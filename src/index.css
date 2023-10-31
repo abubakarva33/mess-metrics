@@ -1,0 +1,59 @@
+:root {
+  --bg-body: #18191A ;
+  --bg-primary: #242526;
+  --bg-secondary:#303030;
+  --bg-tertiary:#3A3B3C;
+  --bg-quaternary:#232E3B;
+  --text-primary: #e4e6eb;
+  --text-secondary: #b0b3b8;
+  --icon-primary:#E4E6EB;
+  --icon-purple:#F3425F;
+  --icon-blue:#0866FF;
+  --icon-red:#E41E3F;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  margin: 0;
+  padding: 0;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+
+}
+
+a {
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  min-width: 100vw;
+  min-height: 100dvh;
+  background-color: var(  --bg-body);
+  color: var(--text-primary);
+}
+
+
+
+
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
