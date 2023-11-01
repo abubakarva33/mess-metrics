@@ -2,7 +2,7 @@ import "./SideHeader.css";
 
 const SideHeader = () => {
   return (
-    <div>
+    <div className="sideHeader">
       <h1>sample</h1>
     </div>
   );
