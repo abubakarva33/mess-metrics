@@ -4,7 +4,7 @@
   border-radius: 50%;
 }
 .header {
-  border-bottom: 1px solid var(--text-secondary);
+  border-bottom: 1px solid var(--text-tertiary);
   padding: 10px 15px;
   justify-content: flex-end !important;
 }

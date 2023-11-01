@@ -1,4 +1,19 @@
-.sideHeader{
-    min-height: 100dvh;
-    border-right: 1px solid var(--text-secondary);
+.sideHeader {
+  min-height: 100dvh;
+  border-right: 1px solid var(--text-tertiary);
+}
+.headerExpand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--text-tertiary);
+  padding: 9px 0px;
+  margin: 0px 10px;
+}
+.headerLogo {
+  max-height: 45px;
+  max-width: 160px;
+}
+.sideNavItems {
+  margin: 0px 10px;
 }
