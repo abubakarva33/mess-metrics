@@ -1,0 +1,9 @@
+.mainBody {
+  min-height: 100dvh;
+}
+
+.layout-body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
