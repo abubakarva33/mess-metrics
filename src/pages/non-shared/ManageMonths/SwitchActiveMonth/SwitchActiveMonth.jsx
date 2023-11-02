@@ -3,7 +3,7 @@ import './SwitchActiveMonth.css';
 const SwitchActiveMonth = () => {
     return (
         <div>
-            <h1>Switch Active Month</h1>
+            <h1>Switch Active Month</h1> 
         </div>
     );
 };

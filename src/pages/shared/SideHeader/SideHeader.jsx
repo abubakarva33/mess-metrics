@@ -73,16 +73,16 @@ const SideHeader = () => {
           </p>
           {activeNav === "manageCosts" && (
             <div className="flex-column ms-3  flex-wrap">
-              <Link to="/" className="sideNavItem">
+              <Link to="/add-meal-cost" className="sideNavItem">
                 <BsDatabaseAdd className="fs-5 me-1" /> Add Meal Cost
               </Link>
-              <Link to="/" className="sideNavItem">
+              <Link to="/add-shared-cost" className="sideNavItem">
                 <AiOutlineAppstoreAdd className="fs-5 me-1" /> Add Shared Cost
               </Link>
-              <Link to="/" className="sideNavItem">
+              <Link to="/add-individual-cost" className="sideNavItem">
                 <MdAddchart className="fs-5 me-1" /> Add Individual Cost
               </Link>
-              <Link to="/" className="sideNavItem">
+              <Link to="/update-cost" className="sideNavItem">
                 <MdSystemUpdateAlt className="fs-5 me-1" /> Update Costs
               </Link>
             </div>
@@ -98,19 +98,19 @@ const SideHeader = () => {
           </p>
           {activeNav === "manageMembers" && (
             <div className="flex-column ms-3 ">
-              <Link to="/" className="sideNavItem">
+              <Link to="/add-member" className="sideNavItem">
                 <AiOutlineUserAdd className="fs-5 me-1" /> Add Member
               </Link>
-              <Link to="/" className="sideNavItem">
+              <Link to="/remove-member" className="sideNavItem">
                 <AiOutlineUserDelete className="fs-5 me-1" /> Delete Member
               </Link>
-              <Link to="/" className="sideNavItem">
+              <Link to="/all-members" className="sideNavItem">
                 <BsPeople className="fs-5 me-1" /> All Members
               </Link>
             </div>
           )}
         </div>
-        <Link to="/" className="sideNavItem mb-2 py-2 addMoney">
+        <Link to="/add-members-money" className="sideNavItem mb-2 py-2 addMoney">
           <GiReceiveMoney className="fs-5 me-1" /> Add Members Money
         </Link>
         <div>
@@ -123,16 +123,16 @@ const SideHeader = () => {
           </p>
           {activeNav === "manageMonths" && (
             <div className="flex-column ms-3 ">
-              <Link to="/" className="sideNavItem">
+              <Link to="/active-month-details" className="sideNavItem">
                 <PiRadioactive className="fs-5 me-1" /> Active Month Details
               </Link>
-              <Link to="/" className="sideNavItem">
+              <Link to="/switch-active-month" className="sideNavItem">
                 <TbRefreshDot className="fs-5 me-1" /> Switch Active month
               </Link>
-              <Link to="/" className="sideNavItem">
+              <Link to="/start-new-month" className="sideNavItem">
                 <AiOutlineAppstoreAdd className="fs-5 me-1" /> Start New Month
               </Link>
-              <Link to="/" className="sideNavItem">
+              <Link to="/delete-old-month" className="sideNavItem">
                 <AiOutlineDelete className="fs-5 me-1" /> Delete Old Month
               </Link>
             </div>
@@ -148,13 +148,13 @@ const SideHeader = () => {
           </p>
           {activeNav === "manageMess" && (
             <div className="flex-column ms-3 ">
-              <Link to="/" className="sideNavItem">
+              <Link to="/mess-profile" className="sideNavItem">
                 <GiPipeOrgan className="fs-5 me-1" /> Mess Profile
               </Link>
-              <Link to="/" className="sideNavItem">
+              <Link to="/ChangeManager" className="sideNavItem">
                 <BsPersonUp className="fs-5 me-1" /> Change Manager
               </Link>
-              <Link to="/" className="sideNavItem">
+              <Link to="/delete-mess" className="sideNavItem">
                 <AiOutlineDelete className="fs-5 me-1" /> Delete Mess
               </Link>
             </div>
