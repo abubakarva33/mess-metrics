@@ -6,6 +6,7 @@ import {
   AiOutlineBell,
   AiOutlineDelete,
   AiOutlineHome,
+  AiOutlineSetting,
   AiOutlineUserAdd,
   AiOutlineUserDelete,
 } from "react-icons/ai";
@@ -230,14 +231,9 @@ const Header = () => {
             <p className="mb-0">Mess Metrics</p>
             <small>Royal Palace</small>
           </div>
-
-          <div className="d-flexCenter position-relative">
-            <Dropdown menu={{ items }}>
-              <a onClick={(e) => e.preventDefault()}>
-                <img src="/images/userIcon.webp" alt="" className="userIcon me-1" />
-              </a>
-            </Dropdown>
-          </div>
+          <Link to="/">
+            <AiOutlineSetting className="fs-3" />
+          </Link>
         </div>
       </div>
     </>

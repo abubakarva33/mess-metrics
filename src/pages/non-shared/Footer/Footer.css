@@ -1,0 +1,32 @@
+.footerSm {
+  display: none;
+}
+
+.homeIcon {
+  font-size: 40px;
+}
+.homeIconParent {
+  background-color: var(--bg-tertiary);
+  border-radius: 50%;
+  padding: 10px;
+}
+.footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .footerSm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    margin-right: 20px;
+    border-radius: 10px;
+    background-color: var(--bg-secondary);
+  }
+  .footer{
+    display: none;
+  }
+}
