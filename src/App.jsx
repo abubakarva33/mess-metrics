@@ -11,9 +11,9 @@ function App() {
           // Here is my asynchronous operation (e.g., data fetching)
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 500);
   }, []);
-  return <div>{loading ? <Spinner /> : <RouterProvider router={routes}></RouterProvider>}</div>;
+  return <div className="">{loading ? <Spinner /> : <RouterProvider router={routes}></RouterProvider>}</div>;
 }
 
 export default App;

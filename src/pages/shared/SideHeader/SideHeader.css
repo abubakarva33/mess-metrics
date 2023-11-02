@@ -17,3 +17,32 @@
 .sideNavItems {
   margin: 0px 10px;
 }
+
+.sideNavItems a {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin-bottom: 4px;
+  border-radius: 5px;
+  /* border: 1px solid gainsboro; */
+}
+.addMoney{
+  padding-left: 7px !important;
+}
+
+.sideNavItem {
+  font-size: 17px;
+  font-weight: 300;
+}
+.sideNavMainItem{
+  padding-left: 7px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+.sideNavItems a:hover {
+  background-color: var(--bg-secondary);
+}
+.sideNavMainItem:hover {
+  background-color: var(--bg-secondary);
+}
