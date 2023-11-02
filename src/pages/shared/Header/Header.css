@@ -24,6 +24,6 @@
 .ant-dropdown .ant-dropdown-menu {
   background-color: var(--bg-secondary) !important;
 }
-.ant-dropdown-menu-item{
+.ant-dropdown-menu-item {
   color: var(--text-primary) !important;
 }

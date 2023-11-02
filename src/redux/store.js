@@ -5,14 +5,16 @@ import persistStore from "redux-persist/es/persistStore";
 import { mainApi } from "./api/mainApi";
 import sampleSliceReducer from "./features/sampleSlice/sampleSlice";
 import anotherSliceReducer from "./features/AnotherSlice/AnotherSlice";
+import basicReducer from "./features/basic/basicSlice";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["sample"],
+  whitelist: ["basic"],
 };
 
 const rootReducer = combineReducers({
+  basic: basicReducer,
   sample: sampleSliceReducer,
   anotherSample: anotherSliceReducer,
 

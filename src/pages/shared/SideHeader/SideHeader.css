@@ -26,7 +26,7 @@
   border-radius: 5px;
   /* border: 1px solid gainsboro; */
 }
-.addMoney{
+.addMoney {
   padding-left: 7px !important;
 }
 
@@ -34,15 +34,45 @@
   font-size: 17px;
   font-weight: 300;
 }
-.sideNavMainItem{
+.sideNavMainItem {
   padding-left: 7px;
   border-radius: 5px;
   display: flex;
   align-items: center;
 }
 .sideNavItems a:hover {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-quaternary);
+}
+.sideHeader > .sideNavItems a:hover {
+  background-color: var(--bg-secondary) !important;
+}
+.sideHeader > .sideNavItems .sideNavMainItem:hover {
+  background-color: var(--bg-secondary) !important;
 }
 .sideNavMainItem:hover {
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-quaternary);
+}
+.ant-drawer-header-title {
+  flex-direction: row-reverse !important;
+}
+.sideDrawer {
+  background-color: var(--bg-secondary) !important;
+}
+.ant-drawer .ant-drawer-close {
+  color: var(--text-primary) !important;
+  margin-right: 0 !important;
+}
+.ant-drawer .ant-drawer-body {
+  padding: 5px !important;
+}
+.sidebarSm {
+  display: none;
+}
+@media only screen and (max-width: 700px) {
+  .sideHeader {
+    display: none;
+  }
+  .sidebarSm {
+    display: block;
+  }
 }

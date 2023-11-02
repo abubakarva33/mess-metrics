@@ -2,16 +2,17 @@ import { Outlet } from "react-router-dom";
 import "./MainLayout.css";
 import Header from "../pages/shared/Header/Header";
 import SideHeader from "../pages/shared/SideHeader/SideHeader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setNavWidth } from "../redux/features/basic/basicSlice";
 
 const MainLayout = () => {
-  const [width, setWidth] = useState("240px");
   return (
-    <div className="d-flex">
-      <div style={{ width: width }}>
+    <div className="mainLayout">
+      <div>
         <SideHeader />
       </div>
-      <div className="layout-body" style={{ width: `calc( 100% - ${width} )` }}>
+      <div className="layout-body">
         <Header />
         <Outlet />
         <footer className="mt-auto">footer</footer>
