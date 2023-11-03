@@ -3,6 +3,7 @@ import "./Home.css";
 import MessDetails from "./components/MessDetails/MessDetails";
 import Chart from "./components/Chart/Chart";
 import PersonalDetails from "./components/PersonalDetails/PersonalDetails";
+import AllMembers from "./components/AllMembers/AllMembers";
 
 const Home = () => {
   return (
@@ -18,6 +19,12 @@ const Home = () => {
       </Row>
       <div>
         <PersonalDetails />
+      </div>
+      <div>
+        <div className="d-flexCenter mt-3">
+          <h3> Total Members : 9</h3>
+        </div>
+        <AllMembers />
       </div>
     </div>
   );

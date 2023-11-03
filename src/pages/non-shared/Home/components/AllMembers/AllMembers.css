@@ -1,0 +1,5 @@
+.member{
+    border: 1px solid var(--text-tertiary);
+    border-radius: 5px;
+    padding:  5px 15px;
+}
