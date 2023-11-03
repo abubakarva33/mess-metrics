@@ -1,0 +1,6 @@
+.messDetails{
+    padding: 10px;
+    border: 1px solid var(--text-tertiary);
+    border-radius: 10px;
+    /* color: aquamarine; */
+}
