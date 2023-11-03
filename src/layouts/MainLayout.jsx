@@ -10,13 +10,13 @@ import Footer from "../pages/non-shared/Footer/Footer";
 const MainLayout = () => {
   return (
     <div className="mainLayout">
-      <div>
+      <div className="sideHeaderLayout">
         <SideHeader />
       </div>
       <div className="layout-body">
         <Header />
         <Outlet />
-        <footer className="mt-auto">
+        <footer className="footer">
           <Footer/>
         </footer>
       </div>

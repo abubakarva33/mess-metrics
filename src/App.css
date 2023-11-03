@@ -6,3 +6,17 @@
 body{
     overflow-x: hidden;
 }
+
+
+::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+  ::-webkit-scrollbar-track {
+   background: rgba(255, 255, 255, 0.04);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+  }

@@ -1,6 +1,8 @@
 .sideHeader {
-  min-height: 100dvh;
+  min-height: 100vh;
   border-right: 1px solid var(--text-tertiary);
+  /* overflow-y: scroll;
+  overflow-x: hidden; */
 }
 .headerExpand {
   display: flex;

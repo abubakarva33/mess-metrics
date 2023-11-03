@@ -8,25 +8,25 @@ const Footer = () => {
   return (
     <div>
       <div>
-        <div className="footer">
-          <p >All right reserves by Abubakar Siddik</p>
+        <div className="footerMd">
+        <p> &copy; {new Date().getFullYear()}. All rights reserved by Abubakar Siddik </p>
         </div>
       </div>
       <div className="footerSm">
         <Link to="message">
-          <BiMessageDots className="fs-1" />
+          <BiMessageDots className="footerIcon" />
         </Link>
         <Link to="/notification">
-          <AiFillBell className="fs-1" />
+          <AiFillBell className="footerIcon" />
         </Link>
         <Link to="/" className="homeIconParent">
           <AiOutlineHome className="homeIcon"/>
         </Link>
         <Link to="/about-us">
-          <BiHelpCircle className="fs-1" />
+          <BiHelpCircle className="footerIcon" />
         </Link>
         <Link to="/my-profile">
-          <BsPersonCircle className="fs-1" />
+          <BsPersonCircle className="footerIcon" />
         </Link>
       </div>
     </div>

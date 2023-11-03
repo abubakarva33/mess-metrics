@@ -12,7 +12,7 @@ import {
 } from "react-icons/ai";
 import { Drawer, Dropdown, Space } from "antd";
 import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   MdAddchart,
   MdOutlineCalendarMonth,
@@ -25,9 +25,10 @@ import { BiBuildingHouse, BiMoneyWithdraw } from "react-icons/bi";
 import { GiPipeOrgan, GiReceiveMoney } from "react-icons/gi";
 import { PiRadioactive } from "react-icons/pi";
 import { TbRefreshDot } from "react-icons/tb";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Header = () => {
   const [activeNav, setActiveNav] = useState("");
+  const location = useLocation();
   const navHandler = (name) => {
     if (activeNav === name) {
       setActiveNav("");
@@ -44,6 +45,10 @@ const Header = () => {
   const onClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    onClose();
+  }, [location]);
 
   const items = [
     {
@@ -69,7 +74,7 @@ const Header = () => {
         <Link to="/faq" className="navItem">
           FAQ
         </Link>
-        <Link to="/notification" className="navItem me-1">
+        <Link to="/notification" className="navItem me-2">
           <AiOutlineBell className="fs-2" />
         </Link>
 
@@ -86,7 +91,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="SmallNav  my-3 me-3">
+      <div className="SmallNav  my-3">
         <div className="d-flex justify-content-between align-items-center px-2 py-2 ">
           <div className="sidebarSm">
             <AiOutlineBars onClick={showDefaultDrawer} className="fs-2" />
