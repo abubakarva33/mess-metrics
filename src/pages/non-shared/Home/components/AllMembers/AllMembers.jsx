@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const AllMembers = () => {
   return (
-    <Row className="memberContainer gx-2 gy-2 my-3">
+    <Row className="memberContainer gx-2 gy-2 my-2">
       <Col sm={12} md={6} lg={4}>
         <Link to="/">
           <div className="member">

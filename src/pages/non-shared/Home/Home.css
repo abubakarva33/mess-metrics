@@ -3,3 +3,24 @@
     grid-template-columns: 7fr 5fr;
     align-items: center;
 }
+
+.divider {
+    font-size: 22px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .divider::before, .divider::after {
+    flex: 1;
+    content: '';
+    padding: 0.5px;
+    background-color:var(--text-tertiary);
+    margin: 5px;
+  }
+
+  @media only screen and (max-width: 700px) {
+    .divider {
+        font-size: 18px;
+      }
+  }

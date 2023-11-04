@@ -10,6 +10,7 @@ const Home = () => {
     <div className="mt-3">
       <Row className="gy-2">
         <Col sm={12} md={6}>
+        <h5 className="divider"> Mess Details</h5>
           <MessDetails />
         </Col>
         <Col sm={12} md={6}>
@@ -17,11 +18,12 @@ const Home = () => {
         </Col>
       </Row>
       <div>
+      <h5 className="divider">Personal Details</h5>
         <PersonalDetails />
       </div>
       <div>
-        <div className="d-flexCenter mt-3">
-          <h3> Total Members : 9</h3>
+        <div className="d-flexCenter mt-3 w-100">
+          <h5 className="divider"> Total Members : 9</h5>
         </div>
         <AllMembers />
       </div>
