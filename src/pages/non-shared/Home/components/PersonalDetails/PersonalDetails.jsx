@@ -2,7 +2,7 @@ import './PersonalDetails.css';
 
 const PersonalDetails = () => {
     return (
-      <div className="messDetails">
+      <div className="messDetails mt-2">
       <div className="d-gridTwo">
         <p className="mb-0">My Total Meal </p>
         <p className="mb-0">: 1000 tk </p>

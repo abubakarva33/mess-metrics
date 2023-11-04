@@ -7,9 +7,8 @@ import AllMembers from "./components/AllMembers/AllMembers";
 
 const Home = () => {
   return (
-    <div>
-      <h1 className="border bg-primary">home</h1>
-      <Row>
+    <div className="mt-3">
+      <Row className="gy-2">
         <Col sm={12} md={6}>
           <MessDetails />
         </Col>
