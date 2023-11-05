@@ -1,5 +1,63 @@
 .personalIcon{
-    max-width: 50px;
-    max-height: 40px;
+    max-width: 100px;
+    max-height: 55px;
     color: azure;
+    margin-right: 10px;
 }
+.amountTag{
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.profileSectionItem{
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-personalDashboard);
+    padding: 25px 10px;
+    border-radius: 10px;
+}
+.tagType{
+    font-size: 16px;
+}
+
+@media only screen and (max-width: 750px) {
+    .tagType{
+        font-size: 15px;
+    }
+    .profileSectionItem{
+        padding: 15px 8px;
+    }
+    .amountTag{
+        font-size: 25px;
+        font-weight: 500;
+    }
+    .personalIcon{
+        max-width: 80px;
+        max-height: 45px;
+    }
+  }
+@media only screen and (max-width: 470px) {
+    .profileSectionItem{
+        flex-direction: column;
+        padding: 15px 8px;
+
+    }
+    .personalIcon{
+        max-width: 70px;
+        max-height: 40px;
+        margin-bottom: 10px;
+    }
+    .amountTag{
+        font-size: 20px;
+        font-weight: 500;
+    }
+    .profileDashboardSubItem{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .tagType{
+        font-size: 14px;
+    }
+  }

@@ -22,7 +22,7 @@ const Home = () => {
         <PersonalDetails />
       </div>
       <div>
-        <div className="d-flexCenter mt-3 w-100">
+        <div className="d-flexCenter mt-4 w-100">
           <h5 className="divider"> Total Members : 9</h5>
         </div>
         <AllMembers />

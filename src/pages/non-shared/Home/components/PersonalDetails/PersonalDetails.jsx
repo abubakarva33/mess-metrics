@@ -1,55 +1,64 @@
 import "./PersonalDetails.css";
-import { IoFastFoodOutline } from "react-icons/io5";
-import { RiLuggageDepositLine } from "react-icons/ri";
-import { BsBriefcase } from "react-icons/bs";
+import { Col, Row } from "react-bootstrap";
 
 const PersonalDetails = () => {
   return (
-    <div className="messDetails mt-2">
-      <div className="">
-        <IoFastFoodOutline />
-        <div>
-          <p className="mb-0">My Total Meal </p>
-          <p className="mb-0">100</p>
-        </div>
-      </div>
-      <div className="">
-        <div>
-          <BsBriefcase />
-          <div>
-            <p className="mb-0">My Balance</p>
-            <p className="mb-0">: -1240 tk </p>
+    <Row className="personalDashboard mt-2 gx-2 gy-2" xs={2} md={2} sm={2} lg={2} xl={3} xxl={3}>
+      <Col>
+        <div className="profileSectionItem">
+          <img src="/images/totalMeal.png" className="personalIcon" alt="" />
+          <div className="profileDashboardSubItem">
+            <p className="mb-0 tagType">My Total Meal </p>
+            <p className="mb-0 amountTag">1240</p>
           </div>
         </div>
-      </div>
-      <div className="">
-        <img src="/images/cost.webp" className="personalIcon" alt="" />
-        <div>
-          <p className="mb-0">My Cost </p>
-          <p className="mb-0">: -1240 tk </p>
+      </Col>
+      <Col>
+        <div className="profileSectionItem">
+          <img src="/images/totalCost.png" className="personalIcon" alt="" />
+          <div className="profileDashboardSubItem">
+            <p className="mb-0 tagType">My Balance</p>
+            <p className="mb-0 amountTag">1240 </p>
+          </div>
         </div>
-      </div>
-      <div className="">
-        <img src="/images/sharedCost.webp" className="personalIcon" alt="" />
-        <div>
-          <p className="mb-0">My Shared Cost </p>
-          <p className="mb-0">: -1240 tk </p>
+      </Col>
+      <Col>
+        <div className="profileSectionItem">
+          <img src="/images/wallet.png" className="personalIcon" alt="" />
+          <div className="profileDashboardSubItem">
+            <p className="mb-0 tagType">My Deposit </p>
+            <p className="mb-0 amountTag">1240 tk </p>
+          </div>
         </div>
-      </div>
-      <div className="">
-        <img src="/images/individualCost.webp" className="personalIcon" alt="" />
-        <div>
-          <p className="mb-0">My Individual Cost </p>
-          <p className="mb-0">: -1240 tk </p>
+      </Col>
+      <Col>
+        <div className="profileSectionItem">
+          <img src="/images/balance.png" className="personalIcon" alt="" />
+          <div className="profileDashboardSubItem">
+            <p className="mb-0 tagType">My Cost </p>
+            <p className="mb-0 amountTag">1240 tk </p>
+          </div>
         </div>
-      </div>
-      <div className="">
-        <RiLuggageDepositLine />
-
-        <p className="mb-0">My Deposit </p>
-        <p className="mb-0">: -1240 tk </p>
-      </div>
-    </div>
+      </Col>
+      <Col>
+        <div className="profileSectionItem">
+          <img src="/images/sharedCost.png" className="personalIcon" alt="" />
+          <div className="profileDashboardSubItem">
+            <p className="mb-0 tagType">My Shared Cost </p>
+            <p className="mb-0 amountTag">1240 tk </p>
+          </div>
+        </div>
+      </Col>
+      <Col>
+        <div className="profileSectionItem">
+          <img src="/images/individualCost.png" className="personalIcon" alt="" />
+          <div className="profileDashboardSubItem">
+            <p className="mb-0 tagType">My Individual Cost </p>
+            <p className="mb-0 amountTag">1240 tk </p>
+          </div>
+        </div>
+      </Col>
+    </Row>
   );
 };
 
