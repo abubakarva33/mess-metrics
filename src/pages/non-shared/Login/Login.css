@@ -1,0 +1,51 @@
+.btnGroups {
+  display: flex;
+  justify-items: center;
+  flex-direction: column;
+  align-items: center;
+}
+.login-form {
+  padding: 20px;
+  margin: 0 20px;
+  color: var(--text-primary) !important;
+}
+.login-left {
+  background-image: image-set("/images/loginBackground.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #fffffe;
+}
+.login-right{
+    min-height: 100vh;
+    align-content: center;
+}
+.checkboxForm {
+  margin-bottom: 0;
+  
+}
+.userForm{
+    min-height: 100vh;
+}
+.ant-input-affix-wrapper{
+    background-color: transparent !important;
+}
+.ant-input{
+    background-color: transparent !important;
+    color: var(--text-secondary) !important;
+}
+.ant-input::placeholder{
+    color: var(--text-secondary) !important;
+}
+.ant-input-affix-wrapper{
+    color: var(--text-primary) !important;
+}
+.ant-input-password-icon{
+    color: var(--text-primary) !important;
+}
+.ant-checkbox-wrapper{
+    color: var(--text-primary) !important;
+}

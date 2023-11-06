@@ -24,6 +24,7 @@ import DeleteOldMonth from "../pages/non-shared/ManageMonths/DeleteOldMonth/Dele
 import MessProfile from "../pages/non-shared/ManageMess/MessProfile/MessProfile";
 import DeleteMess from "../pages/non-shared/ManageMess/DeleteMess/DeleteMess";
 import ChangeManager from "../pages/non-shared/ManageMess/ChangeManager/ChangeManager";
+import Login from "../pages/non-shared/Login/Login";
 
 export const routes = createBrowserRouter([
   {
@@ -52,9 +53,10 @@ export const routes = createBrowserRouter([
       { path: "/delete-old-month", element: <DeleteOldMonth /> },
       { path: "/mess-profile", element: <MessProfile /> },
       { path: "/delete-mess", element: <DeleteMess /> },
-      { path: "/ChangeManager", element: <ChangeManager /> },
+      { path: "/delete-mess", element: <DeleteMess /> },
     ],
   },
+  { path: "/user/login", element: <Login /> },
   {
     path: "*",
     element: <ErrorPage />,
