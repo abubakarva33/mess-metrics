@@ -3,7 +3,6 @@ import "./SideHeader.css";
 import { BiBuildingHouse, BiMoneyWithdraw } from "react-icons/bi";
 
 import {
-  AiFillCaretDown,
   AiOutlineAppstoreAdd,
   AiOutlineBars,
   AiOutlineDelete,
@@ -23,6 +22,8 @@ import { GiPipeOrgan, GiReceiveMoney } from "react-icons/gi";
 import { BsDatabaseAdd, BsPeople, BsPersonUp } from "react-icons/bs";
 import { TbRefreshDot } from "react-icons/tb";
 import { PiRadioactive } from "react-icons/pi";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+
 import { useState } from "react";
 import { Button, Drawer, Space } from "antd";
 
@@ -54,8 +55,12 @@ const SideHeader = () => {
               className="sideNavItem mb-2 py-2 sideNavMainItem  "
               onClick={() => navHandler("manageMeal")}
             >
-              <MdOutlineFastfood className="fs-5 me-2" /> Manage Meal
-              <AiFillCaretDown className="ms-auto" />
+              <MdOutlineFastfood className="fs-5 me-2" /> Manage Meal{" "}
+              {activeNav === "manageMeal" ? (
+                <IoIosArrowUp className="ms-auto" />
+              ) : (
+                <IoIosArrowDown className="ms-auto" />
+              )}
             </p>
             {activeNav === "manageMeal" && (
               <div className="flex-column ms-3 ">
@@ -73,8 +78,12 @@ const SideHeader = () => {
               className="sideNavItem mb-2 py-2 sideNavMainItem"
               onClick={() => navHandler("manageCosts")}
             >
-              <BiMoneyWithdraw className="fs-5 me-2" /> Manage Costs
-              <AiFillCaretDown className="ms-auto" />
+              <BiMoneyWithdraw className="fs-5 me-2" /> Manage Costs{" "}
+              {activeNav === "manageCosts" ? (
+                <IoIosArrowUp className="ms-auto" />
+              ) : (
+                <IoIosArrowDown className="ms-auto" />
+              )}
             </p>
             {activeNav === "manageCosts" && (
               <div className="flex-column ms-3  flex-wrap">
@@ -99,7 +108,11 @@ const SideHeader = () => {
               onClick={() => navHandler("manageMembers")}
             >
               <MdOutlinePeopleAlt className="fs-5 me-2" /> Manage Members
-              <AiFillCaretDown className="ms-auto" />
+              {activeNav === "manageMembers" ? (
+                <IoIosArrowUp className="ms-auto" />
+              ) : (
+                <IoIosArrowDown className="ms-auto" />
+              )}
             </p>
             {activeNav === "manageMembers" && (
               <div className="flex-column ms-3 ">
@@ -115,14 +128,18 @@ const SideHeader = () => {
               </div>
             )}
           </div>
-          
+
           <div>
             <p
               className="sideNavItem mb-2 py-2 sideNavMainItem "
               onClick={() => navHandler("manageMonths")}
             >
               <MdOutlineCalendarMonth className="fs-5 me-2" /> Manage Months
-              <AiFillCaretDown className="ms-auto" />
+              {activeNav === "manageMonths" ? (
+                <IoIosArrowUp className="ms-auto" />
+              ) : (
+                <IoIosArrowDown className="ms-auto" />
+              )}
             </p>
             {activeNav === "manageMonths" && (
               <div className="flex-column ms-3 ">
@@ -147,7 +164,11 @@ const SideHeader = () => {
               onClick={() => navHandler("manageMess")}
             >
               <BiBuildingHouse className="fs-5 me-2" /> Manage Mess
-              <AiFillCaretDown className="ms-auto" />
+              {activeNav === "manageMess" ? (
+                <IoIosArrowUp className="ms-auto" />
+              ) : (
+                <IoIosArrowDown className="ms-auto" />
+              )}
             </p>
             {activeNav === "manageMess" && (
               <div className="flex-column ms-3 ">
