@@ -4,25 +4,33 @@
   flex-direction: column;
   align-items: center;
 }
+.userForm{
+  background-image: image-set("/images/loginBg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .login-form {
-  padding: 20px;
+  padding: 20px 0;
   margin: 0 20px;
   color: var(--text-primary) !important;
 }
 .login-left {
-  background-image: image-set("/images/loginBackground.webp");
-  background-repeat: no-repeat;
-  background-size: cover;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-items: center;
-  color: #fffffe;
+  color: #a0a09b;
 }
 .login-right{
     min-height: 100vh;
-    align-content: center;
 }
+.welcomeMsg{
+font-size: 22px;
+}
+.forgotMsg{
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
 .checkboxForm {
   margin-bottom: 0;
   
@@ -48,4 +56,10 @@
 }
 .ant-checkbox-wrapper{
     color: var(--text-primary) !important;
+}
+
+@media only screen and (max-width: 700px) {
+  .welcomeMsg{
+    font-size: 18px;
+    }
 }

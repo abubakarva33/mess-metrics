@@ -25,6 +25,7 @@ import MessProfile from "../pages/non-shared/ManageMess/MessProfile/MessProfile"
 import DeleteMess from "../pages/non-shared/ManageMess/DeleteMess/DeleteMess";
 import ChangeManager from "../pages/non-shared/ManageMess/ChangeManager/ChangeManager";
 import Login from "../pages/non-shared/Login/Login";
+import Register from "../pages/non-shared/Register/Register";
 
 export const routes = createBrowserRouter([
   {
@@ -57,6 +58,7 @@ export const routes = createBrowserRouter([
     ],
   },
   { path: "/user/login", element: <Login /> },
+  { path: "/user/register", element: <Register /> },
   {
     path: "*",
     element: <ErrorPage />,

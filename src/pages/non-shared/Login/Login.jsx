@@ -18,11 +18,7 @@ const Login = () => {
   return (
     <div>
       <Row className="userForm gx-0">
-        <Col xs={12} md={8} className="login-left">
-          <h1>WELCOME TO MESS METRICS</h1>
-          <p>Sign in to continue access</p>
-        </Col>
-        <Col xs={12} md={4} className="login-right">
+        <Col xs={12} sm={6} md={5} lg={4} className="login-right">
           <ConfigProvider
             theme={{
               components: {
@@ -41,9 +37,9 @@ const Login = () => {
               onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
-              <div className="d-flex align-items-center justify-content-center flex-column">
-                <h3>Hello Again!</h3>
-                <p>Please Log in!!</p>
+              <div className="mt-5 d-flex justify-content-center flex-column">
+                <h3 className="welcomeMsg">WELCOME TO MESS METRICS</h3>
+               <p>Sign in to continue access</p>
               </div>
               <Form.Item
                 name="email"
@@ -85,7 +81,7 @@ const Login = () => {
 
                 <div className="d-flex align-items-center justify-content-between">
                   <Link to="/" className="login-form-forgot">
-                    <h6>Forgot password?</h6>
+                    <h6 className="forgotMsg">Forgot password?</h6>
                   </Link>
                 </div>
               </div>
@@ -118,6 +114,8 @@ const Login = () => {
               </div>
             </Form>
           </ConfigProvider>
+        </Col>
+        <Col xs={12} sm={6} md={7} lg={8} className="login-left">
         </Col>
       </Row>
     </div>
