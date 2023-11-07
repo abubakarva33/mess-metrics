@@ -5,23 +5,39 @@ const MessDetails = () => {
     <div>
       <div className="messDetails">
         <div className="d-gridTwo">
-          <p className="mb-0">Month </p>
-          <p className="mb-0">: November__sk (Running) </p>
+          <div>
+            <p className="mb-0">Month </p>
+          </div>
+          <p className="mb-0">: November (Running) </p>
         </div>
         <div className="d-gridTwo">
-          <p className="mb-0">Mess Balance </p>
+          <div>
+            <p className="mb-0">Manager </p>
+          </div>
+          <p className="mb-0">: Abubakar (Running) </p>
+        </div>
+        <div className="d-gridTwo">
+          <div>
+            <p className="mb-0">Mess Balance </p>
+          </div>
           <p className="mb-0">: -1240 tk </p>
         </div>
         <div className="d-gridTwo">
-          <p className="mb-0">Total Deposit </p>
+          <div>
+            <p className="mb-0">Total Deposit </p>
+          </div>
           <p className="mb-0">: -1240 tk </p>
         </div>
         <div className="d-gridTwo">
-          <p className="mb-0">Total Meal Cost </p>
+          <div>
+            <p className="mb-0">Total Meal Cost </p>
+          </div>
           <p className="mb-0">: -1240 tk </p>
         </div>
         <div className="d-gridTwo">
-          <p className="mb-0">Total Meal</p>
+        <div>
+        <p className="mb-0">Total Meal</p>
+        </div>
           <p className="mb-0">: -1240 tk </p>
         </div>
         <div className="d-gridTwo">

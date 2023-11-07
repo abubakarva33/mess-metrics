@@ -114,7 +114,7 @@ const Chart = () => {
     },
   ];
   return (
-    <div className=" messDetails chartDetails">
+    <div className="chartDetails">
       <ResponsiveLine
         data={data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}

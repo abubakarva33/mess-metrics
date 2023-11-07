@@ -8,6 +8,7 @@ import {
   AiOutlineBars,
   AiOutlineDelete,
   AiOutlineHome,
+  AiOutlinePhone,
   AiOutlineUserAdd,
   AiOutlineUserDelete,
 } from "react-icons/ai";
@@ -46,23 +47,23 @@ const SideHeader = () => {
         </div>
         <div className="sideNavItems mt-4">
           <Link to="/" className="sideNavItem mb-2 py-2 addMoney">
-            <AiOutlineHome className="fs-5 me-1" /> Home
+            <AiOutlineHome className="fs-5 me-2" /> Home
           </Link>
           <div>
             <p
               className="sideNavItem mb-2 py-2 sideNavMainItem  "
               onClick={() => navHandler("manageMeal")}
             >
-              <MdOutlineFastfood className="fs-5 me-1" /> Manage Meal
-              <AiFillCaretDown />
+              <MdOutlineFastfood className="fs-5 me-2" /> Manage Meal
+              <AiFillCaretDown className="ms-auto" />
             </p>
             {activeNav === "manageMeal" && (
               <div className="flex-column ms-3 ">
                 <Link to="/add-meal" className="sideNavItem">
-                  <BsDatabaseAdd className="fs-5 me-1" /> Add Meal
+                  <BsDatabaseAdd className="fs-5 me-2" /> Add Meal
                 </Link>
                 <Link to="/update-meal" className="sideNavItem">
-                  <MdSystemUpdateAlt className="fs-5 me-1" /> Update Meal
+                  <MdSystemUpdateAlt className="fs-5 me-2" /> Update Meal
                 </Link>
               </div>
             )}
@@ -72,22 +73,22 @@ const SideHeader = () => {
               className="sideNavItem mb-2 py-2 sideNavMainItem"
               onClick={() => navHandler("manageCosts")}
             >
-              <BiMoneyWithdraw className="fs-5 me-1" /> Manage Costs
-              <AiFillCaretDown />
+              <BiMoneyWithdraw className="fs-5 me-2" /> Manage Costs
+              <AiFillCaretDown className="ms-auto" />
             </p>
             {activeNav === "manageCosts" && (
               <div className="flex-column ms-3  flex-wrap">
                 <Link to="/add-meal-cost" className="sideNavItem">
-                  <BsDatabaseAdd className="fs-5 me-1" /> Add Meal Cost
+                  <BsDatabaseAdd className="fs-5 me-2" /> Add Meal Cost
                 </Link>
                 <Link to="/add-shared-cost" className="sideNavItem">
-                  <AiOutlineAppstoreAdd className="fs-5 me-1" /> Add Shared Cost
+                  <AiOutlineAppstoreAdd className="fs-5 me-2" /> Add Shared Cost
                 </Link>
                 <Link to="/add-individual-cost" className="sideNavItem">
-                  <MdAddchart className="fs-5 me-1" /> Add Individual Cost
+                  <MdAddchart className="fs-5 me-2" /> Add Individual Cost
                 </Link>
                 <Link to="/update-cost" className="sideNavItem">
-                  <MdSystemUpdateAlt className="fs-5 me-1" /> Update Costs
+                  <MdSystemUpdateAlt className="fs-5 me-2" /> Update Costs
                 </Link>
               </div>
             )}
@@ -97,47 +98,45 @@ const SideHeader = () => {
               className="sideNavItem mb-2 py-2 sideNavMainItem "
               onClick={() => navHandler("manageMembers")}
             >
-              <MdOutlinePeopleAlt className="fs-5 me-1" /> Manage Members
-              <AiFillCaretDown />
+              <MdOutlinePeopleAlt className="fs-5 me-2" /> Manage Members
+              <AiFillCaretDown className="ms-auto" />
             </p>
             {activeNav === "manageMembers" && (
               <div className="flex-column ms-3 ">
                 <Link to="/add-member" className="sideNavItem">
-                  <AiOutlineUserAdd className="fs-5 me-1" /> Add Member
+                  <AiOutlineUserAdd className="fs-5 me-2" /> Add Member
                 </Link>
                 <Link to="/remove-member" className="sideNavItem">
-                  <AiOutlineUserDelete className="fs-5 me-1" /> Delete Member
+                  <AiOutlineUserDelete className="fs-5 me-2" /> Delete Member
                 </Link>
                 <Link to="/all-members" className="sideNavItem">
-                  <BsPeople className="fs-5 me-1" /> All Members
+                  <BsPeople className="fs-5 me-2" /> All Members
                 </Link>
               </div>
             )}
           </div>
-          <Link to="/add-members-money" className="sideNavItem mb-2 py-2 addMoney">
-            <GiReceiveMoney className="fs-5 me-1" /> Add Members Money
-          </Link>
+          
           <div>
             <p
               className="sideNavItem mb-2 py-2 sideNavMainItem "
               onClick={() => navHandler("manageMonths")}
             >
-              <MdOutlineCalendarMonth className="fs-5 me-1" /> Manage Months
-              <AiFillCaretDown />
+              <MdOutlineCalendarMonth className="fs-5 me-2" /> Manage Months
+              <AiFillCaretDown className="ms-auto" />
             </p>
             {activeNav === "manageMonths" && (
               <div className="flex-column ms-3 ">
                 <Link to="/active-month-details" className="sideNavItem">
-                  <PiRadioactive className="fs-5 me-1" /> Active Month Details
+                  <PiRadioactive className="fs-5 me-2" /> Active Month Details
                 </Link>
                 <Link to="/switch-active-month" className="sideNavItem">
-                  <TbRefreshDot className="fs-5 me-1" /> Switch Active month
+                  <TbRefreshDot className="fs-5 me-2" /> Switch Active month
                 </Link>
                 <Link to="/start-new-month" className="sideNavItem">
-                  <AiOutlineAppstoreAdd className="fs-5 me-1" /> Start New Month
+                  <AiOutlineAppstoreAdd className="fs-5 me-2" /> Start New Month
                 </Link>
                 <Link to="/delete-old-month" className="sideNavItem">
-                  <AiOutlineDelete className="fs-5 me-1" /> Delete Old Month
+                  <AiOutlineDelete className="fs-5 me-2" /> Delete Old Month
                 </Link>
               </div>
             )}
@@ -147,23 +146,29 @@ const SideHeader = () => {
               className="sideNavItem mb-2 py-2 sideNavMainItem "
               onClick={() => navHandler("manageMess")}
             >
-              <BiBuildingHouse className="fs-5 me-1" /> Manage Mess
-              <AiFillCaretDown />
+              <BiBuildingHouse className="fs-5 me-2" /> Manage Mess
+              <AiFillCaretDown className="ms-auto" />
             </p>
             {activeNav === "manageMess" && (
               <div className="flex-column ms-3 ">
                 <Link to="/mess-profile" className="sideNavItem">
-                  <GiPipeOrgan className="fs-5 me-1" /> Mess Profile
+                  <GiPipeOrgan className="fs-5 me-2" /> Mess Profile
                 </Link>
                 <Link to="/ChangeManager" className="sideNavItem">
-                  <BsPersonUp className="fs-5 me-1" /> Change Manager
+                  <BsPersonUp className="fs-5 me-2" /> Change Manager
                 </Link>
                 <Link to="/delete-mess" className="sideNavItem">
-                  <AiOutlineDelete className="fs-5 me-1" /> Delete Mess
+                  <AiOutlineDelete className="fs-5 me-2" /> Delete Mess
                 </Link>
               </div>
             )}
           </div>
+          <Link to="/add-members-money" className="sideNavItem mb-2 py-2 addMoney">
+            <GiReceiveMoney className="fs-5 me-2" /> Add Members Money
+          </Link>
+          <Link to="/" className="sideNavItem mb-2 py-2 addMoney">
+            <AiOutlinePhone className="fs-5 me-2" /> Phone Book
+          </Link>
         </div>
       </div>
     </>
