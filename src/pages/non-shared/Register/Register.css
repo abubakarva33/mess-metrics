@@ -1,0 +1,19 @@
+.ant-picker{
+    width: 100% !important;
+    background-color: var(--bg-body) !important;
+    color: var(--text-secondary) !important;
+}
+
+.ant-picker .ant-picker-suffix {
+    color: var(--text-secondary) !important;
+}
+.ant-picker .ant-picker-suffix::placeholder{
+    color: var(--text-secondary) !important;
+}
+.ant-picker .ant-picker-input >input{
+    color: var(--text-secondary) !important;
+}
+
+.datePickerAnt::placeholder{
+    color: var(--text-secondary) !important;
+}

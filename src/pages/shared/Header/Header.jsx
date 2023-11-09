@@ -26,9 +26,14 @@ import { GiPipeOrgan, GiReceiveMoney } from "react-icons/gi";
 import { PiRadioactive } from "react-icons/pi";
 import { TbRefreshDot } from "react-icons/tb";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { auth } from "../../../redux/features/UserSlice/UserSlice";
 const Header = () => {
-  const [activeNav, setActiveNav] = useState("");
+  const dispatch = useDispatch();
   const location = useLocation();
+
+  const [activeNav, setActiveNav] = useState("");
+
   const navHandler = (name) => {
     if (activeNav === name) {
       setActiveNav("");
@@ -60,6 +65,7 @@ const Header = () => {
       label: "Log Out",
       key: "2",
       icon: <LogoutOutlined />,
+      onClick: ()=> dispatch(auth({ token: "" })),
     },
   ];
   return (

@@ -5,8 +5,13 @@ import Chart from "./components/Chart/Chart";
 import PersonalDetails from "./components/PersonalDetails/PersonalDetails";
 import AllMembers from "./components/AllMembers/AllMembers";
 import BazarList from "./components/BazarList/BazarList";
+import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
+
 
 const Home = () => {
+  const { data } = useGetUserProfileQuery();
+  console.log(Boolean(data?.data?.mess));
+
   return (
     <div className="mt-3">
       <Row className="gy-2">
@@ -16,7 +21,7 @@ const Home = () => {
         </Col>
         <Col sm={12} md={6}>
           <div className="overview">
-            <h5 className="px-2 pt-3" > Mess Overview</h5>
+            <h5 className="px-2 pt-3"> Mess Overview</h5>
             <Chart />
           </div>
           <div>

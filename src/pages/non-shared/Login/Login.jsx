@@ -3,17 +3,43 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, ConfigProvider, Form, Input } from "antd";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLoginUserMutation } from "../../../redux/api/sampleApi/userApi";
+import { auth } from "../../../redux/features/UserSlice/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
+import Spinner from "../../../components/Spinner/Spinner";
 
 const Login = () => {
+  const { isLogin } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loginUser] = useLoginUserMutation();
+
   const [isClicked, setIsClicked] = useState();
-  const onFinish = ({ email, password }) => {
-    console.log(email, password);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (isLogin) {
+      navigate("/");
+    }
+    setIsLoading(false);
+  }, [isLogin]);
+
+  const onFinish = async (values) => {
+    const { token, success } = await loginUser(values).unwrap();
+    if (!success) {
+      return dispatch(auth({ token: "" }));
+    }
+    dispatch(auth({ token }));
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <div>
@@ -24,7 +50,7 @@ const Login = () => {
               components: {
                 Form: {
                   labelColor: "#ffffff",
-                  colorText: "#ffffff"
+                  colorText: "#ffffff",
                 },
               },
             }}
@@ -39,7 +65,7 @@ const Login = () => {
             >
               <div className="mt-5 d-flex justify-content-center flex-column">
                 <h3 className="welcomeMsg">WELCOME TO MESS METRICS</h3>
-               <p>Sign in to continue access</p>
+                <p>Sign in to continue access</p>
               </div>
               <Form.Item
                 name="email"
@@ -109,14 +135,13 @@ const Login = () => {
                   </Button>
                 </div>
                 <p>
-                  Don&apos;t have an account? <Link to="/register">Register now!</Link>
+                  Don&apos;t have an account? <Link to="/user/register">Register now!</Link>
                 </p>
               </div>
             </Form>
           </ConfigProvider>
         </Col>
-        <Col xs={12} sm={6} md={7} lg={8} className="login-left">
-        </Col>
+        <Col xs={12} sm={6} md={7} lg={8} className="login-left"></Col>
       </Row>
     </div>
   );
