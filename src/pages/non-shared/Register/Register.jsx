@@ -3,22 +3,36 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { DatePicker } from "antd";
 import { useCreateUserMutation } from "../../../redux/api/sampleApi/userApi";
+import Swal from "sweetalert2";
 
 const Register = () => {
-  const [show, setShow] = useState(false);
-  const [isMatchedPass, setIsMatchedPass] = useState(true);
   const [form] = Form.useForm();
+  const navigate = useNavigate();
   const [createUser] = useCreateUserMutation();
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     const fieldValues = {
       ...values,
       dateOfBirth: values["dateOfBirth"].format("DD-MM-YYYY"),
     };
-    createUser(fieldValues);
+
+    try {
+      const data = await createUser(fieldValues).unwrap();
+      if (data?.success) {
+        await Swal.fire({
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        navigate("/user/login");
+        form.resetFields();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -107,7 +121,7 @@ const Register = () => {
                   },
                 ]}
               >
-                <DatePicker placeholder="Select Date" className="datePickerAnt"/>
+                <DatePicker placeholder="Select Date" className="datePickerAnt" />
               </Form.Item>
             </div>
             <div>

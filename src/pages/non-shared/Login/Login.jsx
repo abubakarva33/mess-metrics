@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useLoginUserMutation } from "../../../redux/api/sampleApi/userApi";
+import { useGetUserProfileQuery, useLoginUserMutation } from "../../../redux/api/sampleApi/userApi";
 import { auth } from "../../../redux/features/UserSlice/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -18,16 +18,21 @@ const Login = () => {
 
   const [isClicked, setIsClicked] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const { data } = useGetUserProfileQuery();
 
   useEffect(() => {
     if (isLogin) {
+      if (Boolean(data?.data?.mess)) {
+        navigate("/add-meal");
+      }
       navigate("/");
     }
     setIsLoading(false);
   }, [isLogin]);
 
   const onFinish = async (values) => {
-    const { token, success } = await loginUser(values).unwrap();
+    const { token, success, data } = await loginUser(values).unwrap();
+    console.log(data);
     if (!success) {
       return dispatch(auth({ token: "" }));
     }

@@ -1,7 +1,6 @@
 import { mainApi } from "../mainApi";
 
 const userApi = mainApi.injectEndpoints({
- 
   endpoints: (builder) => ({
     createUser: builder.mutation({
       query: (body) => ({
@@ -9,6 +8,7 @@ const userApi = mainApi.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["User"],
     }),
     loginUser: builder.mutation({
       query: (body) => ({
@@ -16,7 +16,7 @@ const userApi = mainApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["User"]
+      invalidatesTags: ["User"],
     }),
     getUserProfile: builder.query({
       query: () => ({
@@ -27,4 +27,4 @@ const userApi = mainApi.injectEndpoints({
   }),
 });
 
-export const { useCreateUserMutation, useLoginUserMutation , useGetUserProfileQuery} = userApi;
+export const { useCreateUserMutation, useLoginUserMutation, useGetUserProfileQuery } = userApi;

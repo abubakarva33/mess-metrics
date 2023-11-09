@@ -6,11 +6,24 @@ import PersonalDetails from "./components/PersonalDetails/PersonalDetails";
 import AllMembers from "./components/AllMembers/AllMembers";
 import BazarList from "./components/BazarList/BazarList";
 import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
-
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => {
-  const { data } = useGetUserProfileQuery();
+  const { data, isLoading } = useGetUserProfileQuery();
+  const navigate = useNavigate();
+
   console.log(Boolean(data?.data?.mess));
+ 
+  if (isLoading) {
+    return;
+  }
+
+  useEffect(() => {
+    if (Boolean(data?.data?.mess)) {
+      navigate("/add-meal");
+    }
+  }, [data]);
 
   return (
     <div className="mt-3">
