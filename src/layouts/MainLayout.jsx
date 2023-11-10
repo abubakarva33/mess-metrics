@@ -7,23 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Spinner from "../components/Spinner/Spinner";
 import { useGetUserProfileQuery } from "../redux/api/sampleApi/userApi";
+import Auth from "../components/Auth/Auth";
 
 const MainLayout = () => {
   const { isLogin } = useSelector((state) => state.user);
   const { data } = useGetUserProfileQuery();
   console.log(data, isLogin);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
 
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!isLogin) {
-      navigate("/user/login");
-    }
-    setIsLoading(false);
-  }, [isLogin]);
 
   useEffect(() => {
     if (!Boolean(data?.data?.mess)) {
@@ -37,18 +29,20 @@ const MainLayout = () => {
   }
 
   return (
-    <div className="mainLayout">
-      <div className="sideHeaderLayout">
-        <SideHeader />
+    <Auth>
+      <div className="mainLayout">
+        <div className="sideHeaderLayout">
+          <SideHeader />
+        </div>
+        <div className="layout-body">
+          <Header />
+          <Outlet />
+          <footer className="footer">
+            <Footer />
+          </footer>
+        </div>
       </div>
-      <div className="layout-body">
-        <Header />
-        <Outlet />
-        <footer className="footer">
-          <Footer />
-        </footer>
-      </div>
-    </div>
+    </Auth>
   );
 };
 

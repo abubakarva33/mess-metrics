@@ -22,7 +22,7 @@ const userApi = mainApi.injectEndpoints({
       query: () => ({
         url: `users/profile`,
       }),
-      providedTags: ["User"],
+      providesTags: ["User"],
     }),
   }),
 });
