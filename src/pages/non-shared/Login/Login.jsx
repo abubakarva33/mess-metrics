@@ -18,13 +18,9 @@ const Login = () => {
 
   const [isClicked, setIsClicked] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const { data } = useGetUserProfileQuery();
 
   useEffect(() => {
     if (isLogin) {
-      if (Boolean(data?.data?.mess)) {
-        navigate("/add-meal");
-      }
       navigate("/");
     }
     setIsLoading(false);
@@ -32,7 +28,7 @@ const Login = () => {
 
   const onFinish = async (values) => {
     const { token, success, data } = await loginUser(values).unwrap();
-    console.log(data);
+
     if (!success) {
       return dispatch(auth({ token: "" }));
     }
@@ -66,7 +62,8 @@ const Login = () => {
               onFinish={onFinish}
               layout="vertical"
               onFinishFailed={onFinishFailed}
-              autoComplete="off"
+              autoComplete="on"
+              defaultValue={{ email: "ass@gmail.com", password: "asdasd" }}
             >
               <div className="mt-5 d-flex justify-content-center flex-column">
                 <h3 className="welcomeMsg">WELCOME TO MESS METRICS</h3>

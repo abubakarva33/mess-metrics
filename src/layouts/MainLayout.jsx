@@ -10,6 +10,8 @@ import { useGetUserProfileQuery } from "../redux/api/sampleApi/userApi";
 
 const MainLayout = () => {
   const { isLogin } = useSelector((state) => state.user);
+  const { data } = useGetUserProfileQuery();
+  console.log(data, isLogin);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,6 +24,13 @@ const MainLayout = () => {
     }
     setIsLoading(false);
   }, [isLogin]);
+
+  useEffect(() => {
+    if (!Boolean(data?.data?.mess)) {
+      navigate("/create-mess");
+    }
+    setIsLoading(false);
+  }, [data]);
 
   if (isLoading) {
     return <Spinner />;

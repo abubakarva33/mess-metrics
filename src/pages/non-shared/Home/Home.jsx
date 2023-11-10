@@ -13,17 +13,9 @@ const Home = () => {
   const { data, isLoading } = useGetUserProfileQuery();
   const navigate = useNavigate();
 
-  console.log(Boolean(data?.data?.mess));
- 
   if (isLoading) {
     return;
   }
-
-  useEffect(() => {
-    if (Boolean(data?.data?.mess)) {
-      navigate("/add-meal");
-    }
-  }, [data]);
 
   return (
     <div className="mt-3">
