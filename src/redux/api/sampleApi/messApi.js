@@ -29,7 +29,15 @@ const messApi = mainApi.injectEndpoints({
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["Service"],
+      invalidatesTags: ["Mess", "User"],
+    }),
+    addMember: builder.mutation({
+      query: ({ _id, ...body }) => ({
+        url: `mess/add-member/${_id}`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Mess", "User"],
     }),
   }),
 });
@@ -39,4 +47,5 @@ export const {
   useDeleteMessMutation,
   useChangeManagerMutation,
   useGetSingleMessQuery,
+  useAddMemberMutation
 } = messApi;

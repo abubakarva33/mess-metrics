@@ -175,7 +175,7 @@ const SideHeader = () => {
                 <Link to="/mess-profile" className="sideNavItem">
                   <GiPipeOrgan className="fs-5 me-2" /> Mess Profile
                 </Link>
-                <Link to="/ChangeManager" className="sideNavItem">
+                <Link to="/change-manager" className="sideNavItem">
                   <BsPersonUp className="fs-5 me-2" /> Change Manager
                 </Link>
                 <Link to="/delete-mess" className="sideNavItem">

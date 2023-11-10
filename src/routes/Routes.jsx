@@ -28,8 +28,6 @@ import Login from "../pages/non-shared/Login/Login";
 import Register from "../pages/non-shared/Register/Register";
 import CreateMess from "../pages/non-shared/CreateMess/CreateMess";
 
-
-
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -57,7 +55,7 @@ export const routes = createBrowserRouter([
       { path: "/delete-old-month", element: <DeleteOldMonth /> },
       { path: "/mess-profile", element: <MessProfile /> },
       { path: "/delete-mess", element: <DeleteMess /> },
-      { path: "/delete-mess", element: <DeleteMess /> },
+      { path: "/change-manager", element: <ChangeManager /> },
     ],
   },
   { path: "/user/login", element: <Login /> },
