@@ -6,15 +6,16 @@ import {
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
 import Swal from "sweetalert2";
 import { Button } from "antd";
+import MembersDropdown from "../../Home/components/AllMembers/MembersDropdown/MembersDropdown";
 
 const ChangeManager = () => {
   const [changeManager] = useChangeManagerMutation();
-  const profileData = useGetUserProfileQuery();
-  if (profileData?.isLoading) {
-    return;
-  }
-  const { data } = useGetSingleMessQuery(profileData?.data?.data?.mess?._id);
-  console.log(data?._id, data);
+  // const { data: profileData , isLoading} = useGetUserProfileQuery();
+  // if (isLoading) {
+  //   return;
+  // }
+  // const { data } = useGetSingleMessQuery(profileData?.data?.mess?._id);
+  // console.log(data?.members );
 
   const changeManagerHandler = async () => {
     Swal.fire({
@@ -38,6 +39,7 @@ const ChangeManager = () => {
   return (
     <div>
       <h1>Change Manager</h1>
+      <MembersDropdown/>
       <Button onClick={changeManagerHandler}>Change Manager</Button>
     </div>
   );

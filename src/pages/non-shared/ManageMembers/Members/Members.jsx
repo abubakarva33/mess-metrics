@@ -13,7 +13,7 @@ const Members = () => {
       <h1>All Members</h1>
       <Row className="memberContainer gx-2 gy-2 my-2">
         {Array.isArray(data?.members) &&
-          data?.members?.map((data, ind) => <AllMembers key={ind} ind={ind} data={data} />)}
+          data?.members?.map((data, ind) => <AllMembers key={ind} data={data} />)}
       </Row>
     </div>
   );
