@@ -28,6 +28,7 @@ import { TbRefreshDot } from "react-icons/tb";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { auth } from "../../../redux/features/UserSlice/UserSlice";
+import { mainApi } from "../../../redux/api/mainApi";
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -65,7 +66,9 @@ const Header = () => {
       label: "Log Out",
       key: "2",
       icon: <LogoutOutlined />,
-      onClick: ()=> dispatch(auth({ token: "" })),
+      onClick: () => {
+        dispatch(auth({ token: "" }));
+      },
     },
   ];
   return (

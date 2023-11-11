@@ -15,7 +15,6 @@ import AddIndividualOtherCost from "../pages/non-shared/ManageMessCost/AddMessCo
 import UpdateMessCost from "../pages/non-shared/ManageMessCost/UpdateMessCost/UpdateMessCost";
 import AddMember from "../pages/non-shared/ManageMembers/AddMember/AddMember";
 import RemoveMember from "../pages/non-shared/ManageMembers/RemoveMember/RemoveMember";
-import AllMembers from "../pages/non-shared/ManageMembers/AllMembers/AllMembers";
 import AddMembersMoney from "../pages/non-shared/ManageMembers/AddMembersMoney/AddMembersMoney";
 import ActiveMonthDetails from "../pages/non-shared/ManageMonths/ActiveMonthDetails/ActiveMonthDetails";
 import SwitchActiveMonth from "../pages/non-shared/ManageMonths/SwitchActiveMonth/SwitchActiveMonth";
@@ -27,6 +26,7 @@ import ChangeManager from "../pages/non-shared/ManageMess/ChangeManager/ChangeMa
 import Login from "../pages/non-shared/Login/Login";
 import Register from "../pages/non-shared/Register/Register";
 import CreateMess from "../pages/non-shared/CreateMess/CreateMess";
+import Members from "../pages/non-shared/ManageMembers/Members/Members";
 
 export const routes = createBrowserRouter([
   {
@@ -47,7 +47,7 @@ export const routes = createBrowserRouter([
       { path: "/update-cost", element: <UpdateMessCost /> },
       { path: "/add-member", element: <AddMember /> },
       { path: "/remove-member", element: <RemoveMember /> },
-      { path: "/all-members", element: <AllMembers /> },
+      { path: "/all-members", element: <Members /> },
       { path: "/add-members-money", element: <AddMembersMoney /> },
       { path: "/active-month-details", element: <ActiveMonthDetails /> },
       { path: "/switch-active-month", element: <SwitchActiveMonth /> },

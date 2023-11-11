@@ -4,46 +4,45 @@ import {
   useGetSingleMessQuery,
 } from "../../../../redux/api/sampleApi/messApi";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
-import Swal from "sweetalert2";
 import { Button, Checkbox, ConfigProvider, Form, Input, Select } from "antd";
 import { HomeOutlined, CalendarOutlined } from "@ant-design/icons";
+import { useState } from "react";
 
 const AddMember = () => {
+  const [form] = Form.useForm();
   const [AddMemberToMess] = useAddMemberMutation();
   const profileData = useGetUserProfileQuery();
-  const [form] = Form.useForm();
+  const [successMessage, setSuccessMessage] = useState("");
+  console.log(successMessage);
   if (profileData?.isLoading) {
     return;
   }
-  console.log(profileData);
   const { data } = useGetSingleMessQuery(profileData?.data?.data?.mess?._id);
-
   const onFinish = async (values) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const res = await AddMemberToMess({ _id: data?._id, ...values }).unwrap();
-        if (res?.success) {
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
-          form.resetFields();
-        }
-      }
-    });
-  };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+    try {
+      const res = await AddMemberToMess({ _id: data?._id, ...values }).unwrap();
 
+      console.log({ res });
+      if (res?.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        setSuccessMessage("");
+        form.resetFields();
+      }
+    } catch (error) {
+      console.log(error?.data?.message);
+      setSuccessMessage(error?.data?.message);
+    }
+  };
   return (
     <div>
       <h1>add member</h1>
+      {successMessage ? <h1>{successMessage}</h1> : null}
+
       <ConfigProvider
         theme={{
           components: {
@@ -55,11 +54,10 @@ const AddMember = () => {
         }}
       >
         <Form
-          name="basic"
+          name="add-member"
           className="login-form"
           onFinish={onFinish}
           layout="vertical"
-          onFinishFailed={onFinishFailed}
           form={form}
           autoComplete="on"
         >

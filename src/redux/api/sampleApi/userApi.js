@@ -16,7 +16,6 @@ const userApi = mainApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["User"],
     }),
     getUserProfile: builder.query({
       query: () => ({
