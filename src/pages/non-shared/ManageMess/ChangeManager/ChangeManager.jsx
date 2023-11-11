@@ -3,21 +3,26 @@ import {
   useChangeManagerMutation,
   useGetSingleMessQuery,
 } from "../../../../redux/api/sampleApi/messApi";
-import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
 import Swal from "sweetalert2";
-import { Button } from "antd";
+import { Button, ConfigProvider, Form, Select } from "antd";
 import MembersDropdown from "../../Home/components/AllMembers/MembersDropdown/MembersDropdown";
+import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
+import { useState } from "react";
+import useMemberOptions from "../../Home/components/AllMembers/MembersDropdown/MembersDropdown";
 
 const ChangeManager = () => {
+  const [form] = Form.useForm();
   const [changeManager] = useChangeManagerMutation();
-  // const { data: profileData , isLoading} = useGetUserProfileQuery();
-  // if (isLoading) {
-  //   return;
-  // }
-  // const { data } = useGetSingleMessQuery(profileData?.data?.mess?._id);
-  // console.log(data?.members );
+  const { data: profileData } = useGetUserProfileQuery();
+  const { data } = useGetSingleMessQuery(profileData?.data?.mess?._id);
+  console.log(data?.manager?._id);
+  const members = useMemberOptions();
 
-  const changeManagerHandler = async () => {
+  const onFinish = async (values) => {
+    const fieldValues = {
+      ...values,
+      managerId: data?.manager?._id,
+    };
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -28,7 +33,7 @@ const ChangeManager = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await changeManager({ _id: data?._id, ...values }).unwrap();
+        const res = await changeManager({ _id: data?._id, ...fieldValues }).unwrap();
         if (res?.success) {
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
@@ -39,8 +44,39 @@ const ChangeManager = () => {
   return (
     <div>
       <h1>Change Manager</h1>
-      <MembersDropdown/>
-      <Button onClick={changeManagerHandler}>Change Manager</Button>
+      <ConfigProvider
+        theme={{
+          components: {
+            Form: {
+              labelColor: "#ffffff",
+              colorText: "green",
+            },
+          },
+        }}
+      >
+        <Form
+          name="basic"
+          className="login-form"
+          onFinish={onFinish}
+          layout="vertical"
+          form={form}
+          autoComplete="on"
+        >
+          <Form.Item
+            name="newManagerId"
+            label="Select Member"
+            rules={[
+              {
+                required: true,
+                message: "Please Select Member!",
+              },
+            ]}
+          >
+            <Select defaultValue="" options={members} />
+          </Form.Item>
+          <Button htmlType="submit">Change Manager</Button>
+        </Form>
+      </ConfigProvider>
     </div>
   );
 };
