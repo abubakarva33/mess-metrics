@@ -27,65 +27,42 @@ import Login from "../pages/non-shared/Login/Login";
 import Register from "../pages/non-shared/Register/Register";
 import CreateMess from "../pages/non-shared/CreateMess/CreateMess";
 import Members from "../pages/non-shared/ManageMembers/Members/Members";
-import { useGetUserProfileQuery } from "../redux/api/sampleApi/userApi";
-import { useEffect, useState } from "react";
 
-const mainLayoutChildInit = [
-  { path: "/", element: <Home /> },
-  { path: "/aboutUs", element: <ContactUs /> },
-  { path: "/faq", element: <FAQ /> },
-  { path: "/my-profile", element: <MyProfile /> },
-  { path: "/notification", element: <Notification /> },
-  { path: "/helps", element: <Help /> },
-  { path: "/all-members", element: <Members /> },
-  { path: "/switch-active-month", element: <SwitchActiveMonth /> },
-  { path: "/mess-profile", element: <MessProfile /> },
-];
-
-const Routes = () => {
-  const { data, status } = useGetUserProfileQuery();
-
-  const [mainLayoutChild, setMainLayoutChild] = useState(mainLayoutChildInit);
-
-  const managerRoutes = [
-    { path: "/add-meal", element: <AddMeal /> },
-    { path: "/update-meal", element: <UpdateMeal /> },
-    { path: "/add-meal-cost", element: <AddMealCoast /> },
-    { path: "/add-shared-cost", element: <AddSharedOtherCost /> },
-    { path: "/add-individual-cost", element: <AddIndividualOtherCost /> },
-    { path: "/update-cost", element: <UpdateMessCost /> },
-    { path: "/add-member", element: <AddMember /> },
-    { path: "/remove-member", element: <RemoveMember /> },
-    { path: "/add-members-money", element: <AddMembersMoney /> },
-    { path: "/active-month-details", element: <ActiveMonthDetails /> },
-    { path: "/start-new-month", element: <StartNewMonth /> },
-    { path: "/delete-old-month", element: <DeleteOldMonth /> },
-    { path: "/delete-mess", element: <DeleteMess /> },
-    { path: "/change-manager", element: <ChangeManager /> },
-  ];
-
-  useEffect(() => {
-    if (status === "fulfilled" && data?.data?.role === "manager") {
-      setMainLayoutChild([...mainLayoutChild, ...managerRoutes]);
-    }
-  }, [data]);
-
-  const routes = [
-    {
-      path: "/",
-      element: <MainLayout />,
-      children: mainLayoutChild,
-    },
-    { path: "/user/login", element: <Login /> },
-    { path: "/user/register", element: <Register /> },
-    { path: "/create-mess", element: <CreateMess /> },
-    {
-      path: "*",
-      element: <ErrorPage />,
-    },
-  ];
-
-  return createBrowserRouter(routes);
-};
-
-export default Routes;
+export const routes = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/aboutUs", element: <ContactUs /> },
+      { path: "/faq", element: <FAQ /> },
+      { path: "/my-profile", element: <MyProfile /> },
+      { path: "/notification", element: <Notification /> },
+      { path: "/helps", element: <Help /> },
+      { path: "/add-meal", element: <AddMeal /> },
+      { path: "/update-meal", element: <UpdateMeal /> },
+      { path: "/add-meal-cost", element: <AddMealCoast /> },
+      { path: "/add-shared-cost", element: <AddSharedOtherCost /> },
+      { path: "/add-individual-cost", element: <AddIndividualOtherCost /> },
+      { path: "/update-cost", element: <UpdateMessCost /> },
+      { path: "/add-member", element: <AddMember /> },
+      { path: "/remove-member", element: <RemoveMember /> },
+      { path: "/all-members", element: <Members /> },
+      { path: "/add-members-money", element: <AddMembersMoney /> },
+      { path: "/active-month-details", element: <ActiveMonthDetails /> },
+      { path: "/switch-active-month", element: <SwitchActiveMonth /> },
+      { path: "/start-new-month", element: <StartNewMonth /> },
+      { path: "/delete-old-month", element: <DeleteOldMonth /> },
+      { path: "/mess-profile", element: <MessProfile /> },
+      { path: "/delete-mess", element: <DeleteMess /> },
+      { path: "/change-manager", element: <ChangeManager /> },
+    ],
+  },
+  { path: "/user/login", element: <Login /> },
+  { path: "/user/register", element: <Register /> },
+  { path: "/create-mess", element: <CreateMess /> },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
+]);

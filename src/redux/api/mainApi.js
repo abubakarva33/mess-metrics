@@ -5,13 +5,14 @@ export const mainApi = createApi({
     baseUrl: "http://localhost:5000/api/v1/",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().user.token;
-      // if (token) {
-      headers.set("authorization", token);
-      // }
+      console.log({ token });
+      if (token) {
+        headers.set("authorization", token);
+      }
 
       return headers;
     },
   }),
-  tagTypes: ["User", "Mess", "Profile"],
+  tagTypes: ["User", "Mess", "Profile", "Member"],
   endpoints: () => ({}),
 });

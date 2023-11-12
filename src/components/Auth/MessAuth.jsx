@@ -6,16 +6,27 @@ import Spinner from "../Spinner/Spinner";
 
 const MessAuth = ({ children }) => {
   const navigate = useNavigate();
+  const { isLogin } = useSelector((state) => state.user);
 
-  const { data, isLoading, status } = useGetUserProfileQuery();
+  const { data, isLoading, status, refetch } = useGetUserProfileQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+
+  console.log({ status });
 
   useEffect(() => {
-    if (!Boolean(data?.data?.mess)) {
+    if (isLogin && status === "rejected") {
+      refetch();
+    }
+  }, [status, isLogin]);
+
+  useEffect(() => {
+    if (status === "fulfilled" && !Boolean(data?.data?.mess)) {
       navigate("/create-mess");
     }
   }, [data]);
 
-  if ((!isLoading, status === "fulfilled")) {
+  if (!isLoading && status === "fulfilled") {
     return <>{children}</>;
   }
   return <Spinner />;

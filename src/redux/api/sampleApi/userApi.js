@@ -16,12 +16,13 @@ const userApi = mainApi.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["Profile"],
     }),
     getUserProfile: builder.query({
       query: () => ({
         url: `users/profile`,
       }),
-      providesTags: ["Profile"],
+      providesTags: ["Profile", "Mess"],
     }),
   }),
 });

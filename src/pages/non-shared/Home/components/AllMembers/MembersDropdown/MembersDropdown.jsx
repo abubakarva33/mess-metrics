@@ -1,19 +1,18 @@
 import { Select } from "antd";
-import { useGetSingleMessQuery } from "../../../../../../redux/api/sampleApi/messApi";
+import {
+  useGetMembersQuery,
+} from "../../../../../../redux/api/sampleApi/messApi";
 import { useGetUserProfileQuery } from "../../../../../../redux/api/sampleApi/userApi";
 import "./MembersDropdown.css";
 import { useEffect, useState } from "react";
 
 const useMemberOptions = () => {
-  const { data: profileData, status: profileStatus } = useGetUserProfileQuery();
-  const { data: messData, status: messStatus } = useGetSingleMessQuery(
-    profileData?.data?.mess?._id
-  );
+  const { data } = useGetMembersQuery();
 
   const [members, setMembers] = useState([{ label: "Select Member", value: "" }]);
 
   useEffect(() => {
-    const memberData = messData?.members?.map((member) => ({
+    const memberData = data?.map((member) => ({
       label: member?.name,
       value: member._id,
     }));
@@ -26,7 +25,7 @@ const useMemberOptions = () => {
       membersFormate = [{ label: "Select Member", value: "" }];
     }
     setMembers(membersFormate);
-  }, [messData]);
+  }, [data]);
 
   return members;
 };

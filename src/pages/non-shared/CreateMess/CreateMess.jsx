@@ -19,7 +19,7 @@ const CreateMess = () => {
   const dispatch = useDispatch();
 
   const [createMess] = useCreateMessMutation();
-  const { data } = useGetUserProfileQuery();
+  const { data } = useGetUserProfileQuery(undefined, { refetchOnMountOrArgChange: true });
 
   const [isLoading, setIsLoading] = useState(true);
 

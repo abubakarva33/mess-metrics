@@ -47,6 +47,11 @@ const messApi = mainApi.injectEndpoints({
       }),
       invalidatesTags: ["Mess", "User"],
     }),
+    getMembers: builder.query({
+      query: () => `mess/members`,
+      transformResponse: (response) => response.data,
+      providesTags: ["Member"],
+    }),
   }),
 });
 
@@ -57,4 +62,5 @@ export const {
   useGetSingleMessQuery,
   useAddMemberMutation,
   useDeleteMemberMutation,
+  useGetMembersQuery
 } = messApi;

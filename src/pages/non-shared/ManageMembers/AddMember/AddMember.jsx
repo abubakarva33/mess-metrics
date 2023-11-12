@@ -1,46 +1,44 @@
 import "./AddMember.css";
-import {
-  useAddMemberMutation,
-  useGetSingleMessQuery,
-} from "../../../../redux/api/sampleApi/messApi";
+import { useAddMemberMutation } from "../../../../redux/api/sampleApi/messApi";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
-import { Button, Checkbox, ConfigProvider, Form, Input, Select } from "antd";
-import { HomeOutlined, CalendarOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { Button, ConfigProvider, Form, Input } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
+import Swal from "sweetalert2";
 
 const AddMember = () => {
   const [form] = Form.useForm();
   const [AddMemberToMess] = useAddMemberMutation();
-  const profileData = useGetUserProfileQuery();
-  const [successMessage, setSuccessMessage] = useState("");
-  const { data } = useGetSingleMessQuery(profileData?.data?.data?.mess?._id);
+  const { data: profileData, isLoading } = useGetUserProfileQuery();
   const onFinish = async (values) => {
     try {
-      const res = await AddMemberToMess({ _id: data?._id, ...values }).unwrap();
-
+      const res = await AddMemberToMess({ _id: profileData?.data?.mess?._id, ...values }).unwrap();
+      console.log(res.success);
       if (res?.success) {
         Swal.fire({
           icon: "success",
-          title: "Your work has been saved",
+          title: "Member Added Successfully",
           showConfirmButton: false,
           timer: 1000,
         });
-        setSuccessMessage("");
         form.resetFields();
       }
     } catch (error) {
       console.log(error?.data?.message);
-      setSuccessMessage(error?.data?.message);
+      Swal.fire({
+        icon: "error",
+        title: error?.data?.message || "Add Member Failed",
+        showConfirmButton: false,
+        timer: 1000,
+      });
     }
   };
 
-  if (profileData?.isLoading) {
+  if (isLoading) {
     return;
   }
   return (
     <div>
       <h1>add member</h1>
-      {successMessage !== "" ? <h1>{successMessage}</h1> : null}
 
       <ConfigProvider
         theme={{
