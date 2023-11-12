@@ -7,17 +7,15 @@ import Spinner from "../Spinner/Spinner";
 const ManagerAuth = ({ children }) => {
   const navigate = useNavigate();
 
-  const { data, isLoading, status } = useGetUserProfileQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  });
+  const { data, isLoading, status } = useGetUserProfileQuery();
 
   useEffect(() => {
-    if (!Boolean(data?.data?.role !== "manager")) {
+    if (status === "fulfilled" && data?.data?.role !== "manager") {
       navigate("/");
     }
   }, [data]);
 
-  if ((!isLoading, status === "fulfilled")) {
+  if (!isLoading && status === "fulfilled") {
     return <>{children}</>;
   }
   return <Spinner />;

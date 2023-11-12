@@ -4,13 +4,21 @@ import Swal from "sweetalert2";
 import { Button, ConfigProvider, Form, Select } from "antd";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
 import useMemberOptions from "../../Home/components/AllMembers/MembersDropdown/MembersDropdown";
+import { useEffect, useState } from "react";
 
 const ChangeManager = () => {
   const [form] = Form.useForm();
   const [changeManager] = useChangeManagerMutation();
   const { data: profileData } = useGetUserProfileQuery();
 
-  const members = useMemberOptions();
+  const users = useMemberOptions();
+  const [members, setMembers] = useState(users);
+  console.log(members);
+
+  useEffect(() => {
+    const items = users.filter((member) => member?.value !== profileData?.data?.mess?.manager);
+    setMembers(items);
+  }, [users]);
 
   const onFinish = async (values) => {
     const fieldValues = {

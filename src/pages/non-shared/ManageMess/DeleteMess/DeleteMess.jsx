@@ -1,10 +1,9 @@
 import { Button } from "antd";
-import {
-  useDeleteMessMutation,
-} from "../../../../redux/api/sampleApi/messApi";
+import { useDeleteMessMutation } from "../../../../redux/api/sampleApi/messApi";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
 import "./DeleteMess.css";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const DeleteMess = () => {
   const [deleteMess] = useDeleteMessMutation();

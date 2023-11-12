@@ -8,12 +8,12 @@ const messApi = mainApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Mess", "User"],
+      invalidatesTags: ["Mess", "Profile", "Member"],
     }),
     getSingleMess: builder.query({
       query: (_id) => `mess/${_id}`,
       transformResponse: (response) => response.data,
-      providesTags: ["Mess", "User"],
+      providesTags: ["Mess"],
     }),
 
     deleteMess: builder.mutation({
@@ -21,7 +21,7 @@ const messApi = mainApi.injectEndpoints({
         url: `mess/${_id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Mess", "User"],
+      invalidatesTags: ["Mess", "Profile"],
     }),
     changeManager: builder.mutation({
       query: ({ _id, ...body }) => ({
@@ -29,7 +29,7 @@ const messApi = mainApi.injectEndpoints({
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["Profile"],
+      invalidatesTags: ["Profile", "Member", "Mess"],
     }),
     addMember: builder.mutation({
       query: ({ _id, ...body }) => ({
@@ -37,7 +37,7 @@ const messApi = mainApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Mess", "User"],
+      invalidatesTags: ["Member"],
     }),
     deleteMember: builder.mutation({
       query: ({ _id, ...body }) => ({
@@ -45,7 +45,7 @@ const messApi = mainApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Mess", "User"],
+      invalidatesTags: ["Member"],
     }),
     getMembers: builder.query({
       query: () => `mess/members`,
@@ -62,5 +62,5 @@ export const {
   useGetSingleMessQuery,
   useAddMemberMutation,
   useDeleteMemberMutation,
-  useGetMembersQuery
+  useGetMembersQuery,
 } = messApi;

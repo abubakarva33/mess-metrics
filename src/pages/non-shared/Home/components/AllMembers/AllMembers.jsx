@@ -3,7 +3,6 @@ import "./AllMembers.css";
 import { Link } from "react-router-dom";
 
 const AllMembers = ({ data }) => {
-  console.log(data);
   const { name } = data;
   return (
     <Col sm={12} md={6} lg={4}>

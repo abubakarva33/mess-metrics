@@ -12,6 +12,7 @@ const RemoveMember = () => {
   const { data: profileData } = useGetUserProfileQuery();
   const users = useMemberOptions();
   const [members, setMembers] = useState(users);
+  console.log(members);
 
   useEffect(() => {
     const items = users.filter((member) => member?.value !== profileData?.data?.mess?.manager);
