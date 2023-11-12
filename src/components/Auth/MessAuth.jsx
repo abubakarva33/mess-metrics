@@ -7,8 +7,7 @@ import Spinner from "../Spinner/Spinner";
 const MessAuth = ({ children }) => {
   const navigate = useNavigate();
 
-  const { data, isLoading, status } = useGetUserProfileQuery(
-  );
+  const { data, isLoading, status } = useGetUserProfileQuery();
 
   useEffect(() => {
     if (!Boolean(data?.data?.mess)) {

@@ -13,16 +13,11 @@ const AddMember = () => {
   const [AddMemberToMess] = useAddMemberMutation();
   const profileData = useGetUserProfileQuery();
   const [successMessage, setSuccessMessage] = useState("");
-  console.log(successMessage);
-  if (profileData?.isLoading) {
-    return;
-  }
   const { data } = useGetSingleMessQuery(profileData?.data?.data?.mess?._id);
   const onFinish = async (values) => {
     try {
       const res = await AddMemberToMess({ _id: data?._id, ...values }).unwrap();
 
-      console.log({ res });
       if (res?.success) {
         Swal.fire({
           icon: "success",
@@ -38,10 +33,14 @@ const AddMember = () => {
       setSuccessMessage(error?.data?.message);
     }
   };
+
+  if (profileData?.isLoading) {
+    return;
+  }
   return (
     <div>
       <h1>add member</h1>
-      {successMessage ? <h1>{successMessage}</h1> : null}
+      {successMessage !== "" ? <h1>{successMessage}</h1> : null}
 
       <ConfigProvider
         theme={{

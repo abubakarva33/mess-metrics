@@ -3,20 +3,12 @@ import "./Home.css";
 import MessDetails from "./components/MessDetails/MessDetails";
 import Chart from "./components/Chart/Chart";
 import PersonalDetails from "./components/PersonalDetails/PersonalDetails";
-import AllMembers from "./components/AllMembers/AllMembers";
 import BazarList from "./components/BazarList/BazarList";
 import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import Members from "../ManageMembers/Members/Members";
 
 const Home = () => {
-  const { data, isLoading } = useGetUserProfileQuery();
-  const navigate = useNavigate();
-
-  if (isLoading) {
-    return;
-  }
-
   return (
     <div className="mt-3">
       <Row className="gy-2">
@@ -42,7 +34,7 @@ const Home = () => {
         <div className="d-flexCenter mt-4 w-100">
           <h5 className="divider"> Total Members : 9</h5>
         </div>
-        <AllMembers />
+        <Members />
       </div>
     </div>
   );

@@ -6,12 +6,12 @@ export const mainApi = createApi({
     prepareHeaders: (headers, { getState }) => {
       const token = getState().user.token;
       // if (token) {
-        headers.set("authorization", token);
+      headers.set("authorization", token);
       // }
 
       return headers;
     },
   }),
-  tagTypes: ["User", "Mess"],
+  tagTypes: ["User", "Mess", "Profile"],
   endpoints: () => ({}),
 });
