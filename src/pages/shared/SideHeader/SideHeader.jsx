@@ -187,7 +187,7 @@ const SideHeader = () => {
           <Link to="/add-members-money" className="sideNavItem mb-2 py-2 addMoney">
             <GiReceiveMoney className="fs-5 me-2" /> Add Members Money
           </Link>
-          <Link to="/" className="sideNavItem mb-2 py-2 addMoney">
+          <Link to="/phone-book" className="sideNavItem mb-2 py-2 addMoney">
             <AiOutlinePhone className="fs-5 me-2" /> Phone Book
           </Link>
         </div>
