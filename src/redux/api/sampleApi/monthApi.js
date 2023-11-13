@@ -16,15 +16,26 @@ const messApi = mainApi.injectEndpoints({
         url: `month/${_id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["Mess", "Profile","Member", "Month"],
+      invalidatesTags: ["Mess", "Profile", "Member", "Month"],
     }),
 
-    // getSingleMess: builder.query({
-    //   query: (_id) => `mess/${_id}`,
-    //   transformResponse: (response) => response.data,
-    //   providesTags: ["Mess"],
-    // }),
+    getMonths: builder.query({
+      query: () => `month/mess`,
+      transformResponse: (response) => response.data,
+      providesTags: ["Month"],
+    }),
+
+    getActiveMonth: builder.query({
+      query: () => `month/active`,
+      transformResponse: (response) => response.data,
+      providesTags: ["Month"],
+    }),
   }),
 });
 
-export const { useCreateMonthMutation , useDeleteMonthMutation} = messApi;
+export const {
+  useCreateMonthMutation,
+  useDeleteMonthMutation,
+  useGetMonthsQuery,
+  useGetActiveMonthQuery,
+} = messApi;

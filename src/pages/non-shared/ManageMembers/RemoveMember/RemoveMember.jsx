@@ -3,8 +3,8 @@ import { useDeleteMemberMutation } from "../../../../redux/api/sampleApi/messApi
 import Swal from "sweetalert2";
 import { Button, ConfigProvider, Form, Select } from "antd";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
-import useMemberOptions from "../../Home/components/AllMembers/MembersDropdown/MembersDropdown";
 import { useEffect, useState } from "react";
+import useMemberOptions from "../../../../components/Hooks/MembersDropdown";
 
 const RemoveMember = () => {
   const [form] = Form.useForm();
