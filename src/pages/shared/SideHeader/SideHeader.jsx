@@ -190,6 +190,9 @@ const SideHeader = () => {
           <Link to="/phone-book" className="sideNavItem mb-2 py-2 addMoney">
             <AiOutlinePhone className="fs-5 me-2" /> Phone Book
           </Link>
+          <Link to="/birthdays" className="sideNavItem mb-2 py-2 addMoney">
+            <AiOutlinePhone className="fs-5 me-2" /> Birthdays
+          </Link>
         </div>
       </div>
     </>

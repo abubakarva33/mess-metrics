@@ -31,6 +31,7 @@ import { useGetUserProfileQuery } from "../redux/api/sampleApi/userApi";
 import { useEffect, useState } from "react";
 import ManagerAuth from "../components/Auth/ManagerAuth";
 import PhoneBook from "../pages/non-shared/PhoneBook/PhoneBook";
+import Birthdays from "../pages/non-shared/Birthdays/Birthdays";
 
 const mainLayoutChildInit = [
   { path: "/", element: <Home /> },
@@ -43,6 +44,7 @@ const mainLayoutChildInit = [
   { path: "/switch-active-month", element: <SwitchActiveMonth /> },
   { path: "/mess-profile", element: <MessProfile /> },
   { path: "/phone-book", element: <PhoneBook /> },
+  { path: "/birthdays", element: <Birthdays /> },
 ];
 
 const Routes = () => {
