@@ -5,7 +5,7 @@ import {
   useUpdatePhoneMutation,
 } from "../../../../../redux/api/sampleApi/phonebookApi";
 import Swal from "sweetalert2";
-// import Swal from "sweetalert2";
+
 
 const PhoneEach = ({ data }) => {
   const { _id, name, phone } = data;
@@ -31,7 +31,6 @@ const PhoneEach = ({ data }) => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Update",
     });
-    console.log(formValues);
     if (formValues) {
       Swal.fire(JSON.stringify(formValues));
       const name = formValues[0];
@@ -41,18 +40,36 @@ const PhoneEach = ({ data }) => {
       if (data?.success) {
         await Swal.fire({
           icon: "success",
-          title: "Your work has been saved",
+          title: "Phone Number Updated !",
           showConfirmButton: false,
           timer: 1000,
         });
       }
     }
   };
+  const deletePhoneHandler = async()=>{
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await deletePhone(_id).unwrap();
+        if (res?.success) {
+          Swal.fire("Deleted!", "Phone number has been deleted.", "success");
+        }
+      }
+    });
+  }
   return (
     <div className="d-flex">
       <h3>{name}</h3>
       <h6> {phone}</h6>
-      {_id ? <Button onClick={() => deletePhone(_id)}> DeleteNumber </Button> : null}
+      {_id ? <Button onClick={deletePhoneHandler}> DeleteNumber </Button> : null}
       {_id ? <Button onClick={updateNumberHandler}> Update Number </Button> : null}
     </div>
   );

@@ -1,22 +1,51 @@
-.d-flexCenter{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.d-flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-body{
-    overflow-x: hidden;
+body {
+  overflow-x: hidden;
 }
-
 
 ::-webkit-scrollbar {
-    width: 7px;
-  }
-  
-  ::-webkit-scrollbar-track {
-   background: rgba(255, 255, 255, 0.04);
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
-  }
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+}
+
+.swal2-popup {
+  background-color: var(--bg-tertiary) !important;
+}
+.swal2-title {
+  color: var(--text-primary) !important;
+}
+.swal2-input {
+  border: 1px solid var(--text-tertiary) !important;
+  color: var(--text-secondary) !important;
+}
+.swal2-input:focus {
+  border: 2px solid #848ca8 !important;
+  box-shadow: none !important;
+}
+.swal2-input:focus-visible {
+  outline: none !important;
+}
+.swal2-html-container {
+  color: var(--text-secondary) !important;
+}
+.swal2-success-ring {
+  border: 0.25em solid rgb(74 154 76 / 95%) !important;
+}
+.swal2-default-outline:focus{
+  box-shadow: none !important;
+}
+.swal2-confirm:focus {
+  box-shadow: none !important;
+}

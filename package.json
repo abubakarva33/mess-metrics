@@ -12,7 +12,6 @@
   "dependencies": {
     "@nivo/line": "^0.83.0",
     "@reduxjs/toolkit": "^1.9.5",
-    "@sweetalert2/theme-borderless": "^5.0.15",
     "antd": "^5.9.2",
     "bootstrap": "^5.3.2",
     "framer-motion": "^10.16.4",

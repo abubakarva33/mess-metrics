@@ -7,6 +7,7 @@ import { useGetUserProfileQuery } from "./redux/api/sampleApi/userApi";
 import { ConfigProvider, Space, theme } from "antd";
 import Routes from "./routes/Routes";
 
+
 function App() {
   const { isLoading } = useGetUserProfileQuery();
   const routes = Routes();
