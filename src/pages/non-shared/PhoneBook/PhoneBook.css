@@ -1,0 +1,51 @@
+.componentHeader {
+  display: flex;
+  align-items: center;
+  padding: 30px 15px 10px 15px;
+
+}
+.componentHeader h3 {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+.componentHeaderIcon {
+  font-size: 20px;
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+.phoneBookContainer {
+    background-color: var(--bg-quaternary);
+    min-height: 100vh;
+}
+.componentAddSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 25px 0px 20px;
+}
+.componentAddIconSection {
+  border: 1px solid white;
+  padding: 5px 15px;
+  border-radius: 8px;
+  background-color: var(--text-primary);
+}
+.componentAddIcon {
+  color: var(--bg-primary);
+}
+.phoneBookContainerMain {
+  background-color: var(--bg-body);
+  padding-bottom: 50px;
+  border-bottom-right-radius: 70px;
+  margin-right: -5px;
+}
+.phoneBookContainerItem {
+  background-color: var(--bg-quaternary);
+  border-top-left-radius: 70px;
+  margin-left: -5px;
+}
+.phoneBookContainerMainBg {
+    background-color: var(--bg-quaternary);
+}
+.phoneBookContainerItemBg {
+  background-color: var(--bg-body);
+}

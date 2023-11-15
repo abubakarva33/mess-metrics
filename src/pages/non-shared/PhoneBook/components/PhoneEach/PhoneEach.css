@@ -1,0 +1,9 @@
+.phoneItem{
+    background-color: #080C29;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 5px 15px;
+    border-radius: 10px;
+}

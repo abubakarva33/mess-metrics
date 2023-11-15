@@ -5,12 +5,19 @@ import {
   useUpdatePhoneMutation,
 } from "../../../../../redux/api/sampleApi/phonebookApi";
 import Swal from "sweetalert2";
-
+import { IoCallOutline } from "react-icons/io5";
+import { FaRegCopy } from "react-icons/fa6";
+import { AiOutlineDelete } from "react-icons/ai";
+import { FaRegEdit } from "react-icons/fa";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const PhoneEach = ({ data }) => {
   const { _id, name, phone } = data;
   const [deletePhone] = useDeletePhoneMutation();
   const [updatePhone] = useUpdatePhoneMutation();
+  const [role, setRole] = useState("manager");
+  const [isCopied, setIsCopied] = useState(false);
 
   const updateNumberHandler = async () => {
     const { value: formValues } = await Swal.fire({
@@ -47,7 +54,7 @@ const PhoneEach = ({ data }) => {
       }
     }
   };
-  const deletePhoneHandler = async()=>{
+  const deletePhoneHandler = async () => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -64,13 +71,75 @@ const PhoneEach = ({ data }) => {
         }
       }
     });
-  }
+  };
+  // const copyToClipboard = (text) => {
+  //   console.log('text', text)
+  //   var textField = document.createElement('textarea')
+  //   textField.innerText = text
+  //   document.body.appendChild(textField)
+  //   textField.select()
+  //   document.execCommand('copy')
+  //   textField.remove()
+  // }
+
+  const copyToClipboard = (textToCopy) => {
+    // Create a temporary textarea element
+    const textarea = document.createElement("textarea");
+    textarea.value = textToCopy;
+    document.body.appendChild(textarea);
+
+    // Select and copy the text inside the textarea
+    textarea.select();
+    document.execCommand("copy");
+
+    // Remove the textarea from the document
+    document.body.removeChild(textarea);
+
+    // Set state to indicate that the text has been copied
+    setIsCopied(true);
+
+    // Reset the 'copied' state after a short delay
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
+  };
+
   return (
-    <div className="d-flex">
-      <h3>{name}</h3>
-      <h6> {phone}</h6>
-      {_id ? <Button onClick={deletePhoneHandler}> DeleteNumber </Button> : null}
-      {_id ? <Button onClick={updateNumberHandler}> Update Number </Button> : null}
+    <div className="phoneItem">
+      <div>
+        <h5>{name}</h5>
+        <div className="d-flex align-items-center mb-2">
+          <h6 className="mb-0 me-2"> {phone}</h6>
+          <div onClick={() => copyToClipboard(phone)}>{isCopied ? "number Copied!" :   <FaRegCopy  />}</div>
+         
+        </div>
+      </div>
+
+      {role === "manager" ? (
+        <div className="d-flex align-items-center">
+          <div className="fs-3 ">
+            <Link to={`tel:${phone}`} target="_blank">
+              <IoCallOutline />
+            </Link>
+          </div>
+          <div className="d-flex align-items-center">
+            {_id ? (
+              <div onClick={deletePhoneHandler} className="fs-3 mx-2">
+                <AiOutlineDelete />
+              </div>
+            ) : null}
+            {_id ? (
+              <div onClick={updateNumberHandler} className="fs-4">
+                <FaRegEdit />
+              </div>
+            ) : null}
+          </div>
+        </div>
+      ) : (
+        <Link to={`tel:${phone}`} target="_blank">
+          <IoCallOutline />
+        </Link>
+      )}
     </div>
   );
 };
