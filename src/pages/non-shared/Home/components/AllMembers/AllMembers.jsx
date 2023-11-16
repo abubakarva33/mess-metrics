@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const AllMembers = ({ data }) => {
   const { name } = data;
+
   return (
     <Col sm={12} md={6} lg={4}>
       <Link to="/">

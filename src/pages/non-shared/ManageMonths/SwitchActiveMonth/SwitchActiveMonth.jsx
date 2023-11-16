@@ -7,12 +7,15 @@ import {
   useSwitchActiveMonthMutation,
 } from "../../../../redux/api/sampleApi/monthApi";
 import useActiveMonthOptions from "../../../../components/Hooks/MessActiveMonthDropdown";
+import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const SwitchActiveMonth = () => {
   const [form] = Form.useForm();
   const month = useActiveMonthOptions();
   const { data, isFetching } = useGetActiveMonthQuery();
   const [switchMonth] = useSwitchActiveMonthMutation();
+  const navigate = useNavigate();
 
   if (isFetching) {
     return;
@@ -39,41 +42,92 @@ const SwitchActiveMonth = () => {
   };
 
   return (
-    <div>
-      <h1>Switch Active Month</h1>
-      <ConfigProvider
-        theme={{
-          components: {
-            Form: {
-              labelColor: "#ffffff",
-              colorText: "green",
-            },
-          },
-        }}
-      >
-        <Form
-          name="basic"
-          className="login-form"
-          onFinish={onFinish}
-          layout="vertical"
-          form={form}
-          autoComplete="on"
-        >
-          <Form.Item
-            name="month"
-            label="Select Month"
-            rules={[
-              {
-                required: true,
-                message: "Please Select Month!",
-              },
-            ]}
-          >
-            <Select label={data?.name} defaultValue={data?._id} options={month} />
-          </Form.Item>
-          <Button htmlType="submit">Switch Month</Button>
-        </Form>
-      </ConfigProvider>
+    // <div>
+    //   <h1>Switch Active Month</h1>
+    //   <ConfigProvider
+    //     theme={{
+    //       components: {
+    //         Form: {
+    //           labelColor: "#ffffff",
+    //           colorText: "green",
+    //         },
+    //       },
+    //     }}
+    //   >
+    //     <Form
+    //       name="basic"
+    //       className="login-form"
+    //       onFinish={onFinish}
+    //       layout="vertical"
+    //       form={form}
+    //       autoComplete="on"
+    //     >
+    //       <Form.Item
+    //         name="month"
+    //         label="Select Month"
+    //         rules={[
+    //           {
+    //             required: true,
+    //             message: "Please Select Month!",
+    //           },
+    //         ]}
+    //       >
+    //         <Select label={data?.name} defaultValue={data?._id} options={month} />
+    //       </Form.Item>
+    //       <Button htmlType="submit">Switch Month</Button>
+    //     </Form>
+    //   </ConfigProvider>
+    // </div>
+
+    <div className="phoneBookContainer">
+      <div className="phoneBookContainerMainBg">
+        <div className="phoneBookContainerMain">
+          <div className="componentHeader">
+            <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+            <h3>REMOVE MEMBER </h3>
+          </div>
+        </div>
+      </div>
+      <div className="phoneBookContainerItemBg">
+        <div className="phoneBookContainerItem ">
+          <div className="pt-5 pb-3 px-3">
+            <div className="selectContainer">
+              <ConfigProvider
+                theme={{
+                  components: {
+                    Form: {
+                      labelColor: "#ffffff",
+                      colorText: "green",
+                    },
+                  },
+                }}
+              >
+                <Form
+                  name="basic"
+                  className="login-form"
+                  onFinish={onFinish}
+                  layout="vertical"
+                  form={form}
+                  autoComplete="on"
+                >
+                  <Form.Item
+                    name="month"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please Select Month!",
+                      },
+                    ]}
+                  >
+                    <Select label={data?.name} defaultValue={data?._id} options={month} />
+                  </Form.Item>
+                  <Button htmlType="submit">Switch Month</Button>
+                </Form>
+              </ConfigProvider>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

@@ -15,7 +15,6 @@ const RemoveMember = () => {
   const users = useMemberOptions();
   const [members, setMembers] = useState(users);
   const navigate = useNavigate();
-  console.log(members);
 
   useEffect(() => {
     const items = users.filter((member) => member?.value !== profileData?.data?.mess?.manager);
@@ -54,44 +53,46 @@ const RemoveMember = () => {
       </div>
       <div className="phoneBookContainerItemBg">
         <div className="phoneBookContainerItem ">
-          <div className="selectContainer">
-            <ConfigProvider
-              theme={{
-                components: {
-                  Form: {
-                    labelColor: "#ffffff",
-                    colorText: "green",
-                  },
-                },
-              }}
-            >
-              <Form
-                name="basic"
-                className="login-form"
-                onFinish={onFinish}
-                layout="vertical"
-                form={form}
-                autoComplete="on"
-              >
-                <Form.Item
-                  name="memberId"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please Select Member!",
+          <div className="pt-5 pb-3 px-3">
+            <div className="selectContainer">
+              <ConfigProvider
+                theme={{
+                  components: {
+                    Form: {
+                      labelColor: "#ffffff",
+                      colorText: "green",
                     },
-                  ]}
+                  },
+                }}
+              >
+                <Form
+                  name="basic"
+                  className="login-form"
+                  onFinish={onFinish}
+                  layout="vertical"
+                  form={form}
+                  autoComplete="on"
                 >
-                  <Select defaultValue="" options={members} />
-                </Form.Item>
+                  <Form.Item
+                    name="memberId"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please Select Member!",
+                      },
+                    ]}
+                  >
+                    <Select defaultValue="" options={members} />
+                  </Form.Item>
 
-                <div className="d-flex w-100">
-                  <Button htmlType="submit" className="w-100">
-                    Remove member
-                  </Button>
-                </div>
-              </Form>
-            </ConfigProvider>
+                  <div className="d-flex w-100">
+                    <Button htmlType="submit" className="w-100">
+                      Remove member
+                    </Button>
+                  </div>
+                </Form>
+              </ConfigProvider>
+            </div>
           </div>
         </div>
       </div>

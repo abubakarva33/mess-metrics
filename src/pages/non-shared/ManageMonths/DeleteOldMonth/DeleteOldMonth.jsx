@@ -5,14 +5,20 @@ import { Button, ConfigProvider, Form, Select } from "antd";
 
 import { useEffect, useState } from "react";
 import useMonthOptions from "../../../../components/Hooks/MessMonthDropdown";
-import { useDeleteMonthMutation, useGetActiveMonthQuery } from "../../../../redux/api/sampleApi/monthApi";
+import {
+  useDeleteMonthMutation,
+  useGetActiveMonthQuery,
+} from "../../../../redux/api/sampleApi/monthApi";
+import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const DeleteOldMonth = () => {
   const [form] = Form.useForm();
   const month = useMonthOptions();
   const { data } = useGetActiveMonthQuery();
-  const [deleteMonth]=useDeleteMonthMutation();
-  
+  const [deleteMonth] = useDeleteMonthMutation();
+  const navigate = useNavigate();
+
   const [months, setMonths] = useState(month);
 
   useEffect(() => {
@@ -20,7 +26,7 @@ const DeleteOldMonth = () => {
     setMonths(items);
   }, [month]);
 
-  const onFinish = async ({month}) => {
+  const onFinish = async ({ month }) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -40,41 +46,94 @@ const DeleteOldMonth = () => {
   };
 
   return (
-    <div>
-      <h1>Delete Month</h1>
-      <ConfigProvider
-        theme={{
-          components: {
-            Form: {
-              labelColor: "#ffffff",
-              colorText: "green",
-            },
-          },
-        }}
-      >
-        <Form
-          name="basic"
-          className="login-form"
-          onFinish={onFinish}
-          layout="vertical"
-          form={form}
-          autoComplete="on"
-        >
-          <Form.Item
-            name="month"
-            label="Select Month"
-            rules={[
-              {
-                required: true,
-                message: "Please Select Month!",
-              },
-            ]}
-          >
-            <Select defaultValue="" options={months} />
-          </Form.Item>
-          <Button htmlType="submit">Delete Month</Button>
-        </Form>
-      </ConfigProvider>
+    // <div>
+    //   <h1>Delete Month</h1>
+    //   <ConfigProvider
+    //     theme={{
+    //       components: {
+    //         Form: {
+    //           labelColor: "#ffffff",
+    //           colorText: "green",
+    //         },
+    //       },
+    //     }}
+    //   >
+    //     <Form
+    //       name="basic"
+    //       className="login-form"
+    //       onFinish={onFinish}
+    //       layout="vertical"
+    //       form={form}
+    //       autoComplete="on"
+    //     >
+    //       <Form.Item
+    //         name="month"
+    //         label="Select Month"
+    //         rules={[
+    //           {
+    //             required: true,
+    //             message: "Please Select Month!",
+    //           },
+    //         ]}
+    //       >
+    //         <Select defaultValue="" options={months} />
+    //       </Form.Item>
+    //       <Button htmlType="submit">Delete Month</Button>
+    //     </Form>
+    //   </ConfigProvider>
+    // </div>
+
+    <div className="phoneBookContainer">
+      <div className="phoneBookContainerMainBg">
+        <div className="phoneBookContainerMain">
+          <div className="componentHeader">
+            <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+            <h3>DELETE OLD MONTH </h3>
+          </div>
+        </div>
+      </div>
+      <div className="phoneBookContainerItemBg">
+        <div className="phoneBookContainerItem ">
+          <div className="pt-5 pb-3 px-3">
+            <ConfigProvider
+              theme={{
+                components: {
+                  Form: {
+                    labelColor: "#ffffff",
+                    colorText: "green",
+                  },
+                },
+              }}
+            >
+              <Form
+                name="basic"
+                className="login-form"
+                onFinish={onFinish}
+                layout="vertical"
+                form={form}
+                autoComplete="on"
+              >
+                <Form.Item
+                  name="month"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please Select Month!",
+                    },
+                  ]}
+                >
+                  <Select defaultValue="" options={months} />
+                </Form.Item>
+                <div className="d-flex w-100">
+                  <Button htmlType="submit" className="w-100">
+                    Delete Month
+                  </Button>
+                </div>
+              </Form>
+            </ConfigProvider>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

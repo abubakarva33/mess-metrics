@@ -4,10 +4,12 @@ import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi"
 import "./DeleteMess.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 
 const DeleteMess = () => {
   const [deleteMess] = useDeleteMessMutation();
   const profileData = useGetUserProfileQuery();
+  const navigate = useNavigate();
   if (profileData?.isLoading) {
     return;
   }
@@ -32,9 +34,27 @@ const DeleteMess = () => {
   };
 
   return (
-    <div>
-      <h1>Delete Mess {profileData?.data?.data?.mess?.name}</h1>
-      <Button onClick={deleteMessHandler}>Delete Mess</Button>
+    // <div>
+    //   <h1>Delete Mess {profileData?.data?.data?.mess?.name}</h1>
+    //   <Button onClick={deleteMessHandler}>Delete Mess</Button>
+    // </div>
+
+    <div className="phoneBookContainer">
+      <div className="phoneBookContainerMainBg">
+        <div className="phoneBookContainerMain">
+          <div className="componentHeader">
+            <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+            <h3>DELETE MESS </h3>
+          </div>
+        </div>
+      </div>
+      <div className="phoneBookContainerItemBg">
+        <div className="phoneBookContainerItem ">
+          <div className="pt-5 pb-3 px-3">
+            <Button onClick={deleteMessHandler}>Delete Mess</Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

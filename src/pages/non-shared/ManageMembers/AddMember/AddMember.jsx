@@ -52,43 +52,47 @@ const AddMember = () => {
       </div>
       <div className="phoneBookContainerItemBg">
         <div className="phoneBookContainerItem ">
-          <ConfigProvider
-            theme={{
-              components: {
-                Form: {
-                  labelColor: "#ffffff",
-                  colorText: "green",
-                },
-              },
-            }}
-          >
-            <Form
-              name="add-member"
-              className="login-form"
-              onFinish={onFinish}
-              layout="vertical"
-              form={form}
-              autoComplete="on"
-            >
-              <div className="mt-5 d-flex justify-content-center flex-column">
-                <h3 className="welcomeMsg mb-5">Add member to your Mess</h3>
-              </div>
-              <Form.Item
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input members email or number!",
+          <div className="pt-5 pb-3 px-3">
+            <ConfigProvider
+              theme={{
+                components: {
+                  Form: {
+                    labelColor: "#ffffff",
+                    colorText: "green",
                   },
-                ]}
+                },
+              }}
+            >
+              <Form
+                name="add-member"
+                className="login-form"
+                onFinish={onFinish}
+                layout="vertical"
+                form={form}
+                autoComplete="on"
               >
-                <Input placeholder="Enter new member's email or number" />
-              </Form.Item>
-              <div className="d-flex w-100">
-                <Button htmlType="submit" className="w-100">Add member</Button>
-              </div>
-            </Form>
-          </ConfigProvider>
+                <div className="mt-5 d-flex justify-content-center flex-column">
+                  <h3 className="welcomeMsg mb-5">Add member to your Mess</h3>
+                </div>
+                <Form.Item
+                  name="email"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input members email or number!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Enter new member's email or number" />
+                </Form.Item>
+                <div className="d-flex w-100">
+                  <Button htmlType="submit" className="w-100">
+                    Add member
+                  </Button>
+                </div>
+              </Form>
+            </ConfigProvider>
+          </div>
         </div>
       </div>
     </div>
