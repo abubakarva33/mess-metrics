@@ -28,6 +28,7 @@ const Login = () => {
 
   const onFinish = async (values) => {
     const { token, success, data } = await loginUser(values).unwrap();
+    console.log({data});
 
     if (!success) {
       return dispatch(auth({ token: "" }));

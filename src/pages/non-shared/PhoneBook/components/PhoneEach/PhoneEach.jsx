@@ -11,12 +11,13 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { FaRegEdit } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const PhoneEach = ({ data }) => {
   const { _id, name, phone } = data;
   const [deletePhone] = useDeletePhoneMutation();
   const [updatePhone] = useUpdatePhoneMutation();
-  const [role, setRole] = useState("manager");
+  const { role } = useSelector((state) => state.user);
   const [isCopied, setIsCopied] = useState(false);
 
   const updateNumberHandler = async () => {
@@ -72,16 +73,6 @@ const PhoneEach = ({ data }) => {
       }
     });
   };
-  // const copyToClipboard = (text) => {
-  //   console.log('text', text)
-  //   var textField = document.createElement('textarea')
-  //   textField.innerText = text
-  //   document.body.appendChild(textField)
-  //   textField.select()
-  //   document.execCommand('copy')
-  //   textField.remove()
-  // }
-
   const copyToClipboard = (textToCopy) => {
     // Create a temporary textarea element
     const textarea = document.createElement("textarea");
@@ -122,7 +113,7 @@ const PhoneEach = ({ data }) => {
               <IoCallOutline />
             </Link>
           </div>
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center phoneBtnGroup">
             {_id ? (
               <div onClick={deletePhoneHandler} className="fs-3 mx-2">
                 <AiOutlineDelete />

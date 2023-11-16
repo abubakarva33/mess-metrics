@@ -6,11 +6,15 @@ import Spinner from "./components/Spinner/Spinner";
 import { useGetUserProfileQuery } from "./redux/api/sampleApi/userApi";
 import { ConfigProvider, Space, theme } from "antd";
 import Routes from "./routes/Routes";
+import { useDispatch } from "react-redux";
+import { authRole } from "./redux/features/UserSlice/UserSlice";
 
 
 function App() {
-  const { isLoading } = useGetUserProfileQuery();
+  const { isLoading ,data} = useGetUserProfileQuery();
   const routes = Routes();
+  const dispatch = useDispatch();
+  dispatch(authRole({ role: data?.data?.role }));
 
   return (
     <div className="">

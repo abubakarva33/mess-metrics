@@ -5,10 +5,14 @@ import Chart from "./components/Chart/Chart";
 import PersonalDetails from "./components/PersonalDetails/PersonalDetails";
 import BazarList from "./components/BazarList/BazarList";
 import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
-import { useNavigate } from "react-router-dom";
 import Members from "../ManageMembers/Members/Members";
+import { useDispatch } from "react-redux";
+import { authRole } from "../../../redux/features/UserSlice/UserSlice";
 
 const Home = () => {
+  // const dispatch = useDispatch();
+  // const { data } = useGetUserProfileQuery();
+  // dispatch(authRole({ role: data?.data?.role }));
 
   return (
     <div className="mt-3">

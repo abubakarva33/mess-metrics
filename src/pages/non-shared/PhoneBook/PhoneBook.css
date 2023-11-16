@@ -14,7 +14,7 @@
   margin-right: 10px;
 }
 .phoneBookContainer {
-    background-color: var(--bg-quaternary);
+    background-color: var(--bg-app-primary);
     min-height: 100vh;
 }
 .componentAddSection {
@@ -24,10 +24,10 @@
   padding: 30px 25px 0px 20px;
 }
 .componentAddIconSection {
-  border: 1px solid white;
   padding: 5px 15px;
   border-radius: 8px;
-  background-color: var(--text-primary);
+  background-color: #fee21f;
+  /* background-color: var(--text-primary); */
 }
 .componentAddIcon {
   color: var(--bg-primary);
@@ -39,12 +39,12 @@
   margin-right: -5px;
 }
 .phoneBookContainerItem {
-  background-color: var(--bg-quaternary);
+  background-color: var(--bg-app-primary);
   border-top-left-radius: 70px;
   margin-left: -5px;
 }
 .phoneBookContainerMainBg {
-    background-color: var(--bg-quaternary);
+    background-color: var(--bg-app-primary);
 }
 .phoneBookContainerItemBg {
   background-color: var(--bg-body);
