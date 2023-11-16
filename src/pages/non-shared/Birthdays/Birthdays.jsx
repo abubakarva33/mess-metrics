@@ -14,17 +14,6 @@ const Birthdays = () => {
   }
 
   return (
-    // <div>
-    //   <h1>Birthdays</h1>
-
-    //   {Array.isArray(data) &&
-    //     data?.map((data, ind) => (
-    //       <div >
-    //         <h4> Name : {data?.name}</h4>
-    //         <h4> Birthday : {data?.dateOfBirth}</h4>
-    //       </div>
-    //     ))}
-    // </div>
     <div className="phoneBookContainer">
       <div className="phoneBookContainerMainBg">
         <div className="phoneBookContainerMain">
