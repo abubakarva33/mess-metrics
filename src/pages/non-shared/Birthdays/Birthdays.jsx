@@ -3,6 +3,7 @@ import { useGetMembersQuery } from "../../../redux/api/sampleApi/messApi";
 import Spinner from "../../../components/Spinner/Spinner";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import BirthdayEach from "./BirthdayEach/BirthdayEach";
 
 const Birthdays = () => {
   const { data, isFetching, isLoading } = useGetMembersQuery();
@@ -36,7 +37,7 @@ const Birthdays = () => {
       <div className="phoneBookContainerItemBg">
         <div className="phoneBookContainerItem ">
           <div className="pt-5 pb-3 px-3">
-            {Array.isArray(data) && data?.map((data, ind) => <PhoneEach key={ind} data={data} />)}
+            {Array.isArray(data) && data?.map((data, ind) => <BirthdayEach key={ind} data={data} />)}
           </div>
         </div>
       </div>

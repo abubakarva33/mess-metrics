@@ -1,0 +1,8 @@
+.birthdayText{
+    display: flex;
+    align-items: center;
+    background-color: #fee21f;
+    padding: 5px ;
+    color: var(--bg-body);
+    border-radius: 5px;
+}
