@@ -8,7 +8,7 @@
   padding: 10px 15px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 .navItem {
   font-size: 18px;
@@ -42,6 +42,9 @@
 @media screen and (min-device-width: 576px) and (max-device-width: 992px) { 
   .headerMainMd{
     display: block;
+  }
+  .header {
+    justify-content: space-between;
   }
 }
 

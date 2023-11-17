@@ -55,7 +55,22 @@ const PhoneBook = () => {
   return (
     <div>
       <div className="phonebookSection">
-        <h5 className="divider mt-5"> PHONEBOOK</h5>
+        <h3 className="mt-4 d-flexCenter"> PHONEBOOK</h3>
+        {role === "manager" ? (
+          <div className="componentAddSection">
+            <div>
+              <p className="mb-0">Want to add number? </p>
+              <p className="mb-0">15 numbers available</p>
+            </div>
+
+            <div className="componentAddIconSection">
+              <p className="mb-0 fs-2 d-flex align-items-center" onClick={addNumberHandler}>
+                <MdAddCall className="mb-0 componentAddIcon" />
+              </p>
+            </div>
+          </div>
+        ) : undefined}
+
         <Container fluid className="gx-0 mt-3">
           <Row sm={1} md={2} lg={2} xl={2} xxl={3} className="gx-2">
             {Array.isArray(data) &&
@@ -67,6 +82,9 @@ const PhoneBook = () => {
           </Row>
         </Container>
       </div>
+
+      {/* for small device  */}
+
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
