@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   padding: 30px 15px 10px 15px;
-
 }
 .componentHeader h3 {
   font-size: 20px;
@@ -14,8 +13,9 @@
   margin-right: 10px;
 }
 .phoneBookContainer {
-    background-color: var(--bg-app-primary);
-    min-height: 100vh;
+  display: none;
+  background-color: var(--bg-app-primary);
+  min-height: 100vh;
 }
 .componentAddSection {
   display: flex;
@@ -44,8 +44,25 @@
   margin-left: -5px;
 }
 .phoneBookContainerMainBg {
-    background-color: var(--bg-app-primary);
+  background-color: var(--bg-app-primary);
 }
 .phoneBookContainerItemBg {
   background-color: var(--bg-body);
+}
+
+
+@media screen and (min-device-width: 576px) and (max-device-width: 992px) { 
+  .phonebookSection{
+    margin: 0 15px;
+  }
+}
+
+
+@media only screen and (max-width: 576px) {
+  .phoneBookContainer {
+    display: block;
+  }
+  .phonebookSection{
+    display: none;
+  }
 }

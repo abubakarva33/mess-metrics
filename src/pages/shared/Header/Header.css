@@ -6,7 +6,9 @@
 .header {
   border-bottom: 1px solid var(--text-tertiary);
   padding: 10px 15px;
-  justify-content: flex-end !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .navItem {
   font-size: 18px;
@@ -27,18 +29,31 @@
 .ant-dropdown-menu-item {
   color: var(--text-primary) !important;
 }
-.SmallNav{
+.SmallNav {
   display: none;
   border-radius: 10px;
   background-color: var(--bg-secondary);
 }
+.headerMainMd{
+  display: none;
+}
 
 
-@media only screen and (max-width: 700px) {
-  .SmallNav{
+@media screen and (min-device-width: 576px) and (max-device-width: 992px) { 
+  .headerMainMd{
     display: block;
   }
-  .header{
+}
+
+@media only screen and (max-width: 576px) {
+  .SmallNav {
+    display: block;
+  }
+  .header {
+    display: none;
+  }
+  .headerMainMd{
     display: none;
   }
 }
+

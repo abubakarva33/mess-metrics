@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Dropdown } from "antd";
 import "./PhoneEach.css";
 import {
   useDeletePhoneMutation,
@@ -95,35 +95,57 @@ const PhoneEach = ({ data }) => {
     }, 2000);
   };
 
+  const items = [
+    {
+      key: "1",
+      label: <> <img src="/public/images/pencil.png" alt="" className="iconSize" /> </>,
+      onClick: updateNumberHandler,
+    },
+    {
+      key: "2",
+      label: <> <img src="/public/images/bin.png" alt="" className="iconSize" /> </>,
+      onClick: deletePhoneHandler,
+    },
+  ];
+
   return (
     <div className="phoneItem">
-      <div>
-        <h5>{name}</h5>
-        <div className="d-flex align-items-center mb-2">
-          <h6 className="mb-0 me-2"> {phone}</h6>
-          <div onClick={() => copyToClipboard(phone)}>{isCopied ? "number Copied!" :   <FaRegCopy  />}</div>
-         
+      <div className="phoneItemLeft">
+        <img src="/images/userIcon.png" alt="" className="phoneItemPhoto" />
+        <div>
+          <h6 className="phoneNameText pt-1">{name}</h6>
+          <div className="d-flex align-items-center mb-2">
+            <p className="mb-0 me-2 phoneText "> {phone}</p>
+            <div onClick={() => copyToClipboard(phone)}>
+              {isCopied ? "number Copied!" : <FaRegCopy />}
+            </div>
+          </div>
         </div>
       </div>
 
       {role === "manager" ? (
         <div className="d-flex align-items-center">
+          <div className="phoneIconsGroup">
+            {_id ? (
+              // <div onClick={deletePhoneHandler} className="fs-3 mx-2">
+              //   <img src="/public/images/more.png" alt="" className="iconSize" />
+              // </div>
+
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                <img src="/public/images/more.png" alt="" className="iconSize" />
+              </Dropdown>
+            ) : null}
+          </div>
+
           <div className="fs-3 ">
             <Link to={`tel:${phone}`} target="_blank">
-              <IoCallOutline />
+              <img src="/public/images/telephone.png" alt="" className="iconSize" />
+              {/* <IoCallOutline /> */}
             </Link>
-          </div>
-          <div className="d-flex align-items-center phoneBtnGroup">
-            {_id ? (
-              <div onClick={deletePhoneHandler} className="fs-3 mx-2">
-                <AiOutlineDelete />
-              </div>
-            ) : null}
-            {_id ? (
-              <div onClick={updateNumberHandler} className="fs-4">
-                <FaRegEdit />
-              </div>
-            ) : null}
           </div>
         </div>
       ) : (

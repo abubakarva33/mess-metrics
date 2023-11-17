@@ -10,6 +10,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { MdAddCall } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Col, Container, Row } from "react-bootstrap";
 
 const PhoneBook = () => {
   const { data } = useGetPhoneBookQuery();
@@ -18,7 +19,6 @@ const PhoneBook = () => {
   const { role } = useSelector((state) => state.user);
 
   const otherNumber = data?.filter((item) => item?._id !== data?._id);
-
 
   const addNumberHandler = async () => {
     const { value: formValues } = await Swal.fire({
@@ -53,40 +53,56 @@ const PhoneBook = () => {
   };
 
   return (
-    <div className="phoneBookContainer">
-      <div className="phoneBookContainerMainBg">
-        <div className="phoneBookContainerMain">
-          <div className="componentHeader">
-            <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-            <h3>PHONEBOOK </h3>
-          </div>
-          {role === "manager" ? (
-            <div className="componentAddSection">
-              <div>
-                <p className="mb-0">Want to add number? </p>
-                <p className="mb-0">15 numbers available</p>
-                {/* <div className="d-flex">
+    <div>
+      <div className="phonebookSection">
+        <h5 className="divider mt-5"> PHONEBOOK</h5>
+        <Container fluid className="gx-0 mt-3">
+          <Row sm={1} md={2} lg={2} xl={2} xxl={3} className="gx-2">
+            {Array.isArray(data) &&
+              data?.map((data, ind) => (
+                <Col>
+                  <PhoneEach key={ind} data={data} />
+                </Col>
+              ))}
+          </Row>
+        </Container>
+      </div>
+      <div className="phoneBookContainer">
+        <div className="phoneBookContainerMainBg">
+          <div className="phoneBookContainerMain">
+            <div className="componentHeader">
+              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <h3>PHONEBOOK </h3>
+            </div>
+            {role === "manager" ? (
+              <div className="componentAddSection">
+                <div>
+                  <p className="mb-0">Want to add number? </p>
+                  <p className="mb-0">15 numbers available</p>
+                  {/* <div className="d-flex">
                   <p className="mb-0"> {data?.length - otherNumber.length} Members </p>
                   <p className="mb-0">
-                    {" "}
+                    
                     {data?.length - (data?.length - otherNumber.length)} others{" "}
                   </p>
                 </div> */}
-              </div>
+                </div>
 
-              <div className="componentAddIconSection">
-                <p className="mb-0 fs-2 d-flex align-items-center" onClick={addNumberHandler}>
-                  <MdAddCall className="mb-0 componentAddIcon" />
-                </p>
+                <div className="componentAddIconSection">
+                  <p className="mb-0 fs-2 d-flex align-items-center" onClick={addNumberHandler}>
+                    {/* <img src="/public/images/add-user.png" alt="" className="iconSize"/> */}
+                    <MdAddCall className="mb-0 componentAddIcon" />
+                  </p>
+                </div>
               </div>
-            </div>
-          ) : undefined}
+            ) : undefined}
+          </div>
         </div>
-      </div>
-      <div className="phoneBookContainerItemBg">
-        <div className="phoneBookContainerItem ">
-          <div className="pt-5 pb-3 px-3">
-            {Array.isArray(data) && data?.map((data, ind) => <PhoneEach key={ind} data={data} />)}
+        <div className="phoneBookContainerItemBg">
+          <div className="phoneBookContainerItem ">
+            <div className="pt-5 pb-3 px-3">
+              {Array.isArray(data) && data?.map((data, ind) => <PhoneEach key={ind} data={data} />)}
+            </div>
           </div>
         </div>
       </div>

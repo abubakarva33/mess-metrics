@@ -9,36 +9,37 @@ const Members = () => {
   const { data } = useGetMembersQuery();
   const navigate = useNavigate();
   return (
-    // <div>
-    //   <h1>All Members</h1>
-    //   <Row className="memberContainer gx-2 gy-2 my-2">
-    //     {Array.isArray(data) &&
-    //       data?.map((data, ind) => <AllMembers key={ind} data={data} />)}
-    //   </Row>
-    // </div>
+    <>
+      <div>
+        <h1>All Members</h1>
+        <Row className="memberContainer gx-2 gy-2 my-2">
+          {Array.isArray(data) && data?.map((data, ind) => <AllMembers key={ind} data={data} />)}
+        </Row>
+      </div>
 
-    <div className="phoneBookContainer">
-      <div className="phoneBookContainerMainBg">
-        <div className="phoneBookContainerMain">
-          <div className="componentHeader">
-            <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-            <h3>ALL MEMBERS </h3>
+      <div className="phoneBookContainer">
+        <div className="phoneBookContainerMainBg">
+          <div className="phoneBookContainerMain">
+            <div className="componentHeader">
+              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <h3>ALL MEMBERS </h3>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="phoneBookContainerItemBg">
-        <div className="phoneBookContainerItem ">
-          <div className="pt-5 pb-3 px-3">
+        <div className="phoneBookContainerItemBg">
+          <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
-              <Row className="memberContainer gx-2 gy-2 my-2">
-                {Array.isArray(data) &&
-                  data?.map((data, ind) => <AllMembers key={ind} data={data} />)}
-              </Row>
+              <div className="pt-5 pb-3 px-3">
+                <Row className="memberContainer gx-2 gy-2 my-2">
+                  {Array.isArray(data) &&
+                    data?.map((data, ind) => <AllMembers key={ind} data={data} />)}
+                </Row>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
