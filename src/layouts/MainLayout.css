@@ -6,9 +6,9 @@
   display: flex;
   height: 100vh;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 .mainLayout {
   display: grid;
@@ -20,7 +20,7 @@
 }
 .sideHeaderLayout {
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 

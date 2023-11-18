@@ -98,12 +98,22 @@ const PhoneEach = ({ data }) => {
   const items = [
     {
       key: "1",
-      label: <> <img src="/public/images/pencil.png" alt="" className="iconSize" /> </>,
+      label: (
+        <>
+          {" "}
+          <img src="/public/images/pencil.png" alt="" className="iconSize" />{" "}
+        </>
+      ),
       onClick: updateNumberHandler,
     },
     {
       key: "2",
-      label: <> <img src="/public/images/bin.png" alt="" className="iconSize" /> </>,
+      label: (
+        <>
+          {" "}
+          <img src="/public/images/bin.png" alt="" className="iconSize" />{" "}
+        </>
+      ),
       onClick: deletePhoneHandler,
     },
   ];
@@ -127,10 +137,6 @@ const PhoneEach = ({ data }) => {
         <div className="d-flex align-items-center">
           <div className="phoneIconsGroup">
             {_id ? (
-              // <div onClick={deletePhoneHandler} className="fs-3 mx-2">
-              //   <img src="/public/images/more.png" alt="" className="iconSize" />
-              // </div>
-
               <Dropdown
                 menu={{
                   items,
@@ -144,7 +150,6 @@ const PhoneEach = ({ data }) => {
           <div className="fs-3 ">
             <Link to={`tel:${phone}`} target="_blank">
               <img src="/public/images/telephone.png" alt="" className="iconSize" />
-              {/* <IoCallOutline /> */}
             </Link>
           </div>
         </div>

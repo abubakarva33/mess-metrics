@@ -29,11 +29,12 @@ const BirthdayEach = ({ data }) => {
   }
 
   return (
-    <div className="phoneItem">
-      <div>
-        <h5>{name}</h5>
-        <div className="d-flex align-items-center mb-2">
-          <h6 className="mb-0 me-2"> {dateOfBirth}</h6>
+    <div className="phoneItem ">
+      <div className="phoneItemLeft">
+        <img src="/images/userIcon.png" alt="" className="phoneItemPhoto" />
+        <div>
+          <h6 className="phoneNameText pt-1">{name}</h6>
+          <p className="mb-0 me-2 phoneText "> {dateOfBirth}</p>
         </div>
       </div>
       <div className="birthdayText">
