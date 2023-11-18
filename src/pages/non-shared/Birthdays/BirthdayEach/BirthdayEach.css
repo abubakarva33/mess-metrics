@@ -1,6 +1,5 @@
 .birthdayText{
-    display: flex;
-    align-items: center;
+    text-align: center;
     background-color: #fee21f;
     padding: 5px ;
     color: var(--bg-body);

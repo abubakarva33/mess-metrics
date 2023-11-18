@@ -4,19 +4,22 @@ import AllMembers from "../../Home/components/AllMembers/AllMembers";
 import "./Members.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import AllMemberList from "../AllMemberList/AllMemberList";
 
 const Members = () => {
   const { data } = useGetMembersQuery();
   const navigate = useNavigate();
   return (
     <>
-      <div>
-        <h1>All Members</h1>
+      <div className="memberContainerMain">
+        <h1 className="text-center mt-4">All Members</h1>
         <Row className="memberContainer gx-2 gy-2 my-2">
-          {Array.isArray(data) && data?.map((data, ind) => <AllMembers key={ind} data={data} />)}
+          {Array.isArray(data) && data?.map((data, ind) => <AllMemberList key={ind} data={data} />)}
         </Row>
       </div>
 
+
+{/* for mobile device only  */}
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
@@ -29,10 +32,10 @@ const Members = () => {
         <div className="phoneBookContainerItemBg">
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
-              <div className="pt-5 pb-3 px-3">
-                <Row className="memberContainer gx-2 gy-2 my-2">
+              <div className="pb-3 px-3">
+                <Row className="memberContainer gx-2 gy-2">
                   {Array.isArray(data) &&
-                    data?.map((data, ind) => <AllMembers key={ind} data={data} />)}
+                    data?.map((data, ind) => <AllMemberList key={ind} data={data} />)}
                 </Row>
               </div>
             </div>

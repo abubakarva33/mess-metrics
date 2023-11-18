@@ -6,7 +6,7 @@ const AllMembers = ({ data }) => {
   const { name } = data;
 
   return (
-    <Col sm={12} md={6} lg={4}>
+    <Col sm={12} md={6} lg={6} xl={4} xxl={4}>
       <Link to="/">
         <div className="member">
           <h6>{name}</h6>
