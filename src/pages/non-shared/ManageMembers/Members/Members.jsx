@@ -33,7 +33,7 @@ const Members = () => {
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
               <div className="pb-3 px-3">
-                <Row className="memberContainer gx-2 gy-2">
+                <Row className="memberContainer gx-3 gy-3">
                   {Array.isArray(data) &&
                     data?.map((data, ind) => <AllMemberList key={ind} data={data} />)}
                 </Row>

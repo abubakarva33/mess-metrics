@@ -1,0 +1,77 @@
+.profileManageCenter {
+  height: 48%;
+  background-color: var(--bg-primary);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 20px 25px;
+}
+
+.profileInfoCenter {
+  height: 48%;
+  background-color: var(--bg-primary);
+  border-radius: 10px;
+  padding: 20px 25px;
+}
+.memberProfileCenter {
+  background-color: var(--bg-primary);
+  padding: 30px;
+  border-radius: 10px;
+}
+.memberProfileImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+.memberProfileNameText {
+  margin-bottom: 0;
+  font-size: 18px;
+}
+.memberProfileCenterTop {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-bottom: 1px solid var(--text-secondary);
+  margin-bottom: 15px;
+}
+.memberProfileHeader {
+  text-align: center;
+  border-bottom: 1px solid var(--text-secondary);
+  padding-bottom: 15px;
+}
+.memberProfileManageItemText {
+  font-size: 19px;
+}
+.memberProfileName {
+  font-size: 25px;
+}
+
+.profileInfoTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border-bottom: 1px solid var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+@media screen and (min-device-width: 576px) and (max-device-width: 740px) {
+  .profileManageCenter {
+    padding: 20px 15px;
+  }
+  .memberProfileCenter {
+    padding: 30px 15px;
+  }
+  .profileInfoCenter {
+    padding: 20px 15px;
+  }
+  .memberProfileManageItemText {
+    font-size: 16px;
+  }
+  .memberProfileName {
+    font-size: 22px;
+  }
+}
+@media screen and (max-device-width: 576px) {
+  .singleMemberSection {
+    display: none;
+  }
+}

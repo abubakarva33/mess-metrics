@@ -32,6 +32,7 @@ import { useEffect, useState } from "react";
 import ManagerAuth from "../components/Auth/ManagerAuth";
 import PhoneBook from "../pages/non-shared/PhoneBook/PhoneBook";
 import Birthdays from "../pages/non-shared/Birthdays/Birthdays";
+import SingleMember from "../pages/non-shared/ManageMembers/SingleMember/SingleMember";
 
 const mainLayoutChildInit = [
   { path: "/", element: <Home /> },
@@ -45,6 +46,7 @@ const mainLayoutChildInit = [
   { path: "/mess-profile", element: <MessProfile /> },
   { path: "/phone-book", element: <PhoneBook /> },
   { path: "/birthdays", element: <Birthdays /> },
+  { path: "/all-members/:Id", element: <SingleMember /> },
 ];
 
 const Routes = () => {

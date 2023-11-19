@@ -54,7 +54,6 @@ const PhoneBook = () => {
 
   return (
     <div>
-      
       <div className="phonebookSection">
         <h3 className="mt-4 d-flexCenter"> PHONEBOOK</h3>
         {role === "manager" ? (
@@ -109,7 +108,7 @@ const PhoneBook = () => {
 
                 <div className="componentAddIconSection">
                   <p className="mb-0 fs-2 d-flex align-items-center" onClick={addNumberHandler}>
-                    {/* <img src="/public/images/add-user.png" alt="" className="iconSize"/> */}
+                    {/* <img src="/images/add-user.png" alt="" className="iconSize"/> */}
                     <MdAddCall className="mb-0 componentAddIcon" />
                   </p>
                 </div>

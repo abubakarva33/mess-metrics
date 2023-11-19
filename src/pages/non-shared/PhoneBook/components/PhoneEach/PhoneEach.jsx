@@ -101,7 +101,7 @@ const PhoneEach = ({ data }) => {
       label: (
         <>
           {" "}
-          <img src="/public/images/pencil.png" alt="" className="iconSize" />{" "}
+          <img src="/images/pencil.png" alt="" className="iconSize" />{" "}
         </>
       ),
       onClick: updateNumberHandler,
@@ -111,7 +111,7 @@ const PhoneEach = ({ data }) => {
       label: (
         <>
           {" "}
-          <img src="/public/images/bin.png" alt="" className="iconSize" />{" "}
+          <img src="/images/bin.png" alt="" className="iconSize" />{" "}
         </>
       ),
       onClick: deletePhoneHandler,
@@ -142,14 +142,14 @@ const PhoneEach = ({ data }) => {
                   items,
                 }}
               >
-                <img src="/public/images/more.png" alt="" className="iconSize" />
+                <img src="/images/more.png" alt="" className="iconSize" />
               </Dropdown>
             ) : null}
           </div>
 
           <div className="fs-3 ">
             <Link to={`tel:${phone}`} target="_blank">
-              <img src="/public/images/telephone.png" alt="" className="iconSize" />
+              <img src="/images/telephone.png" alt="" className="iconSize" />
             </Link>
           </div>
         </div>
