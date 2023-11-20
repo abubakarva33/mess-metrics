@@ -100,7 +100,10 @@ const SingleMember = () => {
             <Row className="h-100">
               <Col className="h-100">
                 <div className="profileManageCenter">
-                  <h4 className="memberProfileHeader ">Manage Member</h4>
+                  <div className="d-flex align-items-center justify-content-between profileHeaderNotice"> 
+                    <h4 className="mb-0 ">Manage Member</h4>
+                    <img src="/public/images/notice.png" alt="" />
+                  </div>
                   <div>
                     <div className="d-flex align-items-center justify-content-between mb-2">
                       <div>
@@ -111,7 +114,7 @@ const SingleMember = () => {
                     </div>
                     <div className="d-flex align-items-center justify-content-between mb-1">
                       <div>
-                        <h5 className="mb-1 memberProfileManageItemText"> Wanna change manager?</h5>
+                        <h5 className="mb-1 memberProfileManageItemText"> Elected as manager?</h5>
                         <p className="mb-1"> change now</p>
                       </div>
                       <Button> Change</Button>
@@ -123,10 +126,6 @@ const SingleMember = () => {
                       </div>
                       <Button> Send</Button>
                     </div> */}
-
-                    <div className="d-flexCenter">
-                      <Button> Send Notice </Button>
-                    </div>
                   </div>
                 </div>
 
@@ -188,7 +187,7 @@ const SingleMember = () => {
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
               <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-              <h3>ACTIVE MONTH DETAILS </h3>
+              <h3>MEMBER PROFILE </h3>
             </div>
           </div>
         </div>
@@ -254,7 +253,7 @@ const SingleMember = () => {
               <div className="profileInfoCenter">
                 <div className=" profileInfoTop">
                   <MdArrowBackIosNew onClick={switchData} />
-                  <h4 className=""> {currentObject?.monthName}</h4>
+                  <h4 className="memberProfileMonthNane"> {currentObject?.monthName}</h4>
                   <MdArrowForwardIos onClick={switchData} />
                 </div>
                 <div>

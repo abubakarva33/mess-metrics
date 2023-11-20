@@ -65,7 +65,7 @@ const MyProfile = () => {
                 </div>
                 <div className="d-flexCenter flex-column">
                   <div className="d-flexCenter mt-3">
-                    <h3 className="mb-0  memberProfileName">{name}</h3>
+                    <h3 className="mb-0  memberProfileName profileName">{name}</h3>
                     <MdEdit className="fs-5 ms-2" />
                   </div>
                   <h6> ( {role} )</h6>
@@ -105,21 +105,21 @@ const MyProfile = () => {
             <Row className="h-100">
               <Col className="h-100">
                 <div className="profileManageCenter">
-                  <h4 className="memberProfileHeader ">Manage Member</h4>
+                  <h4 className="memberProfileHeader ">Mess Info.</h4>
                   <div>
                     <div className="d-flex align-items-center justify-content-between mb-3">
                       <div>
                         <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
-                        <p className="mb-1"> remove now</p>
+                        <p className="mb-1"> request to leave </p>
                       </div>
-                      <Button> Remove</Button>
+                      <Button> Request</Button>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
-                        <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
-                        <p className="mb-1"> create a notice now</p>
+                        <h5 className="mb-1 memberProfileManageItemText"> Need extra meals?</h5>
+                        <p className="mb-1"> request for meals</p>
                       </div>
-                      <Button> Send</Button>
+                      <Button> Request</Button>
                     </div>
                   </div>
                 </div>

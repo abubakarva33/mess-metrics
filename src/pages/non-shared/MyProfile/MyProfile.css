@@ -10,3 +10,12 @@
     background-color: var(--bg-tertiary);
     border-radius: 50px;
 }
+.profileName{
+    font-size: 22px !important;
+}
+
+@media screen and (min-device-width: 576px) and (max-device-width: 740px) {
+    .profileName{
+        font-size: 18px !important;
+    }
+  }
