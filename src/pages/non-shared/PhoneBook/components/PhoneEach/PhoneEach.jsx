@@ -127,7 +127,7 @@ const PhoneEach = ({ data }) => {
           <div className="d-flex align-items-center mb-2">
             <p className="mb-0 me-2 phoneText "> {phone}</p>
             <div onClick={() => copyToClipboard(phone)}>
-              {isCopied ? "number Copied!" : <FaRegCopy />}
+              {isCopied ? "Copied!" : <FaRegCopy />}
             </div>
           </div>
         </div>
