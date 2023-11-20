@@ -102,19 +102,30 @@ const SingleMember = () => {
                 <div className="profileManageCenter">
                   <h4 className="memberProfileHeader ">Manage Member</h4>
                   <div>
-                    <div className="d-flex align-items-center justify-content-between mb-3">
+                    <div className="d-flex align-items-center justify-content-between mb-2">
                       <div>
                         <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
                         <p className="mb-1"> remove now</p>
                       </div>
                       <Button> Remove</Button>
                     </div>
-                    <div className="d-flex align-items-center justify-content-between">
+                    <div className="d-flex align-items-center justify-content-between mb-1">
+                      <div>
+                        <h5 className="mb-1 memberProfileManageItemText"> Wanna change manager?</h5>
+                        <p className="mb-1"> change now</p>
+                      </div>
+                      <Button> Change</Button>
+                    </div>
+                    {/* <div className="d-flex align-items-center justify-content-between">
                       <div>
                         <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
                         <p className="mb-1"> create a notice now</p>
                       </div>
                       <Button> Send</Button>
+                    </div> */}
+
+                    <div className="d-flexCenter">
+                      <Button> Send Notice </Button>
                     </div>
                   </div>
                 </div>
@@ -170,8 +181,7 @@ const SingleMember = () => {
         </Row>
       </Container>
 
-
- {/* for small device only  */}
+      {/* for small device only  */}
 
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">

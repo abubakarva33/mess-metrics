@@ -14,7 +14,7 @@
 }
 .memberProfileCenter {
   background-color: var(--bg-primary);
-  padding: 30px;
+  padding: 43px 30px;
   border-radius: 10px;
 }
 .memberProfileImage {
