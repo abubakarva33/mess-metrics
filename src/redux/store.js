@@ -3,8 +3,8 @@ import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import { mainApi } from "./api/mainApi";
-import basicReducer from "./features/basic/basicSlice";
 import userSliceReducer from "./features/UserSlice/UserSlice";
+import basicSliceReducer from "./features/basic/basicSlice";
 
 const persistConfig = {
   key: "root",
@@ -13,7 +13,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  basic: basicReducer,
+  basic: basicSliceReducer,
   user: userSliceReducer,
 
   [mainApi.reducerPath]: mainApi.reducer,

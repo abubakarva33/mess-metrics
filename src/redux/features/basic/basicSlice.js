@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  navWidth: 240,
+  dMeal: '0',
 };
 
 export const basicSlice = createSlice({
-  name: "anotherSample",
+  name: "basic",
   initialState,
   reducers: {
-    setNavWidth: (state, { payload }) => {
-      state.navWidth = payload;
+    setDefaultMeal: (state, { payload }) => {
+      state.dMeal = payload.dMeal;
     },
   },
 });
 
-export const { setNavWidth } = basicSlice.actions;
+export const { setDefaultMeal } = basicSlice.actions;
 const basicSliceReducer = basicSlice.reducer;
 export default basicSliceReducer;
