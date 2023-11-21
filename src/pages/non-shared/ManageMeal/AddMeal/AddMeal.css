@@ -1,0 +1,13 @@
+.addMealRegulationIcon{
+    padding: 7px;
+    background-color: rgb(155, 19, 19);
+    border-radius: 5px;
+}
+.mealCount{
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    background-color: var(--bg-secondary);
+    border-radius: 5px;
+    margin: 0 7px;
+}

@@ -62,7 +62,7 @@ const SingleMember = () => {
           <Col xs={12} sm={6} md={6} lg={6} xl={5} xxl={5}>
             <div className="memberProfileCenter">
               <div className="memberProfileCenterTop">
-                <img src="/public/images/singleUser.webp" alt="" className="memberProfileImage" />
+                <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                 <div className="d-flexCenter flex-column">
                   <h3 className="mb-0 mt-3 memberProfileName">{name}</h3>
                   <h6> ( {role} )</h6>
@@ -100,9 +100,9 @@ const SingleMember = () => {
             <Row className="h-100">
               <Col className="h-100">
                 <div className="profileManageCenter">
-                  <div className="d-flex align-items-center justify-content-between profileHeaderNotice"> 
+                  <div className="d-flex align-items-center justify-content-between profileHeaderNotice">
                     <h4 className="mb-0 ">Manage Member</h4>
-                    <img src="/public/images/notice.png" alt="" />
+                    <img src="/images/notice.png" alt="" />
                   </div>
                   <div>
                     <div className="d-flex align-items-center justify-content-between mb-2">
@@ -196,7 +196,7 @@ const SingleMember = () => {
             <div className="pt-5 pb-3 px-3">
               <div className="memberProfileCenter">
                 <div className="memberProfileCenterTop">
-                  <img src="/public/images/singleUser.webp" alt="" className="memberProfileImage" />
+                  <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                   <div className="d-flexCenter flex-column">
                     <h3 className="mb-0 mt-3 memberProfileName">{name}</h3>
                     <h6> ( {role} )</h6>

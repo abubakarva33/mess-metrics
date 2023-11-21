@@ -82,7 +82,7 @@ const MessProfile = () => {
           <Col xs={12} sm={6} md={6} lg={6} xl={5} xxl={5}>
             <div className="memberProfileCenter">
               <div className="memberProfileCenterTop">
-                <img src="/public/images/singleUser.webp" alt="" className="memberProfileImage" />
+                <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                 <div className="d-flexCenter flex-column">
                   <h3 className="mb-0 mt-3 memberProfileName">{name}</h3>
                   <h6> ( {role} )</h6>
@@ -134,7 +134,7 @@ const MessProfile = () => {
                       <h5 className="mb-0 messProfileName">Active Month : January </h5>
                     </div>
                     <div className="d-flex align-items-center mb-2">
-                      <img src="/public/images/group.png" alt="" className="messProfileIcon" />
+                      <img src="/images/group.png" alt="" className="messProfileIcon" />
                       <h5 className="mb-0 messProfileName">Total Member : {members?.length}</h5>
                     </div>
                   </div>
@@ -213,7 +213,7 @@ const MessProfile = () => {
             <div className="pt-5 pb-3 px-3">
               <div className="memberProfileCenter mb-3">
                 <div className="memberProfileCenterTop">
-                  <img src="/public/images/singleUser.webp" alt="" className="memberProfileImage" />
+                  <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                   <div className="d-flexCenter flex-column">
                     <h3 className="mb-0 mt-3 memberProfileName">{name}</h3>
                     <h6> ( {role} )</h6>
@@ -262,7 +262,7 @@ const MessProfile = () => {
                     <h5 className="mb-0 messProfileName">Active Month : January </h5>
                   </div>
                   <div className="d-flex align-items-center mb-2">
-                    <img src="/public/images/group.png" alt="" className="messProfileIcon" />
+                    <img src="/images/group.png" alt="" className="messProfileIcon" />
                     <h5 className="mb-0 messProfileName">Total Member : {members?.length}</h5>
                   </div>
                 </div>

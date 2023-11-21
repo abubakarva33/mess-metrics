@@ -191,7 +191,7 @@ const MyProfile = () => {
             <div className="pt-5 pb-3 px-3">
               <div className="memberProfileCenter">
                 <div className="memberProfileCenterTop">
-                  <img src="/public/images/singleUser.webp" alt="" className="memberProfileImage" />
+                  <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                   <div className="d-flexCenter flex-column">
                     <h3 className="mb-0 mt-3 memberProfileName">{name}</h3>
                     <h6> ( {role} )</h6>
