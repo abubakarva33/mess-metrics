@@ -43,12 +43,15 @@ body {
 .swal2-success-ring {
   border: 0.25em solid rgb(74 154 76 / 95%) !important;
 }
-.swal2-default-outline:focus{
+.swal2-default-outline:focus {
   box-shadow: none !important;
 }
 .swal2-confirm:focus {
   box-shadow: none !important;
 }
-.memberImageEach{
-  width: 40px;
+.memberImageEach {
+  width: 35px;
+}
+.memberNameEach {
+  font-size: 20px;
 }

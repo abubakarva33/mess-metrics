@@ -1,19 +1,44 @@
-.ant-picker{
-    width: 100% !important;
-    background-color: var(--bg-body) !important;
-    color: var(--text-secondary) !important;
+.ant-picker {
+  width: 100% !important;
+  background-color: var(--bg-body) !important;
+  color: var(--text-secondary) !important;
+  min-height: 45px;
 }
 
 .ant-picker .ant-picker-suffix {
-    color: var(--text-secondary) !important;
+  color: var(--text-secondary) !important;
 }
-.ant-picker .ant-picker-suffix::placeholder{
-    color: var(--text-secondary) !important;
+.ant-picker .ant-picker-suffix::placeholder {
+  color: var(--text-secondary) !important;
 }
-.ant-picker .ant-picker-input >input{
-    color: var(--text-secondary) !important;
+.ant-picker .ant-picker-input > input {
+  font-size: 18px !important;
+  color: var(--text-secondary) !important;
 }
 
-.datePickerAnt::placeholder{
+.datePickerAnt::placeholder {
+  color: var(--text-secondary) !important;
+}
+
+
+@media only screen and (max-width: 576px) {
+  .ant-picker {
+    min-height: 35px;
+  }
+  
+  .ant-picker .ant-picker-suffix {
     color: var(--text-secondary) !important;
+  }
+  .ant-picker .ant-picker-suffix::placeholder {
+    color: var(--text-secondary) !important;
+  }
+  .ant-picker .ant-picker-input > input {
+    font-size: 18px !important;
+    color: var(--text-secondary) !important;
+  }
+  
+  .datePickerAnt::placeholder {
+    color: var(--text-secondary) !important;
+  }
+  
 }

@@ -1,7 +1,6 @@
 .mealDatePicker > .ant-picker {
   min-height: 45px;
   background-color: #4fba6f !important;
-
 }
 
 .mealDatePicker > .ant-picker .ant-picker-input > input {
@@ -23,12 +22,13 @@
 }
 .addMealCostSection {
   border: 1px solid var(--text-tertiary);
+  background-color: var(--bg-primary);
   margin-top: 30px;
   padding: 20px;
   border-radius: 10px;
 }
 .ant-select-selector {
-  height: 50px !important;
+  height: 45px !important;
 }
 .ant-select-multiple .ant-select-selection-item {
   height: 100%;
@@ -43,6 +43,59 @@
   min-height: 45px;
   font-size: 18px;
 }
-.addMealItemMargin{
+.addMealItemMargin {
   margin-top: -20px;
+}
+.ant-input{
+  min-height: 45px !important;
+}
+
+@media only screen and (max-width: 576px) {
+  .addMealCostSectionMain {
+    display: none;
+  }
+  .memberImageEach {
+    width: 25px;
+  }
+  .memberNameEach {
+    font-size: 17px;
+  }
+  .addMealCostSection {
+    background-color: transparent;
+    border: none;
+    margin-top: 0;
+    padding: 10px;
+  }
+  .mealDatePicker > .ant-picker {
+    min-height: 35px;
+  }
+
+  .mealDatePicker > .ant-picker .ant-picker-input > input {
+    font-size: 18px !important;
+  }
+  .mealDatePicker > .ant-picker .ant-picker-suffix {
+    font-size: 18px !important;
+  }
+  .mealDatePicker > .ant-picker .ant-picker-clear {
+    font-size: 18px !important;
+  }
+  .ant-select-selector {
+    height: 35px !important;
+  }
+  .ant-select-multiple .ant-select-selection-placeholder {
+    font-size: 18px !important;
+  }
+  .ant-select .ant-select-arrow {
+    font-size: 18px !important;
+  }
+  .ant-input {
+    min-height: 35px !important;
+    font-size: 18px !important;
+  }
+  .addMealItemMargin {
+    margin-top: -20px;
+  }
+  .ant-input{
+    min-height: 35px !important;
+  }
 }

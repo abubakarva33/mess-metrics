@@ -15,7 +15,7 @@ const useMemberOptions = () => {
           ) : (
             <img src="/images/userIcon.png" alt="" className="memberImageEach" />
           )}
-          <p className="mb-0 ms-2 fs-5">{member?.name}</p>
+          <p className="mb-0 ms-2 memberNameEach">{member?.name}</p>
         </div>
       ),
       value: member._id,
