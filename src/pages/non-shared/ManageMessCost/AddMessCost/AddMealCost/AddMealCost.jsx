@@ -19,8 +19,7 @@ const AddMealCoast = () => {
   return (
     <div>
       <div className="w-50 mx-auto">
-
-        <input type="date" name="" id="" />
+        
         <Form
           name="complex-form"
           form={form}

@@ -49,3 +49,6 @@ body {
 .swal2-confirm:focus {
   box-shadow: none !important;
 }
+.memberImageEach{
+  width: 40px;
+}

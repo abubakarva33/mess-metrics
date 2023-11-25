@@ -8,7 +8,16 @@ const useMemberOptions = () => {
 
   useEffect(() => {
     const memberData = data?.map((member) => ({
-      label: member?.name,
+      label: (
+        <div className="d-flex align-items-center">
+          {member?.image ? (
+            <img src={member.image} alt="" className="memberImageEach" />
+          ) : (
+            <img src="/images/userIcon.png" alt="" className="memberImageEach" />
+          )}
+          <p className="mb-0 ms-2 fs-5">{member?.name}</p>
+        </div>
+      ),
       value: member._id,
     }));
 
