@@ -65,7 +65,7 @@ const AddMeal = () => {
           <div className="mealContainer">
             <Form
               name="normal_login"
-              className="login-form"
+              className=""
               form={form}
               layout="vertical"
               initialValues={{
