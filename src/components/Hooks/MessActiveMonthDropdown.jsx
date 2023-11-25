@@ -10,7 +10,7 @@ const useActiveMonthOptions = () => {
 
   useEffect(() => {
     const memberData = data?.map((member) => ({
-      label: member?.name,
+      label: <p className="memberNameEach mb-0"> {member?.name}</p>,
       value: member._id,
     }));
 
@@ -20,11 +20,19 @@ const useActiveMonthOptions = () => {
 
     if (Array.isArray(memberData)) {
       membersFormate = [
-        { label: `${activeMonth?.name} (Active)`, value: activeMonth?._id },
+        {
+          label: <p className="memberNameEach mb-0"> {activeMonth?.name} (Active) </p>,
+          value: activeMonth?._id,
+        },
         ...monthList,
       ];
     } else {
-      membersFormate = [{ label: `${activeMonth?.name} (Active)`, value: activeMonth?._id }];
+      membersFormate = [
+        {
+          label: <p className="memberNameEach mb-0"> {activeMonth?.name} (Active)</p>,
+          value: activeMonth?._id,
+        },
+      ];
     }
     setMonths(membersFormate);
   }, [data]);
