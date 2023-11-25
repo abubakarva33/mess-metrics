@@ -49,92 +49,100 @@ const ChangeManager = () => {
   };
 
   return (
-    // <div>
-    //   <h1>Change Manager</h1>
-    //   <ConfigProvider
-    //     theme={{
-    //       components: {
-    //         Form: {
-    //           labelColor: "#ffffff",
-    //           colorText: "green",
-    //         },
-    //       },
-    //     }}
-    //   >
-    //     <Form
-    //       name="basic"
-    //       className="login-form"
-    //       onFinish={onFinish}
-    //       layout="vertical"
-    //       form={form}
-    //       autoComplete="on"
-    //     >
-    //       <Form.Item
-    //         name="newManagerId"
-    //         label="Select Member"
-    //         rules={[
-    //           {
-    //             required: true,
-    //             message: "Please Select Member!",
-    //           },
-    //         ]}
-    //       >
-    //         <Select defaultValue="" options={members} />
-    //       </Form.Item>
-    //       <Button htmlType="submit">Change Manager</Button>
-    //     </Form>
-    //   </ConfigProvider>
-    // </div>
+    <div>
+      <div className="addMealCostSectionMain">
+        <h4 className="text-center mt-4">Delete Old Month</h4>
+        <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
+          <ConfigProvider
+            theme={{
+              components: {
+                Form: {
+                  labelColor: "#ffffff",
+                  colorText: "green",
+                },
+              },
+            }}
+          >
+            <Form
+              name="basic"
+              className="login-form"
+              onFinish={onFinish}
+              layout="vertical"
+              form={form}
+              autoComplete="on"
+            >
+              <Form.Item
+                name="newManagerId"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please Select Member!",
+                  },
+                ]}
+              >
+                <Select defaultValue="" options={members} />
+              </Form.Item>
 
-    <div className="phoneBookContainer">
-      <div className="phoneBookContainerMainBg">
-        <div className="phoneBookContainerMain">
-          <div className="componentHeader">
-            <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-            <h3>CHANGE MANAGER </h3>
-          </div>
+              <div className="d-flex w-100">
+                <Button htmlType="submit" className="w-100">
+                  Change Manager
+                </Button>
+              </div>
+            </Form>
+          </ConfigProvider>
         </div>
       </div>
-      <div className="phoneBookContainerItemBg">
-        <div className="phoneBookContainerItem ">
-          <div className="pt-5 pb-3 px-3">
-            <ConfigProvider
-              theme={{
-                components: {
-                  Form: {
-                    labelColor: "#ffffff",
-                    colorText: "green",
-                  },
-                },
-              }}
-            >
-              <Form
-                name="basic"
-                className="login-form"
-                onFinish={onFinish}
-                layout="vertical"
-                form={form}
-                autoComplete="on"
-              >
-                <Form.Item
-                  name="newManagerId"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please Select Member!",
-                    },
-                  ]}
-                >
-                  <Select defaultValue="" options={members} />
-                </Form.Item>
 
-                <div className="d-flex w-100">
-                  <Button htmlType="submit" className="w-100">
-                    Change Manager
-                  </Button>
-                </div>
-              </Form>
-            </ConfigProvider>
+      <div className="phoneBookContainer">
+        <div className="phoneBookContainerMainBg">
+          <div className="phoneBookContainerMain">
+            <div className="componentHeader">
+              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <h3>CHANGE MANAGER </h3>
+            </div>
+          </div>
+        </div>
+        <div className="phoneBookContainerItemBg">
+          <div className="phoneBookContainerItem ">
+            <div className="pt-5 pb-3 px-3">
+              <ConfigProvider
+                theme={{
+                  components: {
+                    Form: {
+                      labelColor: "#ffffff",
+                      colorText: "green",
+                    },
+                  },
+                }}
+              >
+                <Form
+                  name="basic"
+                  className="login-form"
+                  onFinish={onFinish}
+                  layout="vertical"
+                  form={form}
+                  autoComplete="on"
+                >
+                  <Form.Item
+                    name="newManagerId"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please Select Member!",
+                      },
+                    ]}
+                  >
+                    <Select defaultValue="" options={members} />
+                  </Form.Item>
+
+                  <div className="d-flex w-100">
+                    <Button htmlType="submit" className="w-100">
+                      Change Manager
+                    </Button>
+                  </div>
+                </Form>
+              </ConfigProvider>
+            </div>
           </div>
         </div>
       </div>
