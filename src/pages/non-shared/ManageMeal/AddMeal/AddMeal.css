@@ -22,3 +22,20 @@
     padding:0 15px 20px 15px;
     border-radius: 10px;
 }
+
+@media screen and (min-device-width: 576px) and (max-device-width: 740px) {
+    
+  }
+
+  @media screen and (max-device-width: 576px) {
+    .addMealSection{
+        display: none;
+    }
+    .addMealRegulationIcon{
+        padding: 3px;
+    }
+    .mealCount{
+        padding: 0 10px;
+        margin: 0 5px;
+    }
+  }

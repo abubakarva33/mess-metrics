@@ -10,6 +10,10 @@ export const basicSlice = createSlice({
   reducers: {
     setDefaultMeal: (state, { payload }) => {
       state.dMeal = payload.dMeal;
+      console.log(payload.dMeal);
+      if (payload.dMeal <=0) {
+        return
+      }
     },
   },
 });
