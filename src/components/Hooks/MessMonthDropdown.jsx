@@ -1,4 +1,3 @@
-
 import { useGetMonthsQuery } from "../../redux/api/sampleApi/monthApi";
 
 import { useEffect, useState } from "react";
@@ -10,7 +9,7 @@ const useMonthOptions = () => {
 
   useEffect(() => {
     const memberData = data?.map((member) => ({
-      label: member?.name,
+      label: <p className="memberNameEach mb-0"> {member?.name} </p>,
       value: member._id,
     }));
 

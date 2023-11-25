@@ -35,91 +35,99 @@ const StartNewMonth = () => {
   };
 
   return (
-    // <div>
-    //   <h1>Remove Member</h1>
-    //   <ConfigProvider
-    //     theme={{
-    //       components: {
-    //         Form: {
-    //           labelColor: "#ffffff",
-    //           colorText: "green",
-    //         },
-    //       },
-    //     }}
-    //   >
-    //     <Form
-    //       name="basic"
-    //       className="login-form"
-    //       onFinish={onFinish}
-    //       layout="vertical"
-    //       form={form}
-    //       autoComplete="on"
-    //     >
-    //       <Form.Item
-    //         name="name"
-    //         label="Select Member"
-    //         rules={[
-    //           {
-    //             required: true,
-    //             message: "Please Select Member!",
-    //           },
-    //         ]}
-    //       >
-    //         <Select defaultValue="" options={monthOptionsConstant} />
-    //       </Form.Item>
-    //       <Button htmlType="submit">Create New Month</Button>
-    //     </Form>
-    //   </ConfigProvider>
-    // </div>
-
-    <div className="phoneBookContainer">
-      <div className="phoneBookContainerMainBg">
-        <div className="phoneBookContainerMain">
-          <div className="componentHeader">
-            <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-            <h3>START NEW MONTH </h3>
-          </div>
+    <div>
+      <div className="addMealCostSectionMain">
+        <h4 className="text-center mt-4">Create New Month</h4>
+        <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
+          <ConfigProvider
+            theme={{
+              components: {
+                Form: {
+                  labelColor: "#ffffff",
+                  colorText: "green",
+                },
+              },
+            }}
+          >
+            <Form
+              name="basic"
+              className="login-form"
+              onFinish={onFinish}
+              layout="vertical"
+              form={form}
+              autoComplete="on"
+            >
+              <Form.Item
+                name="month"
+                label="Select Month"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please Select Month!",
+                  },
+                ]}
+              >
+                <Select defaultValue="" options={monthOptionsConstant} />
+              </Form.Item>
+              <div className="d-flex justify-content-center  ">
+                <Button type="primary" htmlType="submit" className="w-50 h-auto mt-3">
+                  <span className="fs-5"> Create month</span>
+                </Button>
+              </div>
+            </Form>
+          </ConfigProvider>
         </div>
       </div>
-      <div className="phoneBookContainerItemBg">
-        <div className="phoneBookContainerItem ">
-          <div className="pt-5 pb-3 px-3">
-            <ConfigProvider
-              theme={{
-                components: {
-                  Form: {
-                    labelColor: "#ffffff",
-                    colorText: "green",
-                  },
-                },
-              }}
-            >
-              <Form
-                name="basic"
-                className="login-form"
-                onFinish={onFinish}
-                layout="vertical"
-                form={form}
-                autoComplete="on"
-              >
-                <Form.Item
-                  name="name"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please Select Member!",
+
+      <div className="phoneBookContainer">
+        <div className="phoneBookContainerMainBg">
+          <div className="phoneBookContainerMain">
+            <div className="componentHeader">
+              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <h3>START NEW MONTH </h3>
+            </div>
+          </div>
+        </div>
+        <div className="phoneBookContainerItemBg">
+          <div className="phoneBookContainerItem ">
+            <div className="pt-5 pb-3 px-3">
+              <ConfigProvider
+                theme={{
+                  components: {
+                    Form: {
+                      labelColor: "#ffffff",
+                      colorText: "green",
                     },
-                  ]}
+                  },
+                }}
+              >
+                <Form
+                  name="basic"
+                  className="login-form"
+                  onFinish={onFinish}
+                  layout="vertical"
+                  form={form}
+                  autoComplete="on"
                 >
-                  <Select defaultValue="" options={monthOptionsConstant} />
-                </Form.Item>
-                <div className="d-flex w-100">
-                  <Button htmlType="submit" className="w-100">
-                    Create New Month
-                  </Button>
-                </div>
-              </Form>
-            </ConfigProvider>
+                  <Form.Item
+                    name="name"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please Select Member!",
+                      },
+                    ]}
+                  >
+                    <Select defaultValue="" options={monthOptionsConstant} />
+                  </Form.Item>
+                  <div className="d-flex w-100">
+                    <Button htmlType="submit" className="w-100">
+                      Create New Month
+                    </Button>
+                  </div>
+                </Form>
+              </ConfigProvider>
+            </div>
           </div>
         </div>
       </div>
