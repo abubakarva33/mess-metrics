@@ -130,28 +130,20 @@ const AddSharedOtherCost = () => {
                         </Form.Item>
                       </div>
                     </Form.Item>
-                    <Form.Item className="addMealItemMargin">
+                    <Form.Item>
                       <div>
-                        <h6>Select Shoppers:</h6>
-                        <Select
-                          mode="multiple"
-                          name="tags"
-                          placeholder="Select Members"
-                          onChange={(e) => setFeaturesList(e)}
-                          maxTagCount={5}
-                          maxTagTextLength={20}
-                          dropdownRender={(menu) => (
-                            <>
-                              {menu}
-                              <Divider
-                                style={{
-                                  margin: "8px 0",
-                                }}
-                              />
-                            </>
-                          )}
-                          options={members}
-                        />
+                        <h6>Add Bazar List (Optional) </h6>
+                        <Form.Item
+                          name="name"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please input your Username!",
+                            },
+                          ]}
+                        >
+                          <Input placeholder="Enter Shared cost" />
+                        </Form.Item>
                       </div>
                     </Form.Item>
 
