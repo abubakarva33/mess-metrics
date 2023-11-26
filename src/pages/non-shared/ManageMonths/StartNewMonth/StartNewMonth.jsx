@@ -38,7 +38,7 @@ const StartNewMonth = () => {
     <div>
       <div className="addMealCostSectionMain">
         <div className=" addMealCostSection sectionShadow  mx-auto" style={{ maxWidth: "500px" }}>
-        <h4 className="text-center  mt-2 mb-4">Create New Month</h4>
+        <h4 className="text-center  mt-2 mb-4 ">Create New Month</h4>
           <ConfigProvider
             theme={{
               components: {
@@ -89,8 +89,8 @@ const StartNewMonth = () => {
           </div>
         </div>
         <div className="phoneBookContainerItemBg">
-          <div className="phoneBookContainerItem ">
-            <div className="pt-5 pb-3 px-3">
+          <div className="phoneBookContainerItem smDeviceAlign">
+            <div className="pt-5 pb-3 px-3 m-auto w-100">
               <ConfigProvider
                 theme={{
                   components: {

@@ -128,8 +128,8 @@ const AddMealCoast = () => {
           </div>
         </div>
         <div className="phoneBookContainerItemBg">
-          <div className="phoneBookContainerItem ">
-            <div className="pt-5 pb-3 px-3">
+          <div className="phoneBookContainerItem smDeviceAlign ">
+            <div className="pt-5 pb-3 px-3 m-auto w-100">
               <div>
                 <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
                   <div className="mealDatePicker">

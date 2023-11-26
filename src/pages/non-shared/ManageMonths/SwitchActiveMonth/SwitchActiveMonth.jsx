@@ -96,8 +96,8 @@ const SwitchActiveMonth = () => {
           </div>
         </div>
         <div className="phoneBookContainerItemBg">
-          <div className="phoneBookContainerItem ">
-            <div className="pt-4 pb-3">
+          <div className="phoneBookContainerItem smDeviceAlign">
+            <div className="pt-4 pb-3 m-auto w-100">
               <div className="">
                 <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
                   <ConfigProvider

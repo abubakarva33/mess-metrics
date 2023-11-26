@@ -113,13 +113,13 @@ const AddIndividualOtherCost = () => {
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
               <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-              <h3>ADD MEAL COSTS </h3>
+              <h3>ADD INDIVIDUAL COSTS </h3>
             </div>
           </div>
         </div>
         <div className="phoneBookContainerItemBg">
-          <div className="phoneBookContainerItem ">
-            <div className="pt-5 pb-3 px-3">
+          <div className="phoneBookContainerItem smDeviceAlign ">
+            <div className="pt-5 pb-3 px-3 m-auto w-100">
               <div>
                 <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
                   <div className="mealDatePicker">

@@ -103,8 +103,8 @@ const ChangeManager = () => {
           </div>
         </div>
         <div className="phoneBookContainerItemBg">
-          <div className="phoneBookContainerItem ">
-            <div className="pt-5 pb-3 px-3">
+          <div className="phoneBookContainerItem  smDeviceAlign">
+            <div className="pt-5 pb-3 px-3 m-auto w-100">
               <ConfigProvider
                 theme={{
                   components: {

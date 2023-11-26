@@ -1,0 +1,6 @@
+.smDeviceAlign{
+    min-height: 80vh !important;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
