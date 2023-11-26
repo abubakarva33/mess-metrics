@@ -37,8 +37,8 @@ const StartNewMonth = () => {
   return (
     <div>
       <div className="addMealCostSectionMain">
-        <h4 className="text-center mt-4">Create New Month</h4>
-        <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
+        <div className=" addMealCostSection sectionShadow  mx-auto" style={{ maxWidth: "500px" }}>
+        <h4 className="text-center  mt-2 mb-4">Create New Month</h4>
           <ConfigProvider
             theme={{
               components: {

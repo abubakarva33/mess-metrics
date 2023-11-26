@@ -51,8 +51,8 @@ const ChangeManager = () => {
   return (
     <div>
       <div className="addMealCostSectionMain">
-        <h4 className="text-center mt-4">Delete Old Month</h4>
-        <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
+        <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
+          <h4 className="text-center  mt-2 mb-4">Change Manager</h4>
           <ConfigProvider
             theme={{
               components: {
@@ -83,9 +83,9 @@ const ChangeManager = () => {
                 <Select defaultValue="" options={members} />
               </Form.Item>
 
-              <div className="d-flex w-100">
-                <Button htmlType="submit" className="w-100">
-                  Change Manager
+              <div className="d-flex justify-content-center  ">
+                <Button type="primary" htmlType="submit" className="w-50 h-auto mt-3">
+                  <span className="fs-5"> Change</span>
                 </Button>
               </div>
             </Form>
