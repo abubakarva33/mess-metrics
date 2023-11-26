@@ -27,8 +27,8 @@ const AddIndividualOtherCost = () => {
   return (
     <div>
       <div className="addMealCostSectionMain">
-        <h4 className="text-center mt-4">Add Individual Cost</h4>
-        <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
+        <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
+          <h4 className="text-center  mt-2 mb-4">Add Individual Cost</h4>
           <div className="mealDatePicker">
             <DatePicker
               placeholder="Select Date"
@@ -83,7 +83,7 @@ const AddIndividualOtherCost = () => {
                 />
               </div>
             </Form.Item>
-            <Form.Item>
+            <Form.Item className="addMealItemMarginSet">
               <div>
                 <h6>Add Bazar List (Optional) </h6>
                 <Form.Item
@@ -176,7 +176,7 @@ const AddIndividualOtherCost = () => {
                         />
                       </div>
                     </Form.Item>
-                    <Form.Item>
+                    <Form.Item className="addMealItemMarginSet">
                       <div>
                         <h6>Add Bazar List (Optional) </h6>
                         <Form.Item
@@ -194,8 +194,8 @@ const AddIndividualOtherCost = () => {
                     </Form.Item>
 
                     <div className="d-flex justify-content-center  ">
-                      <Button type="primary" htmlType="submit" className="w-50 h-auto">
-                        <span className="fs-5"> Add</span>
+                      <Button type="primary" htmlType="submit" className="w-100 h-auto">
+                        <span className="fs-5"> Add Cost</span>
                       </Button>
                     </div>
                   </Form>

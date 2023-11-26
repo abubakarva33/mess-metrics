@@ -44,8 +44,8 @@ const SwitchActiveMonth = () => {
   return (
     <div>
       <div className="addMealCostSectionMain my-auto">
-        <div className=" addMealCostSection  mx-auto " style={{ maxWidth: "500px" }}>
-          <h4 className="text-center mt-4">Switch Active Month</h4>
+        <div className=" addMealCostSection sectionShadow mx-auto " style={{ maxWidth: "500px" }}>
+          <h4 className="text-center  mt-2 mb-4">Switch Active Month</h4>
           <ConfigProvider
             theme={{
               components: {
