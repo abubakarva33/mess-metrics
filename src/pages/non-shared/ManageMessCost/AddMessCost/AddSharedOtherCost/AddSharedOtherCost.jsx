@@ -27,8 +27,8 @@ const AddSharedOtherCost = () => {
   return (
     <div>
       <div className="addMealCostSectionMain">
-        <h4 className="text-center mt-4">Add Shared Cost</h4>
-        <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
+        <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
+          <h4 className="text-center  mt-2 mb-4">Add Shared Cost</h4>
           <div className="mealDatePicker">
             <DatePicker
               placeholder="Select Date"
@@ -61,7 +61,7 @@ const AddSharedOtherCost = () => {
               </div>
             </Form.Item>
             <Form.Item>
-              <div>
+              <div className="addMealItemMargin">
                 <h6>Add Bazar List (Optional) </h6>
                 <Form.Item
                   name="name"
@@ -79,7 +79,7 @@ const AddSharedOtherCost = () => {
 
             <div className="d-flex justify-content-center  ">
               <Button type="primary" htmlType="submit" className="w-50 h-auto">
-                <span className="fs-5"> Add</span>
+                <span className="fs-5"> Add Cost</span>
               </Button>
             </div>
           </Form>
@@ -130,26 +130,28 @@ const AddSharedOtherCost = () => {
                         </Form.Item>
                       </div>
                     </Form.Item>
-                    <Form.Item>
-                      <div>
-                        <h6>Add Bazar List (Optional) </h6>
-                        <Form.Item
-                          name="name"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input your Username!",
-                            },
-                          ]}
-                        >
-                          <Input placeholder="Enter Shared cost" />
-                        </Form.Item>
-                      </div>
-                    </Form.Item>
+                    <div className="addMealItemMarginSet">
+                      <Form.Item >
+                        <div>
+                          <h6>Add Bazar List (Optional) </h6>
+                          <Form.Item
+                            name="name"
+                            rules={[
+                              {
+                                required: true,
+                                message: "Please input your Username!",
+                              },
+                            ]}
+                          >
+                            <Input placeholder="Enter Shared cost" />
+                          </Form.Item>
+                        </div>
+                      </Form.Item>
+                    </div>
 
                     <div className="d-flex justify-content-center  ">
-                      <Button type="primary" htmlType="submit" className="w-50 h-auto">
-                        <span className="fs-5"> Add</span>
+                      <Button type="primary" htmlType="submit" className="w-100 h-auto">
+                        <span className="fs-5"> Add Cost</span>
                       </Button>
                     </div>
                   </Form>
