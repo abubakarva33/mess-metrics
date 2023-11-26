@@ -18,8 +18,8 @@ const AddSharedOtherCost = () => {
 
   // console.log(currentDate);
 
-  const onFinish = async ({ tags }) => {
-    tags = featuresList;
+  const onFinish = async (values) => {
+    console.log(values);
   };
   const handleDate = (e) => {
     setCurrentDate(e.format("DD-MM-YYYY"));
@@ -48,7 +48,7 @@ const AddSharedOtherCost = () => {
               <div>
                 <h6>Enter Cost:</h6>
                 <Form.Item
-                  name="defaultMeal"
+                  name="totalCost"
                   rules={[
                     {
                       required: true,
@@ -64,7 +64,7 @@ const AddSharedOtherCost = () => {
               <div className="addMealItemMargin">
                 <h6>Add Bazar List (Optional) </h6>
                 <Form.Item
-                  name="name"
+                  name="bazarList"
                   rules={[
                     {
                       required: true,
@@ -118,7 +118,7 @@ const AddSharedOtherCost = () => {
                       <div>
                         <h6>Enter Cost:</h6>
                         <Form.Item
-                          name="defaultMeal"
+                          name="totalCost"
                           rules={[
                             {
                               required: true,
@@ -131,11 +131,11 @@ const AddSharedOtherCost = () => {
                       </div>
                     </Form.Item>
                     <div className="addMealItemMarginSet">
-                      <Form.Item >
+                      <Form.Item>
                         <div>
                           <h6>Add Bazar List (Optional) </h6>
                           <Form.Item
-                            name="name"
+                            name="bazarList"
                             rules={[
                               {
                                 required: true,

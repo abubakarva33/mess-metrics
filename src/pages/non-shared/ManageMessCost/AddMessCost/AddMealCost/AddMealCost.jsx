@@ -13,16 +13,19 @@ const AddMealCoast = () => {
   const [value, setValue] = useState("");
   // var todayDate = new Date().toISOString().slice(0, 10);
   const [currentDate, setCurrentDate] = useState(moment());
-  const [featuresList, setFeaturesList] = useState([]);
-  const [newFeature, setNewFeature] = useState("");
+  // const [newDate, setNewDate] = useState(todayDate);
+  const [shoppersList, setShoppersList] = useState([]);
   const members = useMemberOptions();
 
-  // console.log(currentDate);
+  // console.log(currentDate.format("YYYY-MM-DD"));
+  // console.log(todayDate,newDate);
 
-  const onFinish = async ({ tags }) => {
-    tags = featuresList;
+  const onFinish = async (values) => {
+    values.shoppers = shoppersList;
+    console.log(values);
   };
   const handleDate = (e) => {
+    console.log(e);
     setCurrentDate(e.format("DD-MM-YYYY"));
   };
   return (
@@ -49,7 +52,7 @@ const AddMealCoast = () => {
               <div>
                 <h6>Enter Cost:</h6>
                 <Form.Item
-                  name="defaultMeal"
+                  name="totalCost"
                   rules={[
                     {
                       required: true,
@@ -66,9 +69,9 @@ const AddMealCoast = () => {
                 <h6>Select Shoppers:</h6>
                 <Select
                   mode="multiple"
-                  name="tags"
+                  name="shoppers"
                   placeholder="Select Members"
-                  onChange={(e) => setFeaturesList(e)}
+                  onChange={(e) => setShoppersList(e)}
                   maxTagCount={5}
                   maxTagTextLength={20}
                   dropdownRender={(menu) => (
@@ -89,7 +92,7 @@ const AddMealCoast = () => {
               <div>
                 <h6>Add Bazar List (Optional) </h6>
                 <Form.Item
-                  name="name"
+                  name="bazarList"
                   rules={[
                     {
                       required: true,
@@ -151,7 +154,7 @@ const AddMealCoast = () => {
                       <div>
                         <h6>Enter Cost:</h6>
                         <Form.Item
-                          name="defaultMeal"
+                          name="totalCost"
                           rules={[
                             {
                               required: true,
@@ -168,9 +171,9 @@ const AddMealCoast = () => {
                         <h6>Select Shoppers:</h6>
                         <Select
                           mode="multiple"
-                          name="tags"
+                          name="shoppers"
                           placeholder="Select Members"
-                          onChange={(e) => setFeaturesList(e)}
+                          onChange={(e) => setShoppersList(e)}
                           maxTagCount={5}
                           maxTagTextLength={20}
                           dropdownRender={(menu) => (
@@ -190,7 +193,7 @@ const AddMealCoast = () => {
                     <Form.Item>
                       <div>
                         <h6>Add Bazar List (Optional) </h6>
-                        <Form.Item name="name">
+                        <Form.Item name="bazarList">
                           <TextArea
                             value={value}
                             onChange={(e) => setValue(e.target.value)}
