@@ -26,17 +26,23 @@ const AddMealCoast = () => {
     console.log(fieldValues);
 
     try {
-      const data = await addMealCost(values).unwrap();
-      if (data?.success) {
-        await Swal.fire({
+      const res = await addMealCost(fieldValues).unwrap();
+      if (res?.success) {
+        Swal.fire({
           icon: "success",
-          title: "Meal cost added successfully",
+          title: "Meal Cost Added Successfully",
           showConfirmButton: false,
           timer: 1000,
         });
+        form.resetFields();
       }
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: error?.data?.message || "Add Cost Failed",
+        showConfirmButton: false,
+        timer: 1000,
+      });
     }
   };
 

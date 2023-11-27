@@ -12,24 +12,30 @@ const AddSharedOtherCost = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
-   // const [addSharedCost] = useCreateMessMutation();
+  // const [addSharedCost] = useCreateMessMutation();
 
   const onFinish = async (values) => {
     const fieldValues = { ...values, date: startDate };
     console.log(fieldValues);
 
     try {
-      const data = await addSharedCost(values).unwrap();
-      if (data?.success) {
-        await Swal.fire({
+      const res = await addSharedCost(fieldValues).unwrap();
+      if (res?.success) {
+        Swal.fire({
           icon: "success",
-          title: "Shared cost added successfully",
+          title: "Shared Cost Added Successfully",
           showConfirmButton: false,
           timer: 1000,
         });
+        form.resetFields();
       }
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: error?.data?.message || "Add Cost Failed",
+        showConfirmButton: false,
+        timer: 1000,
+      });
     }
   };
 
