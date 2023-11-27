@@ -7,6 +7,7 @@ import { useState } from "react";
 import moment from "moment/moment";
 import ReactDatePicker from "react-datepicker";
 import { MdCalendarMonth } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const AddIndividualOtherCost = () => {
   const navigate = useNavigate();

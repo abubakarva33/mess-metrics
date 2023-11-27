@@ -149,7 +149,7 @@ const AddSharedOtherCost = () => {
                         </Form.Item>
                       </div>
                     </Form.Item>
-                    <div className="addMealItemMarginSet">
+                    <div className="addMealItemMargin">
                       <Form.Item>
                         <div>
                           <h6>Add Bazar List (Optional) </h6>

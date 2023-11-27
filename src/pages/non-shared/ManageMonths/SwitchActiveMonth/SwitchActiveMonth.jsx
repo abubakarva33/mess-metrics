@@ -66,7 +66,6 @@ const SwitchActiveMonth = () => {
             >
               <Form.Item
                 name="month"
-                label="Select Month"
                 rules={[
                   {
                     required: true,
@@ -120,7 +119,6 @@ const SwitchActiveMonth = () => {
                     >
                       <Form.Item
                         name="month"
-                        label="Select Month"
                         rules={[
                           {
                             required: true,

@@ -1,6 +1,13 @@
+
+
 const addMeal = {
   date: "string",
   mealDetails: [{ id, meal }],
+};
+const addMembersMoney = {
+  date: "string",
+  member: "string-id",
+  totalCost: "string/number",
 };
 const addMealCost = {
   date: "string",
@@ -16,7 +23,7 @@ const addSharedCost = {
 const addIndividualCost = {
   date: "string",
   bazarList: "string",
-  member: "string",
+  member: "string-id",
   totalCost: "string/number",
 };
 const monthData = [

@@ -59,8 +59,7 @@ const StartNewMonth = () => {
               autoComplete="on"
             >
               <Form.Item
-                name="month"
-                label="Select Month"
+                name="name"
                 rules={[
                   {
                     required: true,
@@ -111,7 +110,7 @@ const StartNewMonth = () => {
                   autoComplete="on"
                 >
                   <Form.Item
-                    name="month"
+                    name="name"
                     rules={[
                       {
                         required: true,
