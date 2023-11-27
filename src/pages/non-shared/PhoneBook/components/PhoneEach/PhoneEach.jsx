@@ -126,9 +126,7 @@ const PhoneEach = ({ data }) => {
           <h6 className="phoneNameText pt-1">{name}</h6>
           <div className="d-flex align-items-center mb-2">
             <p className="mb-0 me-2 phoneText "> {phone}</p>
-            <div onClick={() => copyToClipboard(phone)}>
-              {isCopied ? "Copied!" : <FaRegCopy />}
-            </div>
+            <div onClick={() => copyToClipboard(phone)}>{isCopied ? "Copied!" : <FaRegCopy />}</div>
           </div>
         </div>
       </div>
@@ -154,9 +152,11 @@ const PhoneEach = ({ data }) => {
           </div>
         </div>
       ) : (
-        <Link to={`tel:${phone}`} target="_blank">
-          <IoCallOutline />
-        </Link>
+        <div className="fs-3 ">
+          <Link to={`tel:${phone}`} target="_blank">
+            <img src="/images/telephone.png" alt="" className="iconSize" />
+          </Link>
+        </div>
       )}
     </div>
   );

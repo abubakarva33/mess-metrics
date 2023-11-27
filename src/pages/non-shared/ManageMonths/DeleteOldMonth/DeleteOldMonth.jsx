@@ -49,7 +49,7 @@ const DeleteOldMonth = () => {
     <div>
       <div className="addMealCostSectionMain">
         <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
-        <h4 className="text-center  mt-2 mb-4">Delete Old Month</h4>
+          <h4 className="text-center  mt-2 mb-4">Delete Old Month</h4>
           <ConfigProvider
             theme={{
               components: {
@@ -70,7 +70,6 @@ const DeleteOldMonth = () => {
             >
               <Form.Item
                 name="month"
-                label="Select Month"
                 rules={[
                   {
                     required: true,

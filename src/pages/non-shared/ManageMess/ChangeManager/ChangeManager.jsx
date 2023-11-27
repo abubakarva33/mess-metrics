@@ -13,7 +13,6 @@ const ChangeManager = () => {
   const [changeManager] = useChangeManagerMutation();
   const { data: profileData } = useGetUserProfileQuery();
   const navigate = useNavigate();
-
   const users = useMemberOptions();
   const [members, setMembers] = useState(users);
 
@@ -37,6 +36,25 @@ const ChangeManager = () => {
       confirmButtonText: "Yes, Change!",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        // Swal.fire({
+        //   title: "Enter your password",
+        //   input: "password",
+        //   inputPlaceholder: "Enter your password",
+        //   inputAttributes: {
+        //     autocapitalize: "off",
+        //     autocorrect: "off",
+        //   },
+        // });
+        // if (password) {
+        //   const res = await changeManager({
+        //     _id: profileData?.data?.mess?._id,
+        //     ...fieldValues,
+        //   }).unwrap();
+        //   if (res?.success) {
+        //     Swal.fire("Changed!", "Manager has been changed.", "success");
+        //   }
+        //   Swal.fire(`Entered password: ${password}`);
+        // }
         const res = await changeManager({
           _id: profileData?.data?.mess?._id,
           ...fieldValues,

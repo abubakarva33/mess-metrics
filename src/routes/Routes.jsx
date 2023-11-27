@@ -33,6 +33,7 @@ import ManagerAuth from "../components/Auth/ManagerAuth";
 import PhoneBook from "../pages/non-shared/PhoneBook/PhoneBook";
 import Birthdays from "../pages/non-shared/Birthdays/Birthdays";
 import SingleMember from "../pages/non-shared/ManageMembers/SingleMember/SingleMember";
+import RequestMeal from "../pages/non-shared/RequestMeal/RequestMeal";
 
 const mainLayoutChildInit = [
   { path: "/", element: <Home /> },
@@ -46,6 +47,7 @@ const mainLayoutChildInit = [
   { path: "/mess-profile", element: <MessProfile /> },
   { path: "/phone-book", element: <PhoneBook /> },
   { path: "/birthdays", element: <Birthdays /> },
+  { path: "/request-meal", element: <RequestMeal /> },
   { path: "/all-members/:Id", element: <SingleMember /> },
 ];
 

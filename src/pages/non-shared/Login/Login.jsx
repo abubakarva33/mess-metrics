@@ -28,7 +28,6 @@ const Login = () => {
 
   const onFinish = async (values) => {
     const { token, success, data } = await loginUser(values).unwrap();
-    console.log({data});
 
     if (!success) {
       return dispatch(auth({ token: "" }));
@@ -64,7 +63,6 @@ const Login = () => {
               layout="vertical"
               onFinishFailed={onFinishFailed}
               autoComplete="on"
-              defaultValue={{ email: "ass@gmail.com", password: "asdasd" }}
             >
               <div className="mt-5 d-flex justify-content-center flex-column">
                 <h3 className="welcomeMsg">WELCOME TO MESS METRICS</h3>
