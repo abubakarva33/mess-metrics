@@ -1,6 +1,6 @@
 .addMealRegulationIcon{
     padding: 5px;
-    background-color: rgb(119, 155, 19);
+    background-color: #3bb54a;
     border-radius: 5px;
     border: none;
 }
@@ -22,7 +22,13 @@
     padding:0 15px 20px 15px;
     border-radius: 10px;
 }
-
+.addMealCheckIcon{
+    height: 40px;
+    width: 40px;
+}
+.defaultMeal{
+    margin-bottom: -0px;
+}
 @media screen and (min-device-width: 576px) and (max-device-width: 740px) {
     
   }

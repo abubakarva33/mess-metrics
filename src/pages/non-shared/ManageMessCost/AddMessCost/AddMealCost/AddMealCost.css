@@ -73,10 +73,10 @@
   min-height: 25px;
   width: 25px;
   margin-left: 5px;
-  color: rgb(34, 115, 197);
+  color: var(--bg-body);
 }
 .react-datepicker__input-container input {
-  background-color: #4fba6f !important;
+  background-color: #3bb54a !important;
   min-height: 45px;
   font-size: 20px !important;
   text-align: center !important;

@@ -1,17 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import "./AddMeal.css";
 import { IoIosArrowBack } from "react-icons/io";
-import { MdOutlineAdd } from "react-icons/md";
+import { MdCalendarMonth, MdEdit, MdOutlineAdd } from "react-icons/md";
 import { HiMinusSm } from "react-icons/hi";
-import { Col, Row } from "react-bootstrap";
-import { Button, DatePicker, Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import { useGetSingleMessQuery } from "../../../../redux/api/sampleApi/messApi";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDefaultMeal } from "../../../../redux/features/basic/basicSlice";
-
-// const dMeal = 2;
+import ReactDatePicker from "react-datepicker";
+import moment from "moment/moment";
 
 const AddMeal = () => {
   const [form] = Form.useForm();
@@ -21,6 +20,10 @@ const AddMeal = () => {
   const { data: profileData, isFetching } = useGetUserProfileQuery();
   const { data, isLoading } = useGetSingleMessQuery(profileData?.data?.mess?._id);
   const { dMeal } = useSelector((state) => state.basic);
+  const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
+  const [clicked, setIsClicked] = useState(false);
+  // const [addMeal] = useCreateMessMutation();
+  console.log(meal);
 
   useEffect(() => {
     data?.members?.map((member) =>
@@ -35,11 +38,6 @@ const AddMeal = () => {
   if (isLoading) {
     return;
   }
-
-  const onFinish = async (values) => {
-    const date = values.format("DD-MM-YYYY");
-    console.log({ date });
-  };
 
   const defaultValue = (e) => {
     if (e.target.value < 0) {
@@ -57,104 +55,140 @@ const AddMeal = () => {
     });
   };
 
+  const onFinish = async () => {
+    const fieldValues = { meal, date: startDate };
+    console.log(fieldValues);
+
+    // try {
+    //   const res = await addMeal(fieldValues).unwrap();
+    //   if (res?.success) {
+    //     Swal.fire({
+    //       icon: "success",
+    //       title: "Meal Added Successfully",
+    //       showConfirmButton: false,
+    //       timer: 1000,
+    //     });
+    //     form.resetFields();
+    //   }
+    // } catch (error) {
+    //   Swal.fire({
+    //     icon: "error",
+    //     title: error?.data?.message || "Add Meal Failed",
+    //     showConfirmButton: false,
+    //     timer: 1000,
+    //   });
+    // }
+  };
+
   return (
     <div>
       <div className="addMealSection">
-        <div className="mx-auto my-3" style={{ maxWidth: "500px" }}>
-          <h3 className="text-center mt-4 mb-3">Add Members Meal</h3>
-          <div className="mealContainer">
-            <Form
-              name="normal_login"
-              className=""
-              form={form}
-              layout="vertical"
-              initialValues={{
-                remember: true,
-              }}
-            >
-              <div>
-                <h6>Default Meal:</h6>
-                <h6>{dMeal}</h6>
-                <Form.Item
-                  name="defaultMeal"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Number!",
-                    },
-                    ({ getFieldValue }) => ({
-                      validator(_, value) {
-                        if (value >= 0) {
-                          return Promise.resolve();
-                        }
-                        return Promise.reject(new Error("Please enter a non-negative number"));
-                      },
-                    }),
-                  ]}
-                >
-                  <Input
-                    type="number"
-                    placeholder="Number"
-                    defaultValue={dMeal}
-                    onChange={defaultValue}
-                  />
-                </Form.Item>
-              </div>
-              <div>
-                <h6>Date:</h6>
-                <Form.Item
-                  name="datePicked"
-                  rules={[
-                    {
-                      type: "object",
-                      required: true,
-                      message: "Please select time!",
-                    },
-                  ]}
-                >
-                  <DatePicker
-                    placeholder="Select Date"
-                    className="datePickerAnt"
-                    onChange={onFinish}
-                  />
-                </Form.Item>
-              </div>
-            </Form>
+        <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
+          <h3 className="text-center mt-2 mb-4">Add Members Meal</h3>
+          <div className="mealDatePicker">
+            <ReactDatePicker
+              className="w-100"
+              selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+              dateFormat="dd-MM-yyyy"
+              showIcon
+              onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+              icon={<MdCalendarMonth />}
+            />
+          </div>
+          <Form
+            name="normal_login"
+            className=""
+            form={form}
+            layout="vertical"
+            initialValues={{
+              remember: true,
+            }}
+          >
             <div>
-              {data?.members?.map((member) => (
-                <div className="phoneItem ">
-                  <div className="phoneItemLeft">
-                    <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
-                    <h6 className="phoneNameText pt-1">{member.name}</h6>
-                  </div>
-                  <div className="d-flex">
-                    <button
-                      disabled={meal?.find((m) => m?.id === member._id)?.meal <= 0}
-                      className="addMealRegulationIcon"
-                      onClick={() => handlerMeal(member._id, -0.5)}
-                    >
-                      <HiMinusSm className="fs-4" />
-                    </button>
-                    <div className="mealCount">
-                      <p className="mb-0">
-                        {meal?.find((m) => m?.id === member?._id)?.meal?.toFixed(1) || 0}
-                      </p>
-                    </div>
-
-                    <button
-                      className="addMealRegulationIcon"
-                      onClick={() => handlerMeal(member._id, 0.5)}
-                    >
-                      <MdOutlineAdd className="fs-4" />
-                    </button>
+              {/* <h6>{dMeal}</h6> */}
+              <div className="my-3 d-flex align-items-center justify-content-center">
+                <h5 className="mb-0">Default Meal: {dMeal}</h5>
+                <div>
+                  <MdEdit
+                    className="fs-4 ms-3"
+                    onClick={() => setIsClicked(true)}
+                    style={{ color: "#3bb54a" }}
+                  />
+                </div>
+              </div>
+              {clicked ? (
+                <div className="d-flex align-items-center my-4">
+                  <Form.Item
+                    name="defaultMeal"
+                    className="w-100 defaultMeal"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input your Number!",
+                      },
+                      ({ getFieldValue }) => ({
+                        validator(_, value) {
+                          if (value >= 0) {
+                            return Promise.resolve();
+                          }
+                          return Promise.reject(new Error("Please enter a non-negative number"));
+                        },
+                      }),
+                    ]}
+                  >
+                    <Input
+                      type="number"
+                      placeholder="Number"
+                      defaultValue={dMeal}
+                      onChange={defaultValue}
+                    />
+                  </Form.Item>
+                  <div>
+                    <img
+                      src="/public/images/check.png"
+                      alt=""
+                      className="ms-2 addMealCheckIcon"
+                      onClick={() => setIsClicked(false)}
+                    />
                   </div>
                 </div>
-              ))}
+              ) : undefined}
             </div>
-            <Button type="primary" className="w-100">
-              Submit
-            </Button>
+          </Form>
+          <div>
+            {data?.members?.map((member) => (
+              <div className="phoneItem ">
+                <div className="phoneItemLeft">
+                  <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
+                  <h6 className="phoneNameText pt-1">{member.name}</h6>
+                </div>
+                <div className="d-flex">
+                  <button
+                    disabled={meal?.find((m) => m?.id === member._id)?.meal <= 0}
+                    className="addMealRegulationIcon"
+                    onClick={() => handlerMeal(member._id, -0.5)}
+                  >
+                    <HiMinusSm className="fs-4" />
+                  </button>
+                  <div className="mealCount">
+                    <p className="mb-0">
+                      {meal?.find((m) => m?.id === member?._id)?.meal?.toFixed(1) || 0}
+                    </p>
+                  </div>
+
+                  <button
+                    className="addMealRegulationIcon"
+                    onClick={() => handlerMeal(member._id, 0.5)}
+                  >
+                    <MdOutlineAdd className="fs-4" />
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
+          <Button type="primary" className="w-100" onClick={onFinish}>
+            Submit
+          </Button>
         </div>
       </div>
       <div className="phoneBookContainer">
@@ -170,90 +204,112 @@ const AddMeal = () => {
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
               <div className="mx-auto" style={{ maxWidth: "500px" }}>
-                <div className="mealContainer">
-                  <Form
-                    name="normal_login"
-                    className="login-form"
-                    form={form}
-                    layout="vertical"
-                    initialValues={{
-                      remember: true,
-                    }}
-                  >
-                    <div>
-                      <h6>Default Meal:</h6>
-                      <Form.Item
-                        name="defaultMeal"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input your Number!",
-                          },
-                        ]}
-                      >
-                        <Input
-                          type="number"
-                          placeholder="Number"
-                          defaultValue={dMeal}
-                          onChange={defaultValue}
-                        />
-                      </Form.Item>
-                    </div>
-                    <div>
-                      <h6>Date:</h6>
-                      <Form.Item
-                        name="datePicked"
-                        rules={[
-                          {
-                            type: "object",
-                            required: true,
-                            message: "Please select time!",
-                          },
-                        ]}
-                      >
-                        <DatePicker
-                          placeholder="Select Date"
-                          className="datePickerAnt"
-                          onChange={onFinish}
-                        />
-                      </Form.Item>
-                    </div>
-                  </Form>
+                <div className="mealDatePicker">
+                  <ReactDatePicker
+                    className="w-100"
+                    selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+                    dateFormat="dd-MM-yyyy"
+                    showIcon
+                    onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+                    icon={<MdCalendarMonth />}
+                  />
+                </div>
+                <Form
+                  name="normal_login"
+                  className=""
+                  form={form}
+                  layout="vertical"
+                  initialValues={{
+                    remember: true,
+                  }}
+                >
                   <div>
-                    {data?.members?.map((member) => (
-                      <div className="phoneItem ">
-                        <div className="phoneItemLeft">
-                          <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
-                          <h6 className="phoneNameText pt-1">{member.name}</h6>
-                        </div>
-                        <div className="d-flex">
-                          <button
-                            disabled={meal?.find((m) => m?.id === member._id)?.meal <= 0}
-                            className="addMealRegulationIcon"
-                            onClick={() => handlerMeal(member._id, -0.5)}
-                          >
-                            <HiMinusSm className="fs-4" />
-                          </button>
-                          <div className="mealCount">
-                            <p className="mb-0">
-                              {meal?.find((m) => m?.id === member?._id)?.meal || 0}
-                            </p>
-                          </div>
-
-                          <button
-                            className="addMealRegulationIcon"
-                            onClick={() => handlerMeal(member._id, 0.5)}
-                          >
-                            <MdOutlineAdd className="fs-4" />
-                          </button>
+                    {/* <h6>{dMeal}</h6> */}
+                    <div className="my-3 d-flex align-items-center justify-content-center">
+                      <h5 className="mb-0">Default Meal: {dMeal}</h5>
+                      <div>
+                        <MdEdit
+                          className="fs-4 ms-3"
+                          onClick={() => setIsClicked(true)}
+                          style={{ color: "#3bb54a" }}
+                        />
+                      </div>
+                    </div>
+                    {clicked ? (
+                      <div className="d-flex align-items-center my-4">
+                        <Form.Item
+                          name="defaultMeal"
+                          className="w-100 defaultMeal"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please input your Number!",
+                            },
+                            ({ getFieldValue }) => ({
+                              validator(_, value) {
+                                if (value >= 0) {
+                                  return Promise.resolve();
+                                }
+                                return Promise.reject(
+                                  new Error("Please enter a non-negative number")
+                                );
+                              },
+                            }),
+                          ]}
+                        >
+                          <Input
+                            type="number"
+                            placeholder="Number"
+                            defaultValue={dMeal}
+                            onChange={defaultValue}
+                          />
+                        </Form.Item>
+                        <div>
+                          <img
+                            src="/public/images/check.png"
+                            alt=""
+                            className="ms-2 addMealCheckIcon"
+                            onClick={() => setIsClicked(false)}
+                          />
                         </div>
                       </div>
-                    ))}
+                    ) : undefined}
                   </div>
-                  <Button type="primary" className="w-100">
-                    Submit
-                  </Button>
+                </Form>
+                <div>
+                  {data?.members?.map((member) => (
+                    <div className="phoneItem ">
+                      <div className="phoneItemLeft">
+                        <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
+                        <h6 className="phoneNameText pt-1">{member.name}</h6>
+                      </div>
+                      <div className="d-flex">
+                        <button
+                          disabled={meal?.find((m) => m?.id === member._id)?.meal <= 0}
+                          className="addMealRegulationIcon"
+                          onClick={() => handlerMeal(member._id, -0.5)}
+                        >
+                          <HiMinusSm className="fs-4" />
+                        </button>
+                        <div className="mealCount">
+                          <p className="mb-0">
+                            {meal?.find((m) => m?.id === member?._id)?.meal?.toFixed(1) || 0}
+                          </p>
+                        </div>
+
+                        <button
+                          className="addMealRegulationIcon"
+                          onClick={() => handlerMeal(member._id, 0.5)}
+                        >
+                          <MdOutlineAdd className="fs-4" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
+                <Button type="primary" className="w-100" onClick={onFinish}>
+                  Submit
+                </Button>
               </div>
             </div>
           </div>

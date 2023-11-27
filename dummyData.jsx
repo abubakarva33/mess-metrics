@@ -1,3 +1,7 @@
+const addMeal = {
+  date: "string",
+  mealDetails: [{ id, meal }],
+};
 const addMealCost = {
   date: "string",
   bazarList: "string",
