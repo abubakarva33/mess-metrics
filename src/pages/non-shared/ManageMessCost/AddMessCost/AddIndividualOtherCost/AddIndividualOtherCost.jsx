@@ -1,28 +1,39 @@
 import { IoIosArrowBack } from "react-icons/io";
 import "./AddIndividualOtherCost.css";
 import { useNavigate } from "react-router-dom";
-import { Button, DatePicker, Divider, Form, Input, Select } from "antd";
+import { Button, Divider, Form, Input, Select } from "antd";
 import useMemberOptions from "../../../../../components/Hooks/MembersDropdown";
 import { useState } from "react";
 import moment from "moment/moment";
+import ReactDatePicker from "react-datepicker";
+import { MdCalendarMonth } from "react-icons/md";
 
 const AddIndividualOtherCost = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const [value, setValue] = useState("");
-  // var todayDate = new Date().toISOString().slice(0, 10);
-  const [currentDate, setCurrentDate] = useState(moment());
-  const [shoppersList, setShoppersList] = useState([]);
   const members = useMemberOptions();
-
-  // console.log(currentDate);
+  const [shoppersList, setShoppersList] = useState([]);
+  const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
+  // const [addIndividualCost] = useCreateMessMutation();
 
   const onFinish = async (values) => {
-    values.member = shoppersList;
-    console.log(values);
-  };
-  const handleDate = (e) => {
-    setCurrentDate(e.format("DD-MM-YYYY"));
+    values.shoppers = shoppersList;
+    const fieldValues = { ...values, date: startDate };
+    console.log(fieldValues);
+
+    try {
+      const data = await addIndividualCost(values).unwrap();
+      if (data?.success) {
+        await Swal.fire({
+          icon: "success",
+          title: "Meal cost added successfully",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
@@ -30,11 +41,13 @@ const AddIndividualOtherCost = () => {
         <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
           <h4 className="text-center  mt-2 mb-4">Add Individual Cost</h4>
           <div className="mealDatePicker">
-            <DatePicker
-              placeholder="Select Date"
-              className="datePickerAnt "
-              value={currentDate}
-              onChange={handleDate}
+            <ReactDatePicker
+              className="w-100"
+              selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+              dateFormat="dd-MM-yyyy"
+              showIcon
+              onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+              icon={<MdCalendarMonth />}
             />
           </div>
           <Form
@@ -123,11 +136,13 @@ const AddIndividualOtherCost = () => {
               <div>
                 <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
                   <div className="mealDatePicker">
-                    <DatePicker
-                      placeholder="Select Date"
-                      className="datePickerAnt "
-                      value={currentDate}
-                      onChange={handleDate}
+                    <ReactDatePicker
+                      className="w-100"
+                      selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+                      dateFormat="dd-MM-yyyy"
+                      showIcon
+                      onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+                      icon={<MdCalendarMonth />}
                     />
                   </div>
                   <Form
@@ -158,7 +173,7 @@ const AddIndividualOtherCost = () => {
                         <h6>Select Shoppers:</h6>
                         <Select
                           name="member"
-                          placeholder="Select Members"
+                          placeholder="Select Member"
                           onChange={(e) => setShoppersList(e)}
                           maxTagCount={5}
                           maxTagTextLength={20}

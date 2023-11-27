@@ -1,40 +1,51 @@
 import { IoIosArrowBack } from "react-icons/io";
 import "./AddSharedOtherCost.css";
 import { useNavigate } from "react-router-dom";
-import { Button, DatePicker, Divider, Form, Input, Select } from "antd";
-import useMemberOptions from "../../../../../components/Hooks/MembersDropdown";
+import { Button, Form, Input } from "antd";
 import { useState } from "react";
 import moment from "moment/moment";
-const { TextArea } = Input;
+import ReactDatePicker from "react-datepicker";
+import { MdCalendarMonth } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const AddSharedOtherCost = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  // var todayDate = new Date().toISOString().slice(0, 10);
-  const [currentDate, setCurrentDate] = useState(moment());
-  const [featuresList, setFeaturesList] = useState([]);
-  const [newFeature, setNewFeature] = useState("");
-  const members = useMemberOptions();
-
-  // console.log(currentDate);
+  const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
+   // const [addSharedCost] = useCreateMessMutation();
 
   const onFinish = async (values) => {
-    console.log(values);
+    const fieldValues = { ...values, date: startDate };
+    console.log(fieldValues);
+
+    try {
+      const data = await addSharedCost(values).unwrap();
+      if (data?.success) {
+        await Swal.fire({
+          icon: "success",
+          title: "Shared cost added successfully",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
-  const handleDate = (e) => {
-    setCurrentDate(e.format("DD-MM-YYYY"));
-  };
+
   return (
     <div>
       <div className="addMealCostSectionMain">
         <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
           <h4 className="text-center  mt-2 mb-4">Add Shared Cost</h4>
           <div className="mealDatePicker">
-            <DatePicker
-              placeholder="Select Date"
-              className="datePickerAnt "
-              value={currentDate}
-              onChange={handleDate}
+            <ReactDatePicker
+              className="w-100"
+              selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+              dateFormat="dd-MM-yyyy"
+              showIcon
+              onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+              icon={<MdCalendarMonth />}
             />
           </div>
           <Form
@@ -100,11 +111,13 @@ const AddSharedOtherCost = () => {
               <div>
                 <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
                   <div className="mealDatePicker">
-                    <DatePicker
-                      placeholder="Select Date"
-                      className="datePickerAnt "
-                      value={currentDate}
-                      onChange={handleDate}
+                    <ReactDatePicker
+                      className="w-100"
+                      selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+                      dateFormat="dd-MM-yyyy"
+                      showIcon
+                      onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+                      icon={<MdCalendarMonth />}
                     />
                   </div>
                   <Form
