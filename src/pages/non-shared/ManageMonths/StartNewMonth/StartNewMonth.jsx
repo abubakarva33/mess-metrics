@@ -12,6 +12,7 @@ const StartNewMonth = () => {
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
+    console.log(values);
     try {
       Swal.fire({
         title: "Are you sure?",
@@ -38,7 +39,7 @@ const StartNewMonth = () => {
     <div>
       <div className="addMealCostSectionMain">
         <div className=" addMealCostSection sectionShadow  mx-auto" style={{ maxWidth: "500px" }}>
-        <h4 className="text-center  mt-2 mb-4 ">Create New Month</h4>
+          <h4 className="text-center  mt-2 mb-4 ">Create New Month</h4>
           <ConfigProvider
             theme={{
               components: {
@@ -110,7 +111,7 @@ const StartNewMonth = () => {
                   autoComplete="on"
                 >
                   <Form.Item
-                    name="name"
+                    name="month"
                     rules={[
                       {
                         required: true,

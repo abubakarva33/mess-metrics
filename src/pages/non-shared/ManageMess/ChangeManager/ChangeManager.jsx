@@ -34,7 +34,7 @@ const ChangeManager = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, Change!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await changeManager({
@@ -42,7 +42,7 @@ const ChangeManager = () => {
           ...fieldValues,
         }).unwrap();
         if (res?.success) {
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          Swal.fire("Changed!", "Manager has been changed.", "success");
         }
       }
     });

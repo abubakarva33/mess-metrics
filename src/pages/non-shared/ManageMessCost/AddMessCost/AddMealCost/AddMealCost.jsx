@@ -1,24 +1,28 @@
 import { IoIosArrowBack } from "react-icons/io";
+import { MdCalendarMonth } from "react-icons/md";
 import "./AddMealCost.css";
 import { useNavigate } from "react-router-dom";
-import { Button, DatePicker, Divider, Form, Input, Select } from "antd";
+import { Button, Divider, Form, Input, Select } from "antd";
 import useMemberOptions from "../../../../../components/Hooks/MembersDropdown";
 import { useState } from "react";
 import moment from "moment/moment";
+// import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import ReactDatePicker from "react-datepicker";
 const { TextArea } = Input;
 
 const AddMealCoast = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [value, setValue] = useState("");
-  // var todayDate = new Date().toISOString().slice(0, 10);
-  const [currentDate, setCurrentDate] = useState(moment());
-  // const [newDate, setNewDate] = useState(todayDate);
   const [shoppersList, setShoppersList] = useState([]);
   const members = useMemberOptions();
-
-  // console.log(currentDate.format("YYYY-MM-DD"));
-  // console.log(todayDate,newDate);
+  // var todayDate = new Date().toISOString().slice(0, 10);
+  // const [currentDate, setCurrentDate] = useState(moment());
+  // const [startDate, setStartDate] = useState(moment());
+  // const [newDate, setNewDate] = useState(todayDate);
+  const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
+  console.log(startDate);
 
   const onFinish = async (values) => {
     values.shoppers = shoppersList;
@@ -34,11 +38,13 @@ const AddMealCoast = () => {
         <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
           <h4 className="text-center mt-2 mb-4">Add Meal Cost</h4>
           <div className="mealDatePicker">
-            <DatePicker
-              placeholder="Select Date"
-              className="datePickerAnt "
-              value={currentDate}
-              onChange={handleDate}
+            <ReactDatePicker
+              className="w-100"
+              selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+              dateFormat="dd-MM-yyyy"
+              showIcon
+              onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+              icon={<MdCalendarMonth />}
             />
           </div>
           <Form
@@ -136,12 +142,12 @@ const AddMealCoast = () => {
               <div>
                 <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
                   <div className="mealDatePicker">
-                    <DatePicker
+                    {/* <DatePicker
                       placeholder="Select Date"
                       className="datePickerAnt "
                       value={currentDate}
                       onChange={handleDate}
-                    />
+                    /> */}
                   </div>
                   <Form
                     name="complex-form"

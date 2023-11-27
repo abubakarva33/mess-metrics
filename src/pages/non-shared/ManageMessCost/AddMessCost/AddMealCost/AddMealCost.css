@@ -65,7 +65,51 @@
   width: 100%;
   min-height: 80vh;
 }
-
+.react-datepicker__input-container {
+ display: flex !important;
+ align-items: center !important;
+}
+.react-datepicker__input-container .react-datepicker__calendar-icon{
+  min-height: 25px;
+  width: 25px;
+  margin-left: 5px;
+  color: rgb(34, 115, 197);
+}
+.react-datepicker__input-container input {
+  background-color: #4fba6f !important;
+  min-height: 45px;
+  font-size: 20px !important;
+  text-align: center !important;
+  color: var(--bg-body) !important;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+}
+.react-datepicker-wrapper {
+  width: 100%;
+}
+.react-datepicker__header{
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name{
+  color: var(--text-primary) !important;
+}
+.react-datepicker__current-month{
+  color: var(--text-primary) !important;
+}
+.react-datepicker__day:hover, .react-datepicker__month-text:hover, .react-datepicker__quarter-text:hover, .react-datepicker__year-text:hover{
+  background-color: var(--bg-secondary) !important;
+}
+.react-datepicker{
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+  border: none !important;
+}
+.react-datepicker__day--keyboard-selected, .react-datepicker__month-text--keyboard-selected, .react-datepicker__quarter-text--keyboard-selected, .react-datepicker__year-text--keyboard-selected {
+  background-color: transparent !important;
+}
 @media only screen and (max-width: 576px) {
   .addMealCostSectionMain {
     display: none;
