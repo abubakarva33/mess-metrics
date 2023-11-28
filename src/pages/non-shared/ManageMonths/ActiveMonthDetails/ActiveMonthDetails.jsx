@@ -8,30 +8,30 @@ import { useState } from "react";
 const ActiveMonthDetails = () => {
   const [columns, setColumns] = useState("mealColumns");
 
-  const OptionsData = [
+  const optionsData = [
     {
+      value: "10-01-2023",
       label: "All Items",
-      value: "10-01-2023",
     },
     {
+      value: "10-01-2023",
       label: "10-January-2023",
-      value: "10-01-2023",
     },
     {
+      value: "10-01-2023",
       label: "12-January-2023",
-      value: "10-01-2023",
     },
     {
+      value: "10-01-2023",
       label: "20-January-2023",
-      value: "10-01-2023",
     },
     {
+      value: "10-01-2023",
       label: "13-January-2023",
-      value: "10-01-2023",
     },
     {
-      label: "10-January-2023",
       value: "10-01-2023",
+      label: "10-January-2023",
     },
   ];
   const mealCostData = [
@@ -88,14 +88,9 @@ const ActiveMonthDetails = () => {
       },
 
       {
-        title: "Amount",
-        dataIndex: "amount",
-        key: "amount",
-      },
-      {
-        title: "Meal Cost Details",
-        dataIndex: "details",
-        key: "details",
+        title: "Meal",
+        dataIndex: "meal",
+        key: "meal",
       },
       {
         title: "Action",
@@ -266,6 +261,14 @@ const ActiveMonthDetails = () => {
 
   const column = columnData[columns];
 
+  const onChange = (value) => {
+    console.log(`selected ${value}`);
+  };
+  const onSearch = (value) => {
+    console.log("search:", value);
+  };
+  const filterOption = (input, option) =>
+    (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
   const navigate = useNavigate();
   return (
@@ -273,7 +276,15 @@ const ActiveMonthDetails = () => {
       <div>
         <div className="d-flex align-items-center justify-content-between">
           <h3 className="text-center">Active Month Details</h3>
-          <Select name="date" placeholder="Filter By Date" defaultValue="" options={OptionsData} />
+          <Select
+            showSearch
+            placeholder="Filter By Date"
+            optionFilterProp="children"
+            onChange={onChange}
+            onSearch={onSearch}
+            filterOption={filterOption}
+            options={optionsData}
+          />
         </div>
         <div className="activeMonthBtnGroups">
           <Button className="" onClick={() => setColumns("mealColumns")}>
