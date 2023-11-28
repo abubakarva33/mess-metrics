@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Divider, Select, Space, Table } from "antd";
 import TableTemplate from "./components/TableTemplate/TableTemplate";
 import { useState } from "react";
+import ActiveDetailsTemplate from "./components/ActiveDetailsTemplate/ActiveDetailsTemplate";
 
 const ActiveMonthDetails = () => {
   const [columns, setColumns] = useState("mealColumns");
@@ -94,6 +95,7 @@ const ActiveMonthDetails = () => {
       },
       {
         title: "Action",
+        width: 80,
         key: "action",
         render: (_, record) => (
           <Space size="middle">
@@ -126,6 +128,7 @@ const ActiveMonthDetails = () => {
       },
       {
         title: "Action",
+        width: 80,
         key: "action",
         render: (_, record) => (
           <Space size="middle">
@@ -158,6 +161,7 @@ const ActiveMonthDetails = () => {
       },
       {
         title: "Action",
+        width: 80,
         key: "action",
         render: (_, record) => (
           <Space size="middle">
@@ -190,6 +194,7 @@ const ActiveMonthDetails = () => {
       },
       {
         title: "Action",
+        width: 80,
         key: "action",
         render: (_, record) => (
           <Space size="middle">
@@ -217,6 +222,7 @@ const ActiveMonthDetails = () => {
       },
       {
         title: "Action",
+        width: 80,
         key: "action",
         render: (_, record) => (
           <Space size="middle">
@@ -250,6 +256,7 @@ const ActiveMonthDetails = () => {
       {
         title: "Action",
         key: "action",
+        width: 80,
         render: (_, record) => (
           <Space size="middle">
             <a>Edit</a>
@@ -274,8 +281,8 @@ const ActiveMonthDetails = () => {
   return (
     <div>
       <div>
-        <div className="d-flex align-items-center justify-content-between">
-          <h3 className="text-center">Active Month Details</h3>
+        <div className="d-flex align-items-center justify-content-between my-4">
+          <h4 className="text-center mb-0">Active Month Details</h4>
           <Select
             showSearch
             placeholder="Filter By Date"
@@ -286,7 +293,7 @@ const ActiveMonthDetails = () => {
             options={optionsData}
           />
         </div>
-        <div className="activeMonthBtnGroups">
+        <div className="activeMonthBtnGroups mb-4">
           <Button className="" onClick={() => setColumns("mealColumns")}>
             Meal
           </Button>
@@ -307,8 +314,25 @@ const ActiveMonthDetails = () => {
             BazarList
           </Button>
         </div>
+        <TableTemplate data={mealCostData} columns={column} />
       </div>
-      <TableTemplate data={mealCostData} columns={column} />
+      <div className="phoneBookContainer">
+        <div className="phoneBookContainerMainBg">
+          <div className="phoneBookContainerMain">
+            <div className="componentHeader">
+              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <h3>PHONEBOOK </h3>
+            </div>
+          </div>
+        </div>
+        <div className="phoneBookContainerItemBg">
+          <div className="phoneBookContainerItem ">
+            <div className="pt-5 pb-3 px-3">
+              {Array.isArray(mealCostData) && mealCostData?.map((data, ind) => <ActiveDetailsTemplate key={ind} data={data} />)}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
