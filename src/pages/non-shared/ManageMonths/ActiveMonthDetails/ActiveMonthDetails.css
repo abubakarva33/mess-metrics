@@ -1,0 +1,7 @@
+.activeMonthBtnGroups{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
