@@ -7,12 +7,20 @@ const adminApi = mainApi.injectEndpoints({
       providesTags: ["Users"],
     }),
 
-    // deleteMess: builder.mutation({
+    // deleteUser: builder.mutation({
     //   query: (_id) => ({
-    //     url: `mess/${_id}`,
+    //     url: `users/${_id}`,
     //     method: "DELETE",
     //   }),
-    //   invalidatesTags: ["Mess", "Profile"],
+    //   invalidatesTags: ["Message"],
+    // }),
+    // deleteMultipleUser: builder.mutation({
+    //   query: (body) => ({
+    //     url: `contact/bulk`,
+    //     method: "POST",
+    //     body,
+    //   }),
+    //   invalidatesTags: ["Message"],
     // }),
     // changeManager: builder.mutation({
     //   query: ({ _id, ...body }) => ({
