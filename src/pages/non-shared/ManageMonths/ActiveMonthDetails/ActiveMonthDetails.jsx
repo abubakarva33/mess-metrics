@@ -294,23 +294,41 @@ const ActiveMonthDetails = () => {
           />
         </div>
         <div className="activeMonthBtnGroups mb-4">
-          <Button className="" onClick={() => setColumns("mealColumns")}>
+          <Button
+            className={columns === "mealColumns" ? "activeNav" : undefined}
+            onClick={() => setColumns("mealColumns")}
+          >
             Meal
           </Button>
-          <Button className="ms-3" onClick={() => setColumns("depositColumns")}>
+          <Button
+            className={columns === "depositColumns" ? "activeNav ms-3" : "ms-3"}
+            onClick={() => setColumns("depositColumns")}
+          >
             Deposit
           </Button>
-          <Button className="ms-3" onClick={() => setColumns("mealCostColumns")}>
+          <Button
+            className={columns === "mealCostColumns" ? "activeNav ms-3" : "ms-3"}
+            onClick={() => setColumns("mealCostColumns")}
+          >
             Meal Cost
           </Button>
 
-          <Button className="ms-3" onClick={() => setColumns("SharedCostColumns")}>
+          <Button
+            className={columns === "SharedCostColumns" ? "activeNav ms-3" : "ms-3"}
+            onClick={() => setColumns("SharedCostColumns")}
+          >
             Shared Other Cost
           </Button>
-          <Button className="ms-3" onClick={() => setColumns("IndividualCostColumns")}>
+          <Button
+            className={columns === "IndividualCostColumns" ? "activeNav ms-3" : "ms-3"}
+            onClick={() => setColumns("IndividualCostColumns")}
+          >
             Individual Other Cost
           </Button>
-          <Button className="ms-3" onClick={() => setColumns("bazarListColumns")}>
+          <Button
+            className={columns === "bazarListColumns" ? "activeNav ms-3" : "ms-3"}
+            onClick={() => setColumns("bazarListColumns")}
+          >
             BazarList
           </Button>
         </div>
@@ -323,12 +341,52 @@ const ActiveMonthDetails = () => {
               <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
               <h3>PHONEBOOK </h3>
             </div>
+            <div className="activeMonthBtnGroups mb-4">
+              <Button
+                className={columns === "mealColumns" ? "activeNav" : undefined}
+                onClick={() => setColumns("mealColumns")}
+              >
+                Meal
+              </Button>
+              <Button
+                className={columns === "depositColumns" ? "activeNav ms-3" : "ms-3"}
+                onClick={() => setColumns("depositColumns")}
+              >
+                Deposit
+              </Button>
+              <Button
+                className={columns === "mealCostColumns" ? "activeNav ms-3" : "ms-3"}
+                onClick={() => setColumns("mealCostColumns")}
+              >
+                Meal Cost
+              </Button>
+
+              <Button
+                className={columns === "SharedCostColumns" ? "activeNav ms-3" : "ms-3"}
+                onClick={() => setColumns("SharedCostColumns")}
+              >
+                Shared Other Cost
+              </Button>
+              <Button
+                className={columns === "IndividualCostColumns" ? "activeNav ms-3" : "ms-3"}
+                onClick={() => setColumns("IndividualCostColumns")}
+              >
+                Individual Other Cost
+              </Button>
+              <Button
+                className={columns === "bazarListColumns" ? "activeNav ms-3" : "ms-3"}
+                onClick={() => setColumns("bazarListColumns")}
+              >
+                BazarList
+              </Button>
+            </div>
           </div>
         </div>
         <div className="phoneBookContainerItemBg">
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
-              {Array.isArray(mealCostData) && mealCostData?.map((data, ind) => <ActiveDetailsTemplate key={ind} data={data} />)}
+              {Array.isArray(mealCostData) &&
+                mealCostData?.map((data, ind) => <ActiveDetailsTemplate key={ind} data={data} />)}
             </div>
           </div>
         </div>

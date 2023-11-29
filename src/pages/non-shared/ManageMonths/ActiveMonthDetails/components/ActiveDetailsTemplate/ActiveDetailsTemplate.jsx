@@ -17,7 +17,7 @@ const ActiveDetailsTemplate = ({ data }) => {
         <p className="mb-0">Date: {date}</p>
         {data?.details ? <p className="mb-0">Details: {data?.details}</p> : undefined}
       </div>
-      <img src="/public/images/editIcon.png" alt="" style={{ height: "30px", width: "30px" }} />
+      <img src="/images/editIcon.png" alt="" style={{ height: "30px", width: "30px" }} />
     </div>
   );
 };

@@ -1,7 +1,21 @@
-.activeMonthBtnGroups{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+.activeMonthBtnGroups {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  margin: 0 30px;
 }
+.activeNav {
+  background-color: #3bb54a;
+  color: var(--bg-body);
+  font-weight: 700;
+}
+/* ::-webkit-scrollbar:horizontal {
+  height: 10px;
+  background-color: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background: var(--bg-primary);
+  border-radius: 10px;
+} */

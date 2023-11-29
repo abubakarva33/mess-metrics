@@ -145,7 +145,7 @@ const AddMeal = () => {
                   </Form.Item>
                   <div>
                     <img
-                      src="/public/images/check.png"
+                      src="/images/check.png"
                       alt=""
                       className="ms-2 addMealCheckIcon"
                       onClick={() => setIsClicked(false)}
@@ -266,7 +266,7 @@ const AddMeal = () => {
                         </Form.Item>
                         <div>
                           <img
-                            src="/public/images/check.png"
+                            src="/images/check.png"
                             alt=""
                             className="ms-2 addMealCheckIcon"
                             onClick={() => setIsClicked(false)}
