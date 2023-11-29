@@ -41,7 +41,7 @@ const SideHeader = () => {
 
   return (
     <>
-      {dummyRole !== "admin" && dummyRole !=="superAdmin" ? (
+      {role !== "admin" && role !== "superAdmin" ? (
         <div className="sideHeader">
           <div className="headerExpand">
             <Link to="/">
@@ -228,28 +228,34 @@ const SideHeader = () => {
       ) : (
         <div className="sideHeader">
           <div className="headerExpand">
-            <Link to="/">
+            <Link to="/mess-metrics/protected-explore/dashboard">
               <img src="/images/logo.webp" alt="" className="headerLogo" />
             </Link>
           </div>
           <div className="sideNavItems mt-4">
-            <Link to="/" className="sideNavItem mb-2 py-2 addMoney">
+            <Link
+              to="/mess-metrics/protected-explore/dashboard"
+              className="sideNavItem mb-2 py-2 addMoney"
+            >
               <AiOutlineHome className="fs-5 me-2" /> Dashboard
             </Link>
-            <Link to="/phone-book" className="sideNavItem mb-2 py-2 addMoney">
+            <Link
+              to="/mess-metrics/protected-explore/dashboard/all-users"
+              className="sideNavItem mb-2 py-2 addMoney"
+            >
               <AiOutlinePhone className="fs-5 me-2" /> All Users
             </Link>
-            <Link to="/birthdays" className="sideNavItem mb-2 py-2 addMoney">
+            <Link
+              to="/mess-metrics/protected-explore/dashboard/all-mess"
+              className="sideNavItem mb-2 py-2 addMoney"
+            >
               <AiOutlinePhone className="fs-5 me-2" /> All Mess
             </Link>
-            <Link to="/birthdays" className="sideNavItem mb-2 py-2 addMoney">
+            <Link
+              to="/mess-metrics/protected-explore/dashboard/all-months"
+              className="sideNavItem mb-2 py-2 addMoney"
+            >
               <AiOutlinePhone className="fs-5 me-2" /> All Months
-            </Link>
-            <Link to="/birthdays" className="sideNavItem mb-2 py-2 addMoney">
-              <AiOutlinePhone className="fs-5 me-2" /> Paid Months
-            </Link>
-            <Link to="/birthdays" className="sideNavItem mb-2 py-2 addMoney">
-              <AiOutlinePhone className="fs-5 me-2" /> Unpaid Months
             </Link>
           </div>
         </div>
