@@ -280,7 +280,7 @@ const ActiveMonthDetails = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <div>
+      <div className="activeMonthSectionMain">
         <div className="d-flex align-items-center justify-content-between my-4">
           <h4 className="text-center mb-0">Active Month Details</h4>
           <Select
@@ -341,7 +341,17 @@ const ActiveMonthDetails = () => {
               <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
               <h3>PHONEBOOK </h3>
             </div>
-            <div className="activeMonthBtnGroups mb-4">
+            <Select
+              showSearch
+              placeholder="Filter By Date"
+              optionFilterProp="children"
+              className="w-100 px-3 mb-3"
+              onChange={onChange}
+              onSearch={onSearch}
+              filterOption={filterOption}
+              options={optionsData}
+            />
+            <div className="activeMonthBtnGroups">
               <Button
                 className={columns === "mealColumns" ? "activeNav" : undefined}
                 onClick={() => setColumns("mealColumns")}

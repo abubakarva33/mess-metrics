@@ -1,0 +1,14 @@
+.activeDetailsTemplate{
+    background-color: var(--bg-primary);
+    padding: 10px;
+    border-radius: 10px;
+}
+.dateLogo{
+    background-color: #3bb54a;
+  color: var(--bg-body);
+  margin-bottom: 0;
+  padding: 7px;
+  border: 2px solid var(--bg-body);
+  border-radius: 50px;
+  margin-right: 15px;
+}
