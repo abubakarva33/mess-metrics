@@ -3,7 +3,7 @@ import { mainApi } from "../mainApi";
 const adminApi = mainApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllUsers: builder.query({
-      query: (page) => `users?page=${page}`,
+      query: ({ page, filter }) => `users?page=${page}&query=${filter}`,
       providesTags: ["Users"],
     }),
 

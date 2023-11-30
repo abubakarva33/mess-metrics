@@ -1,4 +1,4 @@
-import { Button, Pagination, Space } from "antd";
+import { Button, Form, Pagination, Space } from "antd";
 import AdminTableTemplate from "../components/AdminTableTemplate";
 import "./AllUsers.css";
 import { Link } from "react-router-dom";
@@ -7,19 +7,20 @@ import { useDeleteUserMutation, useGetAllUsersQuery } from "../../../redux/api/s
 import { useState } from "react";
 import moment from "moment/moment";
 import Swal from "sweetalert2";
+import Search from "antd/es/input/Search";
 
 const AllUsers = () => {
-  //   const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [selectedIds, setSelectedIds] = useState([]);
-  const [deleteUser] = useDeleteUserMutation();
   const [deleteId, setDeleteId] = useState();
-  const { data, isLoading } = useGetAllUsersQuery(pageNumber);
+  const [form] = Form.useForm();
+  const { data, isLoading } = useGetAllUsersQuery({ page: pageNumber, filter });
+  const [deleteUser] = useDeleteUserMutation();
+  // const [allDelete] = useDeleteMultipleMessageMutation();
   if (isLoading) {
     return;
   }
-
-  // const [allDelete] = useDeleteMultipleMessageMutation();
 
   const column = [
     {
@@ -58,7 +59,6 @@ const AllUsers = () => {
       width: 135,
       key: "action",
       render: (_, record) => (
-        
         <Space
           style={{ width: "135px" }}
           className="d-flex align-items-center justify-content-center"
@@ -73,7 +73,10 @@ const AllUsers = () => {
               <AiOutlineEdit className="fs-5" />
             </h6>
           </Link>
-          <h6 className="p-1 me-2 border rounded text-light bg-danger" onClick={()=>handleSingleDelete(record?._id)}>
+          <h6
+            className="p-1 me-2 border rounded text-light bg-danger"
+            onClick={() => handleSingleDelete(record?._id)}
+          >
             <AiOutlineDelete className="fs-5" />
           </h6>
         </Space>
@@ -84,7 +87,9 @@ const AllUsers = () => {
   const onChange = (current) => {
     setPageNumber(current);
   };
-
+  const onFinish = (values) => {
+    setFilter(values.target.value);
+  };
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -131,9 +136,17 @@ const AllUsers = () => {
   const clearSelection = () => {
     setSelectedIds([]);
   };
+
   return (
     <div>
-      <h1 className="text-center">AllUsers</h1>
+      <div className="d-flex align-items-center justify-content-between my-3 ms-3">
+        <h2 className="text-center">AllUsers</h2>
+        <Form name="customized_form_controls" layout="inline" form={form}>
+          <Form.Item name="search" onChange={onFinish}>
+            <Search placeholder="input search text" className="ant-box-constant" />
+          </Form.Item>
+        </Form>
+      </div>
       {selectedIds?.length > 0 ? (
         <div className="my-3 mx-5">
           <h6 className="text-center mb-2">{selectedIds.length} items selected</h6>
@@ -152,7 +165,12 @@ const AllUsers = () => {
         setSelectedIds={setSelectedIds}
       />
       {total > limit && (
-        <Pagination defaultCurrent={1} total={total} onChange={onChange} className="mb-4" />
+        <Pagination
+          defaultCurrent={1}
+          total={total}
+          onChange={onChange}
+          className="my-4 text-center"
+        />
       )}
     </div>
   );

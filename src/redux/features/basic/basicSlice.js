@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   dMeal: '0',
+  filter: "",
 };
 
 export const basicSlice = createSlice({
@@ -15,9 +16,12 @@ export const basicSlice = createSlice({
         return
       }
     },
+    filterData: (state, action) => {
+      state.filter = action.payload;
+    },
   },
 });
 
-export const { setDefaultMeal } = basicSlice.actions;
+export const { setDefaultMeal,filterData } = basicSlice.actions;
 const basicSliceReducer = basicSlice.reducer;
 export default basicSliceReducer;
