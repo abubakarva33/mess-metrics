@@ -7,13 +7,13 @@ const adminApi = mainApi.injectEndpoints({
       providesTags: ["Users"],
     }),
 
-    // deleteUser: builder.mutation({
-    //   query: (_id) => ({
-    //     url: `users/${_id}`,
-    //     method: "DELETE",
-    //   }),
-    //   invalidatesTags: ["Message"],
-    // }),
+    deleteUser: builder.mutation({
+      query: (_id) => ({
+        url: `users/${_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Users"],
+    }),
     // deleteMultipleUser: builder.mutation({
     //   query: (body) => ({
     //     url: `contact/bulk`,
@@ -54,4 +54,4 @@ const adminApi = mainApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllUsersQuery } = adminApi;
+export const { useGetAllUsersQuery, useDeleteUserMutation } = adminApi;

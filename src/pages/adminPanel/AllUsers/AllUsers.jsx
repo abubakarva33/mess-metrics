@@ -1,30 +1,30 @@
-import { Pagination, Space } from "antd";
+import { Button, Pagination, Space } from "antd";
 import AdminTableTemplate from "../components/AdminTableTemplate";
 import "./AllUsers.css";
 import { Link } from "react-router-dom";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
-import { useGetAllUsersQuery } from "../../../redux/api/sampleApi/adminApi";
+import { useDeleteUserMutation, useGetAllUsersQuery } from "../../../redux/api/sampleApi/adminApi";
 import { useState } from "react";
+import moment from "moment/moment";
+import Swal from "sweetalert2";
 
 const AllUsers = () => {
-//   const [filter, setFilter] = useState("");
+  //   const [filter, setFilter] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [selectedIds, setSelectedIds] = useState([]);
+  const [deleteUser] = useDeleteUserMutation();
   const [deleteId, setDeleteId] = useState();
   const { data, isLoading } = useGetAllUsersQuery(pageNumber);
   if (isLoading) {
     return;
   }
- 
 
-  // const [deleteMessage] = useDeleteMessageMutation();
   // const [allDelete] = useDeleteMultipleMessageMutation();
 
   const column = [
     {
       title: "Sl No.",
-      dataIndex: "date",
-      key: "date",
+      render: (_, record, index) => <> {index + 1 + (data?.meta?.page - 1) * data?.meta?.limit} </>,
     },
     {
       title: " Name",
@@ -50,6 +50,7 @@ const AllUsers = () => {
     {
       title: "Date Created",
       dataIndex: "createdAt",
+      render: (_, record) => moment(record.createdAt).format("DD/MM/YYYY"),
       key: "createdAt",
     },
     {
@@ -57,19 +58,23 @@ const AllUsers = () => {
       width: 135,
       key: "action",
       render: (_, record) => (
-        <Space style={{ width: "135px" }}>
+        
+        <Space
+          style={{ width: "135px" }}
+          className="d-flex align-items-center justify-content-center"
+        >
           <Link to={`/main-admin/private-route/abubakar/dashboard/blog/`}>
-            <h6 className="p-2 me-2 border rounded text-light bg-primary">
-              <AiOutlineEye />
+            <h6 className="p-1 me-2 border rounded text-light bg-primary">
+              <AiOutlineEye className="fs-5" />
             </h6>
           </Link>
           <Link to={`/main-admin/private-route/abubakar/dashboard/blog/edit/`}>
-            <h6 className="p-2 me-2 border rounded text-light bg-success">
-              <AiOutlineEdit />
+            <h6 className="p-1 me-2 border rounded text-light bg-success">
+              <AiOutlineEdit className="fs-5" />
             </h6>
           </Link>
-          <h6 className="p-2 me-2 border rounded text-light bg-danger">
-            <AiOutlineDelete />
+          <h6 className="p-1 me-2 border rounded text-light bg-danger" onClick={()=>handleSingleDelete(record?._id)}>
+            <AiOutlineDelete className="fs-5" />
           </h6>
         </Space>
       ),
@@ -97,7 +102,7 @@ const AllUsers = () => {
             Swal.fire("Deleted!", "Your file has been deleted.", "success");
           }
         } else {
-          const res = await deleteMessage(selectedIds).unwrap();
+          const res = await deleteUser(selectedIds).unwrap();
           if (res?.success) {
             Swal.fire("Deleted!", "Your file has been deleted.", "success");
           }
@@ -116,16 +121,30 @@ const AllUsers = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await deleteMessage(id).unwrap();
+        const res = await deleteUser(id).unwrap();
         if (res?.success) {
           Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       }
     });
   };
+  const clearSelection = () => {
+    setSelectedIds([]);
+  };
   return (
     <div>
-      <h1>AllUsers</h1>
+      <h1 className="text-center">AllUsers</h1>
+      {selectedIds?.length > 0 ? (
+        <div className="my-3 mx-5">
+          <h6 className="text-center mb-2">{selectedIds.length} items selected</h6>
+          <Button className="me-2" onClick={handleDelete}>
+            Delete
+          </Button>
+          <Button className="me-2" onClick={clearSelection}>
+            Clear Selection
+          </Button>
+        </div>
+      ) : null}
       <AdminTableTemplate
         data={data?.data}
         column={column}
