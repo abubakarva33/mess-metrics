@@ -6,6 +6,14 @@ const adminApi = mainApi.injectEndpoints({
       query: ({ page, filter }) => `users?page=${page}&query=${filter}`,
       providesTags: ["Users"],
     }),
+    getAllMess: builder.query({
+      query: ({ page, filter }) => `mess?page=${page}&query=${filter}`,
+      providesTags: ["AllMess"],
+    }),
+    getAllMonth: builder.query({
+      query: ({ page, filter }) => `month?page=${page}&query=${filter}`,
+      providesTags: ["Months"],
+    }),
 
     deleteUser: builder.mutation({
       query: (_id) => ({
@@ -13,6 +21,21 @@ const adminApi = mainApi.injectEndpoints({
         method: "DELETE",
       }),
       invalidatesTags: ["Users"],
+    }),
+
+    deleteMessByAdmin: builder.mutation({
+      query: (_id) => ({
+        url: `mess/${_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["AllMess"],
+    }),
+    deleteMonthByAdmin: builder.mutation({
+      query: (_id) => ({
+        url: `month/${_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Months"],
     }),
     // deleteMultipleUser: builder.mutation({
     //   query: (body) => ({
@@ -54,4 +77,11 @@ const adminApi = mainApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllUsersQuery, useDeleteUserMutation } = adminApi;
+export const {
+  useGetAllUsersQuery,
+  useDeleteUserMutation,
+  useGetAllMessQuery,
+  useGetAllMonthQuery,
+  useDeleteMessByAdminMutation,
+  useDeleteMonthByAdminMutation
+} = adminApi;

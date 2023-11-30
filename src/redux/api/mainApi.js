@@ -13,6 +13,17 @@ export const mainApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["User", "Mess", "Profile", "Member", "Month", "PhoneBook", "ActiveMonth", "Users"],
+  tagTypes: [
+    "User",
+    "Mess",
+    "Profile",
+    "Member",
+    "Month",
+    "PhoneBook",
+    "ActiveMonth",
+    "Users",
+    "AllMess",
+    "Months",
+  ],
   endpoints: () => ({}),
 });
