@@ -24,7 +24,6 @@ const AllMonth = () => {
   if (isLoading) {
     return;
   }
-
   const column = [
     {
       title: "Sl No.",
