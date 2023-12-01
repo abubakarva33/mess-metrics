@@ -11,7 +11,7 @@ import {
   AiOutlineUserAdd,
   AiOutlineUserDelete,
 } from "react-icons/ai";
-import { Drawer, Dropdown, Space } from "antd";
+import { Avatar, Badge, Drawer, Dropdown, Space } from "antd";
 import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -27,35 +27,18 @@ import { GiPipeOrgan, GiReceiveMoney } from "react-icons/gi";
 import { PiRadioactive } from "react-icons/pi";
 import { TbRefreshDot } from "react-icons/tb";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../../redux/features/UserSlice/UserSlice";
-import { mainApi } from "../../../redux/api/mainApi";
 import HeaderDrawer from "./HeaderDrawer/HeaderDrawer";
+import moment from "moment";
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const [activeNav, setActiveNav] = useState("");
-
-  // const navHandler = (name) => {
-  //   if (activeNav === name) {
-  //     setActiveNav("");
-  //   } else {
-  //     setActiveNav(name);
-  //   }
-  // };
-
-  // const [open, setOpen] = useState(false);
-  // const [size, setSize] = useState();
-  // const showDefaultDrawer = () => {
-  //   setOpen(true);
-  // };
-  // const onClose = () => {
-  //   setOpen(false);
-  // };
-
-  // useEffect(() => {
-  //   onClose();
-  // }, [location]);
+  const { role } = useSelector((state) => state.user);
+  const [time, setTime] = useState(moment().format("hh:mm A"));
+  setInterval(() => {
+    setTime(moment().format("hh:mm A"));
+  }, 1000 * 60);
 
   const items = [
     {
@@ -78,32 +61,39 @@ const Header = () => {
         <div className="headerMainMd">
           <HeaderDrawer />
         </div>
-        <div className="d-flexCenter">
-          <Link to="/aboutUs" className="navItem">
-            About us
-          </Link>
-          <Link to="/helps" className="navItem">
-            Help
-          </Link>
-          <Link to="/faq" className="navItem">
-            FAQ
-          </Link>
-          <Link to="/notification" className="navItem me-2">
-            <AiOutlineBell className="fs-2" />
-          </Link>
+        {role !== "admin" && role !== "superAdmin" ? (
+          <div className="d-flexCenter">
+            <Link to="/aboutUs" className="navItem">
+              About us
+            </Link>
+            <Link to="/helps" className="navItem">
+              Help
+            </Link>
+            <Link to="/faq" className="navItem">
+              FAQ
+            </Link>
+            <Link to="/notification" className="navItem me-2">
+              <AiOutlineBell className="fs-2" />
+            </Link>
 
-          <div className="d-flexCenter position-relative smHeader">
-            <img src="/images/userIcon.webp" alt="" className="userIcon me-1" />
-            <Dropdown menu={{ items }}>
-              <a onClick={(e) => e.preventDefault()}>
-                <Space>
-                  Abubakar
-                  <DownOutlined />
-                </Space>
-              </a>
-            </Dropdown>
+            <div className="d-flexCenter position-relative smHeader">
+              <img src="/images/userIcon.webp" alt="" className="userIcon me-1" />
+              <Dropdown menu={{ items }}>
+                <a onClick={(e) => e.preventDefault()}>
+                  <Space>
+                    Abubakar
+                    <DownOutlined />
+                  </Space>
+                </a>
+              </Dropdown>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className=" d-flex align-items-center justify-content-between w-100 mb-1">
+            <h3 className="mb-0">WELCOME PORTFOLIO ADMIN</h3>
+            <p className="mb-0">{time} | Admin Account</p>
+          </div>
+        )}
       </div>
 
       {location.pathname === "/" ? (
