@@ -89,6 +89,7 @@ const AllUsers = () => {
   };
   const onFinish = (values) => {
     setFilter(values.target.value);
+    setPageNumber(1)
   };
   const handleDelete = () => {
     Swal.fire({

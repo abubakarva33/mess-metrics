@@ -90,7 +90,7 @@ const Header = () => {
           </div>
         ) : (
           <div className=" d-flex align-items-center justify-content-between w-100 mb-1">
-            <h3 className="mb-0">WELCOME PORTFOLIO ADMIN</h3>
+            <h3 className="mb-0">WELCOME ADMIN</h3>
             <p className="mb-0">{time} | Admin Account</p>
           </div>
         )}

@@ -35,9 +35,9 @@ const AllMonth = () => {
       key: "name",
     },
     {
-      title: " Is Active",
+      title: "Active",
       dataIndex: "isActive",
-      render: (_, record) => <p> {record?.isActive}</p>,
+      render: (_, record) => <p className="text-capitalize"> {record?.isActive?.toString()}</p>,
       key: "isActive",
     },
 

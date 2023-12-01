@@ -26,10 +26,16 @@ const AddMeal = () => {
   console.log(meal);
 
   useEffect(() => {
-    data?.members?.map((member) =>
-      setMeal((prev) => [...prev, { id: member._id, meal: Number(dMeal) || 0 }])
-    );
-  }, [data]);
+    const filterData = data?.members?.map((member) => {
+      return { id: member._id, meal: Number(dMeal) || 0 };
+    });
+    console.log({ filterData });
+    setMeal(filterData);
+
+    // data?.members?.map((member) =>
+    //   setMeal((prev) => [...prev, { id: member._id, meal: Number(dMeal) || 0 }])
+    // );
+  }, [data, dMeal]);
 
   if (isFetching) {
     return;
@@ -47,12 +53,14 @@ const AddMeal = () => {
   };
 
   const handlerMeal = (id, mm) => {
-    const finedMeal = meal?.find((m) => m?.id === id);
-    finedMeal.meal += mm;
-
-    setMeal((prev) => {
-      return [...prev, finedMeal];
+    const filterMeal = meal?.filter((m) => {
+      if (m?.id === id) {
+        m.meal += mm;
+      }
+      return m;
     });
+
+    setMeal(filterMeal);
   };
 
   const onFinish = async () => {
