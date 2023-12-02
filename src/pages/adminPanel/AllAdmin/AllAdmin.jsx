@@ -1,10 +1,11 @@
-import { Button, Form, Pagination, Space } from "antd";
+import { Button, Form, Pagination, Space, Table } from "antd";
 import AdminTableTemplate from "../components/AdminTableTemplate";
-import "./AllUsers.css";
+import "./AllAdmin.css";
 import { Link } from "react-router-dom";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 import {
   useDeleteUserMutation,
+  useGetAllAdminQuery,
   useGetAllUsersQuery,
   useMakeAdminMutation,
 } from "../../../redux/api/sampleApi/adminApi";
@@ -13,13 +14,13 @@ import moment from "moment/moment";
 import Swal from "sweetalert2";
 import Search from "antd/es/input/Search";
 
-const AllUsers = () => {
+const AllAdmin = () => {
   const [filter, setFilter] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [selectedIds, setSelectedIds] = useState([]);
   const [deleteId, setDeleteId] = useState();
   const [form] = Form.useForm();
-  const { data, isLoading } = useGetAllUsersQuery({ page: pageNumber, filter });
+  const { data, isLoading } = useGetAllAdminQuery({ page: pageNumber, filter });
   const [deleteUser] = useDeleteUserMutation();
   const [makeAdmin] = useMakeAdminMutation();
   // const [allDelete] = useDeleteMultipleMessageMutation();
@@ -61,11 +62,11 @@ const AllUsers = () => {
     },
     {
       title: "Action",
-      width: 135,
+      width: 75,
       key: "action",
       render: (_, record) => (
         <Space
-          style={{ width: "135px" }}
+          style={{ width: "75px" }}
           className="d-flex align-items-center justify-content-center"
         >
           <Link to={`/main-admin/private-route/abubakar/dashboard/blog/`}>
@@ -82,12 +83,6 @@ const AllUsers = () => {
             ) : (
               <img src="/public/images/update-user.png" alt="" style={{ height: "22px" }} />
             )}
-          </h6>
-          <h6
-            className="p-1 me-2 border rounded text-light bg-danger"
-            onClick={() => handleSingleDelete(record?._id)}
-          >
-            <AiOutlineDelete className="fs-5" />
           </h6>
         </Space>
       ),
@@ -138,81 +133,17 @@ const AllUsers = () => {
       });
     }
   };
-
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        if (selectedIds.length > 1) {
-          const res = await allDelete({ ids: selectedIds }).unwrap();
-          if (res?.success) {
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
-          }
-        } else {
-          const res = await deleteUser(selectedIds).unwrap();
-          if (res?.success) {
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
-          }
-        }
-      }
-    });
-  };
-  const handleSingleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const res = await deleteUser(id).unwrap();
-        if (res?.success) {
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
-        }
-      }
-    });
-  };
-  const clearSelection = () => {
-    setSelectedIds([]);
-  };
-
   return (
     <div>
       <div className="d-flex align-items-center justify-content-between my-3 ms-3">
-        <h2 className="text-center">AllUsers</h2>
+        <h2 className="text-center">All Admins</h2>
         <Form name="customized_form_controls" layout="inline" form={form}>
           <Form.Item name="search" onChange={onFinish}>
             <Search placeholder="input search text" className="ant-box-constant" />
           </Form.Item>
         </Form>
       </div>
-      {selectedIds?.length > 0 ? (
-        <div className="my-3 mx-5">
-          <h6 className="text-center mb-2">{selectedIds.length} items selected</h6>
-          <Button className="me-2" onClick={handleDelete}>
-            Delete
-          </Button>
-          <Button className="me-2" onClick={clearSelection}>
-            Clear Selection
-          </Button>
-        </div>
-      ) : null}
-      <AdminTableTemplate
-        data={data?.data}
-        column={column}
-        selectedIds={selectedIds}
-        setSelectedIds={setSelectedIds}
-      />
+      <Table pagination={false} columns={column} dataSource={data?.data} />
       {total > limit && (
         <Pagination
           defaultCurrent={1}
@@ -225,4 +156,4 @@ const AllUsers = () => {
   );
 };
 
-export default AllUsers;
+export default AllAdmin;

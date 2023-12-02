@@ -1,0 +1,6 @@
+.ant-box-constant > .ant-input-wrapper .ant-input-group >.ant-input{
+    height: 30px !important;
+}
+.ant-input-search .ant-input-search-button{
+    min-height: 45px;
+}

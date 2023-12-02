@@ -38,6 +38,7 @@ import Dashboard from "../pages/adminPanel/Dashboard/Dashboard";
 import AllUsers from "../pages/adminPanel/AllUsers/AllUsers";
 import AllMonth from "../pages/adminPanel/AllMonth/AllMonth";
 import AllMess from "../pages/adminPanel/AllMess/AllMess";
+import AllAdmin from "../pages/adminPanel/AllAdmin/AllAdmin";
 
 const mainLayoutChildInit = [
   { path: "/", element: <Home /> },
@@ -55,6 +56,7 @@ const mainLayoutChildInit = [
   { path: "/all-members/:Id", element: <SingleMember /> },
   { path: "/mess-metrics/protected-explore/dashboard", element: <Dashboard /> },
   { path: "/mess-metrics/protected-explore/dashboard/all-users", element: <AllUsers /> },
+  { path: "/mess-metrics/protected-explore/dashboard/all-admins", element: <AllAdmin /> },
   { path: "/mess-metrics/protected-explore/dashboard/all-mess", element: <AllMess /> },
   { path: "/mess-metrics/protected-explore/dashboard/all-months", element: <AllMonth /> },
 ];

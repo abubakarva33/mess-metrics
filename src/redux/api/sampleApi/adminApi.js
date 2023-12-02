@@ -6,6 +6,10 @@ const adminApi = mainApi.injectEndpoints({
       query: ({ page, filter }) => `users?page=${page}&query=${filter}`,
       providesTags: ["Users"],
     }),
+    getAllAdmin: builder.query({
+      query: ({ page, filter }) => `users?role=admin&page=${page}&query=${filter}`,
+      providesTags: ["Users"],
+    }),
     getAllMess: builder.query({
       query: ({ page, filter }) => `mess?page=${page}&query=${filter}`,
       providesTags: ["AllMess"],
@@ -38,10 +42,10 @@ const adminApi = mainApi.injectEndpoints({
       invalidatesTags: ["Months"],
     }),
     makeAdmin: builder.mutation({
-      query: ({ id, role }) => ({
+      query: ({ id, ...body }) => ({
         url: `users/${id}`,
         method: "PUT",
-        role,
+        body,
       }),
       invalidatesTags: ["Users"],
     }),
@@ -56,4 +60,5 @@ export const {
   useDeleteMessByAdminMutation,
   useDeleteMonthByAdminMutation,
   useMakeAdminMutation,
+  useGetAllAdminQuery
 } = adminApi;

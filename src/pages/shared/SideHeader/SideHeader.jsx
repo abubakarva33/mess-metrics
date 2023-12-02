@@ -246,6 +246,12 @@ const SideHeader = () => {
               <AiOutlinePhone className="fs-5 me-2" /> All Users
             </Link>
             <Link
+              to="/mess-metrics/protected-explore/dashboard/all-admins"
+              className="sideNavItem mb-2 py-2 addMoney"
+            >
+              <AiOutlinePhone className="fs-5 me-2" /> All Admins
+            </Link>
+            <Link
               to="/mess-metrics/protected-explore/dashboard/all-mess"
               className="sideNavItem mb-2 py-2 addMoney"
             >
