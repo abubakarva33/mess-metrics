@@ -24,7 +24,6 @@ const AllMess = () => {
   if (isLoading) {
     return;
   }
-  console.log(data);
   const column = [
     {
       title: "Sl No.",
@@ -51,11 +50,11 @@ const AllMess = () => {
 
     {
       title: "Action",
-      width: 135,
+      width: 75,
       key: "action",
       render: (_, record) => (
         <Space
-          style={{ width: "135px" }}
+          style={{ width: "75px" }}
           className="d-flex align-items-center justify-content-center"
         >
           <Link to={`/main-admin/private-route/abubakar/dashboard/blog/`}>
@@ -63,11 +62,11 @@ const AllMess = () => {
               <AiOutlineEye className="fs-5" />
             </h6>
           </Link>
-          <Link to={`/main-admin/private-route/abubakar/dashboard/blog/edit/`}>
+          {/* <Link to={`/main-admin/private-route/abubakar/dashboard/blog/edit/`}>
             <h6 className="p-1 me-2 border rounded text-light bg-success">
               <AiOutlineEdit className="fs-5" />
             </h6>
-          </Link>
+          </Link> */}
           <h6
             className="p-1 me-2 border rounded text-light bg-danger"
             onClick={() => handleSingleDelete(record?._id)}
@@ -135,7 +134,7 @@ const AllMess = () => {
   return (
     <div>
       <div className="d-flex align-items-center justify-content-between my-3 ms-3">
-        <h2 className="text-center">AllUsers</h2>
+        <h2 className="text-center">All Mess</h2>
         <Form name="customized_form_controls" layout="inline" form={form}>
           <Form.Item name="search" onChange={onFinish}>
             <Search placeholder="input search text" className="ant-box-constant" />

@@ -3,7 +3,11 @@ import AdminTableTemplate from "../components/AdminTableTemplate";
 import "./AllUsers.css";
 import { Link } from "react-router-dom";
 import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
-import { useDeleteUserMutation, useGetAllUsersQuery } from "../../../redux/api/sampleApi/adminApi";
+import {
+  useDeleteUserMutation,
+  useGetAllUsersQuery,
+  useMakeAdminMutation,
+} from "../../../redux/api/sampleApi/adminApi";
 import { useState } from "react";
 import moment from "moment/moment";
 import Swal from "sweetalert2";
@@ -17,6 +21,7 @@ const AllUsers = () => {
   const [form] = Form.useForm();
   const { data, isLoading } = useGetAllUsersQuery({ page: pageNumber, filter });
   const [deleteUser] = useDeleteUserMutation();
+  const [makeAdmin] = useMakeAdminMutation();
   // const [allDelete] = useDeleteMultipleMessageMutation();
   if (isLoading) {
     return;
@@ -68,11 +73,12 @@ const AllUsers = () => {
               <AiOutlineEye className="fs-5" />
             </h6>
           </Link>
-          <Link to={`/main-admin/private-route/abubakar/dashboard/blog/edit/`}>
-            <h6 className="p-1 me-2 border rounded text-light bg-success">
-              <AiOutlineEdit className="fs-5" />
-            </h6>
-          </Link>
+          <h6
+            className="p-1 me-2 border rounded text-light bg-warning"
+            onClick={() => handleMakeAdmin(record?._id)}
+          >
+            <img src="/public/images/update-user.png" alt="" style={{ height: "22px" }} />
+          </h6>
           <h6
             className="p-1 me-2 border rounded text-light bg-danger"
             onClick={() => handleSingleDelete(record?._id)}
@@ -89,8 +95,28 @@ const AllUsers = () => {
   };
   const onFinish = (values) => {
     setFilter(values.target.value);
-    setPageNumber(1)
+    setPageNumber(1);
   };
+  const handleMakeAdmin = (id) => {
+    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This person will become ADMIN!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Make Admin!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await makeAdmin({ id, role: "admin" }).unwrap();
+        if (res?.success) {
+          Swal.fire("Changed!", "Member set as Admin.", "success");
+        }
+      }
+    });
+  };
+
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",

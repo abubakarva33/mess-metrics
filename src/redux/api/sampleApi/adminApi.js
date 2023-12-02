@@ -37,43 +37,14 @@ const adminApi = mainApi.injectEndpoints({
       }),
       invalidatesTags: ["Months"],
     }),
-    // deleteMultipleUser: builder.mutation({
-    //   query: (body) => ({
-    //     url: `contact/bulk`,
-    //     method: "POST",
-    //     body,
-    //   }),
-    //   invalidatesTags: ["Message"],
-    // }),
-    // changeManager: builder.mutation({
-    //   query: ({ _id, ...body }) => ({
-    //     url: `mess/change-manager/${_id}`,
-    //     method: "PUT",
-    //     body,
-    //   }),
-    //   invalidatesTags: ["Profile", "Member", "Mess"],
-    // }),
-    // addMember: builder.mutation({
-    //   query: ({ _id, ...body }) => ({
-    //     url: `mess/add-member/${_id}`,
-    //     method: "POST",
-    //     body,
-    //   }),
-    //   invalidatesTags: ["Member"],
-    // }),
-    // deleteMember: builder.mutation({
-    //   query: ({ _id, ...body }) => ({
-    //     url: `mess/remove-members/${_id}`,
-    //     method: "POST",
-    //     body,
-    //   }),
-    //   invalidatesTags: ["Member"],
-    // }),
-    // getMembers: builder.query({
-    //   query: () => `mess/members`,
-    //   transformResponse: (response) => response.data,
-    //   providesTags: ["Member"],
-    // }),
+    makeAdmin: builder.mutation({
+      query: ({ id, role }) => ({
+        url: `users/${id}`,
+        method: "PUT",
+        role,
+      }),
+      invalidatesTags: ["Users"],
+    }),
   }),
 });
 
@@ -83,5 +54,6 @@ export const {
   useGetAllMessQuery,
   useGetAllMonthQuery,
   useDeleteMessByAdminMutation,
-  useDeleteMonthByAdminMutation
+  useDeleteMonthByAdminMutation,
+  useMakeAdminMutation,
 } = adminApi;
