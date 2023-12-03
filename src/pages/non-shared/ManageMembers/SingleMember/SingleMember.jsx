@@ -50,6 +50,7 @@ const SingleMember = () => {
   const { name, email, phone, role, dateOfBirth, monthData } = memberProfileData;
   const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
   const currentObject = monthData[currentObjectIndex];
+  console.log(Id);
 
   const switchData = () => {
     setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);

@@ -79,9 +79,9 @@ const AllAdmin = () => {
             onClick={() => handleMakeAdmin(record?._id, record?.role)}
           >
             {record?.role === "admin" ? (
-              <img src="/public/images/fired.png" alt="" style={{ height: "22px" }} />
+              <img src="/images/fired.png" alt="" style={{ height: "22px" }} />
             ) : (
-              <img src="/public/images/update-user.png" alt="" style={{ height: "22px" }} />
+              <img src="/images/update-user.png" alt="" style={{ height: "22px" }} />
             )}
           </h6>
         </Space>

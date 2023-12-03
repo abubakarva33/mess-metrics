@@ -91,7 +91,17 @@ const Header = () => {
         ) : (
           <div className=" d-flex align-items-center justify-content-between w-100 mb-1">
             <h3 className="mb-0">WELCOME ADMIN</h3>
-            <p className="mb-0">{time} | Admin Account</p>
+            <div className=" d-flex align-items-center">
+              <p className="mb-0">{time} | Admin Account |</p>
+              <p
+                className="mb-0 ms-2 bg-danger px-2 py-1 rounded"
+                onClick={() => {
+                  dispatch(auth({ token: "" }));
+                }}
+              >
+                Logout
+              </p>
+            </div>
           </div>
         )}
       </div>
