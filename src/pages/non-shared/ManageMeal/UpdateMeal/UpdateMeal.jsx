@@ -22,7 +22,6 @@ const UpdateMeal = () => {
   const { dMeal } = useSelector((state) => state.basic);
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
   const [clicked, setIsClicked] = useState([]);
-  console.log(clicked);
 
   useEffect(() => {
     const filterData = data?.members?.map((member) => {
@@ -38,18 +37,15 @@ const UpdateMeal = () => {
   if (isFetching) {
     return;
   }
-
   if (isLoading) {
     return;
   }
-
   const defaultValue = (e) => {
     if (e.target.value < 0) {
       dispatch(setDefaultMeal({ dMeal: (e.target.value = 0) }));
     }
     dispatch(setDefaultMeal({ dMeal: e.target.value }));
   };
-
   const handlerMeal = (id, mm) => {
     const filterMeal = meal?.filter((m) => {
       if (m?.id === id) {
@@ -123,7 +119,7 @@ const UpdateMeal = () => {
                   {clicked?.find((m) => m?.id === member._id)?.clicked === false ? (
                     <div>
                       <MdEdit
-                        className="fs-4 ms-3"
+                        className="fs-4 ms-1"
                         onClick={() => handleClick(member._id)}
                         style={{ color: "#3bb54a" }}
                       />
@@ -151,7 +147,7 @@ const UpdateMeal = () => {
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
               <div className="mx-auto" style={{ maxWidth: "500px" }}>
-                <div className="mealDatePicker">
+                <div className="mealDatePicker mb-4">
                   <ReactDatePicker
                     className="w-100"
                     selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
@@ -161,68 +157,6 @@ const UpdateMeal = () => {
                     icon={<MdCalendarMonth />}
                   />
                 </div>
-                <Form
-                  name="normal_login"
-                  className=""
-                  form={form}
-                  layout="vertical"
-                  initialValues={{
-                    remember: true,
-                  }}
-                >
-                  <div>
-                    {/* <h6>{dMeal}</h6> */}
-                    <div className="my-3 d-flex align-items-center justify-content-center">
-                      <h5 className="mb-0">Default Meal: {dMeal}</h5>
-                      <div>
-                        <MdEdit
-                          className="fs-4 ms-3"
-                          onClick={() => setIsClicked(true)}
-                          style={{ color: "#3bb54a" }}
-                        />
-                      </div>
-                    </div>
-                    {clicked ? (
-                      <div className="d-flex align-items-center my-4">
-                        <Form.Item
-                          name="defaultMeal"
-                          className="w-100 defaultMeal"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input your Number!",
-                            },
-                            ({ getFieldValue }) => ({
-                              validator(_, value) {
-                                if (value >= 0) {
-                                  return Promise.resolve();
-                                }
-                                return Promise.reject(
-                                  new Error("Please enter a non-negative number")
-                                );
-                              },
-                            }),
-                          ]}
-                        >
-                          <Input
-                            type="number"
-                            placeholder="Number"
-                            defaultValue={dMeal}
-                            onChange={defaultValue}
-                          />
-                        </Form.Item>
-                        <div>
-                          <img
-                            src="/images/check.png"
-                            alt=""
-                            className="ms-2 addMealCheckIcon"
-                            onClick={() => setIsClicked(false)}
-                          />
-                        </div>
-                      </div>
-                    ) : undefined}
-                  </div>
-                </Form>
                 <div>
                   {data?.members?.map((member) => (
                     <div className="phoneItem ">
@@ -231,25 +165,38 @@ const UpdateMeal = () => {
                         <h6 className="phoneNameText pt-1">{member.name}</h6>
                       </div>
                       <div className="d-flex">
-                        <button
-                          disabled={meal?.find((m) => m?.id === member._id)?.meal <= 0}
-                          className="addMealRegulationIcon"
-                          onClick={() => handlerMeal(member._id, -0.5)}
-                        >
-                          <HiMinusSm className="fs-4" />
-                        </button>
+                        {clicked?.find((m) => m?.id === member._id)?.clicked === true ? (
+                          <button
+                            disabled={meal?.find((m) => m?.id === member._id)?.meal <= 0}
+                            className="addMealRegulationIcon"
+                            onClick={() => handlerMeal(member._id, -0.5)}
+                          >
+                            <HiMinusSm className="fs-4" />
+                          </button>
+                        ) : undefined}
+
                         <div className="mealCount">
                           <p className="mb-0">
                             {meal?.find((m) => m?.id === member?._id)?.meal?.toFixed(1) || 0}
                           </p>
                         </div>
-
-                        <button
-                          className="addMealRegulationIcon"
-                          onClick={() => handlerMeal(member._id, 0.5)}
-                        >
-                          <MdOutlineAdd className="fs-4" />
-                        </button>
+                        {clicked?.find((m) => m?.id === member._id)?.clicked === true ? (
+                          <button
+                            className="addMealRegulationIcon"
+                            onClick={() => handlerMeal(member._id, 0.5)}
+                          >
+                            <MdOutlineAdd className="fs-4" />
+                          </button>
+                        ) : undefined}
+                        {clicked?.find((m) => m?.id === member._id)?.clicked === false ? (
+                          <div>
+                            <MdEdit
+                              className="fs-4 ms-1"
+                              onClick={() => handleClick(member._id)}
+                              style={{ color: "#3bb54a" }}
+                            />
+                          </div>
+                        ) : undefined}
                       </div>
                     </div>
                   ))}
