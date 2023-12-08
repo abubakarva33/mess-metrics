@@ -24,7 +24,27 @@ const userApi = mainApi.injectEndpoints({
       }),
       providesTags: ["Profile"],
     }),
+    updateProfile: builder.mutation({
+      query: (body) => ({
+        url: `users/profile`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Profile"],
+    }),
+    getUserAccount: builder.query({
+      query: () => ({
+        url: `users/account`,
+      }),
+      providesTags: ["Account"],
+    }),
   }),
 });
 
-export const { useCreateUserMutation, useLoginUserMutation, useGetUserProfileQuery } = userApi;
+export const {
+  useCreateUserMutation,
+  useLoginUserMutation,
+  useGetUserProfileQuery,
+  useGetUserAccountQuery,
+  useUpdateProfileMutation
+} = userApi;
