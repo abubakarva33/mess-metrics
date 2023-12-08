@@ -8,7 +8,7 @@ const actionApi = mainApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Actions"],
+      invalidatesTags: ["Action"],
     }),
   }),
 });

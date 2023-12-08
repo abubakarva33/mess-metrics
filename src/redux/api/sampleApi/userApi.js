@@ -36,7 +36,7 @@ const userApi = mainApi.injectEndpoints({
       query: () => ({
         url: `users/account`,
       }),
-      providesTags: ["Account"],
+      providesTags: ["Action"],
     }),
   }),
 });
