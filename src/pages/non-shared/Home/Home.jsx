@@ -4,15 +4,21 @@ import MessDetails from "./components/MessDetails/MessDetails";
 import Chart from "./components/Chart/Chart";
 import PersonalDetails from "./components/PersonalDetails/PersonalDetails";
 import BazarList from "./components/BazarList/BazarList";
-import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
+import {
+  useGetUserAccountQuery,
+  useGetUserProfileQuery,
+} from "../../../redux/api/sampleApi/userApi";
 import Members from "../ManageMembers/Members/Members";
 import { useDispatch } from "react-redux";
 import { authRole } from "../../../redux/features/UserSlice/UserSlice";
 
 const Home = () => {
-  // const dispatch = useDispatch();
-  // const { data } = useGetUserProfileQuery();
-  // dispatch(authRole({ role: data?.data?.role }));
+  const { data: usersAcc, isFetching } = useGetUserAccountQuery();
+  // console.log(usersAcc, "suronjit");
+
+  if (isFetching) {
+    return;
+  }
 
   return (
     <div className="mt-3">
@@ -39,7 +45,13 @@ const Home = () => {
         <div className="d-flexCenter mt-4 w-100">
           <h5 className="divider"> Total Members : 9</h5>
         </div>
-        <Members />
+        {usersAcc?.data?.map((user) => (
+          <h2>
+            {" "}
+            {user?.user?.name} : {user?.meal}{" "}
+          </h2>
+        ))}
+        {/* <Members /> */}
       </div>
     </div>
   );

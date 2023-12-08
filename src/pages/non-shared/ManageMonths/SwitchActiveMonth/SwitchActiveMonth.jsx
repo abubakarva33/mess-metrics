@@ -9,8 +9,15 @@ import {
 import useActiveMonthOptions from "../../../../components/Hooks/MessActiveMonthDropdown";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import {
+  useGetUserProfileQuery,
+  useUpdateProfileMutation,
+} from "../../../../redux/api/sampleApi/userApi";
 
 const SwitchActiveMonth = () => {
+  const [updateProfile] = useUpdateProfileMutation();
+  const { data: profile } = useGetUserProfileQuery();
+
   const [form] = Form.useForm();
   const month = useActiveMonthOptions();
   const { data, isFetching } = useGetActiveMonthQuery();
@@ -22,7 +29,6 @@ const SwitchActiveMonth = () => {
   }
 
   const onFinish = async ({ month }) => {
-    console.log(month);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -34,6 +40,7 @@ const SwitchActiveMonth = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await switchMonth(month).unwrap();
+        await updateProfile({ activeMonth: month });
         if (res?.success) {
           Swal.fire("Switched!", "Month switched  successfully.", "success");
         }
@@ -44,7 +51,10 @@ const SwitchActiveMonth = () => {
   return (
     <div>
       <div className="addMealCostSectionMain my-auto">
-        <div className=" addMealCostSection sectionShadow mx-auto " style={{ maxWidth: "500px" }}>
+        <div
+          className=" addMealCostSection sectionShadow mx-auto "
+          style={{ maxWidth: "500px" }}
+        >
           <h4 className="text-center  mt-2 mb-4">Switch Active Month</h4>
           <ConfigProvider
             theme={{
@@ -63,6 +73,7 @@ const SwitchActiveMonth = () => {
               layout="vertical"
               form={form}
               autoComplete="on"
+              initialValues={{ month: profile?.data?.activeMonth }}
             >
               <Form.Item
                 name="month"
@@ -73,10 +84,15 @@ const SwitchActiveMonth = () => {
                   },
                 ]}
               >
-                <Select label={data?.name} defaultValue={data?._id} options={month} />
+                {console.log({ profile: profile.data.activeMonth })}
+                <Select options={month} />
               </Form.Item>
               <div className="d-flex justify-content-center  ">
-                <Button type="primary" htmlType="submit" className="w-50 h-auto mt-3">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="w-50 h-auto mt-3"
+                >
                   <span className="fs-5"> Switch month</span>
                 </Button>
               </div>
@@ -89,7 +105,10 @@ const SwitchActiveMonth = () => {
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <IoIosArrowBack
+                className="componentHeaderIcon"
+                onClick={() => navigate(-1)}
+              />
               <h3>SWITCH ACTIVE MONTH</h3>
             </div>
           </div>
@@ -98,7 +117,10 @@ const SwitchActiveMonth = () => {
           <div className="phoneBookContainerItem smDeviceAlign">
             <div className="pt-4 pb-3 m-auto w-100">
               <div className="">
-                <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
+                <div
+                  className=" addMealCostSection  mx-auto"
+                  style={{ maxWidth: "500px" }}
+                >
                   <ConfigProvider
                     theme={{
                       components: {
@@ -126,10 +148,18 @@ const SwitchActiveMonth = () => {
                           },
                         ]}
                       >
-                        <Select label={data?.name} defaultValue={data?._id} options={month} />
+                        <Select
+                          label={data?.name}
+                          defaultValue={data?._id}
+                          options={month}
+                        />
                       </Form.Item>
                       <div className="d-flex justify-content-center  ">
-                        <Button type="primary" htmlType="submit" className="w-100 h-auto mt-3">
+                        <Button
+                          type="primary"
+                          htmlType="submit"
+                          className="w-100 h-auto mt-3"
+                        >
                           <span className="fs-5"> Switch month</span>
                         </Button>
                       </div>
