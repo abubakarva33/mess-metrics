@@ -25,7 +25,7 @@ const AddMeal = () => {
   const { dMeal } = useSelector((state) => state.basic);
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
   const [clicked, setIsClicked] = useState(false);
-  const [addMeal] = useAddMealMutation();
+  const [addMeal, { status }] = useAddMealMutation();
 
   useEffect(() => {
     const filterData = data?.members?.map((member) => {
@@ -61,16 +61,14 @@ const AddMeal = () => {
     const fieldValues = { meal, date: startDate };
     try {
       const res = await addMeal(fieldValues).unwrap();
-      if (!res?.success) {
-        <SpinnerMain />;
-      } else {
-        Swal.fire({
+      if (res?.success) {
+        await Swal.fire({
           icon: "success",
           title: "Meal Added Successfully",
           showConfirmButton: false,
           timer: 1000,
         });
-        navigate("/")
+        navigate("/");
       }
     } catch (error) {
       Swal.fire({
@@ -81,6 +79,10 @@ const AddMeal = () => {
       });
     }
   };
+
+  if (status === "pending") {
+    return <SpinnerMain />;
+  }
 
   return (
     <div>

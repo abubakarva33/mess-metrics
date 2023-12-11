@@ -47,7 +47,7 @@ const Home = () => {
           <h5 className="divider"> Total Members : 9</h5>
         </div>
 
-        <Row className="gy-2 gx-2">
+        <Row className="gy-2 gx-2 pb-5 mb-5">
           {usersAcc?.data?.map((user) => (
             <AllMembers data={user} />
           ))}

@@ -8,6 +8,7 @@ import { ConfigProvider, Space, theme } from "antd";
 import Routes from "./routes/Routes";
 import { useDispatch } from "react-redux";
 import { authRole } from "./redux/features/UserSlice/UserSlice";
+import SkeletonLoader from "./components/SkeletonLoader/SkeletonLoader";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
   return (
     <div className="">
       <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
-        {isLoading ? <Spinner /> : <RouterProvider router={routes}></RouterProvider>}
+        {!isLoading ? <SkeletonLoader /> : <RouterProvider router={routes}></RouterProvider>}
       </ConfigProvider>
     </div>
   );
