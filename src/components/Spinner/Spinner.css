@@ -6,3 +6,14 @@
     justify-content: center;
     background: transparent;
 }
+.spinnerMainItem{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+.ant-spin .ant-spin-dot-item{
+    background-color: #66eb63;
+}

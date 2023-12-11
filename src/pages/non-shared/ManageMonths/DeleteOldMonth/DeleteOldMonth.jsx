@@ -11,20 +11,24 @@ import {
 } from "../../../../redux/api/sampleApi/monthApi";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 
 const DeleteOldMonth = () => {
   const [form] = Form.useForm();
   const month = useMonthOptions();
-  const { data } = useGetActiveMonthQuery();
-  const [deleteMonth] = useDeleteMonthMutation();
   const navigate = useNavigate();
-
   const [months, setMonths] = useState(month);
+  const { data, isFetching } = useGetActiveMonthQuery();
+  const [deleteMonth] = useDeleteMonthMutation();
 
   useEffect(() => {
     const items = month.filter((item) => item?.value !== data?._id);
     setMonths(items);
   }, [month]);
+
+  if (isFetching) {
+    return <SpinnerMain />;
+  }
 
   const onFinish = async ({ month }) => {
     Swal.fire({

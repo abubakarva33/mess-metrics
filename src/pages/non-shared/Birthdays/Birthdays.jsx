@@ -5,13 +5,14 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import BirthdayEach from "./BirthdayEach/BirthdayEach";
 import { Col, Container, Row } from "react-bootstrap";
+import SpinnerMain from "../../../components/Spinner/SpinnerMain";
 
 const Birthdays = () => {
   const { data, isFetching, isLoading } = useGetMembersQuery();
   const navigate = useNavigate();
 
-  if (isFetching && isLoading) {
-    return <Spinner />;
+  if (isFetching || isLoading) {
+    return <SpinnerMain />;
   }
 
   return (

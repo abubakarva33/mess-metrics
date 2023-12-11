@@ -11,6 +11,7 @@ import { setDefaultMeal } from "../../../../redux/features/basic/basicSlice";
 import ReactDatePicker from "react-datepicker";
 import moment from "moment/moment";
 import { useNavigate } from "react-router-dom";
+import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 
 const UpdateMeal = () => {
   const [form] = Form.useForm();
@@ -34,12 +35,10 @@ const UpdateMeal = () => {
     setIsClicked(isClicked);
   }, [data, dMeal]);
 
-  if (isFetching) {
-    return;
+  if (isFetching || isLoading) {
+    return <SpinnerMain/>
   }
-  if (isLoading) {
-    return;
-  }
+
   const defaultValue = (e) => {
     if (e.target.value < 0) {
       dispatch(setDefaultMeal({ dMeal: (e.target.value = 0) }));

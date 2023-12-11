@@ -12,13 +12,13 @@ import Members from "../ManageMembers/Members/Members";
 import { useDispatch } from "react-redux";
 import { authRole } from "../../../redux/features/UserSlice/UserSlice";
 import AllMembers from "./components/AllMembers/AllMembers";
+import SpinnerMain from "../../../components/Spinner/SpinnerMain";
 
 const Home = () => {
   const { data: usersAcc, isFetching } = useGetUserAccountQuery();
-  console.log(usersAcc);
 
   if (isFetching) {
-    return;
+    return <SpinnerMain />;
   }
 
   return (

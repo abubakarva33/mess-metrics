@@ -7,11 +7,12 @@ import { useEffect, useState } from "react";
 import useMemberOptions from "../../../../components/Hooks/MembersDropdown";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 
 const RemoveMember = () => {
   const [form] = Form.useForm();
   const [removeMember] = useDeleteMemberMutation();
-  const { data: profileData } = useGetUserProfileQuery();
+  const { data: profileData, isFetching } = useGetUserProfileQuery();
   const users = useMemberOptions();
   const [members, setMembers] = useState(users);
   const navigate = useNavigate();
@@ -20,6 +21,10 @@ const RemoveMember = () => {
     const items = users.filter((member) => member?.value !== profileData?.data?.mess?.manager);
     setMembers(items);
   }, [users]);
+
+  if (isFetching) {
+    return <SpinnerMain />;
+  }
 
   const onFinish = async ({ memberId }) => {
     const ids = [memberId];

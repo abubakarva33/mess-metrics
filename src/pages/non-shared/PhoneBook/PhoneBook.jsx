@@ -11,14 +11,18 @@ import { MdAddCall } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Col, Container, Row } from "react-bootstrap";
+import SpinnerMain from "../../../components/Spinner/SpinnerMain";
 
 const PhoneBook = () => {
-  const { data } = useGetPhoneBookQuery();
-  const [createNumber] = useCreatePhoneMutation();
   const navigate = useNavigate();
   const { role } = useSelector((state) => state.user);
-
+  const { data, isFetching } = useGetPhoneBookQuery();
+  const [createNumber] = useCreatePhoneMutation();
   const otherNumber = data?.filter((item) => item?._id !== data?._id);
+
+  if (isFetching) {
+    return <SpinnerMain />;
+  }
 
   const addNumberHandler = async () => {
     const { value: formValues } = await Swal.fire({

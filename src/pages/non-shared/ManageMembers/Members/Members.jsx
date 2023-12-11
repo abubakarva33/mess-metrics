@@ -5,10 +5,16 @@ import "./Members.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import AllMemberList from "../AllMemberList/AllMemberList";
+import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 
 const Members = () => {
-  const { data } = useGetMembersQuery();
+  const { data, isFetching } = useGetMembersQuery();
   const navigate = useNavigate();
+
+  if (isFetching) {
+    return <SpinnerMain/>
+  }
+
   return (
     <>
       <div className="memberContainerMain">
@@ -18,8 +24,7 @@ const Members = () => {
         </Row>
       </div>
 
-
-{/* for mobile device only  */}
+      {/* for mobile device only  */}
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">

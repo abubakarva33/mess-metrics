@@ -8,6 +8,7 @@ import { Button } from "antd";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
 import { useState } from "react";
 import { useGetSingleMessQuery } from "../../../../redux/api/sampleApi/messApi";
+import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 const monthData = [
   {
     monthName: "January",
@@ -43,11 +44,11 @@ const MessProfile = () => {
   const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
   const { data: profileData, isFetching } = useGetUserProfileQuery();
   if (isFetching) {
-    return;
+    return <SpinnerMain />;
   }
   const { data, isLoading } = useGetSingleMessQuery(profileData?.data?.mess?._id);
   if (isLoading) {
-    return;
+    return <SpinnerMain />;
   }
   const { name, email, phone, role, dateOfBirth } = profileData?.data;
   const currentObject = monthData[currentObjectIndex];

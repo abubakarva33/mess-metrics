@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./AddMeal.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdCalendarMonth, MdEdit, MdOutlineAdd } from "react-icons/md";
@@ -13,6 +13,7 @@ import ReactDatePicker from "react-datepicker";
 import moment from "moment/moment";
 import { useAddMealMutation } from "../../../../redux/api/sampleApi/actionApi";
 import Swal from "sweetalert2";
+import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 
 const AddMeal = () => {
   const [form] = Form.useForm();
@@ -36,8 +37,8 @@ const AddMeal = () => {
   if (isFetching) {
     return;
   }
-  if (isLoading) {
-    return;
+  if (isLoading || isFetching) {
+    return <SpinnerMain />;
   }
   const defaultValue = (e) => {
     if (e.target.value < 0) {
@@ -60,14 +61,16 @@ const AddMeal = () => {
     const fieldValues = { meal, date: startDate };
     try {
       const res = await addMeal(fieldValues).unwrap();
-      if (res?.success) {
+      if (!res?.success) {
+        <SpinnerMain />;
+      } else {
         Swal.fire({
           icon: "success",
           title: "Meal Added Successfully",
           showConfirmButton: false,
           timer: 1000,
         });
-        form.resetFields();
+        navigate("/")
       }
     } catch (error) {
       Swal.fire({
