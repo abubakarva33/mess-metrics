@@ -38,6 +38,12 @@ const userApi = mainApi.injectEndpoints({
       }),
       providesTags: ["Action"],
     }),
+    getSingleUserAccount: builder.query({
+      query: (Id) => ({
+        url: `users/account/${Id}`,
+      }),
+      providesTags: ["Action"],
+    }),
   }),
 });
 
@@ -46,5 +52,6 @@ export const {
   useLoginUserMutation,
   useGetUserProfileQuery,
   useGetUserAccountQuery,
-  useUpdateProfileMutation
+  useUpdateProfileMutation,
+  useGetSingleUserAccountQuery
 } = userApi;

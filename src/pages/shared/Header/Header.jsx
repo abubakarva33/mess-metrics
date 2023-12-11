@@ -108,18 +108,20 @@ const Header = () => {
 
       {location.pathname === "/" ? (
         <>
-          <div className="SmallNav  my-3">
-            <div className="d-flex justify-content-between align-items-center px-2 py-2 ">
-              <div className="sidebarSm">
-                <HeaderDrawer />
+          <div className="SmallNavMain">
+            <div className="SmallNav">
+              <div className="d-flex justify-content-between align-items-center px-2 py-2 ">
+                <div className="sidebarSm">
+                  <HeaderDrawer />
+                </div>
+                <div className="d-flexCenter flex-column">
+                  <p className="mb-0">Mess Metrics</p>
+                  <small>Royal Palace</small>
+                </div>
+                <Link to="/">
+                  <AiOutlineSetting className="fs-3" />
+                </Link>
               </div>
-              <div className="d-flexCenter flex-column">
-                <p className="mb-0">Mess Metrics</p>
-                <small>Royal Palace</small>
-              </div>
-              <Link to="/">
-                <AiOutlineSetting className="fs-3" />
-              </Link>
             </div>
           </div>
         </>

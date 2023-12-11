@@ -5,6 +5,7 @@ import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { useState } from "react";
 import { Button } from "antd";
 import { IoIosArrowBack } from "react-icons/io";
+import { useGetSingleUserAccountQuery } from "../../../../redux/api/sampleApi/userApi";
 
 const memberProfileData = {
   name: "abubakar siddikvaiiiii",
@@ -47,10 +48,11 @@ const memberProfileData = {
 const SingleMember = () => {
   const { Id } = useParams();
   const navigate = useNavigate();
+  const { data } = useGetSingleUserAccountQuery(Id);
   const { name, email, phone, role, dateOfBirth, monthData } = memberProfileData;
   const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
   const currentObject = monthData[currentObjectIndex];
-  console.log(Id);
+  console.log({ Id, data });
 
   const switchData = () => {
     setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);

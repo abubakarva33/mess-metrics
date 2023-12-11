@@ -11,17 +11,18 @@ import {
 import Members from "../ManageMembers/Members/Members";
 import { useDispatch } from "react-redux";
 import { authRole } from "../../../redux/features/UserSlice/UserSlice";
+import AllMembers from "./components/AllMembers/AllMembers";
 
 const Home = () => {
   const { data: usersAcc, isFetching } = useGetUserAccountQuery();
-  // console.log(usersAcc, "suronjit");
+  console.log(usersAcc);
 
   if (isFetching) {
     return;
   }
 
   return (
-    <div className="mt-3">
+    <div className="mt-3 home-container">
       <Row className="gy-2">
         <Col sm={12} md={6}>
           <h5 className="divider"> Mess Details</h5>
@@ -45,13 +46,12 @@ const Home = () => {
         <div className="d-flexCenter mt-4 w-100">
           <h5 className="divider"> Total Members : 9</h5>
         </div>
-        {usersAcc?.data?.map((user) => (
-          <h2>
-            {" "}
-            {user?.user?.name} : {user?.meal}{" "}
-          </h2>
-        ))}
-        {/* <Members /> */}
+
+        <Row className="gy-2 gx-2">
+          {usersAcc?.data?.map((user) => (
+            <AllMembers data={user} />
+          ))}
+        </Row>
       </div>
     </div>
   );

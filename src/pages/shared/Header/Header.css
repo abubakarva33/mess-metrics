@@ -34,10 +34,20 @@
 .ant-dropdown-menu-item {
   color: var(--text-primary) !important;
 }
+.SmallNavMain{
+  background-color: var(--bg-body) !important;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
 .SmallNav {
   display: none;
+  margin: 10px 12px 0 12px;
   border-radius: 10px;
   background-color: var(--bg-secondary);
+ 
 }
 .headerMainMd{
   display: none;
