@@ -1,0 +1,12 @@
+.skeletonSideBar {
+  display: flex;
+  flex-direction: column;
+  width: 210px;
+  height: 100vh;
+}
+
+@media screen and (max-device-width: 776px) {
+  .skeletonSideBar {
+    display: none;
+  }
+}

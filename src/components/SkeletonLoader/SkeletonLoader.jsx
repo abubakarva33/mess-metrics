@@ -1,160 +1,93 @@
 import "./SkeletonLoader.css";
-import { Col, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { Skeleton, Space } from "antd";
 const SkeletonLoader = () => {
   return (
     <>
-      <div className="d-flex">
-        <Space className=" d-flex flex-column " style={{ width: "250px", height: "100vh" }}>
-          <div>
-            <Skeleton.Button active style={{ width: "240px", height: "50px", marginTop: "10px" }} />
+      <div className="d-flex mx-3">
+        <div className="  me-3 skeletonSideBar">
+          <div style={{ width: "210px" }} className="mt-3">
+            <Skeleton.Button active style={{ height: "91vh" }} className="w-100 mt-1" />
           </div>
-
-          <div className="d-flex mb-2">
-            <Skeleton.Button active shape="circle" className="me-1" />
-            <Skeleton.Button active style={{ width: "190px" }} />
-          </div>
-          <div className="d-flex mb-2">
-            <Skeleton.Button active shape="circle" className="me-1" />
-            <Skeleton.Button active style={{ width: "190px" }} />
-          </div>
-          <div className="d-flex mb-2">
-            <Skeleton.Button active shape="circle" className="me-1" />
-            <Skeleton.Button active style={{ width: "190px" }} />
-          </div>
-          <div className="d-flex mb-2">
-            <Skeleton.Button active shape="circle" className="me-1" />
-            <Skeleton.Button active style={{ width: "190px" }} />
-          </div>
-          <div className="d-flex mb-2">
-            <Skeleton.Button active shape="circle" className="me-1" />
-            <Skeleton.Button active style={{ width: "190px" }} />
-          </div>
-        </Space>
-        <div className="">
-          <Row
-            style={{
-              width: `calc(100vw - 240px)`,
-              // height: "100vh",
-              marginLeft: "8px",
-            }}
-            md={2}
-            lg={2}
-            xl={2}
-            xxl={2}
-            className="gx-3"
-          >
-            <Col>
-              <div className=" py-3">
-                <div className="d-flex mb-2 mx-3">
-                  <Skeleton.Button active style={{ width: "250px" }} className="me-1" />
-                  <Skeleton.Button active style={{ width: "250px" }} />
-                </div>
-                <div className="d-flex mb-2 mx-3">
-                  <Skeleton.Button active style={{ width: "250px" }} className="me-1" />
-                  <Skeleton.Button active style={{ width: "250px" }} />
-                </div>
-                <div className="d-flex mb-2 mx-3">
-                  <Skeleton.Button active style={{ width: "250px" }} className="me-1" />
-                  <Skeleton.Button active style={{ width: "250px" }} />
-                </div>
-                <div className="d-flex mb-2 mx-3">
-                  <Skeleton.Button active style={{ width: "250px" }} className="me-1" />
-                  <Skeleton.Button active style={{ width: "250px" }} />
-                </div>
-                <div className="d-flex mb-2 mx-3">
-                  <Skeleton.Button active style={{ width: "250px" }} className="me-1" />
-                  <Skeleton.Button active style={{ width: "250px" }} />
-                </div>
-              </div>
-
-              <div className=" py-3 mt-3">
-                <div className="d-flex mb-2 mx-3">
-                  <Skeleton.Button active style={{ width: "250px" }} className="me-1" />
-                  <Skeleton.Button active style={{ width: "250px" }} />
-                </div>
-                <div className="d-flex mb-2 mx-3">
-                  <Skeleton.Button active style={{ width: "250px" }} className="me-1" />
-                  <Skeleton.Button active style={{ width: "250px" }} />
-                </div>
-                <div className="d-flex mb-2 mx-3">
-                  <Skeleton.Button active style={{ width: "250px" }} className="me-1" />
-                  <Skeleton.Button active style={{ width: "250px" }} />
-                </div>
-                <div className="d-flex mb-2 mx-3">
-                  <Skeleton.Button active style={{ width: "250px" }} className="me-1" />
-                  <Skeleton.Button active style={{ width: "250px" }} />
-                </div>
-                <div className="d-flex mb-2 mx-3">
-                  <Skeleton.Button active style={{ width: "250px" }} className="me-1" />
-                  <Skeleton.Button active style={{ width: "250px" }} />
-                </div>
-              </div>
-            </Col>
-            <Col>
-              <div className=" py-3">
-                <div className="d-flex mb-2 mx-3">
-                  <Skeleton.Button active style={{ height: "400px", width: "500px" }} />
-                </div>
-              </div>
-            </Col>
-          </Row>
-          <Row
-            style={{
-              width: `calc(100vw - 240px)`,
-              // height: "100vh",
-              marginLeft: "8px",
-            }}
-            md={3}
-            lg={3}
-            xl={3}
-            xxl={3}
-            className=""
-          >
-            <Col>
-              <div className=" py-3">
-                <div className="d-flex mb-2">
-                  <Skeleton.Button active style={{ width: "345px", height: "80px" }} />
-                </div>
-              </div>
-            </Col>
-            <Col>
-              <div className=" py-3">
-                <div className="d-flex mb-2">
-                  <Skeleton.Button active style={{ width: "345px", height: "80px" }} />
-                </div>
-              </div>
-            </Col>
-            <Col>
-              <div className=" py-3">
-                <div className="d-flex mb-2">
-                  <Skeleton.Button active style={{ width: "345px", height: "80px" }} />
-                </div>
-              </div>
-            </Col>
-            <Col>
-              <div className=" py-3">
-                <div className="d-flex mb-2">
-                  <Skeleton.Button active style={{ width: "345px", height: "80px" }} />
-                </div>
-              </div>
-            </Col>
-            <Col>
-              <div className=" py-3">
-                <div className="d-flex mb-2">
-                  <Skeleton.Button active style={{ width: "345px", height: "80px" }} />
-                </div>
-              </div>
-            </Col>
-            <Col>
-              <div className=" py-3">
-                <div className="d-flex mb-2">
-                  <Skeleton.Button active style={{ width: "345px", height: "80px" }} />
-                </div>
-              </div>
-            </Col>
-          </Row>
         </div>
+        <Container fluid>
+          <Row md={2} lg={2} xl={2} xxl={2} className="gx-2 gy-2 mt-3 ">
+            <Col>
+              <div className=" w-100">
+                <div className="d-flex w-100 mb-2">
+                  <Skeleton.Button active className="w-100 me-2" />
+                  <Skeleton.Button active className="w-100" />
+                </div>
+                <div className="d-flex w-100 mb-2">
+                  <Skeleton.Button active className="w-100 me-2" />
+                  <Skeleton.Button active className="w-100" />
+                </div>
+                <div className="d-flex w-100 mb-2">
+                  <Skeleton.Button active className="w-100 me-2" />
+                  <Skeleton.Button active className="w-100" />
+                </div>
+                <div className="d-flex w-100 mb-2">
+                  <Skeleton.Button active className="w-100 me-2" />
+                  <Skeleton.Button active className="w-100" />
+                </div>
+                <div className="d-flex w-100 mb-2">
+                  <Skeleton.Button active className="w-100 me-2" />
+                  <Skeleton.Button active className="w-100" />
+                </div>
+                <div className="d-flex w-100 mb-2">
+                  <Skeleton.Button active className="w-100 me-2" />
+                  <Skeleton.Button active className="w-100" />
+                </div>
+                <div className="d-flex w-100 mb-2">
+                  <Skeleton.Button active className="w-100 me-2" />
+                  <Skeleton.Button active className="w-100" />
+                </div>
+              </div>
+
+              <div className="w-100 my-4">
+                <div className="d-flex w-100">
+                  <Skeleton.Button active style={{ height: "25vh" }} className="w-100" />
+                </div>
+              </div>
+            </Col>
+            <Col>
+              <div className=" w-100 ">
+                <div className="d-flex w-100 ps-3">
+                  <Skeleton.Button
+                    active
+                    size="large"
+                    style={{ height: "50vh" }}
+                    className="w-100 "
+                  />
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <Row md={3} lg={3} xl={3} xxl={3} className="gx-2 gy-2 ">
+            <Col>
+              <div className="w-100">
+                <div className="d-flex w-100">
+                  <Skeleton.Button active style={{ height: "75px" }} className="w-100" />
+                </div>
+              </div>
+            </Col>
+            <Col>
+              <div className="w-100">
+                <div className="d-flex w-100">
+                  <Skeleton.Button active style={{ height: "75px" }} className="w-100" />
+                </div>
+              </div>
+            </Col>
+            <Col>
+              <div className="w-100">
+                <div className="d-flex w-100">
+                  <Skeleton.Button active style={{ height: "75px" }} className="w-100" />
+                </div>
+              </div>
+            </Col>
+   
+          </Row>
+        </Container>
       </div>
     </>
   );
