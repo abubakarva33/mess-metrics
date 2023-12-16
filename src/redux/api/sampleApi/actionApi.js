@@ -10,7 +10,20 @@ const actionApi = mainApi.injectEndpoints({
       }),
       invalidatesTags: ["Action"],
     }),
+    getMessMeal: builder.query({
+      query: (date) => `actions/meal-by-date?date=${date} `,
+      transformResponse: (response) => response.data,
+      providesTags: ["Action"],
+    }),
+    updateMeal: builder.mutation({
+      query: ({ _id, ...body }) => ({
+        url: `actions/meal/${_id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Action"],
+    }),
   }),
 });
 
-export const { useAddMealMutation } = actionApi;
+export const { useAddMealMutation, useGetMessMealQuery, useUpdateMealMutation } = actionApi;

@@ -10,9 +10,8 @@ import { useDispatch } from "react-redux";
 import { authRole } from "./redux/features/UserSlice/UserSlice";
 import SkeletonLoader from "./components/SkeletonLoader/SkeletonLoader";
 
-
 function App() {
-  const { isLoading ,data} = useGetUserProfileQuery();
+  const { isLoading, data } = useGetUserProfileQuery();
   const routes = Routes();
   const dispatch = useDispatch();
   dispatch(authRole({ role: data?.data?.role }));
@@ -20,7 +19,7 @@ function App() {
   return (
     <div className="">
       <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
-        {!isLoading ? <SkeletonLoader /> : <RouterProvider router={routes}></RouterProvider>}
+        {isLoading ? <SkeletonLoader /> : <RouterProvider router={routes}></RouterProvider>}
       </ConfigProvider>
     </div>
   );
