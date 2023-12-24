@@ -9,6 +9,8 @@ import moment from "moment/moment";
 import "react-datepicker/dist/react-datepicker.css";
 import ReactDatePicker from "react-datepicker";
 import Swal from "sweetalert2";
+import { useAddMealCostMutation } from "../../../../../redux/api/sampleApi/actionApi";
+import SpinnerMain from "../../../../../components/Spinner/SpinnerMain";
 const { TextArea } = Input;
 
 const AddMealCoast = () => {
@@ -18,13 +20,12 @@ const AddMealCoast = () => {
   const [shoppersList, setShoppersList] = useState([]);
   const members = useMemberOptions();
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
-  // const [addMealCost] = useCreateMessMutation();
+  const [addMealCost, { status }] = useAddMealCostMutation();
 
   const onFinish = async (values) => {
-    values.shoppers = shoppersList;
-    const fieldValues = { ...values, date: startDate };
-    console.log(fieldValues);
-
+    values.members = shoppersList;
+    const amount = Number(values.amount);
+    const fieldValues = { ...values, date: startDate, amount };
     try {
       const res = await addMealCost(fieldValues).unwrap();
       if (res?.success) {
@@ -45,6 +46,9 @@ const AddMealCoast = () => {
       });
     }
   };
+  if (status === "pending") {
+    return <SpinnerMain />;
+  }
 
   return (
     <div>
@@ -72,7 +76,7 @@ const AddMealCoast = () => {
               <div>
                 <h6>Enter Cost:</h6>
                 <Form.Item
-                  name="totalCost"
+                  name="amount"
                   rules={[
                     {
                       required: true,
@@ -89,7 +93,7 @@ const AddMealCoast = () => {
                 <h6>Select Shoppers:</h6>
                 <Select
                   mode="multiple"
-                  name="shoppers"
+                  name="members"
                   placeholder="Select Members"
                   onChange={(e) => setShoppersList(e)}
                   maxTagCount={5}
@@ -112,7 +116,7 @@ const AddMealCoast = () => {
               <div>
                 <h6>Add Bazar List (Optional) </h6>
                 <Form.Item
-                  name="bazarList"
+                  name="list"
                   rules={[
                     {
                       required: true,
@@ -176,7 +180,7 @@ const AddMealCoast = () => {
                       <div>
                         <h6>Enter Cost:</h6>
                         <Form.Item
-                          name="totalCost"
+                          name="amount"
                           rules={[
                             {
                               required: true,
@@ -193,7 +197,7 @@ const AddMealCoast = () => {
                         <h6>Select Shoppers:</h6>
                         <Select
                           mode="multiple"
-                          name="shoppers"
+                          name="members"
                           placeholder="Select Members"
                           onChange={(e) => setShoppersList(e)}
                           maxTagCount={5}
@@ -215,7 +219,7 @@ const AddMealCoast = () => {
                     <Form.Item>
                       <div>
                         <h6>Add Bazar List (Optional) </h6>
-                        <Form.Item name="bazarList">
+                        <Form.Item name="list">
                           <TextArea
                             value={value}
                             onChange={(e) => setValue(e.target.value)}

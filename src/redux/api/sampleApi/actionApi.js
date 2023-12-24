@@ -23,7 +23,20 @@ const actionApi = mainApi.injectEndpoints({
       }),
       invalidatesTags: ["Action"],
     }),
+    addMealCost: builder.mutation({
+      query: (body) => ({
+        url: `bazar`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Action"],
+    }),
   }),
 });
 
-export const { useAddMealMutation, useGetMessMealQuery, useUpdateMealMutation } = actionApi;
+export const {
+  useAddMealMutation,
+  useGetMessMealQuery,
+  useUpdateMealMutation,
+  useAddMealCostMutation,
+} = actionApi;
