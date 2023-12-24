@@ -31,6 +31,14 @@ const actionApi = mainApi.injectEndpoints({
       }),
       invalidatesTags: ["Action"],
     }),
+    addSharedCost: builder.mutation({
+      query: (body) => ({
+        url: `sharedCost`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Action"],
+    }),
   }),
 });
 
@@ -39,4 +47,5 @@ export const {
   useGetMessMealQuery,
   useUpdateMealMutation,
   useAddMealCostMutation,
+  useAddSharedCostMutation,
 } = actionApi;

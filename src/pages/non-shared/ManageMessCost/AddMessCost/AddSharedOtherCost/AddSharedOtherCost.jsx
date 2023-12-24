@@ -7,16 +7,18 @@ import moment from "moment/moment";
 import ReactDatePicker from "react-datepicker";
 import { MdCalendarMonth } from "react-icons/md";
 import Swal from "sweetalert2";
+import { useAddSharedCostMutation } from "../../../../../redux/api/sampleApi/actionApi";
+import SpinnerMain from "../../../../../components/Spinner/SpinnerMain";
 
 const AddSharedOtherCost = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
-  // const [addSharedCost] = useCreateMessMutation();
+  const [addSharedCost, { status }] = useAddSharedCostMutation();
 
   const onFinish = async (values) => {
-    const fieldValues = { ...values, date: startDate };
-    console.log(fieldValues);
+    const amount = Number(values.amount);
+    const fieldValues = { ...values, date: startDate, amount };
 
     try {
       const res = await addSharedCost(fieldValues).unwrap();
@@ -38,7 +40,9 @@ const AddSharedOtherCost = () => {
       });
     }
   };
-
+  if (status === "pending") {
+    return <SpinnerMain />;
+  }
   return (
     <div>
       <div className="addMealCostSectionMain">
@@ -65,7 +69,7 @@ const AddSharedOtherCost = () => {
               <div>
                 <h6>Enter Cost:</h6>
                 <Form.Item
-                  name="totalCost"
+                  name="amount"
                   rules={[
                     {
                       required: true,
@@ -81,7 +85,7 @@ const AddSharedOtherCost = () => {
               <div className="addMealItemMargin">
                 <h6>Add Bazar List (Optional) </h6>
                 <Form.Item
-                  name="bazarList"
+                  name="list"
                   rules={[
                     {
                       required: true,
@@ -137,7 +141,7 @@ const AddSharedOtherCost = () => {
                       <div>
                         <h6>Enter Cost:</h6>
                         <Form.Item
-                          name="totalCost"
+                          name="amount"
                           rules={[
                             {
                               required: true,
@@ -154,7 +158,7 @@ const AddSharedOtherCost = () => {
                         <div>
                           <h6>Add Bazar List (Optional) </h6>
                           <Form.Item
-                            name="bazarList"
+                            name="list"
                             rules={[
                               {
                                 required: true,
