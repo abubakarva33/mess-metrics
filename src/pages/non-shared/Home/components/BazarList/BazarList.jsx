@@ -3,8 +3,10 @@ import "./BazarList.css";
 import { MdOutlineDateRange } from "react-icons/md";
 import { GiMoneyStack } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
-const BazarList = () => {
+const BazarList = ({ data }) => {
+  const { amount, members, date } = data;
   return (
     <Link>
       <div className="bazarSection">
@@ -14,23 +16,21 @@ const BazarList = () => {
         </div>
         <div className="d-gridTwo">
           <div>
-            <div className="d-flex align-items-center ">
-              <AiOutlineShopping />
-              <p className="mb-0 ms-2"> Abubakar</p>
-            </div>
-            <div className="d-flex align-items-center ">
-              <AiOutlineShopping />
-              <p className="mb-0 ms-2">Suronjit</p>
-            </div>
+            {members.map((member, ind) => (
+              <div className="d-flex align-items-center " key={ind}>
+                <AiOutlineShopping />
+                <p className="mb-0 ms-2"> {member?.name}</p>
+              </div>
+            ))}
           </div>
           <div>
             <div className="d-flex align-items-center ">
               <MdOutlineDateRange />
-              <p className="mb-0 ms-2">25/03/2023</p>
+              <p className="mb-0 ms-2">{date}</p>
             </div>
             <div className="d-flex align-items-center ">
               <GiMoneyStack />
-              <p className="mb-0 ms-2">2500</p>
+              <p className="mb-0 ms-2">{amount}</p>
             </div>
           </div>
         </div>

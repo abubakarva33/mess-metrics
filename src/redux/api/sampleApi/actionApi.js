@@ -44,6 +44,11 @@ const actionApi = mainApi.injectEndpoints({
       transformResponse: (response) => response.data,
       providesTags: ["Action"],
     }),
+    getLastBazar: builder.query({
+      query: () => `bazar/last `,
+      transformResponse: (response) => response.data,
+      providesTags: ["Action"],
+    }),
   }),
 });
 
@@ -53,5 +58,6 @@ export const {
   useUpdateMealMutation,
   useAddMealCostMutation,
   useAddSharedCostMutation,
-  useGetMessAccountQuery
+  useGetMessAccountQuery,
+  useGetLastBazarQuery,
 } = actionApi;

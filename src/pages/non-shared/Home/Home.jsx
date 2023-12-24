@@ -13,13 +13,17 @@ import { useDispatch } from "react-redux";
 import { authRole } from "../../../redux/features/UserSlice/UserSlice";
 import AllMembers from "./components/AllMembers/AllMembers";
 import SpinnerMain from "../../../components/Spinner/SpinnerMain";
-import { useGetMessAccountQuery } from "../../../redux/api/sampleApi/actionApi";
+import {
+  useGetLastBazarQuery,
+  useGetMessAccountQuery,
+} from "../../../redux/api/sampleApi/actionApi";
 
 const Home = () => {
   const { data: usersAcc, isFetching } = useGetUserAccountQuery();
   const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
+  const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery();
 
-  if (isFetching || messFetching) {
+  if (isFetching || messFetching || bazarFetching) {
     return <SpinnerMain />;
   }
 
@@ -28,7 +32,7 @@ const Home = () => {
       <Row className="gy-2">
         <Col sm={12} md={6}>
           <h5 className="divider"> Mess Details</h5>
-          <MessDetails data={messAccount}/>
+          <MessDetails data={messAccount} />
         </Col>
         <Col sm={12} md={6}>
           <div className="overview">
@@ -36,7 +40,7 @@ const Home = () => {
             <Chart />
           </div>
           <div>
-            <BazarList  />
+            <BazarList data={lastBazar} />
           </div>
         </Col>
       </Row>
