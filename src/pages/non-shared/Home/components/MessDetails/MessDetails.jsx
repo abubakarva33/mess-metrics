@@ -6,7 +6,16 @@ import { RiLuggageDepositLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { PiStrategy } from "react-icons/pi";
 
-const MessDetails = () => {
+const MessDetails = ({ data }) => {
+  const {
+    balance,
+    sharedCost,
+    totalCost,
+    totalDeposit,
+    totalIndividualCost,
+    totalMeal,
+    totalMealCost,
+  } = data;
   return (
     <div>
       <div className="messDetails">
@@ -29,28 +38,28 @@ const MessDetails = () => {
             <GiMoneyStack />
             <p className="mb-0">Mess Balance </p>
           </div>
-          <p className="mb-0">: -1240 tk </p>
+          <p className="mb-0">: {balance} tk </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
             <RiLuggageDepositLine />
             <p className="mb-0">Total Deposit </p>
           </div>
-          <p className="mb-0">: -1240 tk </p>
+          <p className="mb-0">: {totalDeposit} tk </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
             <GiPayMoney />
             <p className="mb-0">Total Meal Cost </p>
           </div>
-          <p className="mb-0">: -1240 tk </p>
+          <p className="mb-0">: {totalMealCost} tk </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
             <IoFastFoodOutline />
             <p className="mb-0">Total Meal</p>
           </div>
-          <p className="mb-0">: -1240 tk </p>
+          <p className="mb-0">: {totalMeal} tk </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
@@ -65,14 +74,14 @@ const MessDetails = () => {
             <GiTakeMyMoney />
             <p className="mb-0">Total Individual Cost </p>
           </div>
-          <p className="mb-0">: -1240 tk </p>
+          <p className="mb-0">: {totalIndividualCost} tk </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
             <GiTakeMyMoney />
             <p className="mb-0">Total Shared Cost </p>
           </div>
-          <p className="mb-0">: -1240 tk </p>
+          <p className="mb-0">: {sharedCost} tk </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">

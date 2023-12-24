@@ -3,7 +3,6 @@ import "./AllMembers.css";
 import { Link } from "react-router-dom";
 
 const AllMembers = ({ data }) => {
-  console.log(data);
   const { deposit, meal,user,_id } = data;
 
   return (

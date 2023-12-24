@@ -39,6 +39,11 @@ const actionApi = mainApi.injectEndpoints({
       }),
       invalidatesTags: ["Action"],
     }),
+    getMessAccount: builder.query({
+      query: () => `actions/mess-account `,
+      transformResponse: (response) => response.data,
+      providesTags: ["Action"],
+    }),
   }),
 });
 
@@ -48,4 +53,5 @@ export const {
   useUpdateMealMutation,
   useAddMealCostMutation,
   useAddSharedCostMutation,
+  useGetMessAccountQuery
 } = actionApi;
