@@ -148,7 +148,7 @@
     font-size: 18px !important;
   }
   .ant-select-selector {
-    height: 35px !important;
+    min-height: 35px !important;
   }
   .ant-select-multiple .ant-select-selection-placeholder {
     font-size: 18px !important;

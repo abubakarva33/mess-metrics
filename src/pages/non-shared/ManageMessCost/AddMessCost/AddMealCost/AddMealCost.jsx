@@ -30,10 +30,17 @@ const AddMealCoast = () => {
       const res = await addMealCost(fieldValues).unwrap();
       if (res?.success) {
         Swal.fire({
+          text: "Meal cost added successfully",
           icon: "success",
-          title: "Meal Cost Added Successfully",
-          showConfirmButton: false,
-          timer: 1000,
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Back to Home",
+          cancelButtonText: "Add more",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/");
+          }
         });
         form.resetFields();
       }
@@ -124,15 +131,7 @@ const AddMealCoast = () => {
             <Form.Item>
               <div>
                 <h6>Add Bazar List (Optional) </h6>
-                <Form.Item
-                  name="list"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Username!",
-                    },
-                  ]}
-                >
+                <Form.Item name="list">
                   <TextArea
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
@@ -209,8 +208,9 @@ const AddMealCoast = () => {
                           name="members"
                           placeholder="Select Members"
                           onChange={(e) => setShoppersList(e)}
-                          maxTagCount={5}
-                          maxTagTextLength={20}
+                          maxTagCount={2}
+                          notFoundContent
+                          maxTagTextLength={10}
                           dropdownRender={(menu) => (
                             <>
                               {menu}

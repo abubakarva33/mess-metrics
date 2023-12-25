@@ -40,7 +40,19 @@ const RemoveMember = () => {
       if (result.isConfirmed) {
         const res = await removeMember({ _id: profileData?.data?.mess?._id, ids }).unwrap();
         if (res?.success) {
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          Swal.fire({
+            text: "Member removed successfully",
+            icon: "success",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Back to Home",
+            cancelButtonText: "Remove more"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
+          });
         }
       }
     });

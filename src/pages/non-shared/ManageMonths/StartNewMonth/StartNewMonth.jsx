@@ -26,7 +26,18 @@ const StartNewMonth = () => {
         if (result.isConfirmed) {
           const res = await createMonth(values).unwrap();
           if (res?.success) {
-            Swal.fire("Created!", "New month has been created.", "success");
+            Swal.fire("Created!", ".", "success");
+            Swal.fire({
+              text: "New month created successfully",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Back to Home",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                navigate("/");
+              }
+            });
           }
         }
       });

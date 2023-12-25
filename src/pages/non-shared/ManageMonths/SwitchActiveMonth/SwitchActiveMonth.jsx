@@ -43,7 +43,18 @@ const SwitchActiveMonth = () => {
         const res = await switchMonth(month).unwrap();
         await updateProfile({ activeMonth: month });
         if (res?.success) {
-          Swal.fire("Switched!", "Month switched  successfully.", "success");
+          await Swal.fire({
+            text: "Month switched  successfully.",
+            icon: "success",
+            showCancelButton: false,
+            showConfirmButton: true,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Back to Home",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
+          });
         }
       }
     });

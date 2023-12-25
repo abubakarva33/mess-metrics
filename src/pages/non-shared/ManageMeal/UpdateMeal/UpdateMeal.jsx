@@ -15,13 +15,14 @@ import {
   useUpdateMealMutation,
 } from "../../../../redux/api/sampleApi/actionApi.js";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const UpdateMeal = () => {
   const [meal, setMeal] = useState([]);
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
-  const { data: mealData, isFetching: mealFetching } =
-    useGetMessMealQuery(startDate);
+  const { data: mealData, isFetching: mealFetching } = useGetMessMealQuery(startDate);
   const [UpdateMeal] = useUpdateMealMutation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const prevMeal = mealData?.meal?.map((m) => ({
@@ -83,7 +84,19 @@ const UpdateMeal = () => {
           meal: fieldValues,
         }).unwrap();
         if (res?.success) {
-          Swal.fire("Updated!", "Your file has been updated.", "success");
+          Swal.fire({
+            text: "Meal Updated successfully",
+            icon: "success",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Back to Home",
+            cancelButtonText: "Update more",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
+          });
         }
       }
     });
@@ -92,22 +105,15 @@ const UpdateMeal = () => {
   return (
     <div>
       <div className="addMealSection">
-        <div
-          className="addMealCostSection sectionShadow mx-auto"
-          style={{ maxWidth: "500px" }}
-        >
+        <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
           <h3 className="text-center mt-2 mb-4">Update Meal</h3>
           <div className="mealDatePicker mb-4">
             <ReactDatePicker
               className="w-100"
-              selected={
-                new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))
-              }
+              selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
               dateFormat="dd-MM-yyyy"
               showIcon
-              onChange={(date) =>
-                setStartDate(moment(date).format("DD-MM-YYYY"))
-              }
+              onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
               icon={<MdCalendarMonth />}
             />
           </div>
@@ -116,11 +122,7 @@ const UpdateMeal = () => {
             {meal?.map((m, ind) => (
               <div className="phoneItem " key={ind}>
                 <div className="phoneItemLeft">
-                  <img
-                    src="/images/userIcon.png"
-                    alt=""
-                    className="mealItemPhoto"
-                  />
+                  <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
                   <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
                 </div>
                 <div className="d-flex">

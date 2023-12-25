@@ -24,10 +24,17 @@ const AddSharedOtherCost = () => {
       const res = await addSharedCost(fieldValues).unwrap();
       if (res?.success) {
         Swal.fire({
+          text: "Shared  cost added successfully",
           icon: "success",
-          title: "Shared Cost Added Successfully",
-          showConfirmButton: false,
-          timer: 1000,
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Back to Home",
+          cancelButtonText: "Add more",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/");
+          }
         });
         form.resetFields();
       }
@@ -84,15 +91,7 @@ const AddSharedOtherCost = () => {
             <Form.Item>
               <div className="addMealItemMargin">
                 <h6>Add Bazar List (Optional) </h6>
-                <Form.Item
-                  name="list"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Username!",
-                    },
-                  ]}
-                >
+                <Form.Item name="list">
                   <Input placeholder="Enter Shared cost" />
                 </Form.Item>
               </div>
@@ -157,15 +156,7 @@ const AddSharedOtherCost = () => {
                       <Form.Item>
                         <div>
                           <h6>Add Bazar List (Optional) </h6>
-                          <Form.Item
-                            name="list"
-                            rules={[
-                              {
-                                required: true,
-                                message: "Please input your Username!",
-                              },
-                            ]}
-                          >
+                          <Form.Item name="list">
                             <Input placeholder="Enter Shared cost" />
                           </Form.Item>
                         </div>

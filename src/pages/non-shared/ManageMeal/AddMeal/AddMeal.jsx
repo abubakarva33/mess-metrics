@@ -63,12 +63,18 @@ const AddMeal = () => {
       const res = await addMeal(fieldValues).unwrap();
       if (res?.success) {
         await Swal.fire({
+          text: "Meal added successfully",
           icon: "success",
-          title: "Meal Added Successfully",
-          showConfirmButton: false,
-          timer: 1000,
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Back to Home",
+          cancelButtonText: "Add more",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/");
+          }
         });
-        navigate("/");
       }
     } catch (error) {
       Swal.fire({

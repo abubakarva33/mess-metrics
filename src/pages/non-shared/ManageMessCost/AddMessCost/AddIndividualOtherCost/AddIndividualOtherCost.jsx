@@ -26,10 +26,17 @@ const AddIndividualOtherCost = () => {
       const res = await addIndividualCost(fieldValues).unwrap();
       if (res?.success) {
         Swal.fire({
+          text: "Individual cost added successfully",
           icon: "success",
-          title: "Individual Cost Added Successfully",
-          showConfirmButton: false,
-          timer: 1000,
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Back to Home",
+          cancelButtonText: "Add more"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/");
+          }
         });
         form.resetFields();
       }

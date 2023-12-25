@@ -19,10 +19,17 @@ const AddMember = () => {
       console.log(res.success);
       if (res?.success) {
         Swal.fire({
+          text: "Member added successfully",
           icon: "success",
-          title: "Member Added Successfully",
-          showConfirmButton: false,
-          timer: 1000,
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Back to Home",
+          cancelButtonText: "Add more",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/");
+          }
         });
         form.resetFields();
       }

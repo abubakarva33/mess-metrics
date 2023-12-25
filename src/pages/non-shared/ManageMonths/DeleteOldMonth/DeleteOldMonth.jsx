@@ -43,7 +43,17 @@ const DeleteOldMonth = () => {
       if (result.isConfirmed) {
         const res = await deleteMonth(month).unwrap();
         if (res?.success) {
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          Swal.fire({
+            text: "Old month deleted successfully",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Back to Home",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
+          });
         }
       }
     });

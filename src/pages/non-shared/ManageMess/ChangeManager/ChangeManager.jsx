@@ -65,7 +65,17 @@ const ChangeManager = () => {
           ...fieldValues,
         }).unwrap();
         if (res?.success) {
-          Swal.fire("Changed!", "Manager has been changed.", "success");
+          Swal.fire({
+            text: "Manager Changed successfully",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Back to Home",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
+          });
         }
       }
     });
