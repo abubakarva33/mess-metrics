@@ -89,15 +89,24 @@ const AddMealCoast = () => {
               </div>
             </Form.Item>
             <Form.Item className="addMealItemMargin">
-              <div>
+              <div
+                style={{
+                  width: "100%",
+                }}
+                direction="vertical"
+              >
                 <h6>Select Shoppers:</h6>
                 <Select
                   mode="multiple"
                   name="members"
                   placeholder="Select Members"
+                  style={{
+                    width: "100%",
+                  }}
                   onChange={(e) => setShoppersList(e)}
-                  maxTagCount={5}
-                  maxTagTextLength={20}
+                  maxTagCount={2}
+                  notFoundContent
+                  maxTagTextLength={10}
                   dropdownRender={(menu) => (
                     <>
                       {menu}
