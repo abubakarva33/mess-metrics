@@ -7,10 +7,15 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { PiStrategy } from "react-icons/pi";
 
 const MessDetails = ({ data }) => {
+  console.log(data);
   const {
     balance,
     sharedCost,
+    month,
+    mealRate,
+    sharedCostPerPerson,
     totalCost,
+    mess,
     totalDeposit,
     totalIndividualCost,
     totalMeal,
@@ -22,16 +27,23 @@ const MessDetails = ({ data }) => {
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
             <AiOutlineHome />
+            <p className="mb-0"> Mess Name </p>
+          </div>
+          <p className="mb-0">: {mess.name} </p>
+        </div>
+        <div className="d-gridTwo">
+          <div className="d-flex align-items-center">
+            <AiOutlineHome />
             <p className="mb-0">Month </p>
           </div>
-          <p className="mb-0">: November (Running) </p>
+          <p className="mb-0">: {`${month.name} ${month.year}`} </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
             <BsPersonGear />
             <p className="mb-0">Manager </p>
           </div>
-          <p className="mb-0">: Abubakar (Running) </p>
+          <p className="mb-0">: {mess.manager} </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
@@ -39,6 +51,13 @@ const MessDetails = ({ data }) => {
             <p className="mb-0">Mess Balance </p>
           </div>
           <p className="mb-0">: {balance} tk </p>
+        </div>
+        <div className="d-gridTwo">
+          <div className="d-flex align-items-center">
+            <GiMoneyStack />
+            <p className="mb-0">Total Cost </p>
+          </div>
+          <p className="mb-0">: {totalCost} tk </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
@@ -59,7 +78,7 @@ const MessDetails = ({ data }) => {
             <IoFastFoodOutline />
             <p className="mb-0">Total Meal</p>
           </div>
-          <p className="mb-0">: {totalMeal} tk </p>
+          <p className="mb-0">: {totalMeal}</p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
@@ -67,7 +86,7 @@ const MessDetails = ({ data }) => {
             <p className="mb-0">Mess Meal Rate </p>
           </div>
 
-          <p className="mb-0">: -1240 tk </p>
+          <p className="mb-0">: {mealRate} </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
@@ -88,7 +107,7 @@ const MessDetails = ({ data }) => {
             <GiTakeMyMoney />
             <p className="mb-0">Shared Cost Per Person </p>
           </div>
-          <p className="mb-0">: -1240 tk </p>
+          <p className="mb-0">: {sharedCostPerPerson} </p>
         </div>
       </div>
     </div>
