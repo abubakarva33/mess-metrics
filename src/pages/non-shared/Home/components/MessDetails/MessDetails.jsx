@@ -36,14 +36,18 @@ const MessDetails = ({ data }) => {
             <AiOutlineHome />
             <p className="mb-0">Month </p>
           </div>
-          <p className="mb-0">: {`${month.name} ${month.year}`} </p>
+          <p className="mb-0">
+            {`: ${month.name} ${month.year} ${
+              month.isActive ? "(Running)" : ""
+            }`}
+          </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
             <BsPersonGear />
             <p className="mb-0">Manager </p>
           </div>
-          <p className="mb-0">: {mess.manager} </p>
+          <p className="mb-0">: {mess.manager?.name} </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">

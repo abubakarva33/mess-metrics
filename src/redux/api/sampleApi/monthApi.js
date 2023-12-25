@@ -36,7 +36,7 @@ const messApi = mainApi.injectEndpoints({
         url: `month/mess/${_id}`,
         method: "PUT",
       }),
-      invalidatesTags: ["Mess", "Profile", "Member", "Month"],
+      invalidatesTags: ["Mess", "Profile", "Member", "Month", "Action"],
     }),
   }),
 });
@@ -46,5 +46,5 @@ export const {
   useDeleteMonthMutation,
   useGetMonthsQuery,
   useGetActiveMonthQuery,
-  useSwitchActiveMonthMutation
+  useSwitchActiveMonthMutation,
 } = messApi;

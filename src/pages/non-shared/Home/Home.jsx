@@ -40,7 +40,7 @@ const Home = () => {
             <Chart />
           </div>
           <div>
-            <BazarList data={lastBazar} />
+            { lastBazar && <BazarList data={lastBazar} />}
           </div>
         </Col>
       </Row>
