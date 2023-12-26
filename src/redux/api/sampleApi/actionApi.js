@@ -41,7 +41,15 @@ const actionApi = mainApi.injectEndpoints({
     }),
     addSharedCost: builder.mutation({
       query: (body) => ({
-        url: `sharedCost`,
+        url: `shared-cost`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Action"],
+    }),
+    addIndividualCost: builder.mutation({
+      query: (body) => ({
+        url: `individual-cost`,
         method: "POST",
         body,
       }),
@@ -69,4 +77,5 @@ export const {
   useGetMessAccountQuery,
   useGetLastBazarQuery,
   useAddMembersMoneyMutation,
+  useAddIndividualCostMutation,
 } = actionApi;

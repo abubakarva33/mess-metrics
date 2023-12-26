@@ -8,6 +8,7 @@ import moment from "moment/moment";
 import ReactDatePicker from "react-datepicker";
 import { MdCalendarMonth } from "react-icons/md";
 import Swal from "sweetalert2";
+import { useAddIndividualCostMutation } from "../../../../../redux/api/sampleApi/actionApi";
 
 const AddIndividualOtherCost = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const AddIndividualOtherCost = () => {
   const members = useMemberOptions();
   const [shoppersList, setShoppersList] = useState([]);
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
-  // const [addIndividualCost] = useCreateMessMutation();
+  const [addIndividualCost] = useAddIndividualCostMutation();
 
   const onFinish = async (values) => {
     values.shoppers = shoppersList;
@@ -32,7 +33,7 @@ const AddIndividualOtherCost = () => {
           confirmButtonColor: "#3085d6",
           cancelButtonColor: "#d33",
           confirmButtonText: "Back to Home",
-          cancelButtonText: "Add more"
+          cancelButtonText: "Add more",
         }).then((result) => {
           if (result.isConfirmed) {
             navigate("/");
