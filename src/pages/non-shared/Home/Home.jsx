@@ -28,7 +28,7 @@ const Home = () => {
   if (isFetching || messFetching || bazarFetching) {
     return <SpinnerMain />;
   }
-
+console.log(usersAcc.data);
   return (
     <div className="mt-3 home-container">
       <Row className="gy-2">

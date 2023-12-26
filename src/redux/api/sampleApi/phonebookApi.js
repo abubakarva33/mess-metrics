@@ -4,7 +4,7 @@ const messApi = mainApi.injectEndpoints({
   endpoints: (builder) => ({
     createPhone: builder.mutation({
       query: (body) => ({
-        url: `phoneBook`,
+        url: `phone-book`,
         method: "POST",
         body,
       }),
@@ -13,14 +13,14 @@ const messApi = mainApi.injectEndpoints({
 
     deletePhone: builder.mutation({
       query: (_id) => ({
-        url: `phoneBook/${_id}`,
+        url: `phone-book/${_id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["PhoneBook"],
     }),
     updatePhone: builder.mutation({
       query: ({ _id, ...body }) => ({
-        url: `phoneBook/${_id}`,
+        url: `phone-book/${_id}`,
         method: "PUT",
         body,
       }),
@@ -28,7 +28,7 @@ const messApi = mainApi.injectEndpoints({
     }),
 
     getPhoneBook: builder.query({
-      query: () => `phoneBook/mess-phone-book`,
+      query: () => `phone-book/mess-phone-book`,
       transformResponse: (response) => response.data,
       providesTags: ["PhoneBook"],
     }),

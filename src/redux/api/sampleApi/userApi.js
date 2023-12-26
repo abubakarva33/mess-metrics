@@ -34,7 +34,7 @@ const userApi = mainApi.injectEndpoints({
     }),
     getUserAccount: builder.query({
       query: () => ({
-        url: `users/account`,
+        url: `mess/member-with-services`,
       }),
       providesTags: ["Action"],
     }),
@@ -53,5 +53,5 @@ export const {
   useGetUserProfileQuery,
   useGetUserAccountQuery,
   useUpdateProfileMutation,
-  useGetSingleUserAccountQuery
+  useGetSingleUserAccountQuery,
 } = userApi;
