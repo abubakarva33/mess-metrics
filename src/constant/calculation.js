@@ -20,5 +20,5 @@ export const balanceCalculator = (meal, mealRate, individualCost, sharedCost, de
   const mealCost = meal * mealRate;
   const cost = mealCost + individualCost + sharedCost;
   const balance = deposit - cost;
-  return [balance, cost];
+  return [balance.toFixed(2), cost.toFixed(2)];
 };

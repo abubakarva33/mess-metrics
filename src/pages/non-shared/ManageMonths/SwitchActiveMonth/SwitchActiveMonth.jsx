@@ -8,7 +8,7 @@ import {
 } from "../../../../redux/api/sampleApi/monthApi";
 import useActiveMonthOptions from "../../../../components/Hooks/MessActiveMonthDropdown";
 import { IoIosArrowBack } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   useGetUserProfileQuery,
   useUpdateProfileMutation,
@@ -52,7 +52,8 @@ const SwitchActiveMonth = () => {
             confirmButtonText: "Back to Home",
           }).then((result) => {
             if (result.isConfirmed) {
-              navigate("/");
+              Navigate("/")
+              // navigate("/");
             }
           });
         }

@@ -19,8 +19,9 @@ const AddIndividualOtherCost = () => {
   const [addIndividualCost] = useAddIndividualCostMutation();
 
   const onFinish = async (values) => {
-    values.shoppers = shoppersList;
-    const fieldValues = { ...values, date: startDate };
+    values.user = shoppersList;
+    const amount = Number(values.amount);
+    const fieldValues = { ...values, amount, date: startDate };
     console.log(fieldValues);
 
     try {
@@ -76,7 +77,7 @@ const AddIndividualOtherCost = () => {
               <div>
                 <h6>Enter Cost:</h6>
                 <Form.Item
-                  name="totalCost"
+                  name="amount"
                   rules={[
                     {
                       required: true,
@@ -92,7 +93,7 @@ const AddIndividualOtherCost = () => {
               <div>
                 <h6>Select Shoppers:</h6>
                 <Select
-                  name="member"
+                  name="user"
                   placeholder="Select Member"
                   onChange={(e) => setShoppersList(e)}
                   maxTagCount={5}
@@ -114,15 +115,7 @@ const AddIndividualOtherCost = () => {
             <Form.Item className="addMealItemMarginSet">
               <div>
                 <h6>Add Bazar List (Optional) </h6>
-                <Form.Item
-                  name="bazarList"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Username!",
-                    },
-                  ]}
-                >
+                <Form.Item name="list">
                   <Input placeholder="Enter Shared cost" />
                 </Form.Item>
               </div>
@@ -171,7 +164,7 @@ const AddIndividualOtherCost = () => {
                       <div>
                         <h6>Enter Cost:</h6>
                         <Form.Item
-                          name="totalCost"
+                          name="amount"
                           rules={[
                             {
                               required: true,
@@ -187,7 +180,7 @@ const AddIndividualOtherCost = () => {
                       <div>
                         <h6>Select Shoppers:</h6>
                         <Select
-                          name="member"
+                          name="user"
                           placeholder="Select Member"
                           onChange={(e) => setShoppersList(e)}
                           maxTagCount={5}
@@ -209,15 +202,7 @@ const AddIndividualOtherCost = () => {
                     <Form.Item className="addMealItemMarginSet">
                       <div>
                         <h6>Add Bazar List (Optional) </h6>
-                        <Form.Item
-                          name="bazarList"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input your Username!",
-                            },
-                          ]}
-                        >
+                        <Form.Item name="list">
                           <Input placeholder="Enter Shared cost" />
                         </Form.Item>
                       </div>
