@@ -19,13 +19,17 @@ const AddMeal = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [meal, setMeal] = useState([]);
+
+  // rtk-query
   const { data: profileData, isFetching } = useGetUserProfileQuery();
   const { data, isLoading } = useGetSingleMessQuery(profileData?.data?.mess?._id);
+  const [addMeal, { status }] = useAddMealMutation();
+
+  // states
+  const [meal, setMeal] = useState([]);
   const { dMeal } = useSelector((state) => state.basic);
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
   const [clicked, setIsClicked] = useState(false);
-  const [addMeal, { status }] = useAddMealMutation();
 
   useEffect(() => {
     const filterData = data?.members?.map((member) => {
