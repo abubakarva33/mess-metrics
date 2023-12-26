@@ -37,8 +37,8 @@ const MessDetails = ({ data }) => {
             <p className="mb-0">Month </p>
           </div>
           <p className="mb-0">
-            {`: ${month.name} ${month.year} ${
-              month.isActive ? "(Running)" : ""
+            {`: ${month?.name} ${month?.year} ${
+              month?.isActive ? "(Running)" : ""
             }`}
           </p>
         </div>
