@@ -8,6 +8,7 @@ import ReactDatePicker from "react-datepicker";
 import { MdCalendarMonth } from "react-icons/md";
 import useMemberOptions from "../../../../components/Hooks/MembersDropdown";
 import Swal from "sweetalert2";
+import { useAddMembersMoneyMutation } from "../../../../redux/api/sampleApi/actionApi";
 
 const AddMembersMoney = () => {
   const navigate = useNavigate();
@@ -15,15 +16,16 @@ const AddMembersMoney = () => {
   const members = useMemberOptions();
   const [shoppersList, setShoppersList] = useState([]);
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
-  // const [addIndividualCost] = useCreateMessMutation();
+  const [addMembersMoney] = useAddMembersMoneyMutation();
 
   const onFinish = async (values) => {
-    values.member = shoppersList;
-    const fieldValues = { ...values, date: startDate };
+    values.user = shoppersList;
+    const amount = Number(values.amount);
+    const fieldValues = { ...values, amount, date: startDate };
     console.log(fieldValues);
 
     try {
-      const res = await addIndividualCost(fieldValues).unwrap();
+      const res = await addMembersMoney(fieldValues).unwrap();
       if (res?.success) {
         Swal.fire({
           text: "Members money added successfully",
@@ -91,7 +93,7 @@ const AddMembersMoney = () => {
               <div>
                 <h6>Select Member Who Will Deposit:</h6>
                 <Select
-                  name="member"
+                  name="user"
                   placeholder="Select Member"
                   onChange={(e) => setShoppersList(e)}
                   maxTagCount={5}
@@ -168,7 +170,7 @@ const AddMembersMoney = () => {
                     <div>
                       <h6>Select Member Who Will Deposit:</h6>
                       <Select
-                        name="member"
+                        name="user"
                         placeholder="Select Member"
                         onChange={(e) => setShoppersList(e)}
                         maxTagCount={5}

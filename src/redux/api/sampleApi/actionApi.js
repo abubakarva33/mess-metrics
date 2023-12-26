@@ -23,6 +23,14 @@ const actionApi = mainApi.injectEndpoints({
       }),
       invalidatesTags: ["Action"],
     }),
+    addMembersMoney: builder.mutation({
+      query: (body) => ({
+        url: `deposit`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Action"],
+    }),
     addMealCost: builder.mutation({
       query: (body) => ({
         url: `bazar`,
@@ -60,4 +68,5 @@ export const {
   useAddSharedCostMutation,
   useGetMessAccountQuery,
   useGetLastBazarQuery,
+  useAddMembersMoneyMutation,
 } = actionApi;
