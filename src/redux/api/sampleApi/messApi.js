@@ -37,7 +37,7 @@ const messApi = mainApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Member"],
+      invalidatesTags: ["Member", "Action"],
     }),
     deleteMember: builder.mutation({
       query: ({ _id, ...body }) => ({
@@ -45,7 +45,7 @@ const messApi = mainApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Member"],
+      invalidatesTags: ["Member", "Action"],
     }),
     getMembers: builder.query({
       query: () => `mess/members`,
