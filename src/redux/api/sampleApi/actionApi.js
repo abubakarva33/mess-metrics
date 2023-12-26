@@ -4,7 +4,7 @@ const actionApi = mainApi.injectEndpoints({
   endpoints: (builder) => ({
     addMeal: builder.mutation({
       query: (body) => ({
-        url: `actions/add-meal`,
+        url: `meal`,
         method: "POST",
         body,
       }),
@@ -17,7 +17,7 @@ const actionApi = mainApi.injectEndpoints({
     }),
     updateMeal: builder.mutation({
       query: ({ _id, ...body }) => ({
-        url: `actions/meal/${_id}`,
+        url: `meal`,
         method: "PUT",
         body,
       }),

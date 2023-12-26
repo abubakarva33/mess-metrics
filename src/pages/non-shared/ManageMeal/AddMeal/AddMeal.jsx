@@ -58,7 +58,7 @@ const AddMeal = () => {
   };
 
   const onFinish = async () => {
-    const fieldValues = { meal, date: startDate };
+    const fieldValues = { meals:meal, date: startDate };
     try {
       const res = await addMeal(fieldValues).unwrap();
       if (res?.success) {
