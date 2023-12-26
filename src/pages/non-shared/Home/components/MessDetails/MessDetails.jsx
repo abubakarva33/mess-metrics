@@ -37,9 +37,7 @@ const MessDetails = ({ data }) => {
             <p className="mb-0">Month </p>
           </div>
           <p className="mb-0">
-            {`: ${month?.name} ${month?.year} ${
-              month?.isActive ? "(Running)" : ""
-            }`}
+            {`: ${month?.name} ${month?.year} ${month?.isActive ? "(Running)" : ""}`}
           </p>
         </div>
         <div className="d-gridTwo">
@@ -90,7 +88,7 @@ const MessDetails = ({ data }) => {
             <p className="mb-0">Mess Meal Rate </p>
           </div>
 
-          <p className="mb-0">: {mealRate} </p>
+          <p className="mb-0">: {mealRate.toFixed(2)} </p>
         </div>
         <div className="d-gridTwo">
           <div className="d-flex align-items-center">
@@ -111,7 +109,7 @@ const MessDetails = ({ data }) => {
             <GiTakeMyMoney />
             <p className="mb-0">Shared Cost Per Person </p>
           </div>
-          <p className="mb-0">: {sharedCostPerPerson} </p>
+          <p className="mb-0">: {sharedCostPerPerson.toFixed(2)} </p>
         </div>
       </div>
     </div>

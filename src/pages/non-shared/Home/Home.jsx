@@ -17,6 +17,8 @@ import {
   useGetLastBazarQuery,
   useGetMessAccountQuery,
 } from "../../../redux/api/sampleApi/actionApi";
+import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
+import { FloatButton } from "antd";
 
 const Home = () => {
   const { data: usersAcc, isFetching } = useGetUserAccountQuery();
@@ -39,9 +41,7 @@ const Home = () => {
             <h5 className="px-2 pt-3"> Mess Overview</h5>
             <Chart />
           </div>
-          <div>
-            { lastBazar && <BazarList data={lastBazar} />}
-          </div>
+          <div>{lastBazar && <BazarList data={lastBazar} />}</div>
         </Col>
       </Row>
       <div>
@@ -59,6 +59,17 @@ const Home = () => {
           ))}
         </Row>
       </div>
+      <>
+        <FloatButton.Group
+          trigger="click"
+          type="primary"
+          className="homeFloatIcon"
+          icon={<CustomerServiceOutlined />}
+        >
+          <FloatButton />
+          <FloatButton icon={<CommentOutlined />} />
+        </FloatButton.Group>
+      </>
     </div>
   );
 };

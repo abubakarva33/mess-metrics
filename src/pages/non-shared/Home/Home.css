@@ -24,9 +24,18 @@
   margin-bottom: 12px;
   border-radius: 8px;
 }
+.homeFloatIcon {
+  right: 45;
+}
 
 @media screen and (max-device-width: 992px) {
   .home-container {
     padding: 0 12px;
+  }
+}
+@media screen and (max-device-width: 576px) {
+  .homeFloatIcon {
+    right: 35px;
+    bottom: 100px;
   }
 }
