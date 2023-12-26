@@ -23,10 +23,11 @@ const UpdateMeal = () => {
   const { data: mealData, isFetching: mealFetching } = useGetMessMealQuery(startDate);
   const [UpdateMeal] = useUpdateMealMutation();
   const navigate = useNavigate();
+  console.log({ mealData, meal });
 
   useEffect(() => {
-    const prevMeal = mealData?.meal?.map((m) => ({
-      member: m.id,
+    const prevMeal = mealData?.data?.map((m) => ({
+      member: m.user,
       meal: m.meal,
       _id: m._id,
       isChanged: false,
@@ -63,10 +64,9 @@ const UpdateMeal = () => {
   const onFinish = async () => {
     const findValues = meal.filter((m) => m.isChanged);
     const fieldValues = findValues.map((m) => ({
-      id: m.member._id,
+      user: m.member._id,
       meal: m.meal,
     }));
-    // const fieldValues = { meal, date: startDate };
     console.log(fieldValues);
     Swal.fire({
       title: "Are you sure?",
@@ -137,7 +137,7 @@ const UpdateMeal = () => {
                   )}
 
                   <div className="mealCount">
-                    <p className="mb-0">{m.meal}</p>
+                    <p className="mb-0">{m?.meal}</p>
                   </div>
                   {m.isClicked && (
                     <button

@@ -11,7 +11,7 @@ const actionApi = mainApi.injectEndpoints({
       invalidatesTags: ["Action"],
     }),
     getMessMeal: builder.query({
-      query: (date) => `actions/meal-by-date?date=${date} `,
+      query: (date) => `meal?date=${date} `,
       transformResponse: (response) => response.data,
       providesTags: ["Action"],
     }),
