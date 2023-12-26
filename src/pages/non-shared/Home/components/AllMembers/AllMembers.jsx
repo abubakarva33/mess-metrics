@@ -2,9 +2,9 @@ import { Col, Row } from "react-bootstrap";
 import "./AllMembers.css";
 import { Link } from "react-router-dom";
 
-const AllMembers = ({ data }) => {
-  const { deposit,individualCost, meal, user, _id } = data;
-
+const AllMembers = ({ data, mealRate, sharedCost }) => {
+  const { deposit, individualCost, meal, user, _id } = data;
+console.log(mealRate, sharedCost);
   return (
     <Col sm={12} md={6} lg={6} xl={4} xxl={4}>
       <Link to={`/all-members/${_id}`}>

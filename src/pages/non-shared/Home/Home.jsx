@@ -28,7 +28,8 @@ const Home = () => {
   if (isFetching || messFetching || bazarFetching) {
     return <SpinnerMain />;
   }
-console.log(usersAcc.data);
+  // console.log(usersAcc.data);
+  // console.log(messAccount.mealRate);
   return (
     <div className="mt-3 home-container">
       <Row className="gy-2">
@@ -55,7 +56,11 @@ console.log(usersAcc.data);
 
         <Row className="gy-2 gx-2 pb-5 mb-5">
           {usersAcc?.data?.map((user) => (
-            <AllMembers data={user} />
+            <AllMembers
+              data={user}
+              mealRate={messAccount?.mealRate}
+              sharedCost={messAccount?.sharedCostPerPerson}
+            />
           ))}
         </Row>
       </div>
