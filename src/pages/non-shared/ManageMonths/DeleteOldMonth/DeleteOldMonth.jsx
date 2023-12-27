@@ -17,7 +17,7 @@ const DeleteOldMonth = () => {
   const [form] = Form.useForm();
   const month = useMonthOptions();
   const navigate = useNavigate();
-  const [months, setMonths] = useState(month);
+  const [months, setMonths] = useState();
   const { data, isFetching } = useGetActiveMonthQuery();
   const [deleteMonth] = useDeleteMonthMutation();
 
@@ -30,6 +30,7 @@ const DeleteOldMonth = () => {
     return <SpinnerMain />;
   }
 
+  console.log(months);
   const onFinish = async ({ month }) => {
     Swal.fire({
       title: "Are you sure?",

@@ -22,8 +22,7 @@ import { FloatButton } from "antd";
 
 const Home = () => {
   const { data: usersAcc, isFetching } = useGetUserAccountQuery();
-  const { data: messAccount, isFetching: messFetching } =
-    useGetMessAccountQuery();
+  const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
   const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery();
 
   if (isFetching || messFetching || bazarFetching) {
@@ -62,7 +61,7 @@ const Home = () => {
               data={user}
               mealRate={messAccount?.mealRate}
               sharedCost={messAccount?.sharedCostPerPerson}
-              monthId={messAccount.month._id}
+              monthId={messAccount?.month?._id}
             />
           ))}
         </Row>
