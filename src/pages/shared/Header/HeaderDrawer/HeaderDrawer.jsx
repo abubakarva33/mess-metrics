@@ -117,7 +117,7 @@ const HeaderDrawer = () => {
                   <Link to="/add-individual-cost" className="sideNavItem">
                     <MdAddchart className="fs-5 me-2" /> Add Individual Cost
                   </Link>
-                  <Link to="/update-cost" className="sideNavItem">
+                  <Link to="/active-month-details?type=mealCost" className="sideNavItem">
                     <MdSystemUpdateAlt className="fs-5 me-2" /> Update Costs
                   </Link>
                 </div>

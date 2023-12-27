@@ -117,14 +117,14 @@ const Routes = () => {
         </ManagerAuth>
       ),
     },
-    {
-      path: "/update-cost",
-      element: (
-        <ManagerAuth>
-          <UpdateMessCost />
-        </ManagerAuth>
-      ),
-    },
+    // {
+    //   path: "/update-cost",
+    //   element: (
+    //     <ManagerAuth>
+    //       <UpdateMessCost />
+    //     </ManagerAuth>
+    //   ),
+    // },
     {
       path: "/add-member",
       element: (
