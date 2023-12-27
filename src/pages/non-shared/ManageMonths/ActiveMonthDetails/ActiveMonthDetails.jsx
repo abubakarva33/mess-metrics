@@ -85,8 +85,13 @@ const ActiveMonthDetails = () => {
       },
       {
         title: " Member Name",
-        dataIndex: "name",
         key: "name",
+        render: (_, record) =>
+          record?.members?.map((member, idk) => (
+            <div size="middle">
+              <p className="mb-0">{member.name}</p>
+            </div>
+          )),
       },
 
       {
@@ -96,8 +101,9 @@ const ActiveMonthDetails = () => {
       },
       {
         title: "Meal Cost Details",
-        dataIndex: "details",
-        key: "details",
+        dataIndex: "list",
+        render: (_, record) => (record.list ? record.list : "No Details"),
+        key: "list",
       },
       {
         title: "Action",
@@ -116,11 +122,6 @@ const ActiveMonthDetails = () => {
         dataIndex: "date",
         key: "date",
       },
-      {
-        title: " Member Name",
-        dataIndex: "name",
-        key: "name",
-      },
 
       {
         title: "Amount",
@@ -129,8 +130,9 @@ const ActiveMonthDetails = () => {
       },
       {
         title: "Shared Cost Details",
-        dataIndex: "details",
-        key: "details",
+        dataIndex: "list",
+        render: (_, record) => (record.list ? record.list : "No Details"),
+        key: "list",
       },
       {
         title: "Action",
@@ -162,8 +164,9 @@ const ActiveMonthDetails = () => {
       },
       {
         title: "Individual Cost Details",
-        dataIndex: "details",
-        key: "details",
+        dataIndex: "list",
+        render: (_, record) => (record.list ? record.list : "No Details"),
+        key: "list",
       },
       {
         title: "Action",
@@ -212,10 +215,14 @@ const ActiveMonthDetails = () => {
       },
       {
         title: " Shoppers Name",
-        dataIndex: "name",
         key: "name",
+        render: (_, record) =>
+          record?.members?.map((member, idk) => (
+            <div size="middle" key={idk}>
+              <p className="mb-0">{member?.name}</p>
+            </div>
+          )),
       },
-
       {
         title: "Amount",
         dataIndex: "amount",
@@ -223,8 +230,9 @@ const ActiveMonthDetails = () => {
       },
       {
         title: "Bazar Details",
-        dataIndex: "details",
-        key: "details",
+        dataIndex: "list",
+        render: (_, record) => (record?.list ? record?.list : "No Details"),
+        key: "list",
       },
       {
         title: "Action",
@@ -239,11 +247,11 @@ const ActiveMonthDetails = () => {
     ],
   };
   const dataSource = {
-    bazarData: bazarData,
-    sharedCostData: sharedCostData,
+    bazarData,
+    sharedCostData,
     mealData: mealData?.data,
-    depositData: depositData,
-    individualCostData: individualCostData,
+    depositData,
+    individualCostData,
   };
   const column = columnData[columns];
   const tableData = dataSource[columnDataSource];
