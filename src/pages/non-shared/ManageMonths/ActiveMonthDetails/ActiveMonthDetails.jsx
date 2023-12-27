@@ -12,15 +12,18 @@ import {
   useGetAllMealQuery,
   useGetAllSharedCostQuery,
 } from "../../../../redux/api/sampleApi/actionApi";
+import { useSearchQuery } from "../../../../utils/useSearchQuery";
 
 const ActiveMonthDetails = () => {
+  const type = useSearchQuery("type") || "meal";
+  const navigate = useNavigate();
+
   const [columns, setColumns] = useState("mealColumns");
-  const [columnDataSource, setColumnDataSource] = useState("mealData");
-  const { data: bazarData } = useGetAllBazarQuery();
-  const { data: sharedCostData } = useGetAllSharedCostQuery();
+  const { data: bazar } = useGetAllBazarQuery();
+  const { data: sharedCost } = useGetAllSharedCostQuery();
   const { data: mealData } = useGetAllMealQuery();
-  const { data: depositData } = useGetAllDepositQuery();
-  const { data: individualCostData } = useGetAllIndividualCostQuery();
+  const { data: deposit } = useGetAllDepositQuery();
+  const { data: individualCost } = useGetAllIndividualCostQuery();
 
   const optionsData = [
     {
@@ -49,7 +52,7 @@ const ActiveMonthDetails = () => {
     },
   ];
   const columnData = {
-    mealColumns: [
+    meal: [
       {
         title: "Date",
         dataIndex: "date",
@@ -77,7 +80,7 @@ const ActiveMonthDetails = () => {
         ),
       },
     ],
-    mealCostColumns: [
+    mealCost: [
       {
         title: "Date",
         dataIndex: "date",
@@ -116,7 +119,7 @@ const ActiveMonthDetails = () => {
         ),
       },
     ],
-    SharedCostColumns: [
+    sharedCost: [
       {
         title: "Date",
         dataIndex: "date",
@@ -145,7 +148,7 @@ const ActiveMonthDetails = () => {
         ),
       },
     ],
-    IndividualCostColumns: [
+    individualCost: [
       {
         title: "Date",
         dataIndex: "date",
@@ -153,7 +156,7 @@ const ActiveMonthDetails = () => {
       },
       {
         title: " Member Name",
-        render: (_, record) => record.user.name,
+        render: (_, record) => record.user?.name,
         key: "name",
       },
 
@@ -179,7 +182,7 @@ const ActiveMonthDetails = () => {
         ),
       },
     ],
-    depositColumns: [
+    deposit: [
       {
         title: "Date",
         dataIndex: "date",
@@ -207,7 +210,7 @@ const ActiveMonthDetails = () => {
         ),
       },
     ],
-    bazarListColumns: [
+    bazar: [
       {
         title: "Date",
         dataIndex: "date",
@@ -247,14 +250,15 @@ const ActiveMonthDetails = () => {
     ],
   };
   const dataSource = {
-    bazarData,
-    sharedCostData,
-    mealData: mealData?.data,
-    depositData,
-    individualCostData,
+    deposit,
+    meal: mealData?.data,
+    sharedCost,
+    individualCost,
+    bazar,
+    mealCost: bazar,
   };
-  const column = columnData[columns];
-  const tableData = dataSource[columnDataSource];
+  const column = columnData[type];
+  const tableData = dataSource[type];
 
   const onChange = (value) => {
     console.log(`selected ${value}`);
@@ -265,7 +269,6 @@ const ActiveMonthDetails = () => {
   const filterOption = (input, option) =>
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
-  const navigate = useNavigate();
   return (
     <div>
       <div className="activeMonthSectionMain">
@@ -283,41 +286,39 @@ const ActiveMonthDetails = () => {
         </div>
         <div className="activeMonthBtnGroups mb-4">
           <Button
-            className={columns === "mealColumns" ? "activeNav" : undefined}
-            onClick={() => (setColumns("mealColumns"), setColumnDataSource("mealData"))}
+            className={type === "meal" ? "activeNav" : undefined}
+            onClick={() => navigate("?type=meal")}
           >
             Meal
           </Button>
           <Button
-            className={columns === "depositColumns" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => (setColumns("depositColumns"), setColumnDataSource("depositData"))}
+            className={type === "deposit" ? "activeNav ms-3" : "ms-3"}
+            onClick={() => navigate("?type=deposit")}
           >
             Deposit
           </Button>
           <Button
-            className={columns === "mealCostColumns" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => (setColumns("mealCostColumns"), setColumnDataSource("bazarData"))}
+            className={type === "mealCost" ? "activeNav ms-3" : "ms-3"}
+            onClick={() => navigate("?type=mealCost")}
           >
             Meal Cost
           </Button>
 
           <Button
-            className={columns === "SharedCostColumns" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => (setColumns("SharedCostColumns"), setColumnDataSource("sharedCostData"))}
+            className={type === "sharedCost" ? "activeNav ms-3" : "ms-3"}
+            onClick={() => navigate("?type=sharedCost")}
           >
-            Shared Other Cost
+            Shared Cost
           </Button>
           <Button
-            className={columns === "IndividualCostColumns" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => (
-              setColumns("IndividualCostColumns"), setColumnDataSource("individualCostData")
-            )}
+            className={type === "individualCost" ? "activeNav ms-3" : "ms-3"}
+            onClick={() => navigate("?type=individualCost")}
           >
-            Individual Other Cost
+            Individual Cost
           </Button>
           <Button
-            className={columns === "bazarListColumns" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => (setColumns("bazarListColumns"), setColumnDataSource("bazarData"))}
+            className={type === "bazar" ? "activeNav ms-3" : "ms-3"}
+            onClick={() => navigate("?type=bazar")}
           >
             BazarList
           </Button>
@@ -328,8 +329,11 @@ const ActiveMonthDetails = () => {
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-              <h3>PHONEBOOK </h3>
+              <IoIosArrowBack
+                className="componentHeaderIcon"
+                onClick={() => navigate(-1)}
+              />
+              <h3>Phone Book </h3>
             </div>
             <Select
               showSearch
@@ -349,32 +353,44 @@ const ActiveMonthDetails = () => {
                 Meal
               </Button>
               <Button
-                className={columns === "depositColumns" ? "activeNav ms-3" : "ms-3"}
+                className={
+                  columns === "depositColumns" ? "activeNav ms-3" : "ms-3"
+                }
                 onClick={() => setColumns("depositColumns")}
               >
                 Deposit
               </Button>
               <Button
-                className={columns === "mealCostColumns" ? "activeNav ms-3" : "ms-3"}
+                className={
+                  columns === "mealCostColumns" ? "activeNav ms-3" : "ms-3"
+                }
                 onClick={() => setColumns("mealCostColumns")}
               >
                 Meal Cost
               </Button>
 
               <Button
-                className={columns === "SharedCostColumns" ? "activeNav ms-3" : "ms-3"}
+                className={
+                  columns === "SharedCostColumns" ? "activeNav ms-3" : "ms-3"
+                }
                 onClick={() => setColumns("SharedCostColumns")}
               >
                 Shared Other Cost
               </Button>
               <Button
-                className={columns === "IndividualCostColumns" ? "activeNav ms-3" : "ms-3"}
+                className={
+                  columns === "IndividualCostColumns"
+                    ? "activeNav ms-3"
+                    : "ms-3"
+                }
                 onClick={() => setColumns("IndividualCostColumns")}
               >
                 Individual Other Cost
               </Button>
               <Button
-                className={columns === "bazarListColumns" ? "activeNav ms-3" : "ms-3"}
+                className={
+                  columns === "bazarListColumns" ? "activeNav ms-3" : "ms-3"
+                }
                 onClick={() => setColumns("bazarListColumns")}
               >
                 BazarList
