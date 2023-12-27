@@ -1,58 +1,45 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./SingleMember.css";
 import { Col, Container, Row } from "react-bootstrap";
-import { useState } from "react";
+import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
+import { useEffect, useState } from "react";
 import { Button } from "antd";
-import {
-  useGetSingleUserAccountQuery,
-  useGetSingleUserQuery,
-} from "../../../../redux/api/sampleApi/userApi";
+import { IoIosArrowBack } from "react-icons/io";
+import { useGetSingleUserAccountQuery } from "../../../../redux/api/sampleApi/userApi";
 import { useGetMonthsQuery } from "../../../../redux/api/sampleApi/monthApi";
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 import SingleMemberMonthDetails from "./SingleMemberMonthDetails";
 
 const SingleMember = () => {
   const { Id } = useParams();
-
-  const [page, setPage] = useState(1);
-
-  const { data: mData, isFetching: monthsFetching } = useGetMonthsQuery({
-    page,
-    limit: 1,
+  const navigate = useNavigate();
+  const [activeMonth, setActiveMonth] = useState("");
+  const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
+  const { data: monthData, isFetching: monthsFetching } = useGetMonthsQuery();
+  const activeDocument = monthData?.find((item) => item.isActive === true);
+  const { data: singleUserData, isFetching: singleUserFetching } = useGetSingleUserAccountQuery({
+    userId: Id,
+    monthId: activeMonth,
   });
-  const monthData = mData?.data[0];
-
-  const { data: userProfile, isFetching: userFetching } =
-    useGetSingleUserQuery(Id);
-
-  const { data: singleUserData, isFetching: singleUserFetching } =
-    useGetSingleUserAccountQuery({
-      userId: Id,
-      monthId: monthData?._id ? monthData?._id : "",
-    });
-
-  if (userFetching) {
+  useEffect(() => {
+    if (activeDocument) {
+      setActiveMonth(activeDocument._id);
+    }
+  }, [activeDocument]);
+  if (monthsFetching || singleUserFetching || !singleUserData) {
     return <SpinnerMain />;
   }
-
-  const { name, email, phone, role, dateOfBirth } = userProfile;
-
+  const monthList = monthData?.map((month) => month._id);
+  const { name, email, phone, role, dateOfBirth, month } = singleUserData?.data;
+  const currentObject = monthList[currentObjectIndex];
   const switchDataPlus = () => {
-    setPage((prev) => {
-      if (prev >= mData?.meta?.total) {
-        return 1;
-      }
-      return prev + 1;
-    });
+    setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthList.length);
+    setActiveMonth(monthList[(currentObjectIndex + 1) % monthList.length]);
   };
 
   const switchDataMinus = () => {
-    setPage((prev) => {
-      if (prev <= 1) {
-        return mData?.meta?.total;
-      }
-      return prev - 1;
-    });
+    setCurrentObjectIndex((prevIndex) => (prevIndex - 1 + monthList.length) % monthList.length);
+    setActiveMonth(monthList[(currentObjectIndex - 1 + monthList.length) % monthList.length]);
   };
   return (
     <div>
@@ -61,11 +48,7 @@ const SingleMember = () => {
           <Col xs={12} sm={6} md={6} lg={6} xl={5} xxl={5}>
             <div className="memberProfileCenter">
               <div className="memberProfileCenterTop">
-                <img
-                  src="/images/singleUser.webp"
-                  alt=""
-                  className="memberProfileImage"
-                />
+                <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                 <div className="d-flexCenter flex-column">
                   <h3 className="mb-0 mt-3 memberProfileName">{name}</h3>
                   <h6> ( {role} )</h6>
@@ -77,11 +60,7 @@ const SingleMember = () => {
                     <p className="memberProfileNameText"> {email}</p>
                     <div className="fs-3 ">
                       <Link to={`mailto:${email}`} target="_blank">
-                        <img
-                          src="/images/forward-message.png"
-                          alt=""
-                          className="iconSize"
-                        />
+                        <img src="/images/forward-message.png" alt="" className="iconSize" />
                       </Link>
                     </div>
                   </div>
@@ -89,11 +68,7 @@ const SingleMember = () => {
                     <p className="memberProfileNameText"> {phone}</p>
                     <div className="fs-3 ">
                       <Link to={`tel:${phone}`} target="_blank">
-                        <img
-                          src="/images/telephone.png"
-                          alt=""
-                          className="iconSize"
-                        />
+                        <img src="/images/telephone.png" alt="" className="iconSize" />
                       </Link>
                     </div>
                   </div>
@@ -118,20 +93,14 @@ const SingleMember = () => {
                   <div>
                     <div className="d-flex align-items-center justify-content-between mb-2">
                       <div>
-                        <h5 className="mb-1 memberProfileManageItemText">
-                          {" "}
-                          No longer member?
-                        </h5>
+                        <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
                         <p className="mb-1"> remove now</p>
                       </div>
                       <Button> Remove</Button>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
-                        <h5 className="mb-1 memberProfileManageItemText">
-                          {" "}
-                          Need to send Notice?
-                        </h5>
+                        <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
                         <p className="mb-1"> create a notice now</p>
                       </div>
                       <Button> Send</Button>
@@ -139,11 +108,9 @@ const SingleMember = () => {
                   </div>
                 </div>
                 <SingleMemberMonthDetails
-                  month={monthData}
+                  month={month}
                   switchDataPlus={switchDataPlus}
                   switchDataMinus={switchDataMinus}
-                  singleUserFetching={singleUserFetching}
-                  singleUserData={singleUserData}
                 />
               </Col>
             </Row>
