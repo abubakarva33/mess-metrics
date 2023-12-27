@@ -25,17 +25,20 @@ const SingleMember = () => {
       setActiveMonth(activeDocument._id);
     }
   }, [activeDocument]);
-  if (monthsFetching || singleUserFetching) {
+  if (monthsFetching || singleUserFetching || !singleUserData) {
     return <SpinnerMain />;
   }
   const monthList = monthData?.map((month) => month._id);
   const { name, email, phone, role, dateOfBirth, month } = singleUserData?.data;
   const currentObject = monthList[currentObjectIndex];
   const switchDataPlus = () => {
-    setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);
+    setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthList.length);
+    setActiveMonth(monthList[(currentObjectIndex + 1) % monthList.length]);
   };
+
   const switchDataMinus = () => {
-    setCurrentObjectIndex((prevIndex) => (prevIndex - 1) % monthData.length);
+    setCurrentObjectIndex((prevIndex) => (prevIndex - 1 + monthList.length) % monthList.length);
+    setActiveMonth(monthList[(currentObjectIndex - 1 + monthList.length) % monthList.length]);
   };
   return (
     <div>
@@ -94,13 +97,6 @@ const SingleMember = () => {
                       </div>
                       <Button> Remove</Button>
                     </div>
-                    <div className="d-flex align-items-center justify-content-between mb-1">
-                      <div>
-                        <h5 className="mb-1 memberProfileManageItemText"> Elected as manager?</h5>
-                        <p className="mb-1"> change now</p>
-                      </div>
-                      <Button> Change</Button>
-                    </div>
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
                         <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
@@ -112,13 +108,9 @@ const SingleMember = () => {
                 </div>
                 <div className="profileInfoCenter">
                   <div className=" profileInfoTop">
-                    <MdArrowBackIosNew
-                      onClick={() => (switchDataMinus, setActiveMonth(currentObject))}
-                    />
-                    <h4 className=""> {month?.name}</h4>
-                    <MdArrowForwardIos
-                      onClick={() => (switchDataPlus, setActiveMonth(currentObject))}
-                    />
+                    <MdArrowBackIosNew onClick={switchDataMinus} />
+                    <h4 className="">{month?.name}</h4>
+                    <MdArrowForwardIos onClick={switchDataPlus} />
                   </div>
                   <div>
                     <div className="d-gridTwo">
