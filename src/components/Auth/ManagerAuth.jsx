@@ -11,7 +11,7 @@ const ManagerAuth = ({ children }) => {
 
   useEffect(() => {
     if (status === "fulfilled" && data?.data?.role !== "manager") {
-      navigate("/");
+      navigate("/error");
     }
   }, [data]);
 

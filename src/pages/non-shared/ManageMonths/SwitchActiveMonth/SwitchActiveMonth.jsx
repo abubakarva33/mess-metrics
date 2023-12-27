@@ -41,7 +41,7 @@ const SwitchActiveMonth = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await switchMonth(month).unwrap();
-        await updateProfile({ activeMonth: month });
+        // await updateProfile({ activeMonth: month });
         if (res?.success) {
           await Swal.fire({
             text: "Month switched  successfully.",
@@ -52,8 +52,8 @@ const SwitchActiveMonth = () => {
             confirmButtonText: "Back to Home",
           }).then((result) => {
             if (result.isConfirmed) {
-              Navigate("/")
-              // navigate("/");
+              // Navigate("/")
+              navigate("/");
             }
           });
         }

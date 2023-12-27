@@ -164,14 +164,14 @@ const Chart = () => {
         enableArea={true}
         useMesh={true}
         legends={[]}
-        motionConfig={{
-          mass: 1,
-          tension: 199,
-          friction: 88,
-          clamp: true,
-          precision: 0.01,
-          velocity: 0,
-        }}
+        // motionConfig={{
+        //   mass: 1,
+        //   tension: 199,
+        //   friction: 88,
+        //   clamp: true,
+        //   precision: 0.01,
+        //   velocity: 0,
+        // }}
       />
     </div>
   );

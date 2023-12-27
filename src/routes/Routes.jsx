@@ -27,186 +27,180 @@ import Login from "../pages/non-shared/Login/Login";
 import Register from "../pages/non-shared/Register/Register";
 import CreateMess from "../pages/non-shared/CreateMess/CreateMess";
 import Members from "../pages/non-shared/ManageMembers/Members/Members";
-import { useGetUserProfileQuery } from "../redux/api/sampleApi/userApi";
-import { useEffect, useState } from "react";
 import ManagerAuth from "../components/Auth/ManagerAuth";
-import PhoneBook from "../pages/non-shared/PhoneBook/PhoneBook";
 import Birthdays from "../pages/non-shared/Birthdays/Birthdays";
-import SingleMember from "../pages/non-shared/ManageMembers/SingleMember/SingleMember";
+import PhoneBook from "../pages/non-shared/PhoneBook/PhoneBook";
 import RequestMeal from "../pages/non-shared/RequestMeal/RequestMeal";
+import SingleMember from "../pages/non-shared/ManageMembers/SingleMember/SingleMember";
 import Dashboard from "../pages/adminPanel/Dashboard/Dashboard";
 import AllUsers from "../pages/adminPanel/AllUsers/AllUsers";
-import AllMonth from "../pages/adminPanel/AllMonth/AllMonth";
-import AllMess from "../pages/adminPanel/AllMess/AllMess";
 import AllAdmin from "../pages/adminPanel/AllAdmin/AllAdmin";
+import AllMess from "../pages/adminPanel/AllMess/AllMess";
+import AllMonth from "../pages/adminPanel/AllMonth/AllMonth";
 
-const mainLayoutChildInit = [
-  { path: "/", element: <Home /> },
-  { path: "/aboutUs", element: <ContactUs /> },
-  { path: "/faq", element: <FAQ /> },
-  { path: "/my-profile", element: <MyProfile /> },
-  { path: "/notification", element: <Notification /> },
-  { path: "/helps", element: <Help /> },
-  { path: "/all-members", element: <Members /> },
-  { path: "/switch-active-month", element: <SwitchActiveMonth /> },
-  { path: "/mess-profile", element: <MessProfile /> },
-  { path: "/phone-book", element: <PhoneBook /> },
-  { path: "/birthdays", element: <Birthdays /> },
-  { path: "/request-meal", element: <RequestMeal /> },
-  { path: "/all-members/:Id", element: <SingleMember /> },
+export const routes = createBrowserRouter([
   {
-    path: "/active-month-details",
-    element: <ActiveMonthDetails />,
+    path: "/",
+    element: <MainLayout />,
     children: [
+      { path: "/", element: <Home /> },
+      { path: "/aboutUs", element: <ContactUs /> },
+      { path: "/faq", element: <FAQ /> },
+      { path: "/my-profile", element: <MyProfile /> },
+      { path: "/notification", element: <Notification /> },
+      { path: "/helps", element: <Help /> },
+      { path: "/all-members", element: <Members /> },
+      { path: "/switch-active-month", element: <SwitchActiveMonth /> },
+      { path: "/mess-profile", element: <MessProfile /> },
+      { path: "/phone-book", element: <PhoneBook /> },
+      { path: "/birthdays", element: <Birthdays /> },
+      { path: "/request-meal", element: <RequestMeal /> },
+      { path: "/all-members/:Id", element: <SingleMember /> },
       {
-        path: "/active-month-details/meal",
+        path: "/active-month-details",
         element: <ActiveMonthDetails />,
+        children: [
+          {
+            path: "/active-month-details/meal",
+            element: <ActiveMonthDetails />,
+          },
+        ],
+      },
+      {
+        path: "/mess-metrics/protected-explore/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/mess-metrics/protected-explore/dashboard/all-users",
+        element: <AllUsers />,
+      },
+      {
+        path: "/mess-metrics/protected-explore/dashboard/all-admins",
+        element: <AllAdmin />,
+      },
+      {
+        path: "/mess-metrics/protected-explore/dashboard/all-mess",
+        element: <AllMess />,
+      },
+      {
+        path: "/mess-metrics/protected-explore/dashboard/all-months",
+        element: <AllMonth />,
+      },
+      {
+        path: "/add-meal",
+        element: (
+          <ManagerAuth>
+            <AddMeal />
+          </ManagerAuth>
+        ),
+      },
+      {
+        path: "/update-meal",
+        element: (
+          <ManagerAuth>
+            <UpdateMeal />
+          </ManagerAuth>
+        ),
+      },
+      {
+        path: "/add-meal-cost",
+        element: (
+          <ManagerAuth>
+            <AddMealCoast />
+          </ManagerAuth>
+        ),
+      },
+      {
+        path: "/add-shared-cost",
+        element: (
+          <ManagerAuth>
+            <AddSharedOtherCost />
+          </ManagerAuth>
+        ),
+      },
+      {
+        path: "/add-individual-cost",
+        element: (
+          <ManagerAuth>
+            <AddIndividualOtherCost />
+          </ManagerAuth>
+        ),
+      },
+      // {
+      //   path: "/update-cost",
+      //   element: (
+      //     <ManagerAuth>
+      //       <UpdateMessCost />
+      //     </ManagerAuth>
+      //   ),
+      // },
+      {
+        path: "/add-member",
+        element: (
+          <ManagerAuth>
+            <AddMember />
+          </ManagerAuth>
+        ),
+      },
+      {
+        path: "/remove-member",
+        element: (
+          <ManagerAuth>
+            <RemoveMember />
+          </ManagerAuth>
+        ),
+      },
+      {
+        path: "/add-members-money",
+        element: (
+          <ManagerAuth>
+            <AddMembersMoney />
+          </ManagerAuth>
+        ),
+      },
+      {
+        path: "/start-new-month",
+        element: (
+          <ManagerAuth>
+            <StartNewMonth />
+          </ManagerAuth>
+        ),
+      },
+      {
+        path: "/delete-old-month",
+        element: (
+          <ManagerAuth>
+            <DeleteOldMonth />
+          </ManagerAuth>
+        ),
+      },
+      {
+        path: "/delete-mess",
+        element: (
+          <ManagerAuth>
+            <DeleteMess />
+          </ManagerAuth>
+        ),
+      },
+      {
+        path: "/change-manager",
+        element: (
+          <ManagerAuth>
+            <ChangeManager />
+          </ManagerAuth>
+        ),
       },
     ],
   },
-  { path: "/mess-metrics/protected-explore/dashboard", element: <Dashboard /> },
-  { path: "/mess-metrics/protected-explore/dashboard/all-users", element: <AllUsers /> },
-  { path: "/mess-metrics/protected-explore/dashboard/all-admins", element: <AllAdmin /> },
-  { path: "/mess-metrics/protected-explore/dashboard/all-mess", element: <AllMess /> },
-  { path: "/mess-metrics/protected-explore/dashboard/all-months", element: <AllMonth /> },
-];
-
-const Routes = () => {
-  const { data, status } = useGetUserProfileQuery();
-
-  const [mainLayoutChild, setMainLayoutChild] = useState(mainLayoutChildInit);
-
-  const managerRoutes = [
-    {
-      path: "/add-meal",
-      element: (
-        <ManagerAuth>
-          <AddMeal />
-        </ManagerAuth>
-      ),
-    },
-    {
-      path: "/update-meal",
-      element: (
-        <ManagerAuth>
-          <UpdateMeal />
-        </ManagerAuth>
-      ),
-    },
-    {
-      path: "/add-meal-cost",
-      element: (
-        <ManagerAuth>
-          <AddMealCoast />
-        </ManagerAuth>
-      ),
-    },
-    {
-      path: "/add-shared-cost",
-      element: (
-        <ManagerAuth>
-          <AddSharedOtherCost />
-        </ManagerAuth>
-      ),
-    },
-    {
-      path: "/add-individual-cost",
-      element: (
-        <ManagerAuth>
-          <AddIndividualOtherCost />
-        </ManagerAuth>
-      ),
-    },
-    // {
-    //   path: "/update-cost",
-    //   element: (
-    //     <ManagerAuth>
-    //       <UpdateMessCost />
-    //     </ManagerAuth>
-    //   ),
-    // },
-    {
-      path: "/add-member",
-      element: (
-        <ManagerAuth>
-          <AddMember />
-        </ManagerAuth>
-      ),
-    },
-    {
-      path: "/remove-member",
-      element: (
-        <ManagerAuth>
-          <RemoveMember />
-        </ManagerAuth>
-      ),
-    },
-    {
-      path: "/add-members-money",
-      element: (
-        <ManagerAuth>
-          <AddMembersMoney />
-        </ManagerAuth>
-      ),
-    },
-    {
-      path: "/start-new-month",
-      element: (
-        <ManagerAuth>
-          <StartNewMonth />
-        </ManagerAuth>
-      ),
-    },
-    {
-      path: "/delete-old-month",
-      element: (
-        <ManagerAuth>
-          <DeleteOldMonth />
-        </ManagerAuth>
-      ),
-    },
-    {
-      path: "/delete-mess",
-      element: (
-        <ManagerAuth>
-          <DeleteMess />
-        </ManagerAuth>
-      ),
-    },
-    {
-      path: "/change-manager",
-      element: (
-        <ManagerAuth>
-          <ChangeManager />
-        </ManagerAuth>
-      ),
-    },
-  ];
-
-  useEffect(() => {
-    if (status === "fulfilled" && data?.data?.role === "manager") {
-      setMainLayoutChild([...mainLayoutChildInit, ...managerRoutes]);
-    } else {
-      setMainLayoutChild(mainLayoutChildInit);
-    }
-  }, [data]);
-
-  const routes = [
-    {
-      path: "/",
-      element: <MainLayout />,
-      children: mainLayoutChild,
-    },
-    { path: "/user/login", element: <Login /> },
-    { path: "/user/register", element: <Register /> },
-    { path: "/create-mess", element: <CreateMess /> },
-    {
-      path: "*",
-      element: <ErrorPage />,
-    },
-  ];
-
-  return createBrowserRouter(routes);
-};
-
-export default Routes;
+  { path: "/user/login", element: <Login /> },
+  { path: "/user/register", element: <Register /> },
+  { path: "/create-mess", element: <CreateMess /> },
+  {
+    path: "/error",
+    element: <ErrorPage />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
+]);
