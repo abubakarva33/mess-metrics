@@ -20,7 +20,8 @@ import { useNavigate } from "react-router-dom";
 const UpdateMeal = () => {
   const [meal, setMeal] = useState([]);
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
-  const { data: mealData, isFetching: mealFetching } = useGetMessMealQuery(startDate);
+  const { data: mealData, isFetching: mealFetching } =
+    useGetMessMealQuery(startDate);
   const [UpdateMeal] = useUpdateMealMutation();
   const navigate = useNavigate();
   console.log({ mealData, meal });
@@ -64,10 +65,14 @@ const UpdateMeal = () => {
   const onFinish = async () => {
     const findValues = meal.filter((m) => m.isChanged);
     const fieldValues = findValues.map((m) => ({
-      user: m.member._id,
+      id: m.member._id,
       meal: m.meal,
     }));
-    console.log(fieldValues);
+    const body = {
+      date: startDate,
+      meals: fieldValues,
+    };
+    console.log({ fieldValues, body, meal });
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -78,11 +83,7 @@ const UpdateMeal = () => {
       confirmButtonText: "Yes, update it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await UpdateMeal({
-          _id: mealData?._id,
-          date: mealData.date,
-          meal: fieldValues,
-        }).unwrap();
+        const res = await UpdateMeal(body).unwrap();
         if (res?.success) {
           Swal.fire({
             text: "Meal Updated successfully",
@@ -105,15 +106,22 @@ const UpdateMeal = () => {
   return (
     <div>
       <div className="addMealSection">
-        <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
+        <div
+          className="addMealCostSection sectionShadow mx-auto"
+          style={{ maxWidth: "500px" }}
+        >
           <h3 className="text-center mt-2 mb-4">Update Meal</h3>
           <div className="mealDatePicker mb-4">
             <ReactDatePicker
               className="w-100"
-              selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+              selected={
+                new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))
+              }
               dateFormat="dd-MM-yyyy"
               showIcon
-              onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+              onChange={(date) =>
+                setStartDate(moment(date).format("DD-MM-YYYY"))
+              }
               icon={<MdCalendarMonth />}
             />
           </div>
@@ -122,7 +130,11 @@ const UpdateMeal = () => {
             {meal?.map((m, ind) => (
               <div className="phoneItem " key={ind}>
                 <div className="phoneItemLeft">
-                  <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
+                  <img
+                    src="/images/userIcon.png"
+                    alt=""
+                    className="mealItemPhoto"
+                  />
                   <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
                 </div>
                 <div className="d-flex">
@@ -160,7 +172,12 @@ const UpdateMeal = () => {
               </div>
             ))}
           </div>
-          <Button type="primary" className="w-100" onClick={onFinish}>
+          <Button
+            type="primary"
+            className="w-100"
+            onClick={onFinish}
+            disabled={Array.isArray(meal) ? [...meal?.filter((m) => m.isChanged)].length <= 0 : true}
+          >
             Submit
           </Button>
         </div>

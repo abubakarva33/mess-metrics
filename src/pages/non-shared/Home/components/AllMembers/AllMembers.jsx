@@ -5,7 +5,14 @@ import { balanceCalculator } from "../../../../../constant/calculation";
 
 const AllMembers = ({ data, mealRate, sharedCost }) => {
   const { deposit, individualCost, meal, user, _id } = data;
-  const calculate = balanceCalculator(meal, mealRate, individualCost, sharedCost, deposit);
+  const calculate = balanceCalculator({
+    meal,
+    mealRate,
+    individualCost,
+    sharedCost,
+    deposit,
+  });
+  
   return (
     <Col sm={12} md={6} lg={6} xl={4} xxl={4}>
       <Link to={`/all-members/${_id}`}>
@@ -14,7 +21,7 @@ const AllMembers = ({ data, mealRate, sharedCost }) => {
           <div className="d-gridTwo">
             <p className="mb-0">Total Meal: {meal}</p>
             <p className="mb-0">
-              Cost: {calculate[1]} <span className="fs-5">&#2547;</span>{" "}
+              Cost: {calculate.cost} <span className="fs-5">&#2547;</span>{" "}
             </p>
           </div>
           <div className="d-gridTwo">
@@ -22,7 +29,7 @@ const AllMembers = ({ data, mealRate, sharedCost }) => {
               Deposit: {deposit} <span className="fs-5">&#2547;</span>
             </p>
             <p className="mb-0">
-              Balance: {calculate[0]}
+              Balance: {calculate.balance}
               <span className="fs-5">&#2547;</span>
             </p>
           </div>

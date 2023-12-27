@@ -16,7 +16,7 @@ const actionApi = mainApi.injectEndpoints({
       providesTags: ["Action"],
     }),
     updateMeal: builder.mutation({
-      query: ({ _id, ...body }) => ({
+      query: (body) => ({
         url: `meal`,
         method: "PUT",
         body,
