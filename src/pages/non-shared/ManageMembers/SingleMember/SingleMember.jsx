@@ -8,6 +8,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useGetSingleUserAccountQuery } from "../../../../redux/api/sampleApi/userApi";
 import { useGetMonthsQuery } from "../../../../redux/api/sampleApi/monthApi";
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
+import SingleMemberMonthDetails from "./SingleMemberMonthDetails";
 
 const SingleMember = () => {
   const { Id } = useParams();
@@ -106,51 +107,11 @@ const SingleMember = () => {
                     </div>
                   </div>
                 </div>
-                <div className="profileInfoCenter">
-                  <div className=" profileInfoTop">
-                    <MdArrowBackIosNew onClick={switchDataMinus} />
-                    <h4 className="">{month?.name}</h4>
-                    <MdArrowForwardIos onClick={switchDataPlus} />
-                  </div>
-                  <div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Total Meal</p>
-                      </div>
-                      <p className="mb-0"> :{month?.meal}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Total Cost</p>
-                      </div>
-                      <p className="mb-0"> :{month?.totalCost}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Shared Cost</p>
-                      </div>
-                      <p className="mb-0"> :{month?.sharedCost}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Individual Cost</p>
-                      </div>
-                      <p className="mb-0"> :{month?.individualCost}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Deposit </p>
-                      </div>
-                      <p className="mb-0"> :{month?.deposit}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Balance </p>
-                      </div>
-                      <p className="mb-0"> :{month?.balance}</p>
-                    </div>
-                  </div>
-                </div>
+                <SingleMemberMonthDetails
+                  month={month}
+                  switchDataPlus={switchDataPlus}
+                  switchDataMinus={switchDataMinus}
+                />
               </Col>
             </Row>
           </Col>
