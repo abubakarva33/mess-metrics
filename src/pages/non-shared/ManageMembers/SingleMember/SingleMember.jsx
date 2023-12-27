@@ -2,7 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import "./SingleMember.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "antd";
 import { IoIosArrowBack } from "react-icons/io";
 import {
@@ -10,29 +10,41 @@ import {
   useGetUserProfileQuery,
 } from "../../../../redux/api/sampleApi/userApi";
 import Spinner from "../../../../components/Spinner/Spinner";
+import { useGetMonthsQuery } from "../../../../redux/api/sampleApi/monthApi";
 
 const SingleMember = () => {
   const { Id } = useParams();
   const navigate = useNavigate();
-  const { data: profileData, isFetching } = useGetUserProfileQuery();
-  if (isFetching) {
-    return <Spinner />;
-  }
-  const { data, isFetching: singleUserFetching } = useGetSingleUserAccountQuery({
+  const [activeMonth, setActiveMonth] = useState("");
+  const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
+  const { data: monthData, isFetching: monthsFetching } = useGetMonthsQuery();
+  const activeDocument = monthData?.find((item) => item.isActive === true);
+  const { data: singleUserData, isFetching: singleUserFetching } = useGetSingleUserAccountQuery({
     userId: Id,
-    monthId: profileData?.data?.activeMonth,
+    monthId: activeMonth,
   });
-  if (singleUserFetching) {
+
+  useEffect(() => {
+    if (activeDocument) {
+      setActiveMonth(activeDocument._id);
+    }
+  }, [activeDocument]);
+
+  if (monthsFetching || singleUserFetching) {
     return <Spinner />;
   }
-  const { name, email, phone, role, dateOfBirth, month } = data?.data;
-  // const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
-  // const currentObject = monthData[currentObjectIndex];
-  console.log(data?.data);
+  const monthList = monthData?.map((month) => month._id);
+  const { name, email, phone, role, dateOfBirth, month } = singleUserData?.data;
 
-  // const switchData = () => {
-  //   setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);
-  // };
+  const currentObject = monthList[currentObjectIndex];
+  // console.log(data?.data);
+
+  const switchDataPlus = () => {
+    setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);
+  };
+  const switchDataMinus = () => {
+    setCurrentObjectIndex((prevIndex) => (prevIndex - 1) % monthData.length);
+  };
 
   return (
     <div>
@@ -156,9 +168,13 @@ const SingleMember = () => {
 
                 <div className="profileInfoCenter">
                   <div className=" profileInfoTop">
-                    <MdArrowBackIosNew />
-                    <h4 className=""> {month.name}</h4>
-                    <MdArrowForwardIos />
+                    <MdArrowBackIosNew
+                      onClick={() => (switchDataMinus, setActiveMonth(currentObject))}
+                    />
+                    <h4 className=""> {month?.name}</h4>
+                    <MdArrowForwardIos
+                      onClick={() => (switchDataPlus, setActiveMonth(currentObject))}
+                    />
                   </div>
                   <div>
                     <div className="d-gridTwo">
