@@ -5,12 +5,9 @@ import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { Button } from "antd";
 import { IoIosArrowBack } from "react-icons/io";
-import {
-  useGetSingleUserAccountQuery,
-  useGetUserProfileQuery,
-} from "../../../../redux/api/sampleApi/userApi";
-import Spinner from "../../../../components/Spinner/Spinner";
+import { useGetSingleUserAccountQuery } from "../../../../redux/api/sampleApi/userApi";
 import { useGetMonthsQuery } from "../../../../redux/api/sampleApi/monthApi";
+import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 
 const SingleMember = () => {
   const { Id } = useParams();
@@ -23,29 +20,23 @@ const SingleMember = () => {
     userId: Id,
     monthId: activeMonth,
   });
-
   useEffect(() => {
     if (activeDocument) {
       setActiveMonth(activeDocument._id);
     }
   }, [activeDocument]);
-
   if (monthsFetching || singleUserFetching) {
-    return <Spinner />;
+    return <SpinnerMain />;
   }
   const monthList = monthData?.map((month) => month._id);
   const { name, email, phone, role, dateOfBirth, month } = singleUserData?.data;
-
   const currentObject = monthList[currentObjectIndex];
-  // console.log(data?.data);
-
   const switchDataPlus = () => {
     setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);
   };
   const switchDataMinus = () => {
     setCurrentObjectIndex((prevIndex) => (prevIndex - 1) % monthData.length);
   };
-
   return (
     <div>
       <Container fluid className="my-4 singleMemberSection">
@@ -119,53 +110,6 @@ const SingleMember = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* <div className="profileInfoCenter">
-                  <div className=" profileInfoTop">
-                    <MdArrowBackIosNew onClick={switchData} />
-                    <h4 className=""> {currentObject?.monthName}</h4>
-                    <MdArrowForwardIos onClick={switchData} />
-                  </div>
-                  <div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Total Meal</p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.totalMeal}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Total Cost</p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.totalCost}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Shared Cost</p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.sharedCost}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Individual Cost</p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.individualCost}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Deposit </p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.deposit}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Balance </p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.balance}</p>
-                    </div>
-                  </div>
-                </div> */}
-
                 <div className="profileInfoCenter">
                   <div className=" profileInfoTop">
                     <MdArrowBackIosNew
