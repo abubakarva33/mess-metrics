@@ -28,6 +28,15 @@ import Register from "../pages/non-shared/Register/Register";
 import CreateMess from "../pages/non-shared/CreateMess/CreateMess";
 import Members from "../pages/non-shared/ManageMembers/Members/Members";
 import ManagerAuth from "../components/Auth/ManagerAuth";
+import Birthdays from "../pages/non-shared/Birthdays/Birthdays";
+import PhoneBook from "../pages/non-shared/PhoneBook/PhoneBook";
+import RequestMeal from "../pages/non-shared/RequestMeal/RequestMeal";
+import SingleMember from "../pages/non-shared/ManageMembers/SingleMember/SingleMember";
+import Dashboard from "../pages/adminPanel/Dashboard/Dashboard";
+import AllUsers from "../pages/adminPanel/AllUsers/AllUsers";
+import AllAdmin from "../pages/adminPanel/AllAdmin/AllAdmin";
+import AllMess from "../pages/adminPanel/AllMess/AllMess";
+import AllMonth from "../pages/adminPanel/AllMonth/AllMonth";
 
 export const routes = createBrowserRouter([
   {
@@ -40,7 +49,43 @@ export const routes = createBrowserRouter([
       { path: "/my-profile", element: <MyProfile /> },
       { path: "/notification", element: <Notification /> },
       { path: "/helps", element: <Help /> },
+      { path: "/all-members", element: <Members /> },
+      { path: "/switch-active-month", element: <SwitchActiveMonth /> },
+      { path: "/mess-profile", element: <MessProfile /> },
+      { path: "/phone-book", element: <PhoneBook /> },
       { path: "/birthdays", element: <Birthdays /> },
+      { path: "/request-meal", element: <RequestMeal /> },
+      { path: "/all-members/:Id", element: <SingleMember /> },
+      {
+        path: "/active-month-details",
+        element: <ActiveMonthDetails />,
+        children: [
+          {
+            path: "/active-month-details/meal",
+            element: <ActiveMonthDetails />,
+          },
+        ],
+      },
+      {
+        path: "/mess-metrics/protected-explore/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/mess-metrics/protected-explore/dashboard/all-users",
+        element: <AllUsers />,
+      },
+      {
+        path: "/mess-metrics/protected-explore/dashboard/all-admins",
+        element: <AllAdmin />,
+      },
+      {
+        path: "/mess-metrics/protected-explore/dashboard/all-mess",
+        element: <AllMess />,
+      },
+      {
+        path: "/mess-metrics/protected-explore/dashboard/all-months",
+        element: <AllMonth />,
+      },
       {
         path: "/add-meal",
         element: (
@@ -81,14 +126,14 @@ export const routes = createBrowserRouter([
           </ManagerAuth>
         ),
       },
-      {
-        path: "/update-cost",
-        element: (
-          <ManagerAuth>
-            <UpdateMessCost />
-          </ManagerAuth>
-        ),
-      },
+      // {
+      //   path: "/update-cost",
+      //   element: (
+      //     <ManagerAuth>
+      //       <UpdateMessCost />
+      //     </ManagerAuth>
+      //   ),
+      // },
       {
         path: "/add-member",
         element: (
@@ -105,7 +150,6 @@ export const routes = createBrowserRouter([
           </ManagerAuth>
         ),
       },
-      { path: "/all-members", element: <Members /> },
       {
         path: "/add-members-money",
         element: (
@@ -114,8 +158,6 @@ export const routes = createBrowserRouter([
           </ManagerAuth>
         ),
       },
-      { path: "/active-month-details", element: <ActiveMonthDetails /> },
-      { path: "/switch-active-month", element: <SwitchActiveMonth /> },
       {
         path: "/start-new-month",
         element: (
@@ -132,7 +174,6 @@ export const routes = createBrowserRouter([
           </ManagerAuth>
         ),
       },
-      { path: "/mess-profile", element: <MessProfile /> },
       {
         path: "/delete-mess",
         element: (

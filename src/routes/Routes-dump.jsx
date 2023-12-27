@@ -195,23 +195,19 @@ const Routes = () => {
 
   const [mainLayoutChild, setMainLayoutChild] = useState(mainLayoutChildInit);
 
-  // useEffect(() => {
-  //   if (status === "fulfilled" && data?.data?.role === "manager") {
-  //     setMainLayoutChild((prev) => [...prev, ...managerRoutes]);
-  //   } else {
-  //     setMainLayoutChild(mainLayoutChildInit);
-  //   }
-  // }, [data?.data?.role]);
+  useEffect(() => {
+    if (status === "fulfilled" && data?.data?.role === "manager") {
+      setMainLayoutChild((prev) => [...prev, ...managerRoutes]);
+    } else {
+      setMainLayoutChild(mainLayoutChildInit);
+    }
+  }, [data?.data?.role]);
 
   const routes = [
     {
       path: "/",
       element: <MainLayout />,
-      children:
-        status === "fulfilled" && data?.data?.role === "manager"
-          ? mainLayoutChildInit
-          : [...mainLayoutChildInit, ...managerRoutes],
-      // children: mainLayoutChild,
+      children: mainLayoutChild,
     },
     { path: "/user/login", element: <Login /> },
     { path: "/user/register", element: <Register /> },
