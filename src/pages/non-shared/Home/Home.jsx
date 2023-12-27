@@ -22,7 +22,8 @@ import { FloatButton } from "antd";
 
 const Home = () => {
   const { data: usersAcc, isFetching } = useGetUserAccountQuery();
-  const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
+  const { data: messAccount, isFetching: messFetching } =
+    useGetMessAccountQuery();
   const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery();
 
   if (isFetching || messFetching || bazarFetching) {
@@ -57,6 +58,7 @@ const Home = () => {
         <Row className="gy-2 gx-2 pb-5 mb-5">
           {usersAcc?.data?.map((user) => (
             <AllMembers
+              key={user._id}
               data={user}
               mealRate={messAccount?.mealRate}
               sharedCost={messAccount?.sharedCostPerPerson}
