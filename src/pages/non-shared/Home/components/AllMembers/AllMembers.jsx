@@ -3,7 +3,7 @@ import "./AllMembers.css";
 import { Link } from "react-router-dom";
 import { balanceCalculator } from "../../../../../constant/calculation";
 
-const AllMembers = ({ data, mealRate, sharedCost }) => {
+const AllMembers = ({ data, mealRate, sharedCost, monthId }) => {
   const { deposit, individualCost, meal, user, _id } = data;
   const calculate = balanceCalculator({
     meal,
@@ -12,10 +12,11 @@ const AllMembers = ({ data, mealRate, sharedCost }) => {
     sharedCost,
     deposit,
   });
-  
+  console.log(monthId);
+
   return (
     <Col sm={12} md={6} lg={6} xl={4} xxl={4}>
-      <Link to={`/all-members/${_id}`}>
+      <Link to={`/all-members/${user._id}`}>
         <div className="member">
           <h6>{user?.name}</h6>
           <div className="d-gridTwo">

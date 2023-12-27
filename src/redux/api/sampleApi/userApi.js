@@ -39,8 +39,8 @@ const userApi = mainApi.injectEndpoints({
       providesTags: ["Action"],
     }),
     getSingleUserAccount: builder.query({
-      query: (Id) => ({
-        url: `users/account/${Id}`,
+      query: ({ userId, monthId }) => ({
+        url: `actions/user-account/?monthId=${monthId}&userId=${userId}`,
       }),
       providesTags: ["Action"],
     }),

@@ -5,58 +5,34 @@ import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { useState } from "react";
 import { Button } from "antd";
 import { IoIosArrowBack } from "react-icons/io";
-import { useGetSingleUserAccountQuery } from "../../../../redux/api/sampleApi/userApi";
-
-const memberProfileData = {
-  name: "abubakar siddikvaiiiii",
-  email: "abu@gmail.com",
-  phone: "01799057302",
-  role: "member",
-  dateOfBirth: "12-12-2000",
-  notificationMessage: " eta shudu admin send korte parbe ",
-  monthData: [
-    {
-      monthName: "January",
-      totalMeal: "1500",
-      totalCost: "5100",
-      deposit: "15500",
-      balance: "3500",
-      sharedCost: "5050",
-      individualCost: "580",
-    },
-    {
-      monthName: "February",
-      totalMeal: "10",
-      totalCost: "50",
-      deposit: "150",
-      balance: "30",
-      sharedCost: "50",
-      individualCost: "50.5",
-    },
-    {
-      monthName: "March",
-      totalMeal: "1000",
-      totalCost: "5000",
-      deposit: "15500",
-      balance: "3050",
-      sharedCost: "5008",
-      individualCost: "508",
-    },
-  ],
-};
+import {
+  useGetSingleUserAccountQuery,
+  useGetUserProfileQuery,
+} from "../../../../redux/api/sampleApi/userApi";
+import Spinner from "../../../../components/Spinner/Spinner";
 
 const SingleMember = () => {
   const { Id } = useParams();
   const navigate = useNavigate();
-  const { data } = useGetSingleUserAccountQuery(Id);
-  const { name, email, phone, role, dateOfBirth, monthData } = memberProfileData;
-  const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
-  const currentObject = monthData[currentObjectIndex];
-  console.log({ Id, data });
+  const { data: profileData, isFetching } = useGetUserProfileQuery();
+  if (isFetching) {
+    return <Spinner />;
+  }
+  const { data, isFetching: singleUserFetching } = useGetSingleUserAccountQuery({
+    userId: Id,
+    monthId: profileData?.data?.activeMonth,
+  });
+  if (singleUserFetching) {
+    return <Spinner />;
+  }
+  const { name, email, phone, role, dateOfBirth, month } = data?.data;
+  // const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
+  // const currentObject = monthData[currentObjectIndex];
+  console.log(data?.data);
 
-  const switchData = () => {
-    setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);
-  };
+  // const switchData = () => {
+  //   setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);
+  // };
 
   return (
     <div>
@@ -122,17 +98,17 @@ const SingleMember = () => {
                       </div>
                       <Button> Change</Button>
                     </div>
-                    {/* <div className="d-flex align-items-center justify-content-between">
+                    <div className="d-flex align-items-center justify-content-between">
                       <div>
                         <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
                         <p className="mb-1"> create a notice now</p>
                       </div>
                       <Button> Send</Button>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
 
-                <div className="profileInfoCenter">
+                {/* <div className="profileInfoCenter">
                   <div className=" profileInfoTop">
                     <MdArrowBackIosNew onClick={switchData} />
                     <h4 className=""> {currentObject?.monthName}</h4>
@@ -176,6 +152,52 @@ const SingleMember = () => {
                       <p className="mb-0"> :{currentObject?.balance}</p>
                     </div>
                   </div>
+                </div> */}
+
+                <div className="profileInfoCenter">
+                  <div className=" profileInfoTop">
+                    <MdArrowBackIosNew />
+                    <h4 className=""> {month.name}</h4>
+                    <MdArrowForwardIos />
+                  </div>
+                  <div>
+                    <div className="d-gridTwo">
+                      <div>
+                        <p className="mb-0"> Total Meal</p>
+                      </div>
+                      <p className="mb-0"> :{month?.meal}</p>
+                    </div>
+                    <div className="d-gridTwo">
+                      <div>
+                        <p className="mb-0"> Total Cost</p>
+                      </div>
+                      <p className="mb-0"> :{month?.totalCost}</p>
+                    </div>
+                    <div className="d-gridTwo">
+                      <div>
+                        <p className="mb-0"> Shared Cost</p>
+                      </div>
+                      <p className="mb-0"> :{month?.sharedCost}</p>
+                    </div>
+                    <div className="d-gridTwo">
+                      <div>
+                        <p className="mb-0"> Individual Cost</p>
+                      </div>
+                      <p className="mb-0"> :{month?.individualCost}</p>
+                    </div>
+                    <div className="d-gridTwo">
+                      <div>
+                        <p className="mb-0"> Deposit </p>
+                      </div>
+                      <p className="mb-0"> :{month?.deposit}</p>
+                    </div>
+                    <div className="d-gridTwo">
+                      <div>
+                        <p className="mb-0"> Balance </p>
+                      </div>
+                      <p className="mb-0"> :{month?.balance}</p>
+                    </div>
+                  </div>
                 </div>
               </Col>
             </Row>
@@ -184,7 +206,7 @@ const SingleMember = () => {
       </Container>
 
       {/* for small device only  */}
-
+      {/* 
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
@@ -301,7 +323,7 @@ const SingleMember = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
