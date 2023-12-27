@@ -54,6 +54,16 @@ const mainLayoutChildInit = [
   { path: "/birthdays", element: <Birthdays /> },
   { path: "/request-meal", element: <RequestMeal /> },
   { path: "/all-members/:Id", element: <SingleMember /> },
+  {
+    path: "/active-month-details",
+    element: <ActiveMonthDetails />,
+    children: [
+      {
+        path: "/active-month-details/meal",
+        element: <ActiveMonthDetails />,
+      },
+    ],
+  },
   { path: "/mess-metrics/protected-explore/dashboard", element: <Dashboard /> },
   { path: "/mess-metrics/protected-explore/dashboard/all-users", element: <AllUsers /> },
   { path: "/mess-metrics/protected-explore/dashboard/all-admins", element: <AllAdmin /> },
@@ -136,14 +146,6 @@ const Routes = () => {
       element: (
         <ManagerAuth>
           <AddMembersMoney />
-        </ManagerAuth>
-      ),
-    },
-    {
-      path: "/active-month-details",
-      element: (
-        <ManagerAuth>
-          <ActiveMonthDetails />
         </ManagerAuth>
       ),
     },

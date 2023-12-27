@@ -1,5 +1,3 @@
-
-
 const addMeal = {
   date: "string",
   mealDetails: [{ id, meal }],

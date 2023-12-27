@@ -65,6 +65,31 @@ const actionApi = mainApi.injectEndpoints({
       transformResponse: (response) => response.data,
       providesTags: ["Action"],
     }),
+    getAllBazar: builder.query({
+      query: () => `bazar `,
+      transformResponse: (response) => response.data,
+      providesTags: ["Action"],
+    }),
+    getAllSharedCost: builder.query({
+      query: () => `shared-cost `,
+      transformResponse: (response) => response.data,
+      providesTags: ["Action"],
+    }),
+    getAllMeal: builder.query({
+      query: () => `meal `,
+      transformResponse: (response) => response.data,
+      providesTags: ["Action"],
+    }),
+    getAllDeposit: builder.query({
+      query: () => `deposit `,
+      transformResponse: (response) => response.data,
+      providesTags: ["Action"],
+    }),
+    getAllIndividualCost: builder.query({
+      query: () => `individual-cost `,
+      transformResponse: (response) => response.data,
+      providesTags: ["Action"],
+    }),
   }),
 });
 
@@ -78,4 +103,9 @@ export const {
   useGetLastBazarQuery,
   useAddMembersMoneyMutation,
   useAddIndividualCostMutation,
+  useGetAllBazarQuery,
+  useGetAllSharedCostQuery,
+  useGetAllMealQuery,
+  useGetAllDepositQuery,
+  useGetAllIndividualCostQuery
 } = actionApi;

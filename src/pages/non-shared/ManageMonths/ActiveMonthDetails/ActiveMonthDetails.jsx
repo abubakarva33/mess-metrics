@@ -5,9 +5,22 @@ import { Button, Divider, Select, Space, Table } from "antd";
 import TableTemplate from "./components/TableTemplate/TableTemplate";
 import { useState } from "react";
 import ActiveDetailsTemplate from "./components/ActiveDetailsTemplate/ActiveDetailsTemplate";
+import {
+  useGetAllBazarQuery,
+  useGetAllDepositQuery,
+  useGetAllIndividualCostQuery,
+  useGetAllMealQuery,
+  useGetAllSharedCostQuery,
+} from "../../../../redux/api/sampleApi/actionApi";
 
 const ActiveMonthDetails = () => {
   const [columns, setColumns] = useState("mealColumns");
+  const [columnDataSource, setColumnDataSource] = useState("mealData");
+  const { data: bazarData } = useGetAllBazarQuery();
+  const { data: sharedCostData } = useGetAllSharedCostQuery();
+  const { data: mealData } = useGetAllMealQuery();
+  const { data: depositData } = useGetAllDepositQuery();
+  const { data: individualCostData } = useGetAllIndividualCostQuery();
 
   const optionsData = [
     {
@@ -35,46 +48,6 @@ const ActiveMonthDetails = () => {
       label: "10-January-2023",
     },
   ];
-  const mealCostData = [
-    {
-      key: "1",
-      name: "John Brown",
-      date: "11-12-2023",
-      amount: 30,
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      date: "11-12-2023",
-      amount: 50,
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      date: "11-12-2023",
-      amount: 500,
-    },
-  ];
-  const depositData = [
-    {
-      key: "1",
-      name: "John Brown",
-      date: "11-12-2023",
-      amount: 30,
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      date: "11-12-2023",
-      amount: 50,
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      date: "11-12-2023",
-      amount: 500,
-    },
-  ];
   const columnData = {
     mealColumns: [
       {
@@ -84,7 +57,7 @@ const ActiveMonthDetails = () => {
       },
       {
         title: " Member Name",
-        dataIndex: "name",
+        render: (_, record) => record.user.name,
         key: "name",
       },
 
@@ -178,7 +151,7 @@ const ActiveMonthDetails = () => {
       },
       {
         title: " Member Name",
-        dataIndex: "name",
+        render: (_, record) => record.user.name,
         key: "name",
       },
 
@@ -211,8 +184,8 @@ const ActiveMonthDetails = () => {
       },
       {
         title: " Member Name",
-        dataIndex: "name",
         key: "name",
+        render: (_, record) => record.user.name,
       },
 
       {
@@ -265,8 +238,15 @@ const ActiveMonthDetails = () => {
       },
     ],
   };
-
+  const dataSource = {
+    bazarData: bazarData,
+    sharedCostData: sharedCostData,
+    mealData: mealData?.data,
+    depositData: depositData,
+    individualCostData: individualCostData,
+  };
   const column = columnData[columns];
+  const tableData = dataSource[columnDataSource];
 
   const onChange = (value) => {
     console.log(`selected ${value}`);
@@ -296,43 +276,45 @@ const ActiveMonthDetails = () => {
         <div className="activeMonthBtnGroups mb-4">
           <Button
             className={columns === "mealColumns" ? "activeNav" : undefined}
-            onClick={() => setColumns("mealColumns")}
+            onClick={() => (setColumns("mealColumns"), setColumnDataSource("mealData"))}
           >
             Meal
           </Button>
           <Button
             className={columns === "depositColumns" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => setColumns("depositColumns")}
+            onClick={() => (setColumns("depositColumns"), setColumnDataSource("depositData"))}
           >
             Deposit
           </Button>
           <Button
             className={columns === "mealCostColumns" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => setColumns("mealCostColumns")}
+            onClick={() => (setColumns("mealCostColumns"), setColumnDataSource("bazarData"))}
           >
             Meal Cost
           </Button>
 
           <Button
             className={columns === "SharedCostColumns" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => setColumns("SharedCostColumns")}
+            onClick={() => (setColumns("SharedCostColumns"), setColumnDataSource("sharedCostData"))}
           >
             Shared Other Cost
           </Button>
           <Button
             className={columns === "IndividualCostColumns" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => setColumns("IndividualCostColumns")}
+            onClick={() => (
+              setColumns("IndividualCostColumns"), setColumnDataSource("individualCostData")
+            )}
           >
             Individual Other Cost
           </Button>
           <Button
             className={columns === "bazarListColumns" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => setColumns("bazarListColumns")}
+            onClick={() => (setColumns("bazarListColumns"), setColumnDataSource("bazarData"))}
           >
             BazarList
           </Button>
         </div>
-        <TableTemplate data={mealCostData} columns={column} />
+        <TableTemplate data={tableData} columns={column} />
       </div>
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
@@ -392,14 +374,14 @@ const ActiveMonthDetails = () => {
             </div>
           </div>
         </div>
-        <div className="phoneBookContainerItemBg">
+        {/* <div className="phoneBookContainerItemBg">
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
               {Array.isArray(mealCostData) &&
                 mealCostData?.map((data, ind) => <ActiveDetailsTemplate key={ind} data={data} />)}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
