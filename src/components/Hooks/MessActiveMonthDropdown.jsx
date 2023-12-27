@@ -7,12 +7,13 @@ import { useEffect, useState } from "react";
 import { useGetUserProfileQuery } from "../../redux/api/sampleApi/userApi";
 
 const useActiveMonthOptions = () => {
-  const { data, isFetching } = useGetMonthsQuery();
+  const { data, isFetching } = useGetMonthsQuery({ limit: 100 });
+  const month = data?.data;
+  console.log({ data, month });
   const [months, setMonths] = useState([{ label: "Select Month", value: "" }]);
 
   useEffect(() => {
-    const monthList = data?.map((m) => {
-      console.log({ m });
+    const monthList = month?.map((m) => {
       return {
         label: `${m.name} ${m.isActive ? "(active)" : ""}`,
         value: m._id,
@@ -20,7 +21,7 @@ const useActiveMonthOptions = () => {
     });
 
     setMonths(monthList);
-  }, [data]);
+  }, [month]);
 
   if (isFetching) {
     return;
