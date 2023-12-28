@@ -1,6 +1,10 @@
 import { Spin } from "antd";
 import React from "react";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
+const pointer = {
+  pointerEvent: "none",
+  cursor: "not-allow",
+};
 
 const SingleMemberMonthDetails = ({
   month,
@@ -8,24 +12,21 @@ const SingleMemberMonthDetails = ({
   switchDataMinus,
   singleUserFetching,
   singleUserData,
+  total = 0,
 }) => {
   return (
     <Spin spinning={singleUserFetching}>
       <div className="profileInfoCenter">
         <div className=" profileInfoTop" style={{ userSelect: "none" }}>
-          <MdArrowBackIosNew
-            onClick={switchDataMinus}
-            cursor={"pointer"}
-            fontSize={20}
-          />
+          <span style={total >= 1 ? pointer : { cursor: "pointer" }}>
+            <MdArrowBackIosNew onClick={switchDataMinus} fontSize={20} />
+          </span>
           <h4 className="">
             {month?.name} {month?.year}
           </h4>
-          <MdArrowForwardIos
-            onClick={switchDataPlus}
-            cursor={"pointer"}
-            fontSize={20}
-          />
+          <span style={total >= 1 ? pointer : { cursor: "pointer" }}>
+            <MdArrowForwardIos onClick={switchDataPlus} fontSize={20} />
+          </span>
         </div>
         <div>
           <div className="d-gridTwo">

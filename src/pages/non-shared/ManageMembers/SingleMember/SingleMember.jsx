@@ -17,39 +17,22 @@ import { IoIosArrowBack } from "react-icons/io";
 const SingleMember = () => {
   const { Id } = useParams();
   const [page, setPage] = useState(1);
-  // const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { data: mData, isFetching: monthsFetching } = useGetMonthsQuery({
     page,
     limit: 1,
-    userId: Id
+    userId: Id,
   });
   const monthData = mData?.data[0];
 
-  console.log({ monthData, mData });
-
-  const { data: userProfile, isFetching: userFetching } =
-    useGetSingleUserQuery(Id);
-  const { data: singleUserData, isFetching: singleUserFetching } =
-    useGetSingleUserAccountQuery({
-      userId: Id,
-      monthId: monthData?._id ? monthData?._id : "",
-    });
+  const { data: userProfile, isFetching: userFetching } = useGetSingleUserQuery(Id);
+  const { data: singleUserData, isFetching: singleUserFetching } = useGetSingleUserAccountQuery({
+    userId: Id,
+    monthId: monthData?._id ? monthData?._id : "",
+  });
   const [removeMember] = useDeleteMemberMutation();
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   if (userProfile && !userFetching) {
-  //     setLoading(false);
-  //   } else if (!userFetching) {
-  //     setLoading(true);
-  //     navigate("/");
-  //   }
-  // }, [userProfile, userFetching, navigate]);
-
-  // if (loading) {
-  //   return <SpinnerMain />;
-  // }
+  console.log(userProfile);
 
   if (!userProfile) {
     return <p>Error: User not found</p>;
@@ -88,7 +71,7 @@ const SingleMember = () => {
       if (result.isConfirmed) {
         const res = await removeMember({ _id: mess, ids }).unwrap();
         if (res?.success) {
-          navigate('/')
+          navigate("/");
           const Toast = Swal.mixin({
             toast: true,
             position: "top-end",
@@ -116,11 +99,7 @@ const SingleMember = () => {
           <Col xs={12} sm={6} md={6} lg={6} xl={5} xxl={5}>
             <div className="memberProfileCenter">
               <div className="memberProfileCenterTop">
-                <img
-                  src="/images/singleUser.webp"
-                  alt=""
-                  className="memberProfileImage"
-                />
+                <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                 <div className="d-flexCenter flex-column">
                   <h3 className="mb-0 mt-3 memberProfileName">{name}</h3>
                   <h6> ( {role} )</h6>
@@ -132,11 +111,7 @@ const SingleMember = () => {
                     <p className="memberProfileNameText"> {email}</p>
                     <div className="fs-3 ">
                       <Link to={`mailto:${email}`} target="_blank">
-                        <img
-                          src="/images/forward-message.png"
-                          alt=""
-                          className="iconSize"
-                        />
+                        <img src="/images/forward-message.png" alt="" className="iconSize" />
                       </Link>
                     </div>
                   </div>
@@ -144,11 +119,7 @@ const SingleMember = () => {
                     <p className="memberProfileNameText"> {phone}</p>
                     <div className="fs-3 ">
                       <Link to={`tel:${phone}`} target="_blank">
-                        <img
-                          src="/images/telephone.png"
-                          alt=""
-                          className="iconSize"
-                        />
+                        <img src="/images/telephone.png" alt="" className="iconSize" />
                       </Link>
                     </div>
                   </div>
@@ -173,20 +144,14 @@ const SingleMember = () => {
                   <div>
                     <div className="d-flex align-items-center justify-content-between mb-2">
                       <div>
-                        <h5 className="mb-1 memberProfileManageItemText">
-                          {" "}
-                          No longer member?
-                        </h5>
+                        <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
                         <p className="mb-1">remove now</p>
                       </div>
                       <Button onClick={onFinish}> Remove</Button>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
-                        <h5 className="mb-1 memberProfileManageItemText">
-                          {" "}
-                          Need to send Notice?
-                        </h5>
+                        <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
                         <p className="mb-1"> create a notice now</p>
                       </div>
                       <Button> Send</Button>
@@ -199,6 +164,7 @@ const SingleMember = () => {
                   switchDataMinus={switchDataMinus}
                   singleUserFetching={singleUserFetching}
                   singleUserData={singleUserData}
+                  total={mData?.meta?.total}
                 />
               </Col>
             </Row>
@@ -212,10 +178,7 @@ const SingleMember = () => {
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack
-                className="componentHeaderIcon"
-                onClick={() => navigate(-1)}
-              />
+              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
               <h3>MEMBER PROFILE </h3>
             </div>
           </div>
@@ -225,11 +188,7 @@ const SingleMember = () => {
             <div className="pt-5 pb-3 px-3">
               <div className="memberProfileCenter">
                 <div className="memberProfileCenterTop">
-                  <img
-                    src="/images/singleUser.webp"
-                    alt=""
-                    className="memberProfileImage"
-                  />
+                  <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                   <div className="d-flexCenter flex-column">
                     <h3 className="mb-0 mt-3 memberProfileName">{name}</h3>
                     <h6> ( {role} )</h6>
@@ -241,11 +200,7 @@ const SingleMember = () => {
                       <p className="memberProfileNameText"> {email}</p>
                       <div className="fs-3 ">
                         <Link to={`mailto:${email}`} target="_blank">
-                          <img
-                            src="/images/forward-message.png"
-                            alt=""
-                            className="iconSize"
-                          />
+                          <img src="/images/forward-message.png" alt="" className="iconSize" />
                         </Link>
                       </div>
                     </div>
@@ -253,22 +208,14 @@ const SingleMember = () => {
                       <p className="memberProfileNameText"> {phone}</p>
                       <div className="fs-3 ">
                         <Link to={`tel:${phone}`} target="_blank">
-                          <img
-                            src="/images/telephone.png"
-                            alt=""
-                            className="iconSize"
-                          />
+                          <img src="/images/telephone.png" alt="" className="iconSize" />
                         </Link>
                       </div>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                       <p className="memberProfileNameText"> {dateOfBirth}</p>
                       <div className="fs-3 ">
-                        <img
-                          src="/images/tart.png"
-                          alt=""
-                          className="iconSize"
-                        />
+                        <img src="/images/tart.png" alt="" className="iconSize" />
                       </div>
                     </div>
                   </div>
@@ -283,20 +230,14 @@ const SingleMember = () => {
                 <div>
                   <div className="d-flex align-items-center justify-content-between mb-2">
                     <div>
-                      <h5 className="mb-1 memberProfileManageItemText">
-                        {" "}
-                        No longer member?
-                      </h5>
+                      <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
                       <p className="mb-1">remove now</p>
                     </div>
                     <Button onClick={onFinish}> Remove</Button>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <div>
-                      <h5 className="mb-1 memberProfileManageItemText">
-                        {" "}
-                        Need to send Notice?
-                      </h5>
+                      <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
                       <p className="mb-1"> create a notice now</p>
                     </div>
                     <Button> Send</Button>
