@@ -4,9 +4,14 @@ import { Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import { useState } from "react";
-import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
+import {
+  useGetSingleUserAccountQuery,
+  useGetSingleUserQuery,
+  useGetUserProfileQuery,
+} from "../../../redux/api/sampleApi/userApi";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaBirthdayCake, FaCamera, FaEdit, FaPhoneAlt } from "react-icons/fa";
+import { useGetMonthsQuery } from "../../../redux/api/sampleApi/monthApi";
 
 const monthData = [
   {
@@ -40,7 +45,20 @@ const monthData = [
 
 const MyProfile = () => {
   const { data } = useGetUserProfileQuery();
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { data: mData, isFetching: monthsFetching } = useGetMonthsQuery({
+    page,
+    limit: 1,
+  });
+  const monthData = mData?.data[0];
+  const { data: userProfile, isFetching: userFetching } = useGetSingleUserQuery(data._id);
+  const { data: singleUserData, isFetching: singleUserFetching } = useGetSingleUserAccountQuery({
+    userId: data._id,
+    monthId: monthData?._id ? monthData?._id : "",
+  });
+
   const { name, email, phone, role, dateOfBirth } = data?.data;
   const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
   const currentObject = monthData[currentObjectIndex];
