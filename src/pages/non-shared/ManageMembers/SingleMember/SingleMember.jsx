@@ -22,11 +22,12 @@ const SingleMember = () => {
   const { data: mData, isFetching: monthsFetching } = useGetMonthsQuery({
     page,
     limit: 1,
+    userId: Id
   });
   const monthData = mData?.data[0];
 
   console.log({ monthData, mData });
-  
+
   const { data: userProfile, isFetching: userFetching } =
     useGetSingleUserQuery(Id);
   const { data: singleUserData, isFetching: singleUserFetching } =

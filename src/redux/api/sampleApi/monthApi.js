@@ -20,9 +20,9 @@ const messApi = mainApi.injectEndpoints({
     }),
 
     getMonths: builder.query({
-      query: ({ page, limit }) =>
-        `month/mess?limit=${limit ? limit : 10}${
-          page ? "&page=" + page : ""
+      query: ({ page, limit, userId }) =>
+        `month/mess?limit=${limit ? limit : 10}${page ? "&page=" + page : ""}${
+          userId ? "&userId=" + userId : ""
         }`,
       // transformResponse: (response) => response.data,
       providesTags: ["Month"],
