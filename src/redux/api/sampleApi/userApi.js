@@ -25,12 +25,12 @@ const userApi = mainApi.injectEndpoints({
       providesTags: ["Profile"],
     }),
     updateProfile: builder.mutation({
-      query: (body) => ({
-        url: `users/profile`,
+      query: ({ _id, ...body }) => ({
+        url: `users/${_id}`,
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["Profile"],
+      invalidatesTags: ["Profile", "Action"],
     }),
     getUserAccount: builder.query({
       query: () => ({

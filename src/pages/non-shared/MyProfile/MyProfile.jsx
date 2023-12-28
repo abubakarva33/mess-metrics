@@ -8,11 +8,13 @@ import {
   useGetSingleUserAccountQuery,
   useGetSingleUserQuery,
   useGetUserProfileQuery,
+  useUpdateProfileMutation,
 } from "../../../redux/api/sampleApi/userApi";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaBirthdayCake, FaCamera, FaEdit, FaPhoneAlt } from "react-icons/fa";
 import { useGetMonthsQuery } from "../../../redux/api/sampleApi/monthApi";
 import SingleMemberMonthDetails from "../ManageMembers/SingleMember/SingleMemberMonthDetails";
+import Swal from "sweetalert2";
 
 const monthData = [
   {
@@ -47,9 +49,9 @@ const monthData = [
 const MyProfile = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
+  const [updateProfile] = useUpdateProfileMutation();
   const { data } = useGetUserProfileQuery();
-  console.log(data?.data?._id);
-  const { data: mData, isFetching: monthsFetching } = useGetMonthsQuery({
+  const { data: mData } = useGetMonthsQuery({
     page,
     limit: 1,
     userId: data?.data?._id,
@@ -61,12 +63,11 @@ const MyProfile = () => {
     userId: data?.data?._id,
     monthId: monthData?._id ? monthData?._id : "",
   });
-  console.log({ userProfile, singleUserData });
+
   if (!userProfile) {
     return <p>Error: User not found</p>;
   }
 
-  console.log({ userProfile, singleUserData });
   const { name, email, phone, role, dateOfBirth, _id, mess } = userProfile;
 
   const switchDataPlus = () => {
@@ -87,6 +88,32 @@ const MyProfile = () => {
     });
   };
 
+  const editHandler = async (params) => {
+    const firstKey = Object.keys(params)[0];
+    const { value } = await Swal.fire({
+      title: "Input email address",
+      input: "text",
+      inputLabel: "Your email address",
+      inputPlaceholder: "Enter your email address",
+      inputValue: params[firstKey],
+      showCancelButton: true,
+      confirmButtonText: "Update",
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+    });
+
+    if (value) {
+      params[firstKey] = value;
+      console.log({ [firstKey]: params[firstKey], ...params });
+
+      const res = await updateProfile({ _id, ...params }).unwrap();
+
+      if (res?.success) {
+        Swal.fire("Changed!", "Member set as Member.", "success");
+      }
+    }
+  };
+
   return (
     <div>
       <Container fluid className="my-4 singleMemberSection">
@@ -103,7 +130,7 @@ const MyProfile = () => {
                 <div className="d-flexCenter flex-column">
                   <div className="d-flexCenter mt-3">
                     <h3 className="mb-0  memberProfileName profileName">{name}</h3>
-                    <MdEdit className="fs-5 ms-2" />
+                    <MdEdit className="fs-5 ms-2" onClick={() => editHandler({ name })} />
                   </div>
                   <h6> ( {role} )</h6>
                 </div>
@@ -115,21 +142,21 @@ const MyProfile = () => {
                       <MdOutlineMailOutline className="fs-5" />
                       <p className="ms-2 memberProfileNameText"> {email}</p>
                     </div>
-                    <MdEdit className="fs-5" />
+                    <MdEdit className="fs-5" onClick={() => editHandler({ email })} />
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center">
                       <FaPhoneAlt className="fs-5" />
                       <p className="ms-2 memberProfileNameText"> {phone}</p>
                     </div>
-                    <MdEdit className="fs-5" />
+                    <MdEdit className="fs-5" onClick={() => editHandler({ phone })} />
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center">
                       <FaBirthdayCake className="fs-5" />
                       <p className="ms-2 memberProfileNameText"> {dateOfBirth}</p>
                     </div>
-                    <MdEdit className="fs-5" />
+                    <MdEdit className="fs-5" onClick={() => editHandler({ dateOfBirth })} />
                   </div>
                   <div className="d-flexCenter justify-content-center mt-3">
                     <Button>Change Password</Button>
