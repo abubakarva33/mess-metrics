@@ -147,14 +147,14 @@ const SingleMember = () => {
                         <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
                         <p className="mb-1">remove now</p>
                       </div>
-                      <Button onClick={onFinish}> Remove</Button>
+                      <Button style={{width: '80px'}} danger type="primary" onClick={onFinish}> Remove</Button>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
                         <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
                         <p className="mb-1"> create a notice now</p>
                       </div>
-                      <Button> Send</Button>
+                      <Button style={{width: '80px'}} type="primary"> Send</Button>
                     </div>
                   </div>
                 </div>

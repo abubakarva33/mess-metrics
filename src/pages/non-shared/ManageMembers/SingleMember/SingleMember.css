@@ -48,7 +48,7 @@
 .profileInfoTop {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   border-bottom: 1px solid var(--text-secondary);
   margin-bottom: 15px;
 }

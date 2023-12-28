@@ -56,6 +56,7 @@ const Header = () => {
       onClick: () => {
         dispatch(auth({ token: "" }));
       },
+      danger: true,
     },
   ];
   return (
@@ -80,18 +81,18 @@ const Header = () => {
             </Link>
 
             <div className="d-flexCenter position-relative smHeader">
-              <img
-                src="/images/userIcon.webp"
-                alt=""
-                className="userIcon me-1"
-              />
               <Dropdown menu={{ items }}>
-                <a onClick={(e) => e.preventDefault()}>
+                <div style={{ cursor: "pointer" }}>
                   <Space>
-                    <span className="text-capitalize"> {data?.data?.name} </span>
+                    <img
+                      src="/images/singleUser.webp"
+                      alt=""
+                      className="userIcon me-1"
+                    />
+                    <span className="text-capitalize">{data?.data?.name}</span>
                     <DownOutlined />
                   </Space>
-                </a>
+                </div>
               </Dropdown>
             </div>
           </div>
