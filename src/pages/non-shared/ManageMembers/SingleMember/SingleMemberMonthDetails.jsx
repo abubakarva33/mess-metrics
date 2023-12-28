@@ -9,14 +9,13 @@ const SingleMemberMonthDetails = ({
   singleUserFetching,
   singleUserData,
 }) => {
-  console.log({ singleUserData });
   return (
     <Spin spinning={singleUserFetching}>
       <div className="profileInfoCenter">
         <div className=" profileInfoTop" style={{ userSelect: "none" }}>
-          <MdArrowBackIosNew onClick={switchDataMinus} cursor={"pointer"} />
+          <MdArrowBackIosNew onClick={switchDataMinus} cursor={"pointer"} fontSize={20}/>
           <h4 className="">{month?.name}</h4>
-          <MdArrowForwardIos onClick={switchDataPlus} cursor={"pointer"} />
+          <MdArrowForwardIos onClick={switchDataPlus} cursor={"pointer"} fontSize={20}/>
         </div>
         <div>
           <div className="d-gridTwo">

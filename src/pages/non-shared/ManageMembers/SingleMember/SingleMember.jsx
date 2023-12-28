@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./SingleMember.css";
 import { Col, Container, Row } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "antd";
 import {
   useGetSingleUserAccountQuery,
@@ -10,32 +10,36 @@ import {
 import { useGetMonthsQuery } from "../../../../redux/api/sampleApi/monthApi";
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 import SingleMemberMonthDetails from "./SingleMemberMonthDetails";
+import { useDeleteMemberMutation } from "../../../../redux/api/sampleApi/messApi";
+import Swal from "sweetalert2";
 
 const SingleMember = () => {
   const { Id } = useParams();
-
   const [page, setPage] = useState(1);
-
+  const navigate = useNavigate();
   const { data: mData, isFetching: monthsFetching } = useGetMonthsQuery({
     page,
     limit: 1,
   });
   const monthData = mData?.data[0];
+  const { data: userProfile, isFetching: userFetching } = useGetSingleUserQuery(Id);
+  const { data: singleUserData, isFetching: singleUserFetching } = useGetSingleUserAccountQuery({
+    userId: Id,
+    monthId: monthData?._id ? monthData?._id : "",
+  });
+  const [removeMember] = useDeleteMemberMutation();
 
-  const { data: userProfile, isFetching: userFetching } =
-    useGetSingleUserQuery(Id);
-
-  const { data: singleUserData, isFetching: singleUserFetching } =
-    useGetSingleUserAccountQuery({
-      userId: Id,
-      monthId: monthData?._id ? monthData?._id : "",
-    });
-
+  useEffect(() => {
+    if (!userProfile) {
+      navigate("/");
+    }
+  }, [userProfile]);
   if (userFetching) {
     return <SpinnerMain />;
   }
 
-  const { name, email, phone, role, dateOfBirth } = userProfile;
+  console.log(userProfile);
+  const { name, email, phone, role, dateOfBirth, _id, mess } = userProfile;
 
   const switchDataPlus = () => {
     setPage((prev) => {
@@ -54,6 +58,39 @@ const SingleMember = () => {
       return prev - 1;
     });
   };
+
+  const onFinish = async () => {
+    const ids = [_id];
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await removeMember({ _id: mess, ids }).unwrap();
+        if (res?.success) {
+          Swal.fire({
+            text: "Member removed successfully",
+            icon: "success",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Back to Home",
+            cancelButtonText: "Remove more",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
+          });
+        }
+      }
+    });
+  };
+
   return (
     <div>
       <Container fluid className="my-4 singleMemberSection">
@@ -61,11 +98,7 @@ const SingleMember = () => {
           <Col xs={12} sm={6} md={6} lg={6} xl={5} xxl={5}>
             <div className="memberProfileCenter">
               <div className="memberProfileCenterTop">
-                <img
-                  src="/images/singleUser.webp"
-                  alt=""
-                  className="memberProfileImage"
-                />
+                <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                 <div className="d-flexCenter flex-column">
                   <h3 className="mb-0 mt-3 memberProfileName">{name}</h3>
                   <h6> ( {role} )</h6>
@@ -77,11 +110,7 @@ const SingleMember = () => {
                     <p className="memberProfileNameText"> {email}</p>
                     <div className="fs-3 ">
                       <Link to={`mailto:${email}`} target="_blank">
-                        <img
-                          src="/images/forward-message.png"
-                          alt=""
-                          className="iconSize"
-                        />
+                        <img src="/images/forward-message.png" alt="" className="iconSize" />
                       </Link>
                     </div>
                   </div>
@@ -89,11 +118,7 @@ const SingleMember = () => {
                     <p className="memberProfileNameText"> {phone}</p>
                     <div className="fs-3 ">
                       <Link to={`tel:${phone}`} target="_blank">
-                        <img
-                          src="/images/telephone.png"
-                          alt=""
-                          className="iconSize"
-                        />
+                        <img src="/images/telephone.png" alt="" className="iconSize" />
                       </Link>
                     </div>
                   </div>
@@ -118,20 +143,14 @@ const SingleMember = () => {
                   <div>
                     <div className="d-flex align-items-center justify-content-between mb-2">
                       <div>
-                        <h5 className="mb-1 memberProfileManageItemText">
-                          {" "}
-                          No longer member?
-                        </h5>
-                        <p className="mb-1"> remove now</p>
+                        <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
+                        <p className="mb-1">remove now</p>
                       </div>
-                      <Button> Remove</Button>
+                      <Button onClick={onFinish}> Remove</Button>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
-                        <h5 className="mb-1 memberProfileManageItemText">
-                          {" "}
-                          Need to send Notice?
-                        </h5>
+                        <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
                         <p className="mb-1"> create a notice now</p>
                       </div>
                       <Button> Send</Button>
