@@ -34,9 +34,6 @@ const Login = () => {
     }
     dispatch(auth({ token }));
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
 
   if (isLoading) {
     return <Spinner />;
@@ -61,7 +58,6 @@ const Login = () => {
               className="login-form"
               onFinish={onFinish}
               layout="vertical"
-              onFinishFailed={onFinishFailed}
               autoComplete="on"
             >
               <div className="mt-5 d-flex justify-content-center flex-column">

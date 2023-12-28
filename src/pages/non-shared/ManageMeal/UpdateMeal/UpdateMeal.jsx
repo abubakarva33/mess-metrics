@@ -24,7 +24,7 @@ const UpdateMeal = () => {
     useGetMessMealQuery(startDate);
   const [UpdateMeal] = useUpdateMealMutation();
   const navigate = useNavigate();
-  console.log({ mealData, meal });
+
 
   useEffect(() => {
     const prevMeal = mealData?.data?.map((m) => ({
@@ -72,7 +72,7 @@ const UpdateMeal = () => {
       date: startDate,
       meals: fieldValues,
     };
-    console.log({ fieldValues, body, meal });
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",

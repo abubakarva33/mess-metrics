@@ -43,7 +43,7 @@ const SingleMemberMonthDetails = ({
   singleUserData,
   total = 0,
 }) => {
-  console.log(total);
+
   return (
     <Spin spinning={singleUserFetching}>
       <div className="profileInfoCenter">
@@ -58,53 +58,15 @@ const SingleMemberMonthDetails = ({
             <MdArrowForwardIos onClick={switchDataPlus} fontSize={20} />
           </span>
         </div>
-
         {detailsData(singleUserData).map((item) => (
           <div className="d-flex" key={item.name}>
-            <div style={{ width: "120px" }}> {item.name} </div>
+            <div style={{ width: "120px", fontSize: "16.5px" }}> {item.name} </div>
             <div className="space"> : </div>
-            <div className="ps-4"> {item.value} {item.name !== "Total Meal" ? "tk" : ''} </div>
+            <div className="ps-4" style={{ fontSize: "16.5px" }}>
+              {item.value} {item.name !== "Total Meal" ? "tk" : ""}
+            </div>
           </div>
         ))}
-
-        {/* <div>
-          <div className="d-gridTwo">
-            <div>
-              <p className="mb-0"> Total Meal</p>
-            </div>
-            <p className="mb-0"> : {singleUserData?.meal}</p>
-          </div>
-          <div className="d-gridTwo">
-            <div>
-              <p className="mb-0"> Total Cost</p>
-            </div>
-            <p className="mb-0"> : {singleUserData?.totalCost}</p>
-          </div>
-          <div className="d-gridTwo">
-            <div>
-              <p className="mb-0"> Shared Cost</p>
-            </div>
-            <p className="mb-0"> : {singleUserData?.sharedCostPerPerson}</p>
-          </div>
-          <div className="d-gridTwo">
-            <div>
-              <p className="mb-0"> Individual Cost</p>
-            </div>
-            <p className="mb-0"> : {singleUserData?.individualCost}</p>
-          </div>
-          <div className="d-gridTwo">
-            <div>
-              <p className="mb-0"> Deposit </p>
-            </div>
-            <p className="mb-0"> : {singleUserData?.deposit}</p>
-          </div>
-          <div className="d-gridTwo">
-            <div>
-              <p className="mb-0"> Balance </p>
-            </div>
-            <p className="mb-0"> : {singleUserData?.balance}</p>
-          </div>
-        </div> */}
       </div>
     </Spin>
   );

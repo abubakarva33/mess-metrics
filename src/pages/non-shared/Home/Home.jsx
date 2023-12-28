@@ -28,7 +28,7 @@ const Home = () => {
   if (isFetching || messFetching || bazarFetching) {
     return <SpinnerMain />;
   }
-  // console.log(messAccount.mealRate);
+  
   return (
     <div className="mt-3 home-container">
       <Row className="gy-2">

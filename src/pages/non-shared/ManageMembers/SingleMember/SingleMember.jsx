@@ -32,7 +32,7 @@ const SingleMember = () => {
   });
   const [removeMember] = useDeleteMemberMutation();
 
-  console.log(userProfile);
+
 
   if (!userProfile) {
     return <p>Error: User not found</p>;

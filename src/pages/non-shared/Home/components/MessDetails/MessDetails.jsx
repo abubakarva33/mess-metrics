@@ -7,7 +7,6 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { PiStrategy } from "react-icons/pi";
 
 const MessDetails = ({ data }) => {
-  console.log(data);
   const {
     balance,
     sharedCost,

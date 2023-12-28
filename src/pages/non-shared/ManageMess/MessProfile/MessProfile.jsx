@@ -53,7 +53,7 @@ const MessProfile = () => {
   const { name, email, phone, role, dateOfBirth } = profileData?.data;
   const currentObject = monthData[currentObjectIndex];
   const { manager, members } = data;
-  console.log(manager);
+
 
   const switchData = () => {
     setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);

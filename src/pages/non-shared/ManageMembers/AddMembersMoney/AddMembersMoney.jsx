@@ -22,7 +22,7 @@ const AddMembersMoney = () => {
     values.user = shoppersList;
     const amount = Number(values.amount);
     const fieldValues = { ...values, amount, date: startDate };
-    console.log(fieldValues);
+
 
     try {
       const res = await addMembersMoney(fieldValues).unwrap();

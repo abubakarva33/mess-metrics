@@ -12,7 +12,7 @@ const StartNewMonth = () => {
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
-    console.log(values);
+
     try {
       Swal.fire({
         title: "Are you sure?",

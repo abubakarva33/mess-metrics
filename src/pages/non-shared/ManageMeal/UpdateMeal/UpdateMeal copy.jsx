@@ -39,7 +39,6 @@ const UpdateMeal = () => {
     return <SpinnerMain />;
   }
 
-  console.log({meal, mealData});
   const findCommonMeals = () => {
     const commonMeals = mealData?.meal.filter(
       (item1) =>
@@ -50,9 +49,6 @@ const UpdateMeal = () => {
     return commonMeals;
   };
   const commonMeals = findCommonMeals();
-  console.log(commonMeals);
-
-  console.log(mealData?._id);
 
   const defaultValue = (e) => {
     if (e.target.value < 0) {
@@ -80,7 +76,7 @@ const UpdateMeal = () => {
   };
   const onFinish = async () => {
     const fieldValues = { meal, date: startDate };
-    console.log(fieldValues);
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",

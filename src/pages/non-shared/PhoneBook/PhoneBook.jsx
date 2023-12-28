@@ -45,7 +45,7 @@ const PhoneBook = () => {
       const phone = formValues[1];
       const data = await createNumber({ name: name, phone: phone }).unwrap();
       if (data?.success) {
-        console.log(data?.success);
+   
         await Swal.fire({
           icon: "success",
           title: "Your work has been saved",

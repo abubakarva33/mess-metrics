@@ -8,7 +8,7 @@ const messApi = mainApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Mess", "Profile", "Member", "Month"],
+      invalidatesTags: ["Mess", "Profile", "Member", "Month", "Action"],
     }),
 
     deleteMonth: builder.mutation({

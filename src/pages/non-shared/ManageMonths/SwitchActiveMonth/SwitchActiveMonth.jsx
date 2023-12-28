@@ -94,7 +94,7 @@ const SwitchActiveMonth = () => {
                   },
                 ]}
               >
-                {console.log({ profile: profile.data.activeMonth })}
+
                 <Select options={month} />
               </Form.Item>
               <div className="d-flex justify-content-center  ">

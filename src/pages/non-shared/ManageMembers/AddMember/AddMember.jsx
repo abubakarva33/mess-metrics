@@ -16,7 +16,7 @@ const AddMember = () => {
   const onFinish = async (values) => {
     try {
       const res = await AddMemberToMess({ _id: profileData?.data?.mess?._id, ...values }).unwrap();
-      console.log(res.success);
+
       if (res?.success) {
         Swal.fire({
           text: "Member added successfully",
@@ -34,7 +34,6 @@ const AddMember = () => {
         form.resetFields();
       }
     } catch (error) {
-      console.log(error?.data?.message);
       Swal.fire({
         icon: "error",
         title: error?.data?.message || "Add Member Failed",

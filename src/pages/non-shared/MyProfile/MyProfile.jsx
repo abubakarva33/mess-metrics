@@ -62,7 +62,7 @@ const MyProfile = () => {
   const { name, email, phone, role, dateOfBirth } = data?.data;
   const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
   const currentObject = monthData[currentObjectIndex];
-  console.log(data);
+
 
   const switchData = () => {
     setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);

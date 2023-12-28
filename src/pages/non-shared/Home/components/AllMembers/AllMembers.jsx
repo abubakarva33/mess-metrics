@@ -12,7 +12,6 @@ const AllMembers = ({ data, mealRate, sharedCost, monthId }) => {
     sharedCost,
     deposit,
   });
-  console.log(monthId);
 
   return (
     <Col sm={12} md={6} lg={6} xl={4} xxl={4}>

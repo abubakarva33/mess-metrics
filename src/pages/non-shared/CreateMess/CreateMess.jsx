@@ -1,8 +1,8 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "./CreateMess.css";
-import { Button, Checkbox, ConfigProvider, Form, Input, Select } from "antd";
-import { Link, useNavigate } from "react-router-dom";
-import { HomeOutlined, CalendarOutlined } from "@ant-design/icons";
+import { Button, ConfigProvider, Form, Input, Select } from "antd";
+import { useNavigate } from "react-router-dom";
+import { HomeOutlined } from "@ant-design/icons";
 import Swal from "sweetalert2";
 import { monthOptionsConstant } from "../../../constant/constant";
 import { useCreateMessMutation } from "../../../redux/api/sampleApi/messApi";
@@ -12,7 +12,6 @@ import Auth from "../../../components/Auth/Auth";
 import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
 import { useEffect, useState } from "react";
 import Spinner from "../../../components/Spinner/Spinner";
-const { Option } = Select;
 
 const CreateMess = () => {
   const navigate = useNavigate();
@@ -34,7 +33,6 @@ const CreateMess = () => {
     try {
       const data = await createMess(values).unwrap();
       if (data?.success) {
-        console.log(data?.success);
         await Swal.fire({
           icon: "success",
           title: "Your work has been saved",
@@ -46,9 +44,7 @@ const CreateMess = () => {
       console.log(error);
     }
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+
 
   const joinMessHandler = async () => {
     const { value: text } = await Swal.fire({
@@ -93,7 +89,6 @@ const CreateMess = () => {
                   className="login-form"
                   onFinish={onFinish}
                   layout="vertical"
-                  onFinishFailed={onFinishFailed}
                   autoComplete="on"
                 >
                   <div className="mt-5 d-flex justify-content-center flex-column">
