@@ -88,6 +88,7 @@ const SingleMember = () => {
       if (result.isConfirmed) {
         const res = await removeMember({ _id: mess, ids }).unwrap();
         if (res?.success) {
+          navigate('/')
           const Toast = Swal.mixin({
             toast: true,
             position: "top-end",

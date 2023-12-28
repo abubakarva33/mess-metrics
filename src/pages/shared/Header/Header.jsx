@@ -31,10 +31,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../../redux/features/UserSlice/UserSlice";
 import HeaderDrawer from "./HeaderDrawer/HeaderDrawer";
 import moment from "moment";
+import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { role } = useSelector((state) => state.user);
+  const { isLoading, data } = useGetUserProfileQuery();
+
   const [time, setTime] = useState(moment().format("hh:mm A"));
   setInterval(() => {
     setTime(moment().format("hh:mm A"));
@@ -77,11 +80,15 @@ const Header = () => {
             </Link>
 
             <div className="d-flexCenter position-relative smHeader">
-              <img src="/images/userIcon.webp" alt="" className="userIcon me-1" />
+              <img
+                src="/images/userIcon.webp"
+                alt=""
+                className="userIcon me-1"
+              />
               <Dropdown menu={{ items }}>
                 <a onClick={(e) => e.preventDefault()}>
                   <Space>
-                    Abubakar
+                    <span className="text-capitalize"> {data?.data?.name} </span>
                     <DownOutlined />
                   </Space>
                 </a>
