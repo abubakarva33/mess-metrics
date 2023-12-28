@@ -18,7 +18,9 @@ const SingleMemberMonthDetails = ({
             cursor={"pointer"}
             fontSize={20}
           />
-          <h4 className="">{month?.name}</h4>
+          <h4 className="">
+            {month?.name} {month?.year}
+          </h4>
           <MdArrowForwardIos
             onClick={switchDataPlus}
             cursor={"pointer"}
