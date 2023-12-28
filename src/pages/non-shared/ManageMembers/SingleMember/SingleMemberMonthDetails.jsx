@@ -43,7 +43,6 @@ const SingleMemberMonthDetails = ({
   singleUserData,
   total = 0,
 }) => {
-
   return (
     <Spin spinning={singleUserFetching}>
       <div className="profileInfoCenter">
@@ -59,11 +58,10 @@ const SingleMemberMonthDetails = ({
           </span>
         </div>
         {detailsData(singleUserData).map((item) => (
-          <div className="d-flex" key={item.name}>
+          <div className="d-gridTwo" key={item.name}>
             <div style={{ width: "120px", fontSize: "16.5px" }}> {item.name} </div>
-            <div className="space"> : </div>
             <div className="ps-4" style={{ fontSize: "16.5px" }}>
-              {item.value} {item.name !== "Total Meal" ? "tk" : ""}
+              : {item.value} {item.name !== "Total Meal" ? "tk" : ""}
             </div>
           </div>
         ))}

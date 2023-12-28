@@ -12,6 +12,7 @@ import {
 import { IoIosArrowBack } from "react-icons/io";
 import { FaBirthdayCake, FaCamera, FaEdit, FaPhoneAlt } from "react-icons/fa";
 import { useGetMonthsQuery } from "../../../redux/api/sampleApi/monthApi";
+import SingleMemberMonthDetails from "../ManageMembers/SingleMember/SingleMemberMonthDetails";
 
 const monthData = [
   {
@@ -44,28 +45,46 @@ const monthData = [
 ];
 
 const MyProfile = () => {
-  const { data } = useGetUserProfileQuery();
-  const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const { data } = useGetUserProfileQuery();
+  console.log(data?.data?._id);
   const { data: mData, isFetching: monthsFetching } = useGetMonthsQuery({
     page,
     limit: 1,
+    userId: data?.data?._id,
   });
   const monthData = mData?.data[0];
-  const { data: userProfile, isFetching: userFetching } = useGetSingleUserQuery(data._id);
+
+  const { data: userProfile, isFetching: userFetching } = useGetSingleUserQuery(data?.data?._id);
   const { data: singleUserData, isFetching: singleUserFetching } = useGetSingleUserAccountQuery({
-    userId: data._id,
+    userId: data?.data?._id,
     monthId: monthData?._id ? monthData?._id : "",
   });
+  console.log({ userProfile, singleUserData });
+  if (!userProfile) {
+    return <p>Error: User not found</p>;
+  }
 
-  const { name, email, phone, role, dateOfBirth } = data?.data;
-  const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
-  const currentObject = monthData[currentObjectIndex];
+  console.log({ userProfile, singleUserData });
+  const { name, email, phone, role, dateOfBirth, _id, mess } = userProfile;
 
+  const switchDataPlus = () => {
+    setPage((prev) => {
+      if (prev >= mData?.meta?.total) {
+        return 1;
+      }
+      return prev + 1;
+    });
+  };
 
-  const switchData = () => {
-    setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);
+  const switchDataMinus = () => {
+    setPage((prev) => {
+      if (prev <= 1) {
+        return mData?.meta?.total;
+      }
+      return prev - 1;
+    });
   };
 
   return (
@@ -130,63 +149,31 @@ const MyProfile = () => {
                         <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
                         <p className="mb-1"> request to leave </p>
                       </div>
-                      <Button> Request</Button>
+
+                      <Button style={{ width: "80px" }} danger type="primary">
+                        Request
+                      </Button>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
                         <h5 className="mb-1 memberProfileManageItemText"> Need extra meals?</h5>
                         <p className="mb-1"> request for meals</p>
                       </div>
-                      <Button> Request</Button>
+                      <Button style={{ width: "80px" }} type="primary">
+                        Request
+                      </Button>
                     </div>
                   </div>
                 </div>
 
-                <div className="profileInfoCenter">
-                  <div className=" profileInfoTop">
-                    <MdArrowBackIosNew onClick={switchData} />
-                    <h4 className=""> {currentObject?.monthName}</h4>
-                    <MdArrowForwardIos onClick={switchData} />
-                  </div>
-                  <div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Total Meal</p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.totalMeal}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Total Cost</p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.totalCost}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Shared Cost</p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.sharedCost}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Individual Cost</p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.individualCost}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Deposit </p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.deposit}</p>
-                    </div>
-                    <div className="d-gridTwo">
-                      <div>
-                        <p className="mb-0"> Balance </p>
-                      </div>
-                      <p className="mb-0"> :{currentObject?.balance}</p>
-                    </div>
-                  </div>
-                </div>
+                <SingleMemberMonthDetails
+                  month={monthData}
+                  switchDataPlus={switchDataPlus}
+                  switchDataMinus={switchDataMinus}
+                  singleUserFetching={singleUserFetching}
+                  singleUserData={singleUserData}
+                  total={mData?.meta?.total}
+                />
               </Col>
             </Row>
           </Col>
@@ -195,7 +182,7 @@ const MyProfile = () => {
 
       {/* for small device only  */}
 
-      <div className="phoneBookContainer">
+      {/* <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
@@ -311,7 +298,7 @@ const MyProfile = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
