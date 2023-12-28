@@ -12,10 +12,12 @@ import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 import SingleMemberMonthDetails from "./SingleMemberMonthDetails";
 import { useDeleteMemberMutation } from "../../../../redux/api/sampleApi/messApi";
 import Swal from "sweetalert2";
+import { IoIosArrowBack } from "react-icons/io";
 
 const SingleMember = () => {
   const { Id } = useParams();
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { data: mData, isFetching: monthsFetching } = useGetMonthsQuery({
     page,
@@ -30,15 +32,22 @@ const SingleMember = () => {
   const [removeMember] = useDeleteMemberMutation();
 
   useEffect(() => {
-    if (!userProfile) {
+    setLoading(true);
+    if (userProfile && !userFetching) {
+      setLoading(false);
+    } else if (!userFetching) {
+      setLoading(true);
       navigate("/");
     }
-  }, [userProfile]);
-  if (userFetching) {
+  }, [userProfile, userFetching, navigate]);
+
+  if (loading) {
     return <SpinnerMain />;
   }
 
-  console.log(userProfile);
+  if (!userProfile) {
+    return <p>Error: User not found</p>;
+  }
   const { name, email, phone, role, dateOfBirth, _id, mess } = userProfile;
 
   const switchDataPlus = () => {
@@ -73,18 +82,20 @@ const SingleMember = () => {
       if (result.isConfirmed) {
         const res = await removeMember({ _id: mess, ids }).unwrap();
         if (res?.success) {
-          Swal.fire({
-            text: "Member removed successfully",
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            },
+          });
+          Toast.fire({
             icon: "success",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Back to Home",
-            cancelButtonText: "Remove more",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              navigate("/");
-            }
+            title: "Member removed successfully",
           });
         }
       }
@@ -171,7 +182,7 @@ const SingleMember = () => {
       </Container>
 
       {/* for small device only  */}
-      {/* 
+
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
@@ -221,14 +232,17 @@ const SingleMember = () => {
               </div>
 
               <div className="profileManageCenter mt-3">
-                <h4 className="memberProfileHeader ">Manage Member</h4>
+                <div className="d-flex align-items-center justify-content-between profileHeaderNotice">
+                  <h4 className="mb-0 ">Manage Member</h4>
+                  <img src="/images/notice.png" alt="" />
+                </div>
                 <div>
-                  <div className="d-flex align-items-center justify-content-between mb-3">
+                  <div className="d-flex align-items-center justify-content-between mb-2">
                     <div>
                       <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
-                      <p className="mb-1"> remove now</p>
+                      <p className="mb-1">remove now</p>
                     </div>
-                    <Button> Remove</Button>
+                    <Button onClick={onFinish}> Remove</Button>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <div>
@@ -239,56 +253,17 @@ const SingleMember = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="profileInfoCenter">
-                <div className=" profileInfoTop">
-                  <MdArrowBackIosNew onClick={switchData} />
-                  <h4 className="memberProfileMonthNane"> {currentObject?.monthName}</h4>
-                  <MdArrowForwardIos onClick={switchData} />
-                </div>
-                <div>
-                  <div className="d-gridTwo">
-                    <div>
-                      <p className="mb-0"> Total Meal</p>
-                    </div>
-                    <p className="mb-0"> :{currentObject?.totalMeal}</p>
-                  </div>
-                  <div className="d-gridTwo">
-                    <div>
-                      <p className="mb-0"> Total Cost</p>
-                    </div>
-                    <p className="mb-0"> :{currentObject?.totalCost}</p>
-                  </div>
-                  <div className="d-gridTwo">
-                    <div>
-                      <p className="mb-0"> Shared Cost</p>
-                    </div>
-                    <p className="mb-0"> :{currentObject?.sharedCost}</p>
-                  </div>
-                  <div className="d-gridTwo">
-                    <div>
-                      <p className="mb-0"> Individual Cost</p>
-                    </div>
-                    <p className="mb-0"> :{currentObject?.individualCost}</p>
-                  </div>
-                  <div className="d-gridTwo">
-                    <div>
-                      <p className="mb-0"> Deposit </p>
-                    </div>
-                    <p className="mb-0"> :{currentObject?.deposit}</p>
-                  </div>
-                  <div className="d-gridTwo">
-                    <div>
-                      <p className="mb-0"> Balance </p>
-                    </div>
-                    <p className="mb-0"> :{currentObject?.balance}</p>
-                  </div>
-                </div>
-              </div>
+              <SingleMemberMonthDetails
+                month={monthData}
+                switchDataPlus={switchDataPlus}
+                switchDataMinus={switchDataMinus}
+                singleUserFetching={singleUserFetching}
+                singleUserData={singleUserData}
+              />
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
