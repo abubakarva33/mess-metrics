@@ -24,7 +24,6 @@ const ActiveMonthDetails = () => {
   const [columns, setColumns] = useState("mealColumns");
   const [pageNumber, setPageNumber] = useState(1);
 
-  console.log({ filter });
   const { data: bazar, isFetching: bazarFetching } = useGetAllBazarQuery({
     page: pageNumber,
     filter,
@@ -270,6 +269,8 @@ const ActiveMonthDetails = () => {
     setPageNumber(current);
   };
 
+  console.log(tableData);
+
   return (
     <div>
       <div className="activeMonthSectionMain">
@@ -331,58 +332,57 @@ const ActiveMonthDetails = () => {
           onPageChange={onPageChange}
         />
       </div>
-      {/* <div className="phoneBookContainer">
+      <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
               <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
               <h3>Phone Book </h3>
             </div>
-            <Select
-              showSearch
-              placeholder="Filter By Date"
-              optionFilterProp="children"
-              className="w-100 px-3 mb-3"
-              onChange={onChange}
-              onSearch={onSearch}
-              filterOption={filterOption}
-              options={optionsData}
-            />
-            <div className="activeMonthBtnGroups">
+            <div className="activeDatePicker">
+              <ReactDatePicker
+                className="w-100"
+                placeholderText="Filter by date"
+                dateFormat="dd-MM-yyyy"
+                value={filter}
+                onChange={(date) => setFilter(moment(date).format("DD-MM-YYYY"))}
+              />
+            </div>
+            <div className="activeMonthBtnGroups mb-4">
               <Button
-                className={columns === "mealColumns" ? "activeNav" : undefined}
-                onClick={() => setColumns("mealColumns")}
+                className={type === "meal" ? "activeNav" : undefined}
+                onClick={() => navigate("?type=meal")}
               >
                 Meal
               </Button>
               <Button
-                className={columns === "depositColumns" ? "activeNav ms-3" : "ms-3"}
-                onClick={() => setColumns("depositColumns")}
+                className={type === "deposit" ? "activeNav ms-3" : "ms-3"}
+                onClick={() => navigate("?type=deposit")}
               >
                 Deposit
               </Button>
               <Button
-                className={columns === "mealCostColumns" ? "activeNav ms-3" : "ms-3"}
-                onClick={() => setColumns("mealCostColumns")}
+                className={type === "mealCost" ? "activeNav ms-3" : "ms-3"}
+                onClick={() => navigate("?type=mealCost")}
               >
                 Meal Cost
               </Button>
 
               <Button
-                className={columns === "SharedCostColumns" ? "activeNav ms-3" : "ms-3"}
-                onClick={() => setColumns("SharedCostColumns")}
+                className={type === "sharedCost" ? "activeNav ms-3" : "ms-3"}
+                onClick={() => navigate("?type=sharedCost")}
               >
-                Shared Other Cost
+                Shared Cost
               </Button>
               <Button
-                className={columns === "IndividualCostColumns" ? "activeNav ms-3" : "ms-3"}
-                onClick={() => setColumns("IndividualCostColumns")}
+                className={type === "individualCost" ? "activeNav ms-3" : "ms-3"}
+                onClick={() => navigate("?type=individualCost")}
               >
-                Individual Other Cost
+                Individual Cost
               </Button>
               <Button
-                className={columns === "bazarListColumns" ? "activeNav ms-3" : "ms-3"}
-                onClick={() => setColumns("bazarListColumns")}
+                className={type === "bazar" ? "activeNav ms-3" : "ms-3"}
+                onClick={() => navigate("?type=bazar")}
               >
                 BazarList
               </Button>
@@ -392,12 +392,13 @@ const ActiveMonthDetails = () => {
         <div className="phoneBookContainerItemBg">
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
-              {Array.isArray(mealCostData) &&
-                mealCostData?.map((data, ind) => <ActiveDetailsTemplate key={ind} data={data} />)}
+              {tableData?.data?.map((data, ind) => (
+                <ActiveDetailsTemplate key={ind} data={data} />
+              ))}
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

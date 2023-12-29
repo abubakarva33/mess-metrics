@@ -66,25 +66,25 @@ const actionApi = mainApi.injectEndpoints({
       providesTags: ["Action"],
     }),
     getAllBazar: builder.query({
-      query: ({ page, filter }) => `bazar?page=${page}&date=${filter} `,
+      query: ({ page, filter }) => `bazar?page=${page}&query=${filter} `,
       providesTags: ["Action"],
     }),
     getAllSharedCost: builder.query({
-      query: ({ page, filter }) => `shared-cost?page=${page}&date=${filter} `,
+      query: ({ page, filter }) => `shared-cost?page=${page}&query=${filter} `,
       providesTags: ["Action"],
     }),
     getAllMeal: builder.query({
-      query: ({ page, filter }) => `meal?page=${page}&date=${filter} `,
+      query: ({ page, filter }) => `meal?page=${page}&query=${filter} `,
       transformResponse: (response) => response.data,
       providesTags: ["Action"],
     }),
     getAllDeposit: builder.query({
-      query: ({ page, filter }) => `deposit?page=${page}&date=${filter} `,
+      query: ({ page, filter }) => `deposit?page=${page}&query=${filter} `,
 
       providesTags: ["Action"],
     }),
     getAllIndividualCost: builder.query({
-      query: ({ page, filter }) => `individual-cost?page=${page}&date=${filter} `,
+      query: ({ page, filter }) => `individual-cost?page=${page}&query=${filter} `,
 
       providesTags: ["Action"],
     }),

@@ -21,15 +21,15 @@ const AllMembers = ({ data, mealRate, sharedCost, monthId }) => {
           <div className="d-gridTwo">
             <p className="mb-0">Total Meal: {meal}</p>
             <p className="mb-0">
-              Cost: {calculate.cost} <span className="fs-5">&#2547;</span>{" "}
+              Cost: {calculate.cost.toFixed(2)} <span className="fs-5">&#2547;</span>
             </p>
           </div>
           <div className="d-gridTwo">
             <p className="mb-0">
-              Deposit: {deposit} <span className="fs-5">&#2547;</span>
+              Deposit: {deposit.toFixed(2)} <span className="fs-5">&#2547;</span>
             </p>
             <p className="mb-0">
-              Balance: {calculate.balance}
+              Balance: {calculate.balance.toFixed(2)}
               <span className="fs-5">&#2547;</span>
             </p>
           </div>

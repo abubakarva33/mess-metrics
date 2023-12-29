@@ -1,23 +1,39 @@
 import "./ActiveDetailsTemplate.css";
+import { FaUser } from "react-icons/fa";
 
 const ActiveDetailsTemplate = ({ data }) => {
-  const { name, date } = data;
+  console.log(data);
   return (
     <div className="d-flex align-items-center justify-content-between my-3 activeDetailsTemplate">
       <div className="d-flex align-items-center justify-content-between">
-        <div>
-          <h2 className="dateLogo"> 28</h2>
+        <div className="d-flexCenter dateLogo">
+          <h2 className=" mb-0"> {(data?.date).substring(0, 2)}</h2>
         </div>
         <div>
-          <p className="mb-0">
-            Name: <span style={{ fontWeight: "700" }}>{name}</span>
-          </p>
-          {data?.deposit ? <p className="mb-0">Deposit: {data?.deposit}</p> : undefined}
-          {data?.meal ? <p className="mb-0">Meal: {data?.meal}</p> : undefined}
-          {data?.amount ? <p className="mb-0">Amount: {data?.amount}</p> : undefined}
-          {data?.cost ? <p className="mb-0">Cost: {data?.cost}</p> : undefined}
-          <p className="mb-0">Date: {date}</p>
-          {data?.details ? <p className="mb-0">Details: {data?.details}</p> : undefined}
+          {data?.members && (
+            <p className="mb-0 ">
+              Shoppers:
+              <span style={{ fontWeight: "700" }}>
+                {data?.members?.map((member) => (
+                  <span className="mb-0  d-flex flex column align-items-center">
+                    <FaUser className="me-1" /> {member?.name}
+                  </span>
+                ))}
+              </span>
+            </p>
+          )}
+
+          {data?.user?.name && (
+            <p className="mb-0">
+              Name: <span style={{ fontWeight: "700" }}>{data?.user?.name}</span>
+            </p>
+          )}
+          {data?.deposit && <p className="mb-0">Deposit: {data?.deposit}</p>}
+          {data?.meal && <p className="mb-0">Meal: {data?.meal}</p>}
+          {data?.amount && <p className="mb-0">Amount: {data?.amount}</p>}
+          {data?.cost && <p className="mb-0">Cost: {data?.cost}</p>}
+          <p className="mb-0">Date: {data?.date}</p>
+          {data?.list && <p className="mb-0">Details: {data?.list}</p>}
         </div>
       </div>
       <img src="/images/pen.png" alt="" style={{ height: "30px", width: "30px" }} />
