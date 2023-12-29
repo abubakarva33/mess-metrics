@@ -22,13 +22,13 @@ import { FloatButton } from "antd";
 
 const Home = () => {
   const { data: usersAcc, isFetching } = useGetUserAccountQuery();
+  const { data: profileData } = useGetUserProfileQuery();
   const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
   const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery();
 
   if (isFetching || messFetching || bazarFetching) {
     return <SpinnerMain />;
   }
-  
   return (
     <div className="mt-3 home-container">
       <Row className="gy-2">
@@ -46,7 +46,7 @@ const Home = () => {
       </Row>
       <div>
         <h5 className="divider">Personal Details</h5>
-        <PersonalDetails />
+        <PersonalDetails userId={profileData?.data?._id} monthId={messAccount?.month?._id} />
       </div>
       <div>
         <div className="d-flexCenter mt-4 w-100">

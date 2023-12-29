@@ -1,7 +1,7 @@
-import { MdArrowBackIosNew, MdArrowForwardIos, MdEdit, MdOutlineMailOutline } from "react-icons/md";
+import { MdEdit, MdOutlineMailOutline } from "react-icons/md";
 import "./MyProfile.css";
 import { Button } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
 import { useState } from "react";
 import {
@@ -11,7 +11,7 @@ import {
   useUpdateProfileMutation,
 } from "../../../redux/api/sampleApi/userApi";
 import { IoIosArrowBack } from "react-icons/io";
-import { FaBirthdayCake, FaCamera, FaEdit, FaPhoneAlt } from "react-icons/fa";
+import { FaBirthdayCake, FaCamera, FaPhoneAlt } from "react-icons/fa";
 import { useGetMonthsQuery } from "../../../redux/api/sampleApi/monthApi";
 import SingleMemberMonthDetails from "../ManageMembers/SingleMember/SingleMemberMonthDetails";
 import Swal from "sweetalert2";
@@ -20,9 +20,8 @@ import moment from "moment";
 
 const MyProfile = () => {
   const navigate = useNavigate();
-  const [swalItem, setSwalItem] = useState("");
   const [page, setPage] = useState(1);
-  const [updateProfile] = useUpdateProfileMutation();
+  const [updateProfile, { status }] = useUpdateProfileMutation();
   const { data } = useGetUserProfileQuery();
   const { data: mData } = useGetMonthsQuery({
     page,
@@ -37,11 +36,11 @@ const MyProfile = () => {
     monthId: monthData?._id ? monthData?._id : "",
   });
 
-  if (userFetching) {
+  if (userFetching || status === "pending") {
     return <SpinnerMain />;
   }
 
-  const { name, email, phone, role, dateOfBirth, _id, mess } = userProfile;
+  const { name, email, phone, role, dateOfBirth, _id } = userProfile;
 
   const switchDataPlus = () => {
     setPage((prev) => {
@@ -51,7 +50,6 @@ const MyProfile = () => {
       return prev + 1;
     });
   };
-
   const switchDataMinus = () => {
     setPage((prev) => {
       if (prev <= 1) {
