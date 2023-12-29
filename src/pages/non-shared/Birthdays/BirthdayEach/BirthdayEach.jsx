@@ -4,10 +4,12 @@ import { LuPartyPopper } from "react-icons/lu";
 
 const BirthdayEach = ({ data }) => {
   const { name, dateOfBirth } = data;
-  const birthday = moment(dateOfBirth, "DD-MM-YYYY");
-  const isToday = birthday.isSame(moment(), "day");
 
   const adjustDate = () => {
+    let dateFromInput = dateOfBirth
+      ? moment()
+      : moment(dateOfBirth, "DD-MM-YYYY").year(2023);
+    const isToday = dateFromInput.isSame(moment(), "day");
     if (isToday) {
       return (
         <button className="btn btn-success d-flex align-items-center">
@@ -19,10 +21,7 @@ const BirthdayEach = ({ data }) => {
         </button>
       );
     }
-
-    let dateFromInput = moment(dateOfBirth, "DD-MM-YYYY");
     const result = dateFromInput.fromNow();
-
     if (result.includes("days ago")) {
       dateFromInput = dateFromInput.add(1, "days").format("DD-MM-YYYY");
     }
