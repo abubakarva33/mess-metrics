@@ -1,4 +1,9 @@
-import { MdArrowBackIosNew, MdArrowForwardIos, MdEdit, MdOutlineMailOutline } from "react-icons/md";
+import {
+  MdArrowBackIosNew,
+  MdArrowForwardIos,
+  MdEdit,
+  MdOutlineMailOutline,
+} from "react-icons/md";
 import "./MyProfile.css";
 import { Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,6 +21,7 @@ import { useGetMonthsQuery } from "../../../redux/api/sampleApi/monthApi";
 import SingleMemberMonthDetails from "../ManageMembers/SingleMember/SingleMemberMonthDetails";
 import Swal from "sweetalert2";
 import SpinnerMain from "../../../components/Spinner/SpinnerMain";
+import moment from "moment";
 
 const MyProfile = () => {
   const navigate = useNavigate();
@@ -30,11 +36,14 @@ const MyProfile = () => {
   });
   const monthData = mData?.data[0];
 
-  const { data: userProfile, isFetching: userFetching } = useGetSingleUserQuery(data?.data?._id);
-  const { data: singleUserData, isFetching: singleUserFetching } = useGetSingleUserAccountQuery({
-    userId: data?.data?._id,
-    monthId: monthData?._id ? monthData?._id : "",
-  });
+  const { data: userProfile, isFetching: userFetching } = useGetSingleUserQuery(
+    data?.data?._id
+  );
+  const { data: singleUserData, isFetching: singleUserFetching } =
+    useGetSingleUserAccountQuery({
+      userId: data?.data?._id,
+      monthId: monthData?._id ? monthData?._id : "",
+    });
 
   if (userFetching) {
     return <SpinnerMain />;
@@ -60,23 +69,15 @@ const MyProfile = () => {
     });
   };
 
-  const editHandler = async (params) => {
-    const firstKey = Object.keys(params)[0];
-    if (firstKey === "email") {
-      setSwalItem("email");
-    } else if (firstKey === "phone") {
-      setSwalItem("number");
-    } else if (firstKey === "dateOfBirth") {
-      setSwalItem("date");
-    } else {
-      setSwalItem("text");
-    }
-
+  const editHandler = async ({ type, item }) => {
     const { value } = await Swal.fire({
-      title: `Enter your ${firstKey}`,
-      input: `${swalItem}`,
-      inputPlaceholder: `Enter your ${firstKey}`,
-      inputValue: params[firstKey],
+      title: `Enter your ${item}`,
+      input: `${type}`,
+      inputValue:
+        type === "date"
+          ? moment(userProfile[item], "DD-MM-YYYY").format("YYYY-MM-DD")
+          : userProfile[item],
+      inputPlaceholder: `Enter your ${item}`,
       showCancelButton: true,
       confirmButtonText: "Update",
       confirmButtonColor: "#3085d6",
@@ -84,16 +85,40 @@ const MyProfile = () => {
     });
 
     if (value) {
-      params[firstKey] = value;
-      console.log({ [firstKey]: params[firstKey], ...params });
+      const body = {};
+      if (type === "date") {
+        body[item] = moment(value, "YYYY-MM-DD").format("DD-MM-YYYY");
+      } else {
+        body[item] = value;
+      }
+
+      console.log(body);
 
       const res = await updateProfile({ _id, ...params }).unwrap();
-
       if (res?.success) {
-        Swal.fire("Profile Updated!", "Profile updated successfully.", "success");
+        Swal.fire(
+          "Profile Updated!",
+          "Profile updated successfully.",
+          "success"
+        );
       }
     }
   };
+
+  // const editHandler = async (params) => {
+  //   // const firstKey = Object.keys(params)[0];
+  //   // if (firstKey === "email") {
+  //   //   setSwalItem("email");
+  //   // } else if (firstKey === "phone") {
+  //   //   setSwalItem("number");
+  //   // } else if (firstKey === "dateOfBirth") {
+  //   //   setSwalItem("date");
+  //   // } else {
+  //   //   setSwalItem("text");
+  //   // }
+
+  //   updateSwal();
+  // };
 
   return (
     <div>
@@ -103,15 +128,26 @@ const MyProfile = () => {
             <div className="memberProfileCenter">
               <div className="memberProfileCenterTop ">
                 <div className="position-relative">
-                  <img src="/images/singleUser.webp" alt="" className="memberProfileImage " />
+                  <img
+                    src="/images/singleUser.webp"
+                    alt=""
+                    className="memberProfileImage "
+                  />
                   <div className="profileEditPosition">
                     <FaCamera className="fs-5" />
                   </div>
                 </div>
                 <div className="d-flexCenter flex-column">
                   <div className="d-flexCenter mt-3">
-                    <h3 className="mb-0  memberProfileName profileName">{name}</h3>
-                    <MdEdit className="fs-5 ms-2" onClick={() => editHandler({ name })} />
+                    <h3 className="mb-0  memberProfileName profileName">
+                      {name}
+                    </h3>
+                    <MdEdit
+                      className="fs-5 ms-2"
+                      onClick={() =>
+                        editHandler({ type: "text", item: "name" })
+                      }
+                    />
                   </div>
                   <h6> ( {role} )</h6>
                 </div>
@@ -123,21 +159,39 @@ const MyProfile = () => {
                       <MdOutlineMailOutline className="fs-5" />
                       <p className="ms-2 memberProfileNameText"> {email}</p>
                     </div>
-                    <MdEdit className="fs-5" onClick={() => editHandler({ email })} />
+                    <MdEdit
+                      className="fs-5"
+                      onClick={() =>
+                        editHandler({ type: "email", item: "email" })
+                      }
+                    />
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center">
                       <FaPhoneAlt className="fs-5" />
                       <p className="ms-2 memberProfileNameText"> {phone}</p>
                     </div>
-                    <MdEdit className="fs-5" onClick={() => editHandler({ phone })} />
+                    <MdEdit
+                      className="fs-5"
+                      onClick={() =>
+                        editHandler({ type: "number", item: "phone" })
+                      }
+                    />
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <div className="d-flex align-items-center">
                       <FaBirthdayCake className="fs-5" />
-                      <p className="ms-2 memberProfileNameText"> {dateOfBirth}</p>
+                      <p className="ms-2 memberProfileNameText">
+                        {" "}
+                        {dateOfBirth}
+                      </p>
                     </div>
-                    <MdEdit className="fs-5" onClick={() => editHandler({ dateOfBirth })} />
+                    <MdEdit
+                      className="fs-5"
+                      onClick={() =>
+                        editHandler({ type: "date", item: "dateOfBirth" })
+                      }
+                    />
                   </div>
                   <div className="d-flexCenter justify-content-center mt-3">
                     <Button>Change Password</Button>
@@ -154,7 +208,10 @@ const MyProfile = () => {
                   <div>
                     <div className="d-flex align-items-center justify-content-between mb-3">
                       <div>
-                        <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
+                        <h5 className="mb-1 memberProfileManageItemText">
+                          {" "}
+                          No longer member?
+                        </h5>
                         <p className="mb-1"> request to leave </p>
                       </div>
 
@@ -164,7 +221,10 @@ const MyProfile = () => {
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                       <div>
-                        <h5 className="mb-1 memberProfileManageItemText"> Need extra meals?</h5>
+                        <h5 className="mb-1 memberProfileManageItemText">
+                          {" "}
+                          Need extra meals?
+                        </h5>
                         <p className="mb-1"> request for meals</p>
                       </div>
                       <Button style={{ width: "80px" }} type="primary">
@@ -194,7 +254,10 @@ const MyProfile = () => {
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <IoIosArrowBack
+                className="componentHeaderIcon"
+                onClick={() => navigate(-1)}
+              />
               <h3>ACTIVE MONTH DETAILS </h3>
             </div>
           </div>
@@ -205,15 +268,24 @@ const MyProfile = () => {
               <div className="memberProfileCenter">
                 <div className="memberProfileCenterTop ">
                   <div className="position-relative">
-                    <img src="/images/singleUser.webp" alt="" className="memberProfileImage " />
+                    <img
+                      src="/images/singleUser.webp"
+                      alt=""
+                      className="memberProfileImage "
+                    />
                     <div className="profileEditPosition">
                       <FaCamera className="fs-5" />
                     </div>
                   </div>
                   <div className="d-flexCenter flex-column">
                     <div className="d-flexCenter mt-3">
-                      <h3 className="mb-0  memberProfileName profileName">{name}</h3>
-                      <MdEdit className="fs-5 ms-2" onClick={() => editHandler({ name })} />
+                      <h3 className="mb-0  memberProfileName profileName">
+                        {name}
+                      </h3>
+                      <MdEdit
+                        className="fs-5 ms-2"
+                        onClick={() => editHandler({ name })}
+                      />
                     </div>
                     <h6> ( {role} )</h6>
                   </div>
@@ -225,21 +297,33 @@ const MyProfile = () => {
                         <MdOutlineMailOutline className="fs-5" />
                         <p className="ms-2 memberProfileNameText"> {email}</p>
                       </div>
-                      <MdEdit className="fs-5" onClick={() => editHandler({ email })} />
+                      <MdEdit
+                        className="fs-5"
+                        onClick={() => editHandler({ email })}
+                      />
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                       <div className="d-flex align-items-center">
                         <FaPhoneAlt className="fs-5" />
                         <p className="ms-2 memberProfileNameText"> {phone}</p>
                       </div>
-                      <MdEdit className="fs-5" onClick={() => editHandler({ phone })} />
+                      <MdEdit
+                        className="fs-5"
+                        onClick={() => editHandler({ phone })}
+                      />
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                       <div className="d-flex align-items-center">
                         <FaBirthdayCake className="fs-5" />
-                        <p className="ms-2 memberProfileNameText"> {dateOfBirth}</p>
+                        <p className="ms-2 memberProfileNameText">
+                          {" "}
+                          {dateOfBirth}
+                        </p>
                       </div>
-                      <MdEdit className="fs-5" onClick={() => editHandler({ dateOfBirth })} />
+                      <MdEdit
+                        className="fs-5"
+                        onClick={() => editHandler({ dateOfBirth })}
+                      />
                     </div>
                     <div className="d-flexCenter justify-content-center mt-3">
                       <Button>Change Password</Button>
@@ -253,7 +337,10 @@ const MyProfile = () => {
                 <div>
                   <div className="d-flex align-items-center justify-content-between mb-3">
                     <div>
-                      <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
+                      <h5 className="mb-1 memberProfileManageItemText">
+                        {" "}
+                        No longer member?
+                      </h5>
                       <p className="mb-1"> request to leave </p>
                     </div>
 
@@ -263,7 +350,10 @@ const MyProfile = () => {
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <div>
-                      <h5 className="mb-1 memberProfileManageItemText"> Need extra meals?</h5>
+                      <h5 className="mb-1 memberProfileManageItemText">
+                        {" "}
+                        Need extra meals?
+                      </h5>
                       <p className="mb-1"> request for meals</p>
                     </div>
                     <Button style={{ width: "80px" }} type="primary">
