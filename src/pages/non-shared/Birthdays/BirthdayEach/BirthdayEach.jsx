@@ -1,32 +1,39 @@
 import moment from "moment/moment";
 import "./BirthdayEach.css";
-import { useState } from "react";
+import { LuPartyPopper } from "react-icons/lu";
 
 const BirthdayEach = ({ data }) => {
   const { name, dateOfBirth } = data;
-  const today = moment();
   const birthday = moment(dateOfBirth, "DD-MM-YYYY");
-  const daysRemaining = Math.abs(
-    birthday.diff(today, "days") - moment().diff(birthday, "years") * 365
-  );
-  let dateString;
+  const isToday = birthday.isSame(moment(), "day");
 
-  if (daysRemaining === 0) {
-    dateString = "Today";
-  } else if (daysRemaining > 0 && daysRemaining <= 7) {
-    dateString = "This Week";
-  } else if (daysRemaining > 7 && daysRemaining <= 14) {
-    dateString = "Next Week";
-  } else if (daysRemaining > 14 && daysRemaining <= 30) {
-    dateString = "This Month";
-  } else if (daysRemaining > 30 && daysRemaining <= 60) {
-    dateString = "Next Month";
-  } else if (daysRemaining > 60) {
-    dateString = moment(birthday).format("MMMM");
-  } else {
-    const remainingMonths = Math.floor(daysRemaining / 30);
-    dateString = `${remainingMonths} ${remainingMonths === 1 ? "month" : "months"} ago`;
-  }
+  const adjustDate = () => {
+    if (isToday) {
+      return (
+        <button className="btn btn-success d-flex align-items-center">
+          <LuPartyPopper />
+          <LuPartyPopper />
+          <span className="px-2 fw-bold "> Party Time! </span>
+          <LuPartyPopper />
+          <LuPartyPopper />
+        </button>
+      );
+    }
+
+    let dateFromInput = moment(dateOfBirth, "DD-MM-YYYY");
+    const result = dateFromInput.fromNow();
+
+    if (result.includes("days ago")) {
+      dateFromInput = dateFromInput.add(1, "days").format("DD-MM-YYYY");
+    }
+    return (
+      <span className="bg-warning fw-bold rounded-2 px-3 py-2 text-secondary-emphasis">
+        {moment(dateFromInput, "DD-MM-YYYY").fromNow()}
+      </span>
+    );
+  };
+
+  console.log(adjustDate());
 
   return (
     <div className="phoneItem ">
@@ -37,9 +44,26 @@ const BirthdayEach = ({ data }) => {
           <p className="mb-0 me-2 phoneText "> {dateOfBirth}</p>
         </div>
       </div>
-      <div className="birthdayText">
-        <p className="mb-0"> {dateString}</p>
-      </div>
+
+      <p className="mb-0 text-capitalize">
+        {adjustDate()}
+        {/* {isToday ? (
+          <button className="btn btn-success d-flex align-items-center">
+            <LuPartyPopper />
+            <LuPartyPopper />
+            <span className="px-2 fw-bold "> Party Time! </span>
+            <LuPartyPopper />
+            <LuPartyPopper />
+          </button>
+        ) : (
+          <span className="bg-warning fw-bold rounded-2 px-3 py-2 text-secondary-emphasis">
+            {adjustDate()}
+          </span>
+        )} */}
+      </p>
+      {/* <div className="birthdayText">
+
+      </div> */}
     </div>
   );
 };

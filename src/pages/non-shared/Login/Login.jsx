@@ -5,7 +5,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useGetUserProfileQuery, useLoginUserMutation } from "../../../redux/api/sampleApi/userApi";
+import {
+  useGetUserProfileQuery,
+  useLoginUserMutation,
+} from "../../../redux/api/sampleApi/userApi";
 import { auth } from "../../../redux/features/UserSlice/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -98,7 +101,11 @@ const Login = () => {
                 />
               </Form.Item>
               <div className="d-flex align-items-center justify-content-between mb-2">
-                <Form.Item name="remember" valuePropName="checked" className="checkboxForm">
+                <Form.Item
+                  name="remember"
+                  valuePropName="checked"
+                  className="checkboxForm"
+                >
                   <Checkbox>Remember me</Checkbox>
                 </Form.Item>
 
@@ -110,12 +117,18 @@ const Login = () => {
               </div>
               {isClicked ? (
                 <div>
-                  <p className="mb-2 text-danger">Email or password incorrect</p>
+                  <p className="mb-2 text-danger">
+                    Email or password incorrect
+                  </p>
                 </div>
               ) : null}
 
               <div className="btnGroups">
-                <Button type="primary" htmlType="submit" className="login-form-button mb-3 w-100">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button mb-3 w-100"
+                >
                   Log in
                 </Button>
                 <div className="d-flex">
@@ -124,15 +137,22 @@ const Login = () => {
                   <hr />
                 </div>
                 <div className="d-flex w-100">
-                  <Button type="primary" className="login-form-button mb-3 me-3 w-100">
+                  <Button
+                    type="primary"
+                    className="login-form-button mb-3 me-3 w-100"
+                  >
                     Google
                   </Button>
-                  <Button type="primary" className="login-form-button mb-3 w-100">
+                  <Button
+                    type="primary"
+                    className="login-form-button mb-3 w-100"
+                  >
                     Facebook
                   </Button>
                 </div>
                 <p>
-                  Don&apos;t have an account? <Link to="/user/register">Register now!</Link>
+                  Don&apos;t have an account?{" "}
+                  <Link to="/user/register">Register now!</Link>
                 </p>
               </div>
             </Form>

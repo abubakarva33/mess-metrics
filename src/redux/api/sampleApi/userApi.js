@@ -30,7 +30,7 @@ const userApi = mainApi.injectEndpoints({
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["Profile", "Action"],
+      invalidatesTags: ["Profile", "Action", "Member"],
     }),
     getUserAccount: builder.query({
       query: () => ({
