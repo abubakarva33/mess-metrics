@@ -1,6 +1,6 @@
 import { IoIosArrowBack } from "react-icons/io";
 import "./ActiveMonthDetails.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Divider, Pagination, Select, Space, Table } from "antd";
 import TableTemplate from "./components/TableTemplate/TableTemplate";
 import { useState } from "react";
@@ -16,6 +16,7 @@ import { useSearchQuery } from "../../../../utils/useSearchQuery";
 import { MdCalendarMonth } from "react-icons/md";
 import ReactDatePicker from "react-datepicker";
 import moment from "moment";
+import UpdateModal from "./components/UpdateModal";
 
 const ActiveMonthDetails = () => {
   const type = useSearchQuery("type") || "meal";
@@ -23,6 +24,8 @@ const ActiveMonthDetails = () => {
   const [filter, setFilter] = useState("");
   const [columns, setColumns] = useState("mealColumns");
   const [pageNumber, setPageNumber] = useState(1);
+  const [itemData, setItemData] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: bazar, isFetching: bazarFetching } = useGetAllBazarQuery({
     page: pageNumber,
@@ -70,7 +73,7 @@ const ActiveMonthDetails = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <a>Edit</a>
+            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
           </Space>
         ),
       },
@@ -109,7 +112,7 @@ const ActiveMonthDetails = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <a>Edit</a>
+            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
           </Space>
         ),
       },
@@ -138,7 +141,7 @@ const ActiveMonthDetails = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <a>Edit</a>
+            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
           </Space>
         ),
       },
@@ -172,7 +175,7 @@ const ActiveMonthDetails = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <a>Edit</a>
+            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
           </Space>
         ),
       },
@@ -200,7 +203,7 @@ const ActiveMonthDetails = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <a>Edit</a>
+            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
           </Space>
         ),
       },
@@ -238,7 +241,7 @@ const ActiveMonthDetails = () => {
         width: 80,
         render: (_, record) => (
           <Space size="middle">
-            <a>Edit</a>
+            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
           </Space>
         ),
       },
@@ -269,7 +272,9 @@ const ActiveMonthDetails = () => {
     setPageNumber(current);
   };
 
-  console.log(tableData);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
 
   return (
     <div>
@@ -399,6 +404,7 @@ const ActiveMonthDetails = () => {
           </div>
         </div>
       </div>
+      <UpdateModal data={itemData} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </div>
   );
 };

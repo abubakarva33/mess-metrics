@@ -2,7 +2,6 @@ import "./ActiveDetailsTemplate.css";
 import { FaUser } from "react-icons/fa";
 
 const ActiveDetailsTemplate = ({ data }) => {
-  console.log(data);
   return (
     <div className="d-flex align-items-center justify-content-between my-3 activeDetailsTemplate">
       <div className="d-flex align-items-center justify-content-between">
