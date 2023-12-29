@@ -13,6 +13,9 @@ import {
   useGetAllSharedCostQuery,
 } from "../../../../redux/api/sampleApi/actionApi";
 import { useSearchQuery } from "../../../../utils/useSearchQuery";
+import { MdCalendarMonth } from "react-icons/md";
+import ReactDatePicker from "react-datepicker";
+import moment from "moment";
 
 const ActiveMonthDetails = () => {
   const type = useSearchQuery("type") || "meal";
@@ -20,6 +23,8 @@ const ActiveMonthDetails = () => {
   const [filter, setFilter] = useState("");
   const [columns, setColumns] = useState("mealColumns");
   const [pageNumber, setPageNumber] = useState(1);
+
+  console.log({ filter });
   const { data: bazar, isFetching: bazarFetching } = useGetAllBazarQuery({
     page: pageNumber,
     filter,
@@ -42,33 +47,6 @@ const ActiveMonthDetails = () => {
       filter,
     }
   );
-
-  const optionsData = [
-    {
-      value: "10-01-2023",
-      label: "All Items",
-    },
-    {
-      value: "10-01-2023",
-      label: "10-January-2023",
-    },
-    {
-      value: "10-01-2023",
-      label: "12-January-2023",
-    },
-    {
-      value: "10-01-2023",
-      label: "20-January-2023",
-    },
-    {
-      value: "10-01-2023",
-      label: "13-January-2023",
-    },
-    {
-      value: "10-01-2023",
-      label: "10-January-2023",
-    },
-  ];
   const columnData = {
     meal: [
       {
@@ -292,29 +270,20 @@ const ActiveMonthDetails = () => {
     setPageNumber(current);
   };
 
-  const onChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-  const onSearch = (value) => {
-    console.log("search:", value);
-  };
-  const filterOption = (input, option) =>
-    (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
-
   return (
     <div>
       <div className="activeMonthSectionMain">
         <div className="d-flex align-items-center justify-content-between my-4">
           <h4 className="text-center mb-0">Active Month Details</h4>
-          <Select
-            showSearch
-            placeholder="Filter By Date"
-            optionFilterProp="children"
-            onChange={onChange}
-            onSearch={onSearch}
-            filterOption={filterOption}
-            options={optionsData}
-          />
+          <div className="activeDatePicker">
+            <ReactDatePicker
+              className=""
+              placeholderText="Filter by date"
+              dateFormat="dd-MM-yyyy"
+              value={filter}
+              onChange={(date) => setFilter(moment(date).format("DD-MM-YYYY"))}
+            />
+          </div>
         </div>
         <div className="activeMonthBtnGroups mb-4">
           <Button
@@ -359,11 +328,10 @@ const ActiveMonthDetails = () => {
           data={tableData}
           columns={column}
           dataFetching={dataFetching}
-          pageNumber={pageNumber}
           onPageChange={onPageChange}
         />
       </div>
-      <div className="phoneBookContainer">
+      {/* <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
@@ -421,15 +389,15 @@ const ActiveMonthDetails = () => {
             </div>
           </div>
         </div>
-        {/* <div className="phoneBookContainerItemBg">
+        <div className="phoneBookContainerItemBg">
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
               {Array.isArray(mealCostData) &&
                 mealCostData?.map((data, ind) => <ActiveDetailsTemplate key={ind} data={data} />)}
             </div>
           </div>
-        </div> */}
-      </div>
+        </div>
+      </div> */}
     </div>
   );
 };

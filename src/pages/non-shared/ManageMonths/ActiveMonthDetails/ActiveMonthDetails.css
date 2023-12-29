@@ -11,6 +11,13 @@
   color: var(--bg-body);
   font-weight: 700;
 }
+.activeDatePicker > div > div input {
+  min-height: 35px !important;
+  background-color: aliceblue !important;
+  padding: 0 !important;
+  max-width: 130px;
+  font-size: 16px !important;
+}
 /* ::-webkit-scrollbar:horizontal {
   height: 10px;
   background-color: var(--bg-primary);
