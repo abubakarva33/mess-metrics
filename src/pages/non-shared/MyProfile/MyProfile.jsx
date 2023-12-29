@@ -94,7 +94,7 @@ const MyProfile = () => {
 
       console.log(body);
 
-      const res = await updateProfile({ _id, ...params }).unwrap();
+      const res = await updateProfile({ _id, ...body }).unwrap();
       if (res?.success) {
         Swal.fire(
           "Profile Updated!",
