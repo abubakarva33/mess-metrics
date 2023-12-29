@@ -1,8 +1,5 @@
-import {
-  useGetMonthsQuery,
-} from "../../redux/api/sampleApi/monthApi";
+import { useGetMonthsQuery } from "../../redux/api/sampleApi/monthApi";
 import { useEffect, useState } from "react";
-
 
 const useActiveMonthOptions = () => {
   const { data, isFetching } = useGetMonthsQuery({ limit: 100 });
@@ -12,8 +9,8 @@ const useActiveMonthOptions = () => {
   useEffect(() => {
     const monthList = month?.map((m) => {
       return {
-        label: `${m.name} ${m.isActive ? "(active)" : ""}`,
-        value: m._id,
+        label: `${m?.name} ${m?.isActive ? "(active)" : ""}`,
+        value: m?._id,
       };
     });
 

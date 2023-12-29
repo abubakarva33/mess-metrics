@@ -12,25 +12,30 @@ import {
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
+import useActiveMonthOptions from "../../../../components/Hooks/MessActiveMonthDropdown";
 
 const DeleteOldMonth = () => {
   const [form] = Form.useForm();
-  const month = useMonthOptions();
+  // const month = useMonthOptions();
+  const month = useActiveMonthOptions();
   const navigate = useNavigate();
   const [months, setMonths] = useState();
   const { data, isFetching } = useGetActiveMonthQuery();
   const [deleteMonth] = useDeleteMonthMutation();
 
   useEffect(() => {
-    const items = month.filter((item) => item?.value !== data?._id);
+    const items = month?.filter((item) => item?.value !== data?._id) || [];
+    if (items) {
+      items.unshift({ label: "Select Month", value: "" });
+    }
     setMonths(items);
-  }, [month]);
+  }, [month, data]);
 
   if (isFetching) {
     return <SpinnerMain />;
   }
 
-
+  console.log(months);
   const onFinish = async ({ month }) => {
     Swal.fire({
       title: "Are you sure?",

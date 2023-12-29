@@ -1,11 +1,17 @@
 import { useGetMonthsQuery } from "../../redux/api/sampleApi/monthApi";
 
 import { useEffect, useState } from "react";
+import SpinnerMain from "../Spinner/SpinnerMain";
 
 const useMonthOptions = () => {
-  const { data } = useGetMonthsQuery();
+  const { data, isFetching } = useGetMonthsQuery();
+
+  if (isFetching) {
+    return <SpinnerMain />;
+  }
 
   const [months, setMonths] = useState([{ label: "Select Member", value: "" }]);
+  console.log(months);
 
   useEffect(() => {
     const memberData = data?.map((member) => ({
@@ -22,6 +28,8 @@ const useMonthOptions = () => {
     }
     setMonths(membersFormate);
   }, [data]);
+
+ 
 
   return months;
 };
