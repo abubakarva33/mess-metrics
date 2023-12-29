@@ -1,51 +1,109 @@
 import { Button, Form, Input, Modal, Select } from "antd";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import { MdCalendarMonth } from "react-icons/md";
+import Swal from "sweetalert2";
+import {
+  useUpdateBazarMutation,
+  useUpdateDepositMutation,
+  useUpdateIndividualCostMutation,
+  useUpdateMealMutation,
+  useUpdateSharedCostMutation,
+} from "../../../../../redux/api/sampleApi/actionApi";
 
-const UpdateModal = ({ data, isModalOpen, setIsModalOpen }) => {
+const UpdateModal = ({ data, isModalOpen, setIsModalOpen, itemName }) => {
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const [value, setValue] = useState("");
+  const [updateBazar, { status: bazarStatus }] = useUpdateBazarMutation();
+  const [updateDeposit, { status: depositStatus }] = useUpdateDepositMutation();
+  const [updateIndividualCost, { status: individualCostStatus }] =
+    useUpdateIndividualCostMutation();
+  const [updateSharedCost, { status: sharedCostStatus }] = useUpdateSharedCostMutation();
+  const [updateMeal] = useUpdateMealMutation();
+
   const handleOk = () => {
     setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  useEffect(() => {
+    form.setFieldsValue({
+      amount: data?.amount,
+      list: data?.list,
+    });
+  }, [data, form]);
 
   const onFinish = async (values) => {
-    console.log(values);
-    // values.members = shoppersList;
-    // const amount = Number(values.amount);
-    // const fieldValues = { ...values, date: startDate, amount };
-    // try {
-    //   const res = await addMealCost(fieldValues).unwrap();
-    //   if (res?.success) {
-    //     Swal.fire({
-    //       text: "Meal cost added successfully",
-    //       icon: "success",
-    //       showCancelButton: true,
-    //       confirmButtonColor: "#3085d6",
-    //       cancelButtonColor: "#d33",
-    //       confirmButtonText: "Back to Home",
-    //       cancelButtonText: "Add more",
-    //     }).then((result) => {
-    //       if (result.isConfirmed) {
-    //         navigate("/");
-    //       }
-    //     });
-    //     form.resetFields();
-    //   }
-    // } catch (error) {
-    //   Swal.fire({
-    //     icon: "error",
-    //     title: error?.data?.message || "Add Cost Failed",
-    //     showConfirmButton: false,
-    //     timer: 1000,
-    //   });
-    // }
+    const mealValues = {
+      meals: [
+        {
+          user: data?.user?._id,
+          meal: values.amount,
+        },
+      ],
+      date: data?.date,
+    };
+    console.log(mealValues);
+    const amount = Number(values.amount);
+    const fieldValues = { ...values, amount };
+    console.log(fieldValues);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        if (itemName === "meal") {
+          const res = await updateMeal(mealValues).unwrap();
+          console.log("m c");
+        }
+        if (itemName === "mealCost") {
+          const res = await updateBazar({ id: data?._id, ...fieldValues }).unwrap();
+          console.log("m c");
+        }
+        if (itemName === "sharedCost") {
+          const res = await updateSharedCost({ id: data?._id, amount }).unwrap();
+          console.log("s c");
+        }
+        if (itemName === "individualCost") {
+          const res = await updateIndividualCost({
+            id: data?._id,
+
+            ...fieldValues,
+          }).unwrap();
+          console.log("i c");
+        }
+        if (itemName === "deposit") {
+          const res = await updateDeposit({ id: data?._id, ...fieldValues }).unwrap();
+          console.log("d");
+        }
+        if (itemName === "bazarCost") {
+          const res = await updateBazar({ id: data?._id, ...fieldValues }).unwrap();
+          console.log("d");
+        }
+
+        if (res?.success) {
+          Swal.fire({
+            text: "Old month deleted successfully",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "Back to Home",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate("/");
+            }
+          });
+        }
+      }
+    });
   };
   console.log(data);
   return (
@@ -63,17 +121,7 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen }) => {
           icon={<MdCalendarMonth />}
         />
       </div>
-      <Form
-        name="complex-form"
-        form={form}
-        onFinish={onFinish}
-        layout="vertical"
-        className="my-4"
-        initialValues={{
-          amount: data?.amount,
-          list: data?.list,
-        }}
-      >
+      <Form name="complex-form" form={form} onFinish={onFinish} layout="vertical" className="my-4">
         <Form.Item>
           <div>
             <h6>Enter Updated Cost:</h6>

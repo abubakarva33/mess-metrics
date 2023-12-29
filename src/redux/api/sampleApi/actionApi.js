@@ -88,6 +88,39 @@ const actionApi = mainApi.injectEndpoints({
 
       providesTags: ["Action"],
     }),
+
+    updateBazar: builder.mutation({
+      query: ({ id, ...body }) => ({
+        url: `bazar/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Action"],
+    }),
+    updateSharedCost: builder.mutation({
+      query: ({ id, ...body }) => ({
+        url: `shared-cost/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Action"],
+    }),
+    updateIndividualCost: builder.mutation({
+      query: ({ id, ...body }) => ({
+        url: `individual-cost/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Action"],
+    }),
+    updateDeposit: builder.mutation({
+      query: ({ id, ...body }) => ({
+        url: `deposit/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Action"],
+    }),
   }),
 });
 
@@ -106,4 +139,8 @@ export const {
   useGetAllMealQuery,
   useGetAllDepositQuery,
   useGetAllIndividualCostQuery,
+  useUpdateBazarMutation,
+  useUpdateDepositMutation,
+  useUpdateIndividualCostMutation,
+  useUpdateSharedCostMutation,
 } = actionApi;

@@ -26,6 +26,7 @@ const ActiveMonthDetails = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [itemName, setItemName] = useState("");
 
   const { data: bazar, isFetching: bazarFetching } = useGetAllBazarQuery({
     page: pageNumber,
@@ -73,7 +74,9 @@ const ActiveMonthDetails = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
+            <Link onClick={() => (setItemData(record), setIsModalOpen(true), setItemName("meal"))}>
+              Edit
+            </Link>
           </Space>
         ),
       },
@@ -112,7 +115,11 @@ const ActiveMonthDetails = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
+            <Link
+              onClick={() => (setItemData(record), setIsModalOpen(true), setItemName("mealCost"))}
+            >
+              Edit
+            </Link>
           </Space>
         ),
       },
@@ -141,7 +148,11 @@ const ActiveMonthDetails = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
+            <Link
+              onClick={() => (setItemData(record), setIsModalOpen(true), setItemName("sharedCost"))}
+            >
+              Edit
+            </Link>
           </Space>
         ),
       },
@@ -175,7 +186,13 @@ const ActiveMonthDetails = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
+            <Link
+              onClick={() => (
+                setItemData(record), setIsModalOpen(true), setItemName("individualCost")
+              )}
+            >
+              Edit
+            </Link>
           </Space>
         ),
       },
@@ -203,7 +220,11 @@ const ActiveMonthDetails = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
+            <Link
+              onClick={() => (setItemData(record), setIsModalOpen(true), setItemName("deposit"))}
+            >
+              Edit
+            </Link>
           </Space>
         ),
       },
@@ -241,7 +262,11 @@ const ActiveMonthDetails = () => {
         width: 80,
         render: (_, record) => (
           <Space size="middle">
-            <Link onClick={() => (setItemData(record), setIsModalOpen(true))}>Edit</Link>
+            <Link
+              onClick={() => (setItemData(record), setIsModalOpen(true), setItemName("bazarCost"))}
+            >
+              Edit
+            </Link>
           </Space>
         ),
       },
@@ -404,7 +429,12 @@ const ActiveMonthDetails = () => {
           </div>
         </div>
       </div>
-      <UpdateModal data={itemData} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <UpdateModal
+        data={itemData}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        itemName={itemName}
+      />
     </div>
   );
 };
