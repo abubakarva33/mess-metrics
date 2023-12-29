@@ -16,6 +16,7 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, itemName }) => {
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const [value, setValue] = useState("");
+  const [res, setRes] = useState();
   const [updateBazar, { status: bazarStatus }] = useUpdateBazarMutation();
   const [updateDeposit, { status: depositStatus }] = useUpdateDepositMutation();
   const [updateIndividualCost, { status: individualCostStatus }] =
@@ -33,20 +34,24 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, itemName }) => {
     form.setFieldsValue({
       amount: data?.amount,
       list: data?.list,
+      meal: data?.meal,
     });
   }, [data, form]);
 
+  console.log(data?._id);
+
   const onFinish = async (values) => {
-    const mealValues = {
+    const body = {
       meals: [
         {
-          user: data?.user?._id,
+          user: data?._id,
           meal: values.amount,
         },
       ],
       date: data?.date,
     };
-    console.log(mealValues);
+
+    console.log(body);
     const amount = Number(values.amount);
     const fieldValues = { ...values, amount };
     console.log(fieldValues);
@@ -61,15 +66,18 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, itemName }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         if (itemName === "meal") {
-          const res = await updateMeal(mealValues).unwrap();
+          const res = await updateMeal(body).unwrap();
+          setRes(res);
           console.log("m c");
         }
         if (itemName === "mealCost") {
           const res = await updateBazar({ id: data?._id, ...fieldValues }).unwrap();
+          setRes(res);
           console.log("m c");
         }
         if (itemName === "sharedCost") {
-          const res = await updateSharedCost({ id: data?._id, amount }).unwrap();
+          const res = await updateSharedCost({ id: data?._id, ...fieldValues }).unwrap();
+          setRes(res);
           console.log("s c");
         }
         if (itemName === "individualCost") {
@@ -78,17 +86,20 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, itemName }) => {
 
             ...fieldValues,
           }).unwrap();
+          setRes(res);
           console.log("i c");
         }
         if (itemName === "deposit") {
-          const res = await updateDeposit({ id: data?._id, ...fieldValues }).unwrap();
+          const res = await updateDeposit({ id: data?._id, amount }).unwrap();
+          setRes(res);
           console.log("d");
         }
         if (itemName === "bazarCost") {
           const res = await updateBazar({ id: data?._id, ...fieldValues }).unwrap();
+          setRes(res);
           console.log("d");
         }
-
+        console.log(res);
         if (res?.success) {
           Swal.fire({
             text: "Old month deleted successfully",
@@ -98,7 +109,7 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, itemName }) => {
             confirmButtonText: "Back to Home",
           }).then((result) => {
             if (result.isConfirmed) {
-              navigate("/");
+              setIsModalOpen(false);
             }
           });
         }
@@ -122,22 +133,41 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, itemName }) => {
         />
       </div>
       <Form name="complex-form" form={form} onFinish={onFinish} layout="vertical" className="my-4">
-        <Form.Item>
-          <div>
-            <h6>Enter Updated Cost:</h6>
-            <Form.Item
-              name="amount"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Number!",
-                },
-              ]}
-            >
-              <Input type="number" placeholder="Enter Total Meal Cost" />
-            </Form.Item>
-          </div>
-        </Form.Item>
+        {!data?.meal ? (
+          <Form.Item>
+            <div>
+              <h6>Enter Updated Cost:</h6>
+              <Form.Item
+                name="amount"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Number!",
+                  },
+                ]}
+              >
+                <Input type="number" placeholder="Enter Total Meal Cost" />
+              </Form.Item>
+            </div>
+          </Form.Item>
+        ) : (
+          <Form.Item>
+            <div>
+              <h6>Enter Updated Meal:</h6>
+              <Form.Item
+                name="meal"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Number!",
+                  },
+                ]}
+              >
+                <Input type="number" placeholder="Enter Total Meal Cost" />
+              </Form.Item>
+            </div>
+          </Form.Item>
+        )}
         <Form.Item>
           <div>
             <h6>Update Bazar List (Optional) </h6>
