@@ -19,11 +19,12 @@ const ActiveMonthDetails = () => {
   const navigate = useNavigate();
 
   const [columns, setColumns] = useState("mealColumns");
-  const { data: bazar } = useGetAllBazarQuery();
-  const { data: sharedCost } = useGetAllSharedCostQuery();
-  const { data: mealData } = useGetAllMealQuery();
-  const { data: deposit } = useGetAllDepositQuery();
-  const { data: individualCost } = useGetAllIndividualCostQuery();
+  const { data: bazar, isFetching: bazarFetching } = useGetAllBazarQuery();
+  const { data: sharedCost, isFetching: sharedCostFetching } = useGetAllSharedCostQuery();
+  const { data: mealData, isFetching: mealFetching } = useGetAllMealQuery();
+  const { data: deposit, isFetching: depositFetching } = useGetAllDepositQuery();
+  const { data: individualCost, isFetching: individualCostFetching } =
+    useGetAllIndividualCostQuery();
 
   const optionsData = [
     {
@@ -257,8 +258,17 @@ const ActiveMonthDetails = () => {
     bazar,
     mealCost: bazar,
   };
+  const tableDataFetching = {
+    deposit: depositFetching,
+    meal: mealFetching,
+    sharedCost: sharedCostFetching,
+    individualCost: individualCostFetching,
+    bazar: bazarFetching,
+    mealCost: bazarFetching,
+  };
   const column = columnData[type];
   const tableData = dataSource[type];
+  const dataFetching = tableDataFetching[type];
 
   const onChange = (value) => {
     console.log(`selected ${value}`);
@@ -323,16 +333,13 @@ const ActiveMonthDetails = () => {
             BazarList
           </Button>
         </div>
-        <TableTemplate data={tableData} columns={column} />
+        <TableTemplate data={tableData} columns={column} dataFetching={dataFetching} />
       </div>
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack
-                className="componentHeaderIcon"
-                onClick={() => navigate(-1)}
-              />
+              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
               <h3>Phone Book </h3>
             </div>
             <Select
@@ -353,44 +360,32 @@ const ActiveMonthDetails = () => {
                 Meal
               </Button>
               <Button
-                className={
-                  columns === "depositColumns" ? "activeNav ms-3" : "ms-3"
-                }
+                className={columns === "depositColumns" ? "activeNav ms-3" : "ms-3"}
                 onClick={() => setColumns("depositColumns")}
               >
                 Deposit
               </Button>
               <Button
-                className={
-                  columns === "mealCostColumns" ? "activeNav ms-3" : "ms-3"
-                }
+                className={columns === "mealCostColumns" ? "activeNav ms-3" : "ms-3"}
                 onClick={() => setColumns("mealCostColumns")}
               >
                 Meal Cost
               </Button>
 
               <Button
-                className={
-                  columns === "SharedCostColumns" ? "activeNav ms-3" : "ms-3"
-                }
+                className={columns === "SharedCostColumns" ? "activeNav ms-3" : "ms-3"}
                 onClick={() => setColumns("SharedCostColumns")}
               >
                 Shared Other Cost
               </Button>
               <Button
-                className={
-                  columns === "IndividualCostColumns"
-                    ? "activeNav ms-3"
-                    : "ms-3"
-                }
+                className={columns === "IndividualCostColumns" ? "activeNav ms-3" : "ms-3"}
                 onClick={() => setColumns("IndividualCostColumns")}
               >
                 Individual Other Cost
               </Button>
               <Button
-                className={
-                  columns === "bazarListColumns" ? "activeNav ms-3" : "ms-3"
-                }
+                className={columns === "bazarListColumns" ? "activeNav ms-3" : "ms-3"}
                 onClick={() => setColumns("bazarListColumns")}
               >
                 BazarList
