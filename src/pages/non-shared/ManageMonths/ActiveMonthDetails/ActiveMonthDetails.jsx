@@ -1,7 +1,7 @@
 import { IoIosArrowBack } from "react-icons/io";
 import "./ActiveMonthDetails.css";
 import { useNavigate } from "react-router-dom";
-import { Button, Divider, Select, Space, Table } from "antd";
+import { Button, Divider, Pagination, Select, Space, Table } from "antd";
 import TableTemplate from "./components/TableTemplate/TableTemplate";
 import { useState } from "react";
 import ActiveDetailsTemplate from "./components/ActiveDetailsTemplate/ActiveDetailsTemplate";
@@ -17,14 +17,31 @@ import { useSearchQuery } from "../../../../utils/useSearchQuery";
 const ActiveMonthDetails = () => {
   const type = useSearchQuery("type") || "meal";
   const navigate = useNavigate();
-
+  const [filter, setFilter] = useState("");
   const [columns, setColumns] = useState("mealColumns");
-  const { data: bazar, isFetching: bazarFetching } = useGetAllBazarQuery();
-  const { data: sharedCost, isFetching: sharedCostFetching } = useGetAllSharedCostQuery();
-  const { data: mealData, isFetching: mealFetching } = useGetAllMealQuery();
-  const { data: deposit, isFetching: depositFetching } = useGetAllDepositQuery();
-  const { data: individualCost, isFetching: individualCostFetching } =
-    useGetAllIndividualCostQuery();
+  const [pageNumber, setPageNumber] = useState(1);
+  const { data: bazar, isFetching: bazarFetching } = useGetAllBazarQuery({
+    page: pageNumber,
+    filter,
+  });
+  const { data: sharedCost, isFetching: sharedCostFetching } = useGetAllSharedCostQuery({
+    page: pageNumber,
+    filter,
+  });
+  const { data: mealData, isFetching: mealFetching } = useGetAllMealQuery({
+    page: pageNumber,
+    filter,
+  });
+  const { data: deposit, isFetching: depositFetching } = useGetAllDepositQuery({
+    page: pageNumber,
+    filter,
+  });
+  const { data: individualCost, isFetching: individualCostFetching } = useGetAllIndividualCostQuery(
+    {
+      page: pageNumber,
+      filter,
+    }
+  );
 
   const optionsData = [
     {
@@ -251,11 +268,11 @@ const ActiveMonthDetails = () => {
     ],
   };
   const dataSource = {
-    deposit,
-    meal: mealData?.data,
-    sharedCost,
-    individualCost,
-    bazar,
+    deposit: deposit,
+    meal: mealData,
+    sharedCost: sharedCost,
+    individualCost: individualCost,
+    bazar: bazar,
     mealCost: bazar,
   };
   const tableDataFetching = {
@@ -266,9 +283,14 @@ const ActiveMonthDetails = () => {
     bazar: bazarFetching,
     mealCost: bazarFetching,
   };
+
   const column = columnData[type];
   const tableData = dataSource[type];
   const dataFetching = tableDataFetching[type];
+
+  const onPageChange = (current) => {
+    setPageNumber(current);
+  };
 
   const onChange = (value) => {
     console.log(`selected ${value}`);
@@ -333,7 +355,13 @@ const ActiveMonthDetails = () => {
             BazarList
           </Button>
         </div>
-        <TableTemplate data={tableData} columns={column} dataFetching={dataFetching} />
+        <TableTemplate
+          data={tableData}
+          columns={column}
+          dataFetching={dataFetching}
+          pageNumber={pageNumber}
+          onPageChange={onPageChange}
+        />
       </div>
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
