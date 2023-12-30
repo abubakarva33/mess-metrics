@@ -1,302 +1,37 @@
 import { IoIosArrowBack } from "react-icons/io";
 import "./ActiveMonthDetails.css";
-import { Link, useNavigate } from "react-router-dom";
-import { Button, Divider, Pagination, Select, Space, Table } from "antd";
-import TableTemplate from "./components/TableTemplate/TableTemplate";
+import { useNavigate } from "react-router-dom";
+import { Button } from "antd";
 import { useState } from "react";
 import ActiveDetailsTemplate from "./components/ActiveDetailsTemplate/ActiveDetailsTemplate";
-import {
-  useGetAllBazarQuery,
-  useGetAllDepositQuery,
-  useGetAllIndividualCostQuery,
-  useGetAllMealQuery,
-  useGetAllSharedCostQuery,
-} from "../../../../redux/api/sampleApi/actionApi";
+
 import { useSearchQuery } from "../../../../utils/useSearchQuery";
-import { MdCalendarMonth } from "react-icons/md";
 import ReactDatePicker from "react-datepicker";
 import moment from "moment";
 import UpdateModal from "./components/UpdateModal";
+import MealDetails from "./components/ActiveMonthPages/MealDetails";
+import DepositDetails from "./components/ActiveMonthPages/DepositDetails";
+import BazarDetails from "./components/ActiveMonthPages/BazarDetails";
+import SharedCostDetails from "./components/ActiveMonthPages/SharedCostDetails";
+import IndividualCostDetails from "./components/ActiveMonthPages/IndividualCostDetails";
 
 const ActiveMonthDetails = () => {
   const type = useSearchQuery("type") || "meal";
   const navigate = useNavigate();
   const [filter, setFilter] = useState("");
-  const [columns, setColumns] = useState("mealColumns");
-  const [pageNumber, setPageNumber] = useState(1);
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemName, setItemName] = useState("");
 
-  const { data: bazar, isFetching: bazarFetching } = useGetAllBazarQuery({
-    page: pageNumber,
-    filter,
-  });
-  const { data: sharedCost, isFetching: sharedCostFetching } = useGetAllSharedCostQuery({
-    page: pageNumber,
-    filter,
-  });
-  const { data: mealData, isFetching: mealFetching } = useGetAllMealQuery({
-    page: pageNumber,
-    filter,
-  });
-  const { data: deposit, isFetching: depositFetching } = useGetAllDepositQuery({
-    page: pageNumber,
-    filter,
-  });
-  const { data: individualCost, isFetching: individualCostFetching } = useGetAllIndividualCostQuery(
-    {
-      page: pageNumber,
-      filter,
-    }
-  );
-  const columnData = {
-    meal: [
-      {
-        title: "Date",
-        dataIndex: "date",
-        key: "date",
-      },
-      {
-        title: " Member Name",
-        render: (_, record) => record.user.name,
-        key: "name",
-      },
-
-      {
-        title: "Meal",
-        dataIndex: "meal",
-        key: "meal",
-      },
-      {
-        title: "Action",
-        width: 80,
-        key: "action",
-        render: (_, record) => (
-          <Space size="middle">
-            <Link to="/update-meal">Edit</Link>
-          </Space>
-        ),
-      },
-    ],
-    mealCost: [
-      {
-        title: "Date",
-        dataIndex: "date",
-        key: "date",
-      },
-      {
-        title: " Member Name",
-        key: "name",
-        render: (_, record) =>
-          record?.members?.map((member, idk) => (
-            <div size="middle">
-              <p className="mb-0">{member.name}</p>
-            </div>
-          )),
-      },
-
-      {
-        title: "Amount",
-        dataIndex: "amount",
-        key: "amount",
-      },
-      {
-        title: "Meal Cost Details",
-        dataIndex: "list",
-        render: (_, record) => (record.list ? record.list : "No Details"),
-        key: "list",
-      },
-      {
-        title: "Action",
-        width: 80,
-        key: "action",
-        render: (_, record) => (
-          <Space size="middle">
-            <Link
-              onClick={() => (setItemData(record), setIsModalOpen(true), setItemName("mealCost"))}
-            >
-              Edit
-            </Link>
-          </Space>
-        ),
-      },
-    ],
-    sharedCost: [
-      {
-        title: "Date",
-        dataIndex: "date",
-        key: "date",
-      },
-
-      {
-        title: "Amount",
-        dataIndex: "amount",
-        key: "amount",
-      },
-      {
-        title: "Shared Cost Details",
-        dataIndex: "list",
-        render: (_, record) => (record.list ? record.list : "No Details"),
-        key: "list",
-      },
-      {
-        title: "Action",
-        width: 80,
-        key: "action",
-        render: (_, record) => (
-          <Space size="middle">
-            <Link
-              onClick={() => (setItemData(record), setIsModalOpen(true), setItemName("sharedCost"))}
-            >
-              Edit
-            </Link>
-          </Space>
-        ),
-      },
-    ],
-    individualCost: [
-      {
-        title: "Date",
-        dataIndex: "date",
-        key: "date",
-      },
-      {
-        title: " Member Name",
-        render: (_, record) => record.user?.name,
-        key: "name",
-      },
-
-      {
-        title: "Amount",
-        dataIndex: "amount",
-        key: "amount",
-      },
-      {
-        title: "Individual Cost Details",
-        dataIndex: "list",
-        render: (_, record) => (record.list ? record.list : "No Details"),
-        key: "list",
-      },
-      {
-        title: "Action",
-        width: 80,
-        key: "action",
-        render: (_, record) => (
-          <Space size="middle">
-            <Link
-              onClick={() => (
-                setItemData(record), setIsModalOpen(true), setItemName("individualCost")
-              )}
-            >
-              Edit
-            </Link>
-          </Space>
-        ),
-      },
-    ],
-    deposit: [
-      {
-        title: "Date",
-        dataIndex: "date",
-        key: "date",
-      },
-      {
-        title: " Member Name",
-        key: "name",
-        render: (_, record) => record.user.name,
-      },
-
-      {
-        title: "Amount",
-        dataIndex: "amount",
-        key: "amount",
-      },
-      {
-        title: "Action",
-        width: 80,
-        key: "action",
-        render: (_, record) => (
-          <Space size="middle">
-            <Link
-              onClick={() => (setItemData(record), setIsModalOpen(true), setItemName("deposit"))}
-            >
-              Edit
-            </Link>
-          </Space>
-        ),
-      },
-    ],
-    bazar: [
-      {
-        title: "Date",
-        dataIndex: "date",
-        key: "date",
-      },
-      {
-        title: " Shoppers Name",
-        key: "name",
-        render: (_, record) =>
-          record?.members?.map((member, idk) => (
-            <div size="middle" key={idk}>
-              <p className="mb-0">{member?.name}</p>
-            </div>
-          )),
-      },
-      {
-        title: "Amount",
-        dataIndex: "amount",
-        key: "amount",
-      },
-      {
-        title: "Bazar Details",
-        dataIndex: "list",
-        render: (_, record) => (record?.list ? record?.list : "No Details"),
-        key: "list",
-      },
-      {
-        title: "Action",
-        key: "action",
-        width: 80,
-        render: (_, record) => (
-          <Space size="middle">
-            <Link
-              onClick={() => (setItemData(record), setIsModalOpen(true), setItemName("bazarCost"))}
-            >
-              Edit
-            </Link>
-          </Space>
-        ),
-      },
-    ],
-  };
-  const dataSource = {
-    deposit: deposit,
-    meal: mealData,
-    sharedCost: sharedCost,
-    individualCost: individualCost,
-    bazar: bazar,
-    mealCost: bazar,
-  };
-  const tableDataFetching = {
-    deposit: depositFetching,
-    meal: mealFetching,
-    sharedCost: sharedCostFetching,
-    individualCost: individualCostFetching,
-    bazar: bazarFetching,
-    mealCost: bazarFetching,
-  };
-
-  const column = columnData[type];
+  const dataSource = {};
   const tableData = dataSource[type];
-  const dataFetching = tableDataFetching[type];
 
-  const onPageChange = (current) => {
-    setPageNumber(current);
-  };
-
-  const showModal = () => {
-    setIsModalOpen(true);
+  const pages = {
+    meal: <MealDetails />,
+    deposit: <DepositDetails />,
+    bazar: <BazarDetails />,
+    sharedCost: <SharedCostDetails />,
+    individualCost: <IndividualCostDetails />,
   };
 
   return (
@@ -327,12 +62,6 @@ const ActiveMonthDetails = () => {
           >
             Deposit
           </Button>
-          <Button
-            className={type === "mealCost" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => navigate("?type=mealCost")}
-          >
-            Meal Cost
-          </Button>
 
           <Button
             className={type === "sharedCost" ? "activeNav ms-3" : "ms-3"}
@@ -353,18 +82,23 @@ const ActiveMonthDetails = () => {
             BazarList
           </Button>
         </div>
-        <TableTemplate
+
+        <div className="px-2">{pages[type]}</div>
+        {/* <TableTemplate
           data={tableData}
           columns={column}
           dataFetching={dataFetching}
           onPageChange={onPageChange}
-        />
+        /> */}
       </div>
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <IoIosArrowBack
+                className="componentHeaderIcon"
+                onClick={() => navigate(-1)}
+              />
               <h3>Phone Book </h3>
             </div>
             <div className="activeDatePicker">
@@ -373,7 +107,9 @@ const ActiveMonthDetails = () => {
                 placeholderText="Filter by date"
                 dateFormat="dd-MM-yyyy"
                 value={filter}
-                onChange={(date) => setFilter(moment(date).format("DD-MM-YYYY"))}
+                onChange={(date) =>
+                  setFilter(moment(date).format("DD-MM-YYYY"))
+                }
               />
             </div>
             <div className="activeMonthBtnGroups mb-4">
@@ -403,7 +139,9 @@ const ActiveMonthDetails = () => {
                 Shared Cost
               </Button>
               <Button
-                className={type === "individualCost" ? "activeNav ms-3" : "ms-3"}
+                className={
+                  type === "individualCost" ? "activeNav ms-3" : "ms-3"
+                }
                 onClick={() => navigate("?type=individualCost")}
               >
                 Individual Cost

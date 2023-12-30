@@ -2,21 +2,31 @@ import { Pagination, Table } from "antd";
 import "./TableTemplate.css";
 import SpinnerMain from "../../../../../../components/Spinner/SpinnerMain";
 
-const TableTemplate = ({ data, columns, dataFetching, onPageChange }) => {
+const TableTemplate = ({
+  data,
+  columns,
+  dataFetching = false,
+  onPageChange,
+}) => {
   if (dataFetching) {
     return <SpinnerMain />;
   }
-  const { total, limit } = data?.meta;
+  console.log(data?.meta);
+  const { total = 0, limit, page } = data?.meta;
   return (
-    <div>
+    <div className="mb-3">
       <Table pagination={false} columns={columns} dataSource={data?.data} />
       {total > limit && (
-        <Pagination
-          defaultCurrent={1}
-          total={total}
-          onChange={onPageChange}
-          className="my-4 text-center"
-        />
+        <div className="text-center my-2">
+          <Pagination
+            // defaultCurrent={1}
+            current={page || 1}
+            pageSize={limit || 10}
+            total={total}
+            onChange={onPageChange}
+            rootClassName="pagination-item"
+          />
+        </div>
       )}
     </div>
   );

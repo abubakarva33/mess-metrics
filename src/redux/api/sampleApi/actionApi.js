@@ -66,26 +66,40 @@ const actionApi = mainApi.injectEndpoints({
       providesTags: ["Action"],
     }),
     getAllBazar: builder.query({
-      query: ({ page, filter }) => `bazar?page=${page}&date=${filter} `,
+      query: (params) => ({
+        url: `bazar`,
+        params,
+      }),
       providesTags: ["Action"],
     }),
     getAllSharedCost: builder.query({
-      query: ({ page, filter }) => `shared-cost?page=${page}&date=${filter} `,
+      query: (params) => ({
+        url: `shared-cost`,
+        params,
+      }),
       providesTags: ["Action"],
     }),
     getAllMeal: builder.query({
-      query: ({ page, filter }) => `meal?page=${page}&date=${filter} `,
-      transformResponse: (response) => response.data,
+      query: (params) => ({
+        url: "meal",
+        params,
+      }),
+      // transformResponse: (response) => response.data,
       providesTags: ["Action"],
     }),
     getAllDeposit: builder.query({
-      query: ({ page, filter }) => `deposit?page=${page}&date=${filter} `,
+      query: (params) => ({
+        url: `deposit`,
+        params,
+      }),
 
       providesTags: ["Action"],
     }),
     getAllIndividualCost: builder.query({
-      query: ({ page, filter }) => `individual-cost?page=${page}&date=${filter} `,
-
+      query: (params) => ({
+        url: `individual-cost`,
+        params,
+      }),
       providesTags: ["Action"],
     }),
     getAllNotification: builder.query({
