@@ -1,3 +1,4 @@
+import moment from "moment";
 import { GoDotFill } from "react-icons/go";
 
 const NotificationModalItem = ({ data }) => {
@@ -7,14 +8,14 @@ const NotificationModalItem = ({ data }) => {
       {!data && <p> No Notification Found</p>}
       <div className="d-flex align-items-center justify-content-between">
         <div className="d-flexCenter dateImgNotification">
-          <h4 className=" mb-0"> {data?.date?.substring(0, 2)}</h4>
+          <h4 className=" mb-0">{moment(data?.createdAt).format("DD/MM/YYYY")?.substring(0, 2)}</h4>
         </div>
         <div>
           <p className={data?.isRead === false ? "itemBold" : "itemLight"} style={{ fontSize: 16 }}>
             {data?.message}
           </p>
           <p className={data?.isRead === false ? "itemBold" : "itemLight"} style={{ fontSize: 14 }}>
-            {data?.date}
+            {moment(data?.createdAt).format("DD/MM/YYYY")}
           </p>
         </div>
       </div>
