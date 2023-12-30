@@ -32,13 +32,26 @@ import { auth } from "../../../redux/features/UserSlice/UserSlice";
 import HeaderDrawer from "./HeaderDrawer/HeaderDrawer";
 import moment from "moment";
 import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
+import NotificationModal from "../../non-shared/Notification/NotificationModal/NotificationModal";
+import { useGetAllNotificationQuery } from "../../../redux/api/sampleApi/actionApi";
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const { role } = useSelector((state) => state.user);
   const { isLoading, data } = useGetUserProfileQuery();
-
+  const { isFetching, data: notificationData } = useGetAllNotificationQuery();
   const [time, setTime] = useState(moment().format("hh:mm A"));
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   setInterval(() => {
     setTime(moment().format("hh:mm A"));
   }, 1000 * 60);
@@ -76,19 +89,15 @@ const Header = () => {
             <Link to="/faq" className="navItem">
               FAQ
             </Link>
-            <Link to="/notification" className="navItem me-2">
+            <p className="navItem me-2" onClick={showModal}>
               <AiOutlineBell className="fs-2" />
-            </Link>
+            </p>
 
             <div className="d-flexCenter position-relative smHeader">
               <Dropdown menu={{ items }}>
                 <div style={{ cursor: "pointer" }}>
                   <Space>
-                    <img
-                      src="/images/singleUser.webp"
-                      alt=""
-                      className="userIcon me-1"
-                    />
+                    <img src="/images/singleUser.webp" alt="" className="userIcon me-1" />
                     <span className="text-capitalize">{data?.data?.name}</span>
                     <DownOutlined />
                   </Space>
@@ -134,6 +143,13 @@ const Header = () => {
           </div>
         </>
       ) : undefined}
+
+      <NotificationModal
+        isModalOpen={isModalOpen}
+        handleCancel={handleCancel}
+        handleOk={handleOk}
+        data={notificationData}
+      />
     </>
   );
 };

@@ -1,0 +1,41 @@
+.notificationModal > .ant-modal-content {
+  padding: 10px 10px 20px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.modalItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modalItem:hover {
+  background: var(--bg-tertiary);
+}
+.notificationModal > .ant-modal-content > .ant-modal-header .ant-modal-title {
+  font-size: 22px;
+}
+/* .notificationModal > .ant-modal-content > .ant-modal-header {
+  background-color: #1f1f1f;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+} */
+.dateImgNotification {
+  background-color: #3bb54a;
+  color: var(--bg-body);
+  margin-bottom: 0;
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+.itemBold {
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.itemLight {
+  font-weight: 300;
+  margin-bottom: 0;
+}

@@ -88,6 +88,11 @@ const actionApi = mainApi.injectEndpoints({
 
       providesTags: ["Action"],
     }),
+    getAllNotification: builder.query({
+      query: () => `notification`,
+
+      providesTags: ["Action"],
+    }),
 
     updateBazar: builder.mutation({
       query: ({ id, ...body }) => ({
@@ -143,4 +148,5 @@ export const {
   useUpdateDepositMutation,
   useUpdateIndividualCostMutation,
   useUpdateSharedCostMutation,
+  useGetAllNotificationQuery,
 } = actionApi;
