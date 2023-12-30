@@ -14,6 +14,7 @@ import {
 import SpinnerMain from "../../../../../components/Spinner/SpinnerMain";
 
 const UpdateModal = ({ data, isModalOpen, setIsModalOpen, itemName }) => {
+  console.log(data);
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const [value, setValue] = useState("");

@@ -74,9 +74,7 @@ const ActiveMonthDetails = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <Link onClick={() => (setItemData(record), setIsModalOpen(true), setItemName("meal"))}>
-              Edit
-            </Link>
+            <Link to="/update-meal">Edit</Link>
           </Space>
         ),
       },
@@ -423,7 +421,13 @@ const ActiveMonthDetails = () => {
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
               {tableData?.data?.map((data, ind) => (
-                <ActiveDetailsTemplate key={ind} data={data} />
+                <ActiveDetailsTemplate
+                  key={ind}
+                  data={data}
+                  isModalOpen={isModalOpen}
+                  setIsModalOpen={setIsModalOpen}
+                  itemName={itemName}
+                />
               ))}
             </div>
           </div>
