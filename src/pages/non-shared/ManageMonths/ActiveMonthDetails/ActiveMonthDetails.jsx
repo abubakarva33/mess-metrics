@@ -95,11 +95,8 @@ const ActiveMonthDetails = () => {
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack
-                className="componentHeaderIcon"
-                onClick={() => navigate(-1)}
-              />
-              <h3>Phone Book </h3>
+              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <h3>ACTIVE MONTH DETAILS</h3>
             </div>
             <div className="activeDatePicker">
               <ReactDatePicker
@@ -107,9 +104,7 @@ const ActiveMonthDetails = () => {
                 placeholderText="Filter by date"
                 dateFormat="dd-MM-yyyy"
                 value={filter}
-                onChange={(date) =>
-                  setFilter(moment(date).format("DD-MM-YYYY"))
-                }
+                onChange={(date) => setFilter(moment(date).format("DD-MM-YYYY"))}
               />
             </div>
             <div className="activeMonthBtnGroups mb-4">
@@ -133,9 +128,7 @@ const ActiveMonthDetails = () => {
                 Shared Cost
               </Button>
               <Button
-                className={
-                  type === "individualCost" ? "activeNav ms-3" : "ms-3"
-                }
+                className={type === "individualCost" ? "activeNav ms-3" : "ms-3"}
                 onClick={() => navigate("?type=individualCost")}
               >
                 Individual Cost
@@ -149,21 +142,7 @@ const ActiveMonthDetails = () => {
             </div>
           </div>
         </div>
-        <div className="phoneBookContainerItemBg">
-          <div className="phoneBookContainerItem ">
-            <div className="pt-5 pb-3 px-3">
-              {tableData?.data?.map((data, ind) => (
-                <ActiveDetailsTemplate
-                  key={ind}
-                  data={data}
-                  isModalOpen={isModalOpen}
-                  setIsModalOpen={setIsModalOpen}
-                  itemName={itemName}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+        <div>{pages[type]}</div>
       </div>
       <UpdateModal
         data={itemData}

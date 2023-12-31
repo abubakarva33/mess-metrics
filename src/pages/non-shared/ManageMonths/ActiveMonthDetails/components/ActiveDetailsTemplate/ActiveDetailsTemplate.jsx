@@ -2,16 +2,8 @@ import UpdateModal from "../UpdateModal";
 import "./ActiveDetailsTemplate.css";
 import { FaUser } from "react-icons/fa";
 
-const ActiveDetailsTemplate = ({
-  data,
-  setIsModalOpen,
-  setItemData,
-  setItemName,
-
-  isModalOpen,
-  itemName,
-}) => {
-  console.log({ data });
+const ActiveDetailsTemplate = ({ data, modalProps, itemData, setItemData, setIsModalOpen }) => {
+  console.log({ modalProps });
   return (
     <div className="d-flex align-items-center justify-content-between my-3 activeDetailsTemplate">
       <div className="d-flex align-items-center justify-content-between">
@@ -49,15 +41,10 @@ const ActiveDetailsTemplate = ({
         src="/images/pen.png"
         alt=""
         style={{ height: "30px", width: "30px" }}
-        onClick={() => (setIsModalOpen(true), setItemName("mealCost"))}
+        onClick={() => (setItemData(data), setIsModalOpen(true))}
       />
 
-      <UpdateModal
-        data={data}
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        itemName={itemName}
-      />
+      {itemData && <UpdateModal {...modalProps} />}
     </div>
   );
 };

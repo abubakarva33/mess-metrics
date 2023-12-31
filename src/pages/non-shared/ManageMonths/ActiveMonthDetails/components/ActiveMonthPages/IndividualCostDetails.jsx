@@ -7,6 +7,7 @@ import {
 import { Space, Spin } from "antd";
 import { Link } from "react-router-dom";
 import UpdateModal from "./UpdateModal";
+import ActiveMonthPageTemplateSm from "./ActiveMonthPageTemplateSm";
 
 const IndividualCostDetails = () => {
   const [filter, setFilter] = useState({});
@@ -21,8 +22,7 @@ const IndividualCostDetails = () => {
   const column = [
     {
       title: "No",
-      render: (_, record, index) =>
-        (data?.meta?.page - 1) * data?.meta?.limit + index + 1,
+      render: (_, record, index) => (data?.meta?.page - 1) * data?.meta?.limit + index + 1,
     },
     {
       title: "Date",
@@ -52,17 +52,8 @@ const IndividualCostDetails = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <div
-            onClick={() => (
-              setItemData(record),
-              setIsModalOpen(true)
-            )}
-          >
-            <img
-              src="/images/pen.png"
-              alt="edit"
-              style={{ height: "30px", width: "30px" }}
-            />
+          <div onClick={() => (setItemData(record), setIsModalOpen(true))}>
+            <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
           </div>
         </Space>
       ),
@@ -76,18 +67,25 @@ const IndividualCostDetails = () => {
     update,
     status,
   };
+  const smDeviceProps = {
+    modalProps,
+    itemData,
+    data,
+    update,
+    onPageChange,
+    setItemData,
+    setIsModalOpen,
+    onPageChange,
+  };
 
   return (
     <Spin spinning={isFetching}>
-      <div>
+      <div className="activeMonthLg">
         {data?.success && (
-          <TableTemplate
-            data={data}
-            columns={column}
-            onPageChange={onPageChange}
-          />
+          <TableTemplate data={data} columns={column} onPageChange={onPageChange} />
         )}
       </div>
+      {data?.success && <ActiveMonthPageTemplateSm {...smDeviceProps} />}
 
       {itemData && <UpdateModal {...modalProps} />}
     </Spin>

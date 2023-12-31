@@ -26,8 +26,8 @@
   background-color: #3bb54a;
   color: var(--bg-body);
   margin-bottom: 0;
-  height: 40px;
-  width: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border-radius: 50px;
   margin-right: 10px;
 }

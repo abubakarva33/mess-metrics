@@ -31,6 +31,9 @@
   .activeMonthSectionMain {
     display: none;
   }
+  .activeMonthLg {
+    display: none !important;
+  }
 }
 
 .pagination-item li {
