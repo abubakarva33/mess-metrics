@@ -23,13 +23,6 @@ const NotificationModal = ({
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
-        style={{
-          position: "absolute",
-          top: 65,
-          right: 10,
-          maxWidth: 350,
-          maxHeight: 500,
-        }}
         className="notificationModal"
       >
         {data?.data?.length !== 0 && (

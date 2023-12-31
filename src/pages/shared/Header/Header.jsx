@@ -35,6 +35,7 @@ import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
 import NotificationModal from "../../non-shared/Notification/NotificationModal/NotificationModal";
 import { useGetAllNotificationQuery } from "../../../redux/api/sampleApi/actionApi";
 import NotificationBadge from "../../non-shared/Notification/NotificationModal/NotificationBadge";
+import Notification from "../../non-shared/Notification/Notification";
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();

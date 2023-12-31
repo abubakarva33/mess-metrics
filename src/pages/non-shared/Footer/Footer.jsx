@@ -3,9 +3,14 @@ import "./Footer.css";
 import { BsPersonCircle } from "react-icons/bs";
 import { BiHelpCircle, BiMessageDots } from "react-icons/bi";
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useGetAllNotificationQuery } from "../../../redux/api/sampleApi/actionApi";
+import NotificationBadge from "../Notification/NotificationModal/NotificationBadge";
 
 const Footer = () => {
   const location = useLocation();
+  const [page, setPage] = useState(1);
+  const { isFetching, data } = useGetAllNotificationQuery(page);
   return (
     <div>
       <div>
@@ -19,8 +24,9 @@ const Footer = () => {
             <Link to="message">
               <BiMessageDots className="footerIcon" />
             </Link>
+
             <Link to="/notification">
-              <AiFillBell className="footerIcon" />
+              <NotificationBadge count={data?.unread} />
             </Link>
             <Link to="/" className="homeIconParent">
               <AiOutlineHome className="homeIcon" />

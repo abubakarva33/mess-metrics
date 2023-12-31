@@ -14,14 +14,14 @@
 .notificationModal > .ant-modal-content > .ant-modal-header .ant-modal-title {
   font-size: 22px;
 }
-/* .notificationModal > .ant-modal-content > .ant-modal-header {
-  background-color: #1f1f1f;
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
-} */
+.notificationModal {
+  position: absolute;
+  top: 65px;
+  right: 10px;
+  max-width: 350px;
+  max-height: 500px;
+}
+
 .dateImgNotification {
   background-color: #3bb54a;
   color: var(--bg-body);
