@@ -9,7 +9,6 @@ const BirthdayEach = ({ data }) => {
     let dateFromInput = dateOfBirth
       ? moment(dateOfBirth, "DD-MM-YYYY").year(2023)
       : moment();
-    console.log({ dateFromInput: dateFromInput.format(), dateOfBirth });
     const isToday = dateFromInput.isSame(moment(), "day");
     if (isToday) {
       return (
@@ -33,7 +32,6 @@ const BirthdayEach = ({ data }) => {
     );
   };
 
-  console.log(adjustDate());
 
   return (
     <div className="phoneItem ">

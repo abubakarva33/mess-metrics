@@ -11,7 +11,6 @@ const useMonthOptions = () => {
   }
 
   const [months, setMonths] = useState([{ label: "Select Member", value: "" }]);
-  console.log(months);
 
   useEffect(() => {
     const memberData = data?.map((member) => ({

@@ -37,13 +37,11 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
       updated.user = data.user._id;
     }
 
-    console.log({ updated });
 
     form.setFieldsValue(updated);
   }, [data, form]);
 
   const onFinish = async (values) => {
-    console.log({ values });
     const fieldValues = { ...values, amount: Number(values.amount) };
 
     Swal.fire({
@@ -67,7 +65,6 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
 
   const miniSwal = async (res) => {
     if (res?.success) {
-      console.log(res);
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",

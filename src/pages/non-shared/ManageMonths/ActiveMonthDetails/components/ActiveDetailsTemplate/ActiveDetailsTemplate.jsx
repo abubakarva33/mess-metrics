@@ -3,7 +3,6 @@ import "./ActiveDetailsTemplate.css";
 import { FaUser } from "react-icons/fa";
 
 const ActiveDetailsTemplate = ({ data, modalProps, itemData, setItemData, setIsModalOpen }) => {
-  console.log({ modalProps });
   return (
     <div className="d-flex align-items-center justify-content-between my-3 activeDetailsTemplate">
       <div className="d-flex align-items-center justify-content-between">

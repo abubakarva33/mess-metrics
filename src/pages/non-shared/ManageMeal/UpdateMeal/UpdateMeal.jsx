@@ -29,7 +29,6 @@ const UpdateMeal = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log({ mealData });
     const prevMeal = mealData?.map((m) => ({
       member: m.user,
       meal: m.meal,

@@ -98,7 +98,7 @@ const ActiveMonthDetails = () => {
               <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
               <h3>ACTIVE MONTH DETAILS</h3>
             </div>
-            <div className="activeDatePicker">
+            <div className="mx-3">
               <ReactDatePicker
                 className="w-100"
                 placeholderText="Filter by date"

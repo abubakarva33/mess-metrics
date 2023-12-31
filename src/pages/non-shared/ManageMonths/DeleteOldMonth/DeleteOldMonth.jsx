@@ -35,7 +35,6 @@ const DeleteOldMonth = () => {
     return <SpinnerMain />;
   }
 
-  console.log(months);
   const onFinish = async ({ month }) => {
     Swal.fire({
       title: "Are you sure?",

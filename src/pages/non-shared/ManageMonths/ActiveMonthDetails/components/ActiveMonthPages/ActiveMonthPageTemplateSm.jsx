@@ -11,7 +11,6 @@ const ActiveMonthPageTemplateSm = ({
   setIsModalOpen,
   onPageChange,
 }) => {
-  console.log(data);
   const { total = 0, limit, page } = data?.meta;
   return (
     <div className="phoneBookContainerItemBg">

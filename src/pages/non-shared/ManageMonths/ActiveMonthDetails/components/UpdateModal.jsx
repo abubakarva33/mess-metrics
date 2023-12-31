@@ -14,7 +14,6 @@ import {
 import SpinnerMain from "../../../../../components/Spinner/SpinnerMain";
 
 const UpdateModal = ({ data, isModalOpen, setIsModalOpen, itemName }) => {
-  console.log(data);
   const [form] = Form.useForm();
   const { TextArea } = Input;
   const [value, setValue] = useState("");
@@ -104,7 +103,6 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, itemName }) => {
 
   const miniSwal = async (res) => {
     if (res?.success) {
-      console.log(res);
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
