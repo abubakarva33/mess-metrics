@@ -3,13 +3,20 @@ import TableTemplate from "../TableTemplate/TableTemplate";
 import {
   useGetAllDepositQuery,
   useGetAllMealQuery,
+  useUpdateDepositMutation,
 } from "../../../../../../redux/api/sampleApi/actionApi";
 import { Space, Spin } from "antd";
 import { Link } from "react-router-dom";
+import UpdateModal from "./UpdateModal";
 
 const DepositDetails = () => {
   const [filter, setFilter] = useState({});
+  const [itemData, setItemData] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
   const { data, isFetching } = useGetAllDepositQuery(filter);
+  const [update, { status }] = useUpdateDepositMutation();
 
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 
@@ -41,17 +48,30 @@ const DepositDetails = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link
+          <div
             onClick={() => (
-              setItemData(record), setIsModalOpen(true), setItemName("deposit")
+              setItemData(record), setIsModalOpen(true)
             )}
           >
-            Edit
-          </Link>
+            <img
+              src="/images/pen.png"
+              alt="edit"
+              style={{ height: "30px", width: "30px" }}
+            />
+          </div>
         </Space>
       ),
     },
   ];
+
+  const modalProps = {
+    data: itemData,
+    isModalOpen,
+
+    setIsModalOpen,
+    update,
+    status,
+  };
 
   return (
     <Spin spinning={isFetching}>
@@ -64,6 +84,8 @@ const DepositDetails = () => {
           />
         )}
       </div>
+
+      {itemData && <UpdateModal {...modalProps} />}
     </Spin>
   );
 };

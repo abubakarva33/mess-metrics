@@ -125,12 +125,6 @@ const ActiveMonthDetails = () => {
               >
                 Deposit
               </Button>
-              <Button
-                className={type === "mealCost" ? "activeNav ms-3" : "ms-3"}
-                onClick={() => navigate("?type=mealCost")}
-              >
-                Meal Cost
-              </Button>
 
               <Button
                 className={type === "sharedCost" ? "activeNav ms-3" : "ms-3"}

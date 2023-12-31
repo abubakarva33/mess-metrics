@@ -16,18 +16,21 @@ import {
 } from "../../../../redux/api/sampleApi/actionApi.js";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useSearchQuery } from "../../../../utils/useSearchQuery.js";
 
 const UpdateMeal = () => {
+  const date = useSearchQuery("date") || moment().format("DD-MM-YYYY");
+
   const [meal, setMeal] = useState([]);
-  const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
+  const [startDate, setStartDate] = useState(date);
   const { data: mealData, isFetching: mealFetching } =
     useGetMessMealQuery(startDate);
   const [UpdateMeal] = useUpdateMealMutation();
   const navigate = useNavigate();
 
-
   useEffect(() => {
-    const prevMeal = mealData?.data?.map((m) => ({
+    console.log({ mealData });
+    const prevMeal = mealData?.map((m) => ({
       member: m.user,
       meal: m.meal,
       _id: m._id,
@@ -176,7 +179,11 @@ const UpdateMeal = () => {
             type="primary"
             className="w-100"
             onClick={onFinish}
-            disabled={Array.isArray(meal) ? [...meal?.filter((m) => m.isChanged)].length <= 0 : true}
+            disabled={
+              Array.isArray(meal)
+                ? [...meal?.filter((m) => m.isChanged)].length <= 0
+                : true
+            }
           >
             Submit
           </Button>

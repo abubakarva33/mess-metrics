@@ -1,21 +1,30 @@
 import React, { useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
-import { useGetAllBazarQuery } from "../../../../../../redux/api/sampleApi/actionApi";
+import {
+  useGetAllBazarQuery,
+  useUpdateBazarMutation,
+} from "../../../../../../redux/api/sampleApi/actionApi";
 import { Space, Spin } from "antd";
 import { Link } from "react-router-dom";
+import UpdateModal from "./UpdateModal";
 
 const BazarDetails = () => {
   const [filter, setFilter] = useState({});
+  const [itemData, setItemData] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
   const { data, isFetching } = useGetAllBazarQuery(filter);
+  const [update, { status }] = useUpdateBazarMutation();
 
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 
   const column = [
-    // {
-    //   title: "No",
-    //   render: (_, record, index) =>
-    //     (data?.meta?.page - 1) * data?.meta?.limit + index + 1,
-    // },
+    {
+      title: "No",
+      render: (_, record, index) =>
+        (data?.meta?.page - 1) * data?.meta?.limit + index + 1,
+    },
     {
       title: "Date",
       dataIndex: "date",
@@ -48,19 +57,29 @@ const BazarDetails = () => {
       width: 80,
       render: (_, record) => (
         <Space size="middle">
-          <Link
+          <div
             onClick={() => (
-              setItemData(record),
-              setIsModalOpen(true),
-              setItemName("bazarCost")
+              setItemData(record), setIsModalOpen(true)
             )}
           >
-            Edit
-          </Link>
+            <img
+              src="/images/pen.png"
+              alt="edit"
+              style={{ height: "30px", width: "30px" }}
+            />
+          </div>
         </Space>
       ),
     },
   ];
+
+  const modalProps = {
+    data: itemData,
+    isModalOpen,
+    setIsModalOpen,
+    update,
+    status,
+  };
 
   return (
     <Spin spinning={isFetching}>
@@ -73,6 +92,8 @@ const BazarDetails = () => {
           />
         )}
       </div>
+
+      {itemData && <UpdateModal {...modalProps} />}
     </Spin>
   );
 };
