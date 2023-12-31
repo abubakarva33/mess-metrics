@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import { useGetAllMealQuery } from "../../../../../../redux/api/sampleApi/actionApi";
-import { Space, Spin } from "antd";
+import { Pagination, Space, Spin } from "antd";
 import { Link } from "react-router-dom";
+import SpinnerMain from "../../../../../../components/Spinner/SpinnerMain";
 
 const MealDetails = () => {
   const [filter, setFilter] = useState({ page: 1 });
@@ -13,8 +14,7 @@ const MealDetails = () => {
   const column = [
     {
       title: "No",
-      render: (_, record, index) =>
-        (data?.meta?.page - 1) * data?.meta?.limit + index + 1,
+      render: (_, record, index) => (data?.meta?.page - 1) * data?.meta?.limit + index + 1,
     },
     {
       title: "Date",
@@ -38,12 +38,8 @@ const MealDetails = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link to={`/update-meal?date=${record.date}`}>
-            <img
-              src="/images/pen.png"
-              alt="edit"
-              style={{ height: "30px", width: "30px" }}
-            />
+          <Link>
+            <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
           </Link>
         </Space>
       ),
@@ -52,14 +48,49 @@ const MealDetails = () => {
 
   return (
     <Spin spinning={isFetching}>
-      <div>
+      <div className="activeMonthLg">
         {data?.success && (
-          <TableTemplate
-            data={data}
-            columns={column}
-            onPageChange={onPageChange}
-          />
+          <TableTemplate data={data} columns={column} onPageChange={onPageChange} />
         )}
+      </div>
+      <div>
+        <div className="phoneBookContainerItemBg">
+          <div className="phoneBookContainerItem ">
+            <div className="pt-5 pb-3 px-3">
+              {data?.data?.map((data) => (
+                <div className="d-flex align-items-center justify-content-between my-3 activeDetailsTemplate">
+                  <div className="d-flex align-items-center justify-content-between">
+                    <div className="d-flexCenter dateLogo">
+                      <h2 className=" mb-0"> {data?.date?.substring(0, 2)}</h2>
+                    </div>
+                    <div>
+                      <p className="mb-0">
+                        Name: <span style={{ fontWeight: "700" }}>{data?.user?.name}</span>
+                      </p>
+
+                      <p className="mb-0">Meal: {data?.meal}</p>
+                      <p className="mb-0">Date: {data?.date}</p>
+                    </div>
+                  </div>
+                  <Link to={`/update-meal?date=${data?.date}`}>
+                    <img src="/images/pen.png" alt="" style={{ height: "30px", width: "30px" }} />
+                  </Link>
+                </div>
+              ))}
+              {data?.meta?.total > data?.meta?.limit && (
+                <div className="text-center my-2">
+                  <Pagination
+                    current={data?.meta?.page || 1}
+                    pageSize={data?.meta?.limit || 10}
+                    total={data?.meta?.total}
+                    onChange={onPageChange}
+                    rootClassName="pagination-item"
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </Spin>
   );
