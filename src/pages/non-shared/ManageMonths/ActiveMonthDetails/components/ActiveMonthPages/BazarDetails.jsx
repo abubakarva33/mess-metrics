@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
-import { useGetAllBazarQuery, useUpdateBazarMutation } from "../../../../../../redux/api/sampleApi/actionApi";
+import {
+  useGetAllBazarQuery,
+  useUpdateBazarMutation,
+} from "../../../../../../redux/api/sampleApi/actionApi";
 import { Space, Spin } from "antd";
 import { Link } from "react-router-dom";
 import UpdateModal from "./UpdateModal";
@@ -9,20 +12,19 @@ const BazarDetails = () => {
   const [filter, setFilter] = useState({});
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [type, setType] = useState("");
+
 
   const { data, isFetching } = useGetAllBazarQuery(filter);
   const [update, { status }] = useUpdateBazarMutation();
 
-
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 
   const column = [
-    // {
-    //   title: "No",
-    //   render: (_, record, index) =>
-    //     (data?.meta?.page - 1) * data?.meta?.limit + index + 1,
-    // },
+    {
+      title: "No",
+      render: (_, record, index) =>
+        (data?.meta?.page - 1) * data?.meta?.limit + index + 1,
+    },
     {
       title: "Date",
       dataIndex: "date",
@@ -57,12 +59,14 @@ const BazarDetails = () => {
         <Space size="middle">
           <div
             onClick={() => (
-              setItemData(record),
-              setIsModalOpen(true),
-              setType("bazarCost")
+              setItemData(record), setIsModalOpen(true)
             )}
           >
-            Edit
+            <img
+              src="/images/pen.png"
+              alt="edit"
+              style={{ height: "30px", width: "30px" }}
+            />
           </div>
         </Space>
       ),
@@ -72,7 +76,6 @@ const BazarDetails = () => {
   const modalProps = {
     data: itemData,
     isModalOpen,
-    type,
     setIsModalOpen,
     update,
     status,

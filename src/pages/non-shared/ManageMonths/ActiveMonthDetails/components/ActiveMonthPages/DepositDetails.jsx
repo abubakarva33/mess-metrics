@@ -13,7 +13,7 @@ const DepositDetails = () => {
   const [filter, setFilter] = useState({});
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [type, setType] = useState("");
+
 
   const { data, isFetching } = useGetAllDepositQuery(filter);
   const [update, { status }] = useUpdateDepositMutation();
@@ -50,7 +50,7 @@ const DepositDetails = () => {
         <Space size="middle">
           <div
             onClick={() => (
-              setItemData(record), setIsModalOpen(true), setType("deposit")
+              setItemData(record), setIsModalOpen(true)
             )}
           >
             <img
@@ -67,7 +67,7 @@ const DepositDetails = () => {
   const modalProps = {
     data: itemData,
     isModalOpen,
-    type,
+
     setIsModalOpen,
     update,
     status,

@@ -5,15 +5,10 @@ import ReactDatePicker from "react-datepicker";
 import { MdCalendarMonth } from "react-icons/md";
 import Swal from "sweetalert2";
 import useMemberOptions from "../../../../../../components/Hooks/MembersDropdown";
+import { useSearchQuery } from "../../../../../../utils/useSearchQuery";
 
-const UpdateModal = ({
-  data,
-  isModalOpen,
-  setIsModalOpen,
-  type,
-  update,
-  status,
-}) => {
+const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
+  const type = useSearchQuery("type") || "";
   const members = useMemberOptions();
   const [form] = Form.useForm();
   const { TextArea } = Input;
@@ -138,6 +133,15 @@ const UpdateModal = ({
   //     return <SpinnerMain />;
   //   }
 
+  const typeFormate = {
+    deposit: "Deposit",
+    sharedCost: "Share Cost",
+    individualCost: "Individual Cost",
+    bazar: "Bazar List",
+  };
+
+  console.log(typeFormate[type], type);
+
   return (
     <Modal
       open={isModalOpen}
@@ -146,7 +150,7 @@ const UpdateModal = ({
       okText="Update"
       footer={null}
     >
-      <h4 className="text-center mt-2 mb-4">Update {convertString(type)}</h4>
+      <h4 className="text-center mt-2 mb-4">Update {typeFormate[type]}</h4>
       <div className="mealDatePicker">
         <ReactDatePicker
           className="w-100"
@@ -184,6 +188,7 @@ const UpdateModal = ({
         {Array.isArray(data.members) && (
           <Form.Item
             name="members"
+            label="Select Members"
             rules={[
               {
                 required: true,
@@ -191,7 +196,7 @@ const UpdateModal = ({
               },
             ]}
           >
-            <h6>Select Member:</h6>
+            {/* <h6>Select Member:</h6> */}
             <Select
               mode="multiple"
               maxTagCount={1}
@@ -203,10 +208,11 @@ const UpdateModal = ({
         {data.user && (
           <Form.Item
             name="user"
+            label="Select Member"
             rules={[
               {
                 required: true,
-                message: "Please Select user!",
+                message: "Please Select Member!",
               },
             ]}
           >

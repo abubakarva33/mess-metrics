@@ -12,7 +12,6 @@ const SharedCostDetails = () => {
   const [filter, setFilter] = useState({});
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [type, setType] = useState("");
 
   const { data, isFetching } = useGetAllSharedCostQuery(filter);
   const [update, { status }] = useUpdateSharedCostMutation();
@@ -48,14 +47,12 @@ const SharedCostDetails = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <div
-            onClick={() => (
-              setItemData(record),
-              setIsModalOpen(true),
-              setItemName("sharedCost")
-            )}
-          >
-            Edit
+          <div onClick={() => (setItemData(record), setIsModalOpen(true))}>
+            <img
+              src="/images/pen.png"
+              alt="edit"
+              style={{ height: "30px", width: "30px" }}
+            />
           </div>
         </Space>
       ),
@@ -65,7 +62,6 @@ const SharedCostDetails = () => {
   const modalProps = {
     data: itemData,
     isModalOpen,
-    type,
     setIsModalOpen,
     update,
     status,

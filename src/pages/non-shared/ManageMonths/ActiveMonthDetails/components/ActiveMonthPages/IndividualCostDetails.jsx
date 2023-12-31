@@ -12,7 +12,6 @@ const IndividualCostDetails = () => {
   const [filter, setFilter] = useState({});
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [type, setType] = useState("");
 
   const { data, isFetching } = useGetAllIndividualCostQuery(filter);
   const [update, { status }] = useUpdateIndividualCostMutation();
@@ -56,11 +55,14 @@ const IndividualCostDetails = () => {
           <div
             onClick={() => (
               setItemData(record),
-              setIsModalOpen(true),
-              setType("individualCost")
+              setIsModalOpen(true)
             )}
           >
-            Edit
+            <img
+              src="/images/pen.png"
+              alt="edit"
+              style={{ height: "30px", width: "30px" }}
+            />
           </div>
         </Space>
       ),
@@ -70,7 +72,6 @@ const IndividualCostDetails = () => {
   const modalProps = {
     data: itemData,
     isModalOpen,
-    type,
     setIsModalOpen,
     update,
     status,
