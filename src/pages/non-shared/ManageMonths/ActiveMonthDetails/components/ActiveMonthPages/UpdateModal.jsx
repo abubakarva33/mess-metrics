@@ -6,14 +6,19 @@ import { MdCalendarMonth } from "react-icons/md";
 import Swal from "sweetalert2";
 import useMemberOptions from "../../../../../../components/Hooks/MembersDropdown";
 import { useSearchQuery } from "../../../../../../utils/useSearchQuery";
+import SpinnerMain from "../../../../../../components/Spinner/SpinnerMain";
+
+const typeFormate = {
+  deposit: "Deposit",
+  sharedCost: "Share Cost",
+  individualCost: "Individual Cost",
+  bazar: "Bazar List",
+};
 
 const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
   const type = useSearchQuery("type") || "";
   const members = useMemberOptions();
   const [form] = Form.useForm();
-  const { TextArea } = Input;
-
-  const [value, setValue] = useState("");
 
   const handleOk = () => {
     setIsModalOpen(false);
@@ -37,110 +42,53 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
     form.setFieldsValue(updated);
   }, [data, form]);
 
-  const convertString = (inputString) => {
-    const words = inputString.split(/(?=[A-Z])/);
-    const convertedString = words
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-    return convertedString;
-  };
-
   const onFinish = async (values) => {
     console.log({ values });
-    const amount = Number(values.amount);
-    const fieldValues = { ...values, amount };
+    const fieldValues = { ...values, amount: Number(values.amount) };
 
-    // Swal.fire({
-    //   title: "Are you sure?",
-    //   text: `This ${convertString(itemName)} will be updated`,
-    //   icon: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#3085d6",
-    //   cancelButtonColor: "#d33",
-    //   confirmButtonText: "Yes, update it!",
-    // }).then(async (result) => {
-    //   if (result?.isConfirmed) {
-    //     await setIsModalOpen(false);
-    //     if (itemName === "meal") {
-    //       const res = await updateMeal(body).unwrap();
-    //       miniSwal(res);
-    //     }
-    //     if (itemName === "mealCost") {
-    //       const res = await updateBazar({
-    //         id: data?._id,
-    //         ...fieldValues,
-    //       }).unwrap();
-    //       miniSwal(res);
-    //     }
-    //     if (itemName === "sharedCost") {
-    //       const res = await updateSharedCost({
-    //         id: data?._id,
-    //         ...fieldValues,
-    //       }).unwrap();
-    //       miniSwal(res);
-    //     }
-    //     if (itemName === "individualCost") {
-    //       const res = await updateIndividualCost({
-    //         id: data?._id,
-
-    //         ...fieldValues,
-    //       }).unwrap();
-    //       miniSwal(res);
-    //     }
-    //     if (itemName === "deposit") {
-    //       const res = await updateDeposit({ id: data?._id, amount }).unwrap();
-    //       miniSwal(res);
-    //     }
-    //     if (itemName === "bazarCost") {
-    //       const res = await updateBazar({
-    //         id: data?._id,
-    //         ...fieldValues,
-    //       }).unwrap();
-    //       miniSwal(res);
-    //     }
-    //   }
-    // });
+    Swal.fire({
+      title: "Are you sure?",
+      text: `This ${typeFormate[type]} will be updated`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, update it!",
+    }).then(async (result) => {
+      if (result?.isConfirmed) {
+        await setIsModalOpen(false);
+        // if (type === "meal") {
+        const res = await update({ id: data._id, ...fieldValues }).unwrap();
+        miniSwal(res);
+        // }
+      }
+    });
   };
 
-  //   const miniSwal = async (res) => {
-  //     if (res?.success) {
-  //       console.log(res);
-  //       const Toast = Swal.mixin({
-  //         toast: true,
-  //         position: "top-end",
-  //         showConfirmButton: false,
-  //         timer: 3000,
-  //         timerProgressBar: true,
-  //         didOpen: (toast) => {
-  //           toast.onmouseenter = Swal.stopTimer;
-  //           toast.onmouseleave = Swal.resumeTimer;
-  //         },
-  //       });
-  //       await Toast.fire({
-  //         icon: "success",
-  //         title: `${convertString(itemName)} updated successfully`,
-  //       });
-  //     }
-  //   };
-
-  //   if (
-  //     mealStatus == "pending" ||
-  //     sharedCostStatus == "pending" ||
-  //     individualCostStatus == "pending" ||
-  //     depositStatus == "pending" ||
-  //     bazarStatus == "pending"
-  //   ) {
-  //     return <SpinnerMain />;
-  //   }
-
-  const typeFormate = {
-    deposit: "Deposit",
-    sharedCost: "Share Cost",
-    individualCost: "Individual Cost",
-    bazar: "Bazar List",
+  const miniSwal = async (res) => {
+    if (res?.success) {
+      console.log(res);
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      await Toast.fire({
+        icon: "success",
+        title: `${typeFormate[type]} updated successfully`,
+      });
+    }
   };
 
-  console.log(typeFormate[type], type);
+  if (status == "pending") {
+    return <SpinnerMain />;
+  }
 
   return (
     <Modal
