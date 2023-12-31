@@ -35,6 +35,14 @@
   font-weight: 500;
   margin-bottom: 0;
 }
+.ant-badge .ant-badge-count {
+  color: var(--text-primary);
+  transform: translate(45%, -40%);
+  top: 2px;
+}
+.ant-badge .ant-badge-multiple-words {
+  padding: 0px 4px;
+}
 .itemLight {
   font-weight: 300;
   margin-bottom: 0;

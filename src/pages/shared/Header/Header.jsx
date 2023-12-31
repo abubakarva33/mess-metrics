@@ -34,6 +34,7 @@ import moment from "moment";
 import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
 import NotificationModal from "../../non-shared/Notification/NotificationModal/NotificationModal";
 import { useGetAllNotificationQuery } from "../../../redux/api/sampleApi/actionApi";
+import NotificationBadge from "../../non-shared/Notification/NotificationModal/NotificationBadge";
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -42,6 +43,8 @@ const Header = () => {
   const { isFetching, data: notificationData } = useGetAllNotificationQuery();
   const [time, setTime] = useState(moment().format("hh:mm A"));
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  console.log(notificationData?.unread);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -89,16 +92,23 @@ const Header = () => {
             <Link to="/faq" className="navItem">
               FAQ
             </Link>
-            <p className="navItem me-2" onClick={showModal}>
-              <AiOutlineBell className="fs-2" />
-            </p>
+            <div className="navItem me-2" onClick={showModal}>
+              <NotificationBadge isModalOpen={isModalOpen} />
+            </div>
 
             <div className="d-flexCenter position-relative smHeader">
               <Dropdown menu={{ items }}>
                 <div style={{ cursor: "pointer" }}>
                   <Space>
-                    <img src="/images/singleUser.webp" alt="" className="userIcon me-1" />
-                    <span className="text-capitalize">{data?.data?.name}</span>
+                    <img
+                      src="/images/singleUser.webp"
+                      alt=""
+                      className=" me-1"
+                      style={{ height: 40, width: 40, borderRadius: 50 }}
+                    />
+                    <span className="text-capitalize" style={{ fontSize: 18 }}>
+                      {data?.data?.name}
+                    </span>
                     <DownOutlined />
                   </Space>
                 </div>
