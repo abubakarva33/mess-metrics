@@ -44,7 +44,6 @@ const Header = () => {
   const [time, setTime] = useState(moment().format("hh:mm A"));
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log(notificationData?.unread);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -93,7 +92,7 @@ const Header = () => {
               FAQ
             </Link>
             <div className="navItem me-2" onClick={showModal}>
-              <NotificationBadge isModalOpen={isModalOpen} />
+              <NotificationBadge isModalOpen={isModalOpen} count={notificationData?.unread} />
             </div>
 
             <div className="d-flexCenter position-relative smHeader">

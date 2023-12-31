@@ -3,98 +3,9 @@ import { Button, Modal } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import NotificationModalItem from "./NotificationModalItem";
+import { useUpdateAllNotificationMutation } from "../../../../redux/api/sampleApi/actionApi";
 const NotificationModal = ({ isModalOpen, handleOk, handleCancel, data }) => {
-//   const data = {
-//     meta: {
-//       page: 1,
-//       limit: 10,
-//       total: 17,
-//     },
-//     unread: 15,
-//     data: [
-//       {
-//         _id: "659005bc3dfd7d5f61abe1ba",
-//         date: "30-12-2023",
-//         message: "2.5 meal added on your account",
-//         isRead: true,
-//         createdAt: "2023-12-30T11:57:48.253Z",
-//         updatedAt: "2023-12-30T11:58:13.264Z",
-//       },
-//       {
-//         _id: "659005bc3dfd7d5f61abe1ba",
-//         date: "30-12-2023",
-//         message: "100 tk deposited on your account",
-//         isRead: false,
-//         createdAt: "2023-12-30T11:57:48.253Z",
-//         updatedAt: "2023-12-30T11:58:13.264Z",
-//       },
-//       {
-//         _id: "659005bc3dfd7d5f61abe1ba",
-//         date: "30-12-2023",
-//         message: "10 meal added on your account",
-//         isRead: true,
-//         createdAt: "2023-12-30T11:57:48.253Z",
-//         updatedAt: "2023-12-30T11:58:13.264Z",
-//       },
-//       {
-//         _id: "659005bc3dfd7d5f61abe1ba",
-//         date: "30-12-2023",
-//         message: "100 tk deposited on your account",
-//         isRead: true,
-//         createdAt: "2023-12-30T11:57:48.253Z",
-//         updatedAt: "2023-12-30T11:58:13.264Z",
-//       },
-//       {
-//         _id: "659005bc3dfd7d5f61abe1ba",
-//         date: "30-12-2023",
-//         message: "2.5 meal added on your account",
-//         isRead: false,
-//         createdAt: "2023-12-30T11:57:48.253Z",
-//         updatedAt: "2023-12-30T11:58:13.264Z",
-//       },
-//       {
-//         _id: "659005bc3dfd7d5f61abe1ba",
-//         date: "30-12-2023",
-//         message: "10 meal added on your account",
-//         isRead: true,
-//         createdAt: "2023-12-30T11:57:48.253Z",
-//         updatedAt: "2023-12-30T11:58:13.264Z",
-//       },
-//       {
-//         _id: "659005bc3dfd7d5f61abe1ba",
-//         date: "30-12-2023",
-//         message: "10 meal added on your account",
-//         isRead: false,
-//         createdAt: "2023-12-30T11:57:48.253Z",
-//         updatedAt: "2023-12-30T11:58:13.264Z",
-//       },
-//       {
-//         _id: "659005bc3dfd7d5f61abe1ba",
-//         date: "30-12-2023",
-//         message: "10 meal added on your account",
-//         isRead: false,
-//         createdAt: "2023-12-30T11:57:48.253Z",
-//         updatedAt: "2023-12-30T11:58:13.264Z",
-//       },
-//       {
-//         _id: "659005bc3dfd7d5f61abe1ba",
-//         date: "30-12-2023",
-//         message: "20 meal added on your account",
-//         isRead: true,
-//         createdAt: "2023-12-30T11:57:48.253Z",
-//         updatedAt: "2023-12-30T11:58:13.264Z",
-//       },
-//       {
-//         _id: "659005bc3dfd7d5f61abe1ba",
-//         date: "30-12-2023",
-//         message: "10 meal added on your account",
-//         isRead: false,
-//         createdAt: "2023-12-30T11:57:48.253Z",
-//         updatedAt: "2023-12-30T11:58:13.264Z",
-//       },
-//     ],
-//   };
-
+  const [updateNotification] = useUpdateAllNotificationMutation();
   return (
     <div>
       <Modal
@@ -114,7 +25,9 @@ const NotificationModal = ({ isModalOpen, handleOk, handleCancel, data }) => {
         className="notificationModal"
       >
         <div className="d-flex align-items-center justify-content-between">
-          <h6> Mark all as read</h6>
+          <h6 onClick={() => updateNotification()} style={{ cursor: "pointer" }}>
+            Mark all as read
+          </h6>
           <Link to="/notification" onClick={handleCancel}>
             <h6 style={{ color: "#5AA7FF" }}> See All</h6>
           </Link>

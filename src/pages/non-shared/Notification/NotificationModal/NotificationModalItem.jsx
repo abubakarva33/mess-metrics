@@ -1,12 +1,17 @@
 import moment from "moment";
 import { GoDotFill } from "react-icons/go";
+import { useUpdateNotificationMutation } from "../../../../redux/api/sampleApi/actionApi";
 
 const NotificationModalItem = ({ data }) => {
-  console.log(data);
+  const [updateNotification] = useUpdateNotificationMutation();
   return (
     <div className="modalItem mb-1 p-2 rounded">
       {!data && <p> No Notification Found</p>}
-      <div className="d-flex align-items-center justify-content-between">
+      <div
+        className="d-flex align-items-center justify-content-between"
+        style={{ cursor: "default" }}
+        onClick={() => updateNotification({ id: data?._id, isRead: true })}
+      >
         <div className="d-flexCenter dateImgNotification">
           <h4 className=" mb-0">{moment(data?.createdAt).format("DD/MM/YYYY")?.substring(0, 2)}</h4>
         </div>

@@ -140,6 +140,21 @@ const actionApi = mainApi.injectEndpoints({
       }),
       invalidatesTags: ["Action"],
     }),
+    updateNotification: builder.mutation({
+      query: ({ id, ...body }) => ({
+        url: `notification/${id}`,
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["Action"],
+    }),
+    updateAllNotification: builder.mutation({
+      query: () => ({
+        url: `notification/read-all`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["Action"],
+    }),
   }),
 });
 
@@ -163,4 +178,6 @@ export const {
   useUpdateIndividualCostMutation,
   useUpdateSharedCostMutation,
   useGetAllNotificationQuery,
+  useUpdateNotificationMutation,
+  useUpdateAllNotificationMutation,
 } = actionApi;
