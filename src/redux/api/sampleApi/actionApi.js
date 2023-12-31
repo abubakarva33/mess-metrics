@@ -103,9 +103,9 @@ const actionApi = mainApi.injectEndpoints({
       providesTags: ["Action"],
     }),
     getAllNotification: builder.query({
-      query: () => `notification`,
+      query: (page) => `notification?page=${page}`,
 
-      providesTags: ["Action"],
+      providesTags: ["Action", "Notification"],
     }),
 
     updateBazar: builder.mutation({
@@ -146,14 +146,14 @@ const actionApi = mainApi.injectEndpoints({
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["Action"],
+      invalidatesTags: ["Notification"],
     }),
     updateAllNotification: builder.mutation({
       query: () => ({
         url: `notification/read-all`,
         method: "PUT",
       }),
-      invalidatesTags: ["Action"],
+      invalidatesTags: ["Notification"],
     }),
   }),
 });

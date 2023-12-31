@@ -38,11 +38,12 @@ import NotificationBadge from "../../non-shared/Notification/NotificationModal/N
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { role } = useSelector((state) => state.user);
-  const { isLoading, data } = useGetUserProfileQuery();
-  const { isFetching, data: notificationData } = useGetAllNotificationQuery();
+  const [page, setPage] = useState(1);
   const [time, setTime] = useState(moment().format("hh:mm A"));
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { role } = useSelector((state) => state.user);
+  const { isLoading, data } = useGetUserProfileQuery();
+  const { isFetching, data: notificationData } = useGetAllNotificationQuery(page);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -158,6 +159,9 @@ const Header = () => {
         handleCancel={handleCancel}
         handleOk={handleOk}
         data={notificationData}
+        setPage={setPage}
+        page={page}
+        isFetching={isFetching}
       />
     </>
   );

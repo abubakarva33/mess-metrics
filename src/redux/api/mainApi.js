@@ -27,6 +27,7 @@ export const mainApi = createApi({
     "AllMess",
     "Months",
     "Action",
+    "Notification",
   ],
   endpoints: () => ({}),
 });

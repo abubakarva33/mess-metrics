@@ -6,7 +6,6 @@ const NotificationModalItem = ({ data }) => {
   const [updateNotification] = useUpdateNotificationMutation();
   return (
     <div className="modalItem mb-1 p-2 rounded">
-      {!data && <p> No Notification Found</p>}
       <div
         className="d-flex align-items-center justify-content-between"
         style={{ cursor: "default" }}

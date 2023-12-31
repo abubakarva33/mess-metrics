@@ -1,10 +1,19 @@
 import "./NotificationModal.css";
-import { Button, Modal } from "antd";
+import { Button, Modal, Spin } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import NotificationModalItem from "./NotificationModalItem";
 import { useUpdateAllNotificationMutation } from "../../../../redux/api/sampleApi/actionApi";
-const NotificationModal = ({ isModalOpen, handleOk, handleCancel, data }) => {
+import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
+const NotificationModal = ({
+  isModalOpen,
+  handleOk,
+  handleCancel,
+  data,
+  setPage,
+  page,
+  isFetching,
+}) => {
   const [updateNotification] = useUpdateAllNotificationMutation();
   return (
     <div>
@@ -16,25 +25,50 @@ const NotificationModal = ({ isModalOpen, handleOk, handleCancel, data }) => {
         footer={null}
         style={{
           position: "absolute",
-          top: 60,
+          top: 65,
           right: 10,
-          //   maxWidth: "calc(100vw - 70%)",
           maxWidth: 350,
           maxHeight: 500,
         }}
         className="notificationModal"
       >
-        <div className="d-flex align-items-center justify-content-between">
-          <h6 onClick={() => updateNotification()} style={{ cursor: "pointer" }}>
-            Mark all as read
-          </h6>
-          <Link to="/notification" onClick={handleCancel}>
-            <h6 style={{ color: "#5AA7FF" }}> See All</h6>
-          </Link>
-        </div>
-        {data?.data?.map((item, ind) => (
-          <NotificationModalItem key={ind} data={item} />
-        ))}
+        {data?.data?.length !== 0 && (
+          <div className="d-flex align-items-center justify-content-between">
+            <h6
+              className="ms-2"
+              onClick={() => setPage(1)}
+              style={{
+                cursor: "pointer",
+                color: "#3bb54a",
+              }}
+            >
+              New
+            </h6>
+            <h6
+              onClick={() => updateNotification()}
+              style={{
+                cursor: "pointer",
+                color: "#5AA7FF",
+              }}
+            >
+              Mark all as read
+            </h6>
+          </div>
+        )}
+        <Spin spinning={isFetching}>
+          {data?.data?.map((item, ind) => (
+            <NotificationModalItem key={ind} data={item} />
+          ))}
+        </Spin>
+
+        {data?.data?.length === 0 && (
+          <p className="text-center mt-3 fs-5"> No Notification Found</p>
+        )}
+        {data?.data?.length >= 10 && (
+          <Button className="w-100" onClick={() => setPage(page + 1)} type="primary">
+            Load More
+          </Button>
+        )}
       </Modal>
     </div>
   );
