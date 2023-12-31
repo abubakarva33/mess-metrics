@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
-import { useGetAllIndividualCostQuery } from "../../../../../../redux/api/sampleApi/actionApi";
+import {
+  useGetAllIndividualCostQuery,
+  useUpdateIndividualCostMutation,
+} from "../../../../../../redux/api/sampleApi/actionApi";
 import { Space, Spin } from "antd";
 import { Link } from "react-router-dom";
+import UpdateModal from "./UpdateModal";
 
 const IndividualCostDetails = () => {
-  const [filter, setFilter] = useState({ page: 1 });
+  const [filter, setFilter] = useState({});
+  const [itemData, setItemData] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [type, setType] = useState("");
+
   const { data, isFetching } = useGetAllIndividualCostQuery(filter);
+  const [update, { status }] = useUpdateIndividualCostMutation();
 
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 
@@ -44,19 +53,28 @@ const IndividualCostDetails = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link
+          <div
             onClick={() => (
               setItemData(record),
               setIsModalOpen(true),
-              setItemName("individualCost")
+              setType("individualCost")
             )}
           >
             Edit
-          </Link>
+          </div>
         </Space>
       ),
     },
   ];
+
+  const modalProps = {
+    data: itemData,
+    isModalOpen,
+    type,
+    setIsModalOpen,
+    update,
+    status,
+  };
 
   return (
     <Spin spinning={isFetching}>
@@ -69,6 +87,8 @@ const IndividualCostDetails = () => {
           />
         )}
       </div>
+
+      {itemData && <UpdateModal {...modalProps} />}
     </Spin>
   );
 };

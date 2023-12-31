@@ -23,7 +23,6 @@ const AddMembersMoney = () => {
     const amount = Number(values.amount);
     const fieldValues = { ...values, amount, date: startDate };
 
-
     try {
       const res = await addMembersMoney(fieldValues).unwrap();
       if (res?.success) {
@@ -54,15 +53,22 @@ const AddMembersMoney = () => {
   return (
     <div>
       <div className="addMealCostSectionMain">
-        <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
+        <div
+          className=" addMealCostSection sectionShadow mx-auto"
+          style={{ maxWidth: "500px" }}
+        >
           <h4 className="text-center  mt-2 mb-4">Add member's Money</h4>
           <div className="mealDatePicker">
             <ReactDatePicker
               className="w-100"
-              selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+              selected={
+                new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))
+              }
               dateFormat="dd-MM-yyyy"
               showIcon
-              onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+              onChange={(date) =>
+                setStartDate(moment(date).format("DD-MM-YYYY"))
+              }
               icon={<MdCalendarMonth />}
             />
           </div>
@@ -124,7 +130,10 @@ const AddMembersMoney = () => {
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <IoIosArrowBack
+                className="componentHeaderIcon"
+                onClick={() => navigate(-1)}
+              />
               <h3>ADD INDIVIDUAL COSTS </h3>
             </div>
           </div>
@@ -132,14 +141,23 @@ const AddMembersMoney = () => {
         <div className="phoneBookContainerItemBg">
           <div className="phoneBookContainerItem smDeviceAlign ">
             <div className="pt-5 pb-3 px-3 m-auto w-100">
-              <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
+              <div
+                className=" addMealCostSection  mx-auto"
+                style={{ maxWidth: "500px" }}
+              >
                 <div className="mealDatePicker">
                   <ReactDatePicker
                     className="w-100"
-                    selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+                    selected={
+                      new Date(
+                        moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY")
+                      )
+                    }
                     dateFormat="dd-MM-yyyy"
                     showIcon
-                    onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+                    onChange={(date) =>
+                      setStartDate(moment(date).format("DD-MM-YYYY"))
+                    }
                     icon={<MdCalendarMonth />}
                   />
                 </div>
@@ -162,7 +180,10 @@ const AddMembersMoney = () => {
                           },
                         ]}
                       >
-                        <Input type="number" placeholder="Enter Deposit Amount" />
+                        <Input
+                          type="number"
+                          placeholder="Enter Deposit Amount"
+                        />
                       </Form.Item>
                     </div>
                   </Form.Item>
@@ -190,7 +211,11 @@ const AddMembersMoney = () => {
                     </div>
                   </Form.Item>
                   <div className="d-flex justify-content-center mt-5  ">
-                    <Button type="primary" htmlType="submit" className="w-100  h-auto">
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      className="w-100  h-auto"
+                    >
                       <span className="fs-5"> Add money</span>
                     </Button>
                   </div>

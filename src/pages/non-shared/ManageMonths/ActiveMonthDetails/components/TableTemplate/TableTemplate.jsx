@@ -11,7 +11,6 @@ const TableTemplate = ({
   if (dataFetching) {
     return <SpinnerMain />;
   }
-  console.log(data?.meta);
   const { total = 0, limit, page } = data?.meta;
   return (
     <div className="mb-3">

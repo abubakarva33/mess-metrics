@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
-import { useGetAllSharedCostQuery } from "../../../../../../redux/api/sampleApi/actionApi";
+import {
+  useGetAllSharedCostQuery,
+  useUpdateSharedCostMutation,
+} from "../../../../../../redux/api/sampleApi/actionApi";
 import { Space, Spin } from "antd";
 import { Link } from "react-router-dom";
+import UpdateModal from "./UpdateModal";
 
 const SharedCostDetails = () => {
-  const [filter, setFilter] = useState({ page: 1 });
+  const [filter, setFilter] = useState({});
+  const [itemData, setItemData] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [type, setType] = useState("");
+
   const { data, isFetching } = useGetAllSharedCostQuery(filter);
+  const [update, { status }] = useUpdateSharedCostMutation();
 
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 
@@ -39,7 +48,7 @@ const SharedCostDetails = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Link
+          <div
             onClick={() => (
               setItemData(record),
               setIsModalOpen(true),
@@ -47,11 +56,20 @@ const SharedCostDetails = () => {
             )}
           >
             Edit
-          </Link>
+          </div>
         </Space>
       ),
     },
   ];
+
+  const modalProps = {
+    data: itemData,
+    isModalOpen,
+    type,
+    setIsModalOpen,
+    update,
+    status,
+  };
 
   return (
     <Spin spinning={isFetching}>
@@ -64,6 +82,8 @@ const SharedCostDetails = () => {
           />
         )}
       </div>
+
+      {itemData && <UpdateModal {...modalProps} />}
     </Spin>
   );
 };
