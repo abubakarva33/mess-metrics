@@ -48,6 +48,7 @@ const Header = () => {
 
   const showModal = () => {
     setIsModalOpen(true);
+    setPage(1);
   };
   const handleOk = () => {
     setIsModalOpen(false);

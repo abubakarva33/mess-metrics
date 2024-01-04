@@ -14,6 +14,7 @@ const NotificationModal = ({
   page,
   isFetching,
 }) => {
+  const [isLoadClicked, setIsLoadClicked] = useState(false);
   const [updateNotification] = useUpdateAllNotificationMutation();
   return (
     <div>
@@ -35,7 +36,7 @@ const NotificationModal = ({
                 color: "#3bb54a",
               }}
             >
-              New
+              Refresh
             </h6>
             <h6
               onClick={() => updateNotification()}
@@ -48,17 +49,36 @@ const NotificationModal = ({
             </h6>
           </div>
         )}
+        {isFetching && isLoadClicked ? (
+          <div>
+            {data?.data?.map((item, ind) => (
+              <NotificationModalItem key={ind} data={item} />
+            ))}
+          </div>
+        ) : (
+          <Spin spinning={isFetching}>
+            {data?.data?.map((item, ind) => (
+              <NotificationModalItem key={ind} data={item} />
+            ))}
+          </Spin>
+        )}
         <Spin spinning={isFetching}>
-          {data?.data?.map((item, ind) => (
-            <NotificationModalItem key={ind} data={item} />
-          ))}
+          <div>
+            {data?.data?.map((item, ind) => (
+              <NotificationModalItem key={ind} data={item} />
+            ))}
+          </div>
         </Spin>
 
         {data?.data?.length === 0 && (
           <p className="text-center mt-3 fs-5"> No Notification Found</p>
         )}
         {data?.data?.length >= 10 && (
-          <Button className="w-100" onClick={() => setPage(page + 1)} type="primary">
+          <Button
+            className="w-100"
+            onClick={() => (setPage(page + 1), setIsLoadClicked(true))}
+            type="primary"
+          >
             Load More
           </Button>
         )}
