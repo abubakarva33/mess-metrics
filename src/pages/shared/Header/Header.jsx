@@ -84,13 +84,13 @@ const Header = () => {
         </div>
         {role !== "admin" && role !== "superAdmin" ? (
           <div className="d-flexCenter">
-            <Link to="/aboutUs" className="navItem">
+            <Link to="/aboutUs" className="navItem" style={{ color: "#00ffff" }}>
               About us
             </Link>
-            <Link to="/helps" className="navItem">
+            <Link to="/helps" className="navItem" style={{ color: "#00ffff" }}>
               Help
             </Link>
-            <Link to="/faq" className="navItem">
+            <Link to="/faq" className="navItem" style={{ color: "#00ffff" }}>
               FAQ
             </Link>
             <div className="navItem me-2" onClick={showModal}>

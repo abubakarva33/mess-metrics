@@ -11,7 +11,7 @@ const NotificationModalItem = ({ data }) => {
         style={{ cursor: "default" }}
         onClick={() => updateNotification({ id: data?._id, isRead: true })}
       >
-        <div className="d-flexCenter dateImgNotification">
+        <div className="d-flexCenter dateImgNotification ">
           <h4 className=" mb-0">{moment(data?.createdAt).format("DD/MM/YYYY")?.substring(0, 2)}</h4>
         </div>
         <div>

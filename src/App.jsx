@@ -9,58 +9,26 @@ import { authRole } from "./redux/features/UserSlice/UserSlice";
 import SkeletonLoader from "./components/SkeletonLoader/SkeletonLoader";
 import { routes } from "./routes/Routes";
 import Swal from "sweetalert2";
+import ErrorPage from "./routes/ErrorPage/ErrorPage";
 
 function App() {
   const { isLoading, data } = useGetUserProfileQuery();
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-  console.log({ isOnline, navi: navigator.onLine });
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: "bottom-end",
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.onmouseenter = Swal.stopTimer;
-      toast.onmouseleave = Swal.resumeTimer;
-    },
-  });
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const handleOnline = () => {
-      setIsOnline(true);
-    };
-
-    const handleOffline = () => {
-      setIsOnline(false);
-    };
-
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
-  }, []);
-
-  useEffect(() => {
-    console.log({ isOnline });
-
-    if (isOnline) {
-      Toast.fire({
-        icon: "success",
-        title: `You are connected`,
-      });
-    } else {
-      Toast.fire({
+    if (!navigator.onLine) {
+      Swal.fire({
         icon: "error",
-        title: `You are not connected`,
+        title: "No Internet Connection!",
+        text: "Please make sure your internet connection on and try again",
+        confirmButtonText: "Try again",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
       });
     }
-  }, [isOnline]);
-  const dispatch = useDispatch();
+  }, []);
 
   useEffect(() => {
     dispatch(authRole({ role: data?.data?.role }));
@@ -69,11 +37,7 @@ function App() {
   return (
     <div className="">
       <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
-        {isLoading ? (
-          <SkeletonLoader />
-        ) : (
-          <RouterProvider router={routes}></RouterProvider>
-        )}
+        {isLoading ? <SkeletonLoader /> : <RouterProvider router={routes}></RouterProvider>}
       </ConfigProvider>
     </div>
   );

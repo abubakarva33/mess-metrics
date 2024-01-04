@@ -14,23 +14,23 @@ const detailsData = (data) => {
     },
     {
       name: "Total Cost",
-      value: data?.totalCost || 0,
+      value: data?.totalCost?.toFixed(2) || 0,
     },
     {
       name: "Shared Cost",
-      value: data?.sharedCostPerPerson || 0,
+      value: data?.sharedCostPerPerson?.toFixed(2) || 0,
     },
     {
       name: "Individual Cost",
-      value: data?.individualCost || 0,
+      value: data?.individualCost?.toFixed(2) || 0,
     },
     {
       name: "Deposit ",
-      value: data?.deposit || 0,
+      value: data?.deposit?.toFixed(2) || 0,
     },
     {
       name: "Balance ",
-      value: data?.balance || 0,
+      value: data?.balance?.toFixed(2) || 0,
     },
   ];
 };

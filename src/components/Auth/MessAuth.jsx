@@ -3,11 +3,10 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useGetUserProfileQuery } from "../../redux/api/sampleApi/userApi";
 import Spinner from "../Spinner/Spinner";
+import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 
 const MessAuth = ({ children }) => {
   const { isLogin } = useSelector((state) => state.user);
-
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   const profile = useGetUserProfileQuery({});
   const { data, status, refetch, error } = profile;
@@ -16,25 +15,7 @@ const MessAuth = ({ children }) => {
     if (isLogin && status === "rejected" && error?.status === 401) {
       refetch();
     }
-  }, [status, isLogin, isOnline]);
-
-  useEffect(() => {
-    const handleOnline = () => {
-      setIsOnline(true);
-    };
-
-    const handleOffline = () => {
-      setIsOnline(false);
-    };
-
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
-  }, []);
+  }, [status, isLogin]);
 
   if (status === "fulfilled" && !Boolean(data?.data?.mess)) {
     return <Navigate to="/create-mess" />;
@@ -47,7 +28,7 @@ const MessAuth = ({ children }) => {
   if (status === "fulfilled") {
     return <>{children}</>;
   }
-  return <Spinner />;
+  return <SkeletonLoader />;
 };
 
 export default MessAuth;

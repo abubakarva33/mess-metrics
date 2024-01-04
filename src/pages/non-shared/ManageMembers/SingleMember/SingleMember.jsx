@@ -94,7 +94,7 @@ const SingleMember = () => {
   };
 
   return (
-    <div>
+    <div className="d-flexCenter" style={{minHeight: "84vh"}}>
       <Container fluid className="my-4 singleMemberSection">
         <Row className="h-100">
           <Col xs={12} sm={6} md={6} lg={6} xl={5} xxl={5}>

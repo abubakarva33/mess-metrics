@@ -90,7 +90,7 @@ const BazarDetails = () => {
           <TableTemplate data={data} columns={column} onPageChange={onPageChange} />
         )}
       </div>
-      {data?.success && <ActiveMonthPageTemplateSm {...smDeviceProps} />}
+      {data?.success && <ActiveMonthPageTemplateSm {...smDeviceProps} className="active-month-sm"/>}
 
       {itemData && <UpdateModal {...modalProps} />}
     </Spin>
