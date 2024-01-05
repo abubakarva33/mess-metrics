@@ -50,25 +50,18 @@ const NotificationModal = ({
           </div>
         )}
         {isFetching && isLoadClicked ? (
-          <div>
-            {data?.data?.map((item, ind) => (
-              <NotificationModalItem key={ind} data={item} />
-            ))}
-          </div>
-        ) : (
           <Spin spinning={isFetching}>
             {data?.data?.map((item, ind) => (
-              <NotificationModalItem key={ind} data={item} />
+              <NotificationModalItem key={ind} data={item} setIsLoadClicked={setIsLoadClicked} />
             ))}
           </Spin>
-        )}
-        <Spin spinning={isFetching}>
+        ) : (
           <div>
             {data?.data?.map((item, ind) => (
-              <NotificationModalItem key={ind} data={item} />
+              <NotificationModalItem key={ind} data={item} setIsLoadClicked={setIsLoadClicked} />
             ))}
           </div>
-        </Spin>
+        )}
 
         {data?.data?.length === 0 && (
           <p className="text-center mt-3 fs-5"> No Notification Found</p>

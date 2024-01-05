@@ -2,10 +2,10 @@ import moment from "moment";
 import { GoDotFill } from "react-icons/go";
 import { useUpdateNotificationMutation } from "../../../../redux/api/sampleApi/actionApi";
 
-const NotificationModalItem = ({ data }) => {
+const NotificationModalItem = ({ data, setIsLoadClicked }) => {
   const [updateNotification] = useUpdateNotificationMutation();
   return (
-    <div className="modalItem mb-1 p-2 rounded">
+    <div className="modalItem mb-1 p-2 rounded" onClick={() => setIsLoadClicked(false)}>
       <div
         className="d-flex align-items-center justify-content-between"
         style={{ cursor: "default" }}
