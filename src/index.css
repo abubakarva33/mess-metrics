@@ -1,3 +1,17 @@
+/* 
+    --primary-100:#2C577D;
+    --primary-200:#5d83ac;
+    --primary-300:#bfe5ff;
+    --accent-100:#FF7F11;
+    --accent-200:#8e2000;
+    --text-100:#FFFFFF;
+    --text-200:#e0e0e0;
+    --bg-100:#11151C;
+    --bg-200:#20242b;
+    --bg-300:#373b43;     
+
+*/
+
 :root {
   --bg-body: #11151c;
   --bg-primary: #242526;
@@ -7,9 +21,9 @@
   /* --bg-app-primary: #434343; */
   --bg-app-primary: #060811;
   /* --bg-member: #27244652; */
-  --bg-personalDashboard: #27244652;
+  --bg-personalDashboard: #21293659;
   --text-primary: #e4e6eb;
-  --text-secondary: #b0b3b8;
+  --text-secondary: #5d83ac;
   --text-tertiary: #62636652;
   /* --text-tertiary: #626366; */
   --border-tertiary: #565963;

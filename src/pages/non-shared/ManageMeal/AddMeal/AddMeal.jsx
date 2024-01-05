@@ -22,7 +22,9 @@ const AddMeal = () => {
 
   // rtk-query
   const { data: profileData, isFetching } = useGetUserProfileQuery();
-  const { data, isLoading } = useGetSingleMessQuery(profileData?.data?.mess?._id);
+  const { data, isLoading } = useGetSingleMessQuery(
+    profileData?.data?.mess?._id
+  );
   const [addMeal, { status }] = useAddMealMutation();
 
   // states
@@ -62,7 +64,7 @@ const AddMeal = () => {
   };
 
   const onFinish = async () => {
-    const fieldValues = { meals:meal, date: startDate };
+    const fieldValues = { meals: meal, date: startDate };
     try {
       const res = await addMeal(fieldValues).unwrap();
       if (res?.success) {
@@ -97,15 +99,22 @@ const AddMeal = () => {
   return (
     <div>
       <div className="addMealSection">
-        <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
+        <div
+          className="addMealCostSection sectionShadow mx-auto"
+          style={{ maxWidth: "500px" }}
+        >
           <h3 className="text-center mt-2 mb-4">Add Members Meal</h3>
           <div className="mealDatePicker">
             <ReactDatePicker
               className="w-100"
-              selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+              selected={
+                new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))
+              }
               dateFormat="dd-MM-yyyy"
               showIcon
-              onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+              onChange={(date) =>
+                setStartDate(moment(date).format("DD-MM-YYYY"))
+              }
               icon={<MdCalendarMonth />}
             />
           </div>
@@ -126,7 +135,7 @@ const AddMeal = () => {
                   <MdEdit
                     className="fs-4 ms-3"
                     onClick={() => setIsClicked(true)}
-                    style={{ color: "#3bb54a" }}
+                    style={{ color: "#5d83ac" }}
                   />
                 </div>
               </div>
@@ -145,7 +154,9 @@ const AddMeal = () => {
                           if (value >= 0) {
                             return Promise.resolve();
                           }
-                          return Promise.reject(new Error("Please enter a non-negative number"));
+                          return Promise.reject(
+                            new Error("Please enter a non-negative number")
+                          );
                         },
                       }),
                     ]}
@@ -173,12 +184,18 @@ const AddMeal = () => {
             {data?.members?.map((member) => (
               <div className="phoneItem ">
                 <div className="phoneItemLeft">
-                  <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
+                  <img
+                    src="/images/userIcon.png"
+                    alt=""
+                    className="mealItemPhoto"
+                  />
                   <h6 className="phoneNameText pt-1">{member.name}</h6>
                 </div>
                 <div className="d-flex">
                   <button
-                    disabled={meal?.find((m) => m?.id === member._id)?.meal <= 0}
+                    disabled={
+                      meal?.find((m) => m?.id === member._id)?.meal <= 0
+                    }
                     className="addMealRegulationIcon"
                     onClick={() => handlerMeal(member._id, -0.5)}
                   >
@@ -186,7 +203,9 @@ const AddMeal = () => {
                   </button>
                   <div className="mealCount">
                     <p className="mb-0">
-                      {meal?.find((m) => m?.id === member?._id)?.meal?.toFixed(1) || 0}
+                      {meal
+                        ?.find((m) => m?.id === member?._id)
+                        ?.meal?.toFixed(1) || 0}
                     </p>
                   </div>
 
@@ -209,7 +228,10 @@ const AddMeal = () => {
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <IoIosArrowBack
+                className="componentHeaderIcon"
+                onClick={() => navigate(-1)}
+              />
               <h3>ADD MEAL </h3>
             </div>
           </div>
@@ -221,10 +243,16 @@ const AddMeal = () => {
                 <div className="mealDatePicker">
                   <ReactDatePicker
                     className="w-100"
-                    selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+                    selected={
+                      new Date(
+                        moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY")
+                      )
+                    }
                     dateFormat="dd-MM-yyyy"
                     showIcon
-                    onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+                    onChange={(date) =>
+                      setStartDate(moment(date).format("DD-MM-YYYY"))
+                    }
                     icon={<MdCalendarMonth />}
                   />
                 </div>
@@ -245,7 +273,7 @@ const AddMeal = () => {
                         <MdEdit
                           className="fs-4 ms-3"
                           onClick={() => setIsClicked(true)}
-                          style={{ color: "#3bb54a" }}
+                          style={{ color: "#5d83ac" }}
                         />
                       </div>
                     </div>
@@ -265,7 +293,9 @@ const AddMeal = () => {
                                   return Promise.resolve();
                                 }
                                 return Promise.reject(
-                                  new Error("Please enter a non-negative number")
+                                  new Error(
+                                    "Please enter a non-negative number"
+                                  )
                                 );
                               },
                             }),
@@ -294,12 +324,18 @@ const AddMeal = () => {
                   {data?.members?.map((member) => (
                     <div className="phoneItem ">
                       <div className="phoneItemLeft">
-                        <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
+                        <img
+                          src="/images/userIcon.png"
+                          alt=""
+                          className="mealItemPhoto"
+                        />
                         <h6 className="phoneNameText pt-1">{member.name}</h6>
                       </div>
                       <div className="d-flex">
                         <button
-                          disabled={meal?.find((m) => m?.id === member._id)?.meal <= 0}
+                          disabled={
+                            meal?.find((m) => m?.id === member._id)?.meal <= 0
+                          }
                           className="addMealRegulationIcon"
                           onClick={() => handlerMeal(member._id, -0.5)}
                         >
@@ -307,7 +343,9 @@ const AddMeal = () => {
                         </button>
                         <div className="mealCount">
                           <p className="mb-0">
-                            {meal?.find((m) => m?.id === member?._id)?.meal?.toFixed(1) || 0}
+                            {meal
+                              ?.find((m) => m?.id === member?._id)
+                              ?.meal?.toFixed(1) || 0}
                           </p>
                         </div>
 

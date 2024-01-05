@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 7fr 5fr;
   align-items: center;
+  padding-bottom: 2px;
 }
 
 .divider {

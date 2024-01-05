@@ -33,7 +33,7 @@ const NotificationModal = ({
               onClick={() => setPage(1)}
               style={{
                 cursor: "pointer",
-                color: "#3bb54a",
+                color: "#5d83ac",
               }}
             >
               Refresh
@@ -52,13 +52,21 @@ const NotificationModal = ({
         {isFetching && isLoadClicked ? (
           <Spin spinning={isFetching}>
             {data?.data?.map((item, ind) => (
-              <NotificationModalItem key={ind} data={item} setIsLoadClicked={setIsLoadClicked} />
+              <NotificationModalItem
+                key={ind}
+                data={item}
+                setIsLoadClicked={setIsLoadClicked}
+              />
             ))}
           </Spin>
         ) : (
           <div>
             {data?.data?.map((item, ind) => (
-              <NotificationModalItem key={ind} data={item} setIsLoadClicked={setIsLoadClicked} />
+              <NotificationModalItem
+                key={ind}
+                data={item}
+                setIsLoadClicked={setIsLoadClicked}
+              />
             ))}
           </div>
         )}

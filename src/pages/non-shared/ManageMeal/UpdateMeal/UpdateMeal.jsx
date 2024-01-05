@@ -23,7 +23,8 @@ const UpdateMeal = () => {
 
   const [meal, setMeal] = useState([]);
   const [startDate, setStartDate] = useState(date);
-  const { data: mealData, isFetching: mealFetching } = useGetMessMealQuery(startDate);
+  const { data: mealData, isFetching: mealFetching } =
+    useGetMessMealQuery(startDate);
   const [UpdateMeal] = useUpdateMealMutation();
   const navigate = useNavigate();
 
@@ -107,15 +108,22 @@ const UpdateMeal = () => {
   return (
     <div>
       <div className="addMealSection">
-        <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
+        <div
+          className="addMealCostSection sectionShadow mx-auto"
+          style={{ maxWidth: "500px" }}
+        >
           <h3 className="text-center mt-2 mb-4">Update Meal</h3>
           <div className="mealDatePicker mb-4">
             <ReactDatePicker
               className="w-100"
-              selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+              selected={
+                new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))
+              }
               dateFormat="dd-MM-yyyy"
               showIcon
-              onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+              onChange={(date) =>
+                setStartDate(moment(date).format("DD-MM-YYYY"))
+              }
               icon={<MdCalendarMonth />}
             />
           </div>
@@ -124,7 +132,11 @@ const UpdateMeal = () => {
             {meal?.map((m, ind) => (
               <div className="phoneItem " key={ind}>
                 <div className="phoneItemLeft">
-                  <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
+                  <img
+                    src="/images/userIcon.png"
+                    alt=""
+                    className="mealItemPhoto"
+                  />
                   <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
                 </div>
                 <div className="d-flex">
@@ -154,7 +166,7 @@ const UpdateMeal = () => {
                       <MdEdit
                         className="fs-4 ms-1"
                         onClick={() => handleClick(m._id)}
-                        style={{ color: "#3bb54a" }}
+                        style={{ color: "#5d83ac" }}
                       />
                     </div>
                   )}
@@ -167,7 +179,9 @@ const UpdateMeal = () => {
             className="w-100"
             onClick={onFinish}
             disabled={
-              Array.isArray(meal) ? [...meal?.filter((m) => m.isChanged)].length <= 0 : true
+              Array.isArray(meal)
+                ? [...meal?.filter((m) => m.isChanged)].length <= 0
+                : true
             }
           >
             Submit
@@ -178,7 +192,10 @@ const UpdateMeal = () => {
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <IoIosArrowBack
+                className="componentHeaderIcon"
+                onClick={() => navigate(-1)}
+              />
               <h3>ADD MEAL </h3>
             </div>
           </div>
@@ -190,10 +207,16 @@ const UpdateMeal = () => {
                 <div className="mealDatePicker mb-4">
                   <ReactDatePicker
                     className="w-100"
-                    selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+                    selected={
+                      new Date(
+                        moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY")
+                      )
+                    }
                     dateFormat="dd-MM-yyyy"
                     showIcon
-                    onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+                    onChange={(date) =>
+                      setStartDate(moment(date).format("DD-MM-YYYY"))
+                    }
                     icon={<MdCalendarMonth />}
                   />
                 </div>
@@ -202,8 +225,14 @@ const UpdateMeal = () => {
                   {meal?.map((m, ind) => (
                     <div className="phoneItem " key={ind}>
                       <div className="phoneItemLeft">
-                        <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
-                        <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
+                        <img
+                          src="/images/userIcon.png"
+                          alt=""
+                          className="mealItemPhoto"
+                        />
+                        <h6 className="phoneNameText pt-1">
+                          {m?.member?.name}
+                        </h6>
                       </div>
                       <div className="d-flex">
                         {m.isClicked && (
@@ -232,7 +261,7 @@ const UpdateMeal = () => {
                             <MdEdit
                               className="fs-4 ms-1"
                               onClick={() => handleClick(m._id)}
-                              style={{ color: "#3bb54a" }}
+                              style={{ color: "#5d83ac" }}
                             />
                           </div>
                         )}
@@ -245,7 +274,9 @@ const UpdateMeal = () => {
                   className="w-100"
                   onClick={onFinish}
                   disabled={
-                    Array.isArray(meal) ? [...meal?.filter((m) => m.isChanged)].length <= 0 : true
+                    Array.isArray(meal)
+                      ? [...meal?.filter((m) => m.isChanged)].length <= 0
+                      : true
                   }
                 >
                   Submit

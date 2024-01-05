@@ -44,7 +44,8 @@ const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { role } = useSelector((state) => state.user);
   const { isLoading, data } = useGetUserProfileQuery();
-  const { isFetching, data: notificationData } = useGetAllNotificationQuery(page);
+  const { isFetching, data: notificationData } =
+    useGetAllNotificationQuery(page);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -85,17 +86,20 @@ const Header = () => {
         </div>
         {role !== "admin" && role !== "superAdmin" ? (
           <div className="d-flexCenter">
-            <Link to="/aboutUs" className="navItem" style={{ color: "#00ffff" }}>
+            <Link to="/aboutUs" className="navItem">
               About us
             </Link>
-            <Link to="/helps" className="navItem" style={{ color: "#00ffff" }}>
+            <Link to="/helps" className="navItem">
               Help
             </Link>
-            <Link to="/faq" className="navItem" style={{ color: "#00ffff" }}>
+            <Link to="/faq" className="navItem">
               FAQ
             </Link>
             <div className="navItem me-2" onClick={showModal}>
-              <NotificationBadge isModalOpen={isModalOpen} count={notificationData?.unread} />
+              <NotificationBadge
+                isModalOpen={isModalOpen}
+                count={notificationData?.unread}
+              />
             </div>
 
             <div className="d-flexCenter position-relative smHeader">

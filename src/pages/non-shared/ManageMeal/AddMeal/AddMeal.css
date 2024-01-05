@@ -1,47 +1,46 @@
-.addMealRegulationIcon{
-    padding: 5px;
-    background-color: #3bb54a;
-    border-radius: 5px;
-    border: none;
+.addMealRegulationIcon {
+  padding: 5px;
+  background-color: #5d83ac;
+  border-radius: 5px;
+  border: none;
 }
-.mealCount{
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    background-color: var(--bg-secondary);
-    border-radius: 5px;
-    margin: 0 7px;
+.mealCount {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background-color: var(--bg-secondary);
+  border-radius: 5px;
+  margin: 0 7px;
 }
 
-.mealItemPhoto{
-    width: 40px;
-    margin-right: 10px;
+.mealItemPhoto {
+  width: 40px;
+  margin-right: 10px;
 }
-.mealContainer{
-    background-color: var(--bg-secondary);
-    padding:0 15px 20px 15px;
-    border-radius: 10px;
+.mealContainer {
+  background-color: var(--bg-secondary);
+  padding: 0 15px 20px 15px;
+  border-radius: 10px;
 }
-.addMealCheckIcon{
-    height: 40px;
-    width: 40px;
+.addMealCheckIcon {
+  height: 40px;
+  width: 40px;
 }
-.defaultMeal{
-    margin-bottom: -0px;
+.defaultMeal {
+  margin-bottom: -0px;
 }
 @media screen and (min-device-width: 576px) and (max-device-width: 740px) {
-    
-  }
+}
 
-  @media screen and (max-device-width: 576px) {
-    .addMealSection{
-        display: none;
-    }
-    .addMealRegulationIcon{
-        padding: 3px;
-    }
-    .mealCount{
-        padding: 0 10px;
-        margin: 0 5px;
-    }
+@media screen and (max-device-width: 576px) {
+  .addMealSection {
+    display: none;
   }
+  .addMealRegulationIcon {
+    padding: 3px;
+  }
+  .mealCount {
+    padding: 0 10px;
+    margin: 0 5px;
+  }
+}

@@ -21,7 +21,8 @@ const UpdateMeal = () => {
   const [meal, setMeal] = useState([]);
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
   const [clicked, setIsClicked] = useState([]);
-  const { data: mealData, isFetching: mealFetching } = useGetMessMealQuery(startDate);
+  const { data: mealData, isFetching: mealFetching } =
+    useGetMessMealQuery(startDate);
   const [UpdateMeal] = useUpdateMealMutation();
 
   useEffect(() => {
@@ -44,7 +45,10 @@ const UpdateMeal = () => {
       (item1) =>
         meal &&
         Array.isArray(meal) &&
-        meal.some((item2) => item2 && item2.id === item1.id && item2?.meal === item1?.meal)
+        meal.some(
+          (item2) =>
+            item2 && item2.id === item1.id && item2?.meal === item1?.meal
+        )
     );
     return commonMeals;
   };
@@ -87,7 +91,10 @@ const UpdateMeal = () => {
       confirmButtonText: "Yes, update it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const res = await UpdateMeal({ _id: mealData?._id, ...fieldValues }).unwrap();
+        const res = await UpdateMeal({
+          _id: mealData?._id,
+          ...fieldValues,
+        }).unwrap();
         if (res?.success) {
           Swal.fire("Updated!", "Your file has been updated.", "success");
         }
@@ -98,15 +105,22 @@ const UpdateMeal = () => {
   return (
     <div>
       <div className="addMealSection">
-        <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
+        <div
+          className="addMealCostSection sectionShadow mx-auto"
+          style={{ maxWidth: "500px" }}
+        >
           <h3 className="text-center mt-2 mb-4">Update Meal</h3>
           <div className="mealDatePicker mb-4">
             <ReactDatePicker
               className="w-100"
-              selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+              selected={
+                new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))
+              }
               dateFormat="dd-MM-yyyy"
               showIcon
-              onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+              onChange={(date) =>
+                setStartDate(moment(date).format("DD-MM-YYYY"))
+              }
               icon={<MdCalendarMonth />}
             />
           </div>
@@ -115,13 +129,20 @@ const UpdateMeal = () => {
             {mealData?.meal?.map((member) => (
               <div className="phoneItem ">
                 <div className="phoneItemLeft">
-                  <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
+                  <img
+                    src="/images/userIcon.png"
+                    alt=""
+                    className="mealItemPhoto"
+                  />
                   <h6 className="phoneNameText pt-1">{member?.id?.name}</h6>
                 </div>
                 <div className="d-flex">
-                  {clicked?.find((m) => m?.id === member._id)?.clicked === true ? (
+                  {clicked?.find((m) => m?.id === member._id)?.clicked ===
+                  true ? (
                     <button
-                      disabled={meal?.find((m) => m?.id === member._id)?.meal <= 0}
+                      disabled={
+                        meal?.find((m) => m?.id === member._id)?.meal <= 0
+                      }
                       className="addMealRegulationIcon"
                       onClick={() => handlerMeal(member._id, -0.5)}
                     >
@@ -131,11 +152,14 @@ const UpdateMeal = () => {
 
                   <div className="mealCount">
                     <p className="mb-0">
-                      {meal?.find((m) => m?.id === member?._id)?.meal?.toFixed(1) || 0}
+                      {meal
+                        ?.find((m) => m?.id === member?._id)
+                        ?.meal?.toFixed(1) || 0}
                       {/* {member?.meal} */}
                     </p>
                   </div>
-                  {clicked?.find((m) => m?.id === member._id)?.clicked === true ? (
+                  {clicked?.find((m) => m?.id === member._id)?.clicked ===
+                  true ? (
                     <button
                       className="addMealRegulationIcon"
                       onClick={() => handlerMeal(member._id, 0.5)}
@@ -143,12 +167,13 @@ const UpdateMeal = () => {
                       <MdOutlineAdd className="fs-4" />
                     </button>
                   ) : undefined}
-                  {clicked?.find((m) => m?.id === member._id)?.clicked === false ? (
+                  {clicked?.find((m) => m?.id === member._id)?.clicked ===
+                  false ? (
                     <div>
                       <MdEdit
                         className="fs-4 ms-1"
                         onClick={() => handleClick(member._id)}
-                        style={{ color: "#3bb54a" }}
+                        style={{ color: "#5d83ac" }}
                       />
                     </div>
                   ) : undefined}
@@ -161,7 +186,6 @@ const UpdateMeal = () => {
           </Button>
         </div>
       </div>
-      
     </div>
   );
 };
