@@ -9,74 +9,20 @@ import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi"
 import { useState } from "react";
 import { useGetSingleMessQuery } from "../../../../redux/api/sampleApi/messApi";
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
-const monthData = [
-  {
-    monthName: "January",
-    totalMeal: "1500",
-    totalCost: "5100",
-    deposit: "15500",
-    balance: "3500",
-    sharedCost: "5050",
-    individualCost: "580",
-  },
-  {
-    monthName: "February",
-    totalMeal: "10",
-    totalCost: "50",
-    deposit: "150",
-    balance: "30",
-    sharedCost: "50",
-    individualCost: "50.5",
-  },
-  {
-    monthName: "March",
-    totalMeal: "1000",
-    totalCost: "5000",
-    deposit: "15500",
-    balance: "3050",
-    sharedCost: "5008",
-    individualCost: "508",
-  },
-];
+import { useGetMessAccountQuery } from "../../../../redux/api/sampleApi/actionApi";
+import { useSelector } from "react-redux";
 
 const MessProfile = () => {
   const navigate = useNavigate();
-  const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
-  const { data: profileData, isFetching } = useGetUserProfileQuery();
-  if (isFetching) {
+  const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
+  const { role } = useSelector((state) => state.user);
+  console.log(role);
+
+  if (messFetching) {
     return <SpinnerMain />;
   }
-  const { data, isLoading } = useGetSingleMessQuery(profileData?.data?.mess?._id);
-  if (isLoading) {
-    return <SpinnerMain />;
-  }
-  const { name, email, phone, role, dateOfBirth } = profileData?.data;
-  const currentObject = monthData[currentObjectIndex];
-  const { manager, members } = data;
 
-
-  const switchData = () => {
-    setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthData.length);
-  };
   return (
-    // <div className="phoneBookContainer">
-    //   <div className="phoneBookContainerMainBg">
-    //     <div className="phoneBookContainerMain">
-    //       <div className="componentHeader">
-    //         <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-    //         <h3>MESS PROFILE </h3>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div className="phoneBookContainerItemBg">
-    //     <div className="phoneBookContainerItem ">
-    //       <div className="pt-5 pb-3 px-3">
-    //         <h1>Mess Profile</h1>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-
     <div>
       <Container fluid className="my-4 singleMemberSection">
         <Row className="h-100">
@@ -85,30 +31,34 @@ const MessProfile = () => {
               <div className="memberProfileCenterTop">
                 <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                 <div className="d-flexCenter flex-column">
-                  <h3 className="mb-0 mt-3 memberProfileName">{name}</h3>
-                  <h6> ( {role} )</h6>
+                  <h3 className="mb-0 mt-3 memberProfileName">
+                    {messAccount?.mess?.manager?.name}
+                  </h3>
+                  <h6> ( {messAccount?.mess?.manager?.role} )</h6>
                 </div>
               </div>
               <div className="">
                 <div>
                   <div className="d-flex align-items-center justify-content-between">
-                    <p className="memberProfileNameText"> {email}</p>
+                    <p className="memberProfileNameText"> {messAccount?.mess?.manager?.email}</p>
                     <div className="fs-3 ">
-                      <Link to={`mailto:${email}`} target="_blank">
+                      <Link to={`mailto:${messAccount?.mess?.manager?.email}`} target="_blank">
                         <img src="/images/forward-message.png" alt="" className="iconSize" />
                       </Link>
                     </div>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
-                    <p className="memberProfileNameText"> {phone}</p>
+                    <p className="memberProfileNameText"> {messAccount?.mess?.manager?.phone}</p>
                     <div className="fs-3 ">
-                      <Link to={`tel:${phone}`} target="_blank">
+                      <Link to={`tel:${messAccount?.mess?.manager?.phone}`} target="_blank">
                         <img src="/images/telephone.png" alt="" className="iconSize" />
                       </Link>
                     </div>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
-                    <p className="memberProfileNameText"> {dateOfBirth}</p>
+                    <p className="memberProfileNameText">
+                      {messAccount?.mess?.manager?.dateOfBirth}
+                    </p>
                     <div className="fs-3 ">
                       <img src="/images/tart.png" alt="" className="iconSize" />
                     </div>
@@ -123,72 +73,78 @@ const MessProfile = () => {
                 <div className="profileManageCenter">
                   <div className="messProfileHeaderMain">
                     <h4 className="mb-0 ">Mess Info.</h4>
-                    <MdEdit className="fs-5 ms-2" />
+                    {role === "manager" && <MdEdit className="fs-5 ms-2" />}
                   </div>
                   <div>
                     <div className="d-flex align-items-center mb-2 mt-3">
                       <img src="/images/home.png" alt="" className="messProfileIcon" />
-                      <h4 className="mb-0 messProfileName">Mess Name : {data?.name}</h4>
+                      <h4 className="mb-0 messProfileName">
+                        Mess Name : {messAccount?.mess?.name}
+                      </h4>
                     </div>
                     <div className="d-flex align-items-center mb-2">
                       <img src="/images/month.png" alt="" className="messProfileIcon" />
-                      <h5 className="mb-0 messProfileName">Active Month : January </h5>
+                      <h5 className="mb-0 messProfileName">
+                        Active Month : {messAccount?.month?.name}
+                      </h5>
                     </div>
                     <div className="d-flex align-items-center mb-2">
                       <img src="/images/group.png" alt="" className="messProfileIcon" />
-                      <h5 className="mb-0 messProfileName">Total Member : {members?.length}</h5>
+                      <h5 className="mb-0 messProfileName">
+                        Total Member : {messAccount?.mess?.members?.length}
+                      </h5>
                     </div>
                   </div>
                 </div>
 
                 <div className="profileInfoCenter">
                   <div className=" profileInfoTop">
-                    <MdArrowBackIosNew onClick={switchData} />
-                    <h4 className=""> {currentObject?.monthName}</h4>
-                    <MdArrowForwardIos onClick={switchData} />
+                    <MdArrowBackIosNew />
+                    <h4 className=""> {messAccount?.month?.name}</h4>
+                    <MdArrowForwardIos />
                   </div>
                   <div>
                     <div className="d-gridTwo">
                       <div>
                         <p className="mb-0"> Total Meal</p>
                       </div>
-                      <p className="mb-0"> :{currentObject?.totalMeal}</p>
+                      <p className="mb-0"> :{messAccount?.totalMeal}</p>
                     </div>
                     <div className="d-gridTwo">
                       <div>
                         <p className="mb-0"> Meal rate</p>
                       </div>
-                      <p className="mb-0"> :{currentObject?.totalMeal}</p>
+                      <p className="mb-0"> :{messAccount?.mealRate?.toFixed(2)}</p>
                     </div>
                     <div className="d-gridTwo">
                       <div>
                         <p className="mb-0"> Total Cost</p>
                       </div>
-                      <p className="mb-0"> :{currentObject?.totalCost}</p>
+                      <p className="mb-0"> :{messAccount?.totalCost?.toFixed(2)}</p>
                     </div>
                     <div className="d-gridTwo">
                       <div>
                         <p className="mb-0"> Shared Cost</p>
                       </div>
-                      <p className="mb-0"> :{currentObject?.sharedCost}</p>
+                      <p className="mb-0"> :{messAccount?.sharedCost?.toFixed(2)}</p>
                     </div>
                     <div className="d-gridTwo">
                       <div>
                         <p className="mb-0"> Individual Cost</p>
                       </div>
-                      <p className="mb-0"> :{currentObject?.individualCost}</p>
+                      <p className="mb-0"> :{messAccount?.totalIndividualCost?.toFixed(2)}</p>
                     </div>
                     <div className="d-gridTwo">
                       <div>
                         <p className="mb-0"> Deposit </p>
                       </div>
-                      <p className="mb-0"> :{currentObject?.deposit}</p>
+                      <p className="mb-0"> :{messAccount?.totalDeposit?.toFixed(2)}</p>
                     </div>
                     <div className="d-gridTwo">
                       <div>
                         <p className="mb-0"> Balance </p>
                       </div>
-                      <p className="mb-0"> :{currentObject?.balance}</p>
+                      <p className="mb-0"> :{messAccount?.balance?.toFixed(2)}</p>
                     </div>
                   </div>
                 </div>
@@ -216,30 +172,34 @@ const MessProfile = () => {
                 <div className="memberProfileCenterTop">
                   <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                   <div className="d-flexCenter flex-column">
-                    <h3 className="mb-0 mt-3 memberProfileName">{name}</h3>
-                    <h6> ( {role} )</h6>
+                    <h3 className="mb-0 mt-3 memberProfileName">
+                      {messAccount?.mess?.manager?.name}
+                    </h3>
+                    <h6> ( {messAccount?.mess?.manager?.role} )</h6>
                   </div>
                 </div>
                 <div className="">
                   <div>
                     <div className="d-flex align-items-center justify-content-between">
-                      <p className="memberProfileNameText"> {email}</p>
+                      <p className="memberProfileNameText"> {messAccount?.mess?.manager?.email}</p>
                       <div className="fs-3 ">
-                        <Link to={`mailto:${email}`} target="_blank">
+                        <Link to={`mailto:${messAccount?.mess?.manager?.email}`} target="_blank">
                           <img src="/images/forward-message.png" alt="" className="iconSize" />
                         </Link>
                       </div>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
-                      <p className="memberProfileNameText"> {phone}</p>
+                      <p className="memberProfileNameText"> {messAccount?.mess?.manager?.phone}</p>
                       <div className="fs-3 ">
-                        <Link to={`tel:${phone}`} target="_blank">
+                        <Link to={`tel:${messAccount?.mess?.manager?.phone}`} target="_blank">
                           <img src="/images/telephone.png" alt="" className="iconSize" />
                         </Link>
                       </div>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
-                      <p className="memberProfileNameText"> {dateOfBirth}</p>
+                      <p className="memberProfileNameText">
+                        {messAccount?.mess?.manager?.dateOfBirth}
+                      </p>
                       <div className="fs-3 ">
                         <img src="/images/tart.png" alt="" className="iconSize" />
                       </div>
@@ -251,72 +211,76 @@ const MessProfile = () => {
               <div className="profileManageCenter">
                 <div className="messProfileHeaderMain">
                   <h4 className="mb-0 ">Mess Info.</h4>
-                  <MdEdit className="fs-5 ms-2" />
+                  {role === "manager" && <MdEdit className="fs-5 ms-2" />}
                 </div>
                 <div>
                   <div className="d-flex align-items-center mb-2 mt-3">
                     <img src="/images/home.png" alt="" className="messProfileIcon" />
-                    <h4 className="mb-0 messProfileName">Mess Name : {data?.name}</h4>
+                    <h4 className="mb-0 messProfileName">Mess Name : {messAccount?.mess?.name}</h4>
                   </div>
                   <div className="d-flex align-items-center mb-2">
                     <img src="/images/month.png" alt="" className="messProfileIcon" />
-                    <h5 className="mb-0 messProfileName">Active Month : January </h5>
+                    <h5 className="mb-0 messProfileName">
+                      Active Month : {messAccount?.month?.name}
+                    </h5>
                   </div>
                   <div className="d-flex align-items-center mb-2">
                     <img src="/images/group.png" alt="" className="messProfileIcon" />
-                    <h5 className="mb-0 messProfileName">Total Member : {members?.length}</h5>
+                    <h5 className="mb-0 messProfileName">
+                      Total Member : {messAccount?.mess?.members?.length}
+                    </h5>
                   </div>
                 </div>
               </div>
 
               <div className="profileInfoCenter">
                 <div className=" profileInfoTop">
-                  <MdArrowBackIosNew onClick={switchData} />
-                  <h4 className=""> {currentObject?.monthName}</h4>
-                  <MdArrowForwardIos onClick={switchData} />
+                  <MdArrowBackIosNew />
+                  <h4 className=""> {messAccount?.month?.name}</h4>
+                  <MdArrowForwardIos />
                 </div>
                 <div>
                   <div className="d-gridTwo">
                     <div>
                       <p className="mb-0"> Total Meal</p>
                     </div>
-                    <p className="mb-0"> :{currentObject?.totalMeal}</p>
+                    <p className="mb-0"> :{messAccount?.totalMeal}</p>
                   </div>
                   <div className="d-gridTwo">
                     <div>
                       <p className="mb-0"> Meal rate</p>
                     </div>
-                    <p className="mb-0"> :{currentObject?.totalMeal}</p>
+                    <p className="mb-0"> :{messAccount?.mealRate?.toFixed(2)}</p>
                   </div>
                   <div className="d-gridTwo">
                     <div>
                       <p className="mb-0"> Total Cost</p>
                     </div>
-                    <p className="mb-0"> :{currentObject?.totalCost}</p>
+                    <p className="mb-0"> :{messAccount?.totalCost?.toFixed(2)}</p>
                   </div>
                   <div className="d-gridTwo">
                     <div>
                       <p className="mb-0"> Shared Cost</p>
                     </div>
-                    <p className="mb-0"> :{currentObject?.sharedCost}</p>
+                    <p className="mb-0"> :{messAccount?.sharedCost?.toFixed(2)}</p>
                   </div>
                   <div className="d-gridTwo">
                     <div>
                       <p className="mb-0"> Individual Cost</p>
                     </div>
-                    <p className="mb-0"> :{currentObject?.individualCost}</p>
+                    <p className="mb-0"> :{messAccount?.totalIndividualCost?.toFixed(2)}</p>
                   </div>
                   <div className="d-gridTwo">
                     <div>
                       <p className="mb-0"> Deposit </p>
                     </div>
-                    <p className="mb-0"> :{currentObject?.deposit}</p>
+                    <p className="mb-0"> :{messAccount?.totalDeposit?.toFixed(2)}</p>
                   </div>
                   <div className="d-gridTwo">
                     <div>
                       <p className="mb-0"> Balance </p>
                     </div>
-                    <p className="mb-0"> :{currentObject?.balance}</p>
+                    <p className="mb-0"> :{messAccount?.balance?.toFixed(2)}</p>
                   </div>
                 </div>
               </div>
