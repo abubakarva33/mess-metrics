@@ -5,6 +5,7 @@ import { GiMoneyStack, GiPayMoney, GiTakeMyMoney } from "react-icons/gi";
 import { RiLuggageDepositLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { PiStrategy } from "react-icons/pi";
+import { MdOutlineCalendarMonth } from "react-icons/md";
 
 const MessDetails = ({ data }) => {
   const {
@@ -23,89 +24,83 @@ const MessDetails = ({ data }) => {
   return (
     <div>
       <div className="messDetails">
-        <div className="d-gridTwo">
+        
+        <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
-            <AiOutlineHome />
-            <p className="mb-0"> Mess Name </p>
-          </div>
-          <p className="mb-0">: {mess.name} </p>
-        </div>
-        <div className="d-gridTwo">
-          <div className="d-flex align-items-center">
-            <AiOutlineHome />
+            <MdOutlineCalendarMonth className="me-2 fs-5" />
             <p className="mb-0">Month </p>
           </div>
           <p className="mb-0">
             {`: ${month?.name} ${month?.year} ${month?.isActive ? "(Running)" : ""}`}
           </p>
         </div>
-        <div className="d-gridTwo">
+        <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
-            <BsPersonGear />
+            <BsPersonGear className="me-2 fs-5" />
             <p className="mb-0">Manager </p>
           </div>
           <p className="mb-0">: {mess.manager?.name} </p>
         </div>
-        <div className="d-gridTwo">
+        <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
-            <GiMoneyStack />
+            <GiMoneyStack className="me-2 fs-5" />
             <p className="mb-0">Mess Balance </p>
           </div>
           <p className="mb-0">: {balance} tk </p>
         </div>
-        <div className="d-gridTwo">
+        <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
-            <GiMoneyStack />
+            <GiMoneyStack className="me-2 fs-5" />
             <p className="mb-0">Total Cost </p>
           </div>
           <p className="mb-0">: {totalCost} tk </p>
         </div>
-        <div className="d-gridTwo">
+        <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
-            <RiLuggageDepositLine />
+            <RiLuggageDepositLine className="me-2 fs-5" />
             <p className="mb-0">Total Deposit </p>
           </div>
           <p className="mb-0">: {totalDeposit} tk </p>
         </div>
-        <div className="d-gridTwo">
+        <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
-            <GiPayMoney />
+            <GiPayMoney className="me-2 fs-5" />
             <p className="mb-0">Total Meal Cost </p>
           </div>
           <p className="mb-0">: {totalMealCost} tk </p>
         </div>
-        <div className="d-gridTwo">
+        <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
-            <IoFastFoodOutline />
+            <IoFastFoodOutline className="me-2 fs-5" />
             <p className="mb-0">Total Meal</p>
           </div>
           <p className="mb-0">: {totalMeal}</p>
         </div>
-        <div className="d-gridTwo">
+        <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
-            <PiStrategy />
+            <PiStrategy className="me-2 fs-5" />
             <p className="mb-0">Mess Meal Rate </p>
           </div>
 
           <p className="mb-0">: {mealRate.toFixed(2)} </p>
         </div>
-        <div className="d-gridTwo">
+        <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
-            <GiTakeMyMoney />
+            <GiTakeMyMoney className="me-2 fs-5" />
             <p className="mb-0">Total Individual Cost </p>
           </div>
           <p className="mb-0">: {totalIndividualCost} tk </p>
         </div>
-        <div className="d-gridTwo">
+        <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
-            <GiTakeMyMoney />
+            <GiTakeMyMoney className="me-2 fs-5" />
             <p className="mb-0">Total Shared Cost </p>
           </div>
           <p className="mb-0">: {sharedCost} tk </p>
         </div>
-        <div className="d-gridTwo">
+        <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
-            <GiTakeMyMoney />
+            <GiTakeMyMoney className="me-2 fs-5" />
             <p className="mb-0">Shared Cost Per Person </p>
           </div>
           <p className="mb-0">: {sharedCostPerPerson.toFixed(2)} </p>

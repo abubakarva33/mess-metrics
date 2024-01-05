@@ -19,12 +19,12 @@ import {
 } from "../../../redux/api/sampleApi/actionApi";
 import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
+import { AiOutlineHome } from "react-icons/ai";
 
 const Home = () => {
   const { data: usersAcc, isFetching } = useGetUserAccountQuery();
   const { data: profileData } = useGetUserProfileQuery();
-  const { data: messAccount, isFetching: messFetching } =
-    useGetMessAccountQuery();
+  const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
   const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery();
 
   if (isFetching || messFetching || bazarFetching) {
@@ -34,7 +34,11 @@ const Home = () => {
     <div className="mt-3 home-container">
       <Row className="gy-2">
         <Col sm={12} md={6}>
-          <h5 className="divider"> Mess Details</h5>
+          <div className="d-flexCenter divider mb-3">
+            <AiOutlineHome className="me-2 fs-3 mb-0" />
+            <h3 className="mb-0 "> {messAccount?.mess?.name}</h3>
+          </div>
+
           <MessDetails data={messAccount} />
         </Col>
         <Col sm={12} md={6}>
@@ -47,16 +51,11 @@ const Home = () => {
       </Row>
       <div>
         <h5 className="divider">Personal Details</h5>
-        <PersonalDetails
-          userId={profileData?.data?._id}
-          monthId={messAccount?.month?._id}
-        />
+        <PersonalDetails userId={profileData?.data?._id} monthId={messAccount?.month?._id} />
       </div>
       <div>
         <div className="d-flexCenter my-4 w-100">
-          <h5 className="divider">
-            Total Members : {messAccount?.mess?.members?.length || 0}
-          </h5>
+          <h5 className="divider">Total Members : {messAccount?.mess?.members?.length || 0}</h5>
         </div>
 
         <Row className="gy-2 gx-2 pb-5 mb-5">

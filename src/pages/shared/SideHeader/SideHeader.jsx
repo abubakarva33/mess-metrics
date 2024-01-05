@@ -76,11 +76,7 @@ const SideHeader = () => {
                   </div>
                 )}
               </div>
-            ) : (
-              <Link to="/request-meal" className="sideNavItem mb-2 py-2 addMoney">
-                <AiOutlinePhone className="fs-5 me-2" /> Request Meal
-              </Link>
-            )}
+            ) : undefined}
             {role === "manager" ? (
               <div>
                 <p
@@ -176,9 +172,14 @@ const SideHeader = () => {
                 )}
               </div>
             ) : (
-              <Link to="/switch-active-month" className="sideNavItem mb-2 py-2 addMoney">
-                <TbRefreshDot className="fs-5 me-2" /> Switch Active month
-              </Link>
+              <>
+                <Link to="/active-month-details" className="sideNavItem">
+                  <PiRadioactive className="fs-5 me-2" /> Active Month Details
+                </Link>
+                <Link to="/switch-active-month" className="sideNavItem mb-2 py-2 addMoney">
+                  <TbRefreshDot className="fs-5 me-2" /> Switch Active month
+                </Link>
+              </>
             )}
             {role === "manager" ? (
               <div>
