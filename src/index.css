@@ -1,13 +1,13 @@
 :root {
-  --bg-body: #18191a;
+  --bg-body: #11151c;
   --bg-primary: #242526;
   --bg-secondary: #303030;
   --bg-tertiary: #3a3b3c;
   --bg-quaternary: #232e3b;
   /* --bg-app-primary: #434343; */
   --bg-app-primary: #060811;
-  --bg-member: #202122;
-  --bg-personalDashboard: #202122;
+  /* --bg-member: #27244652; */
+  --bg-personalDashboard: #27244652;
   --text-primary: #e4e6eb;
   --text-secondary: #b0b3b8;
   --text-tertiary: #62636652;
@@ -17,7 +17,28 @@
   --icon-purple: #f3425f;
   --icon-blue: #0866ff;
   --icon-red: #e41e3f;
+
+  --card-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+/* :root {
+  --bg-body: #18191a;
+  --bg-primary: #242526;
+  --bg-secondary: #303030;
+  --bg-tertiary: #3a3b3c;
+  --bg-quaternary: #232e3b;
+  --bg-app-primary: #060811;
+  --bg-member: #202122;
+  --bg-personalDashboard: #202122;
+  --text-primary: #e4e6eb;
+  --text-secondary: #b0b3b8;
+  --text-tertiary: #62636652;
+  --border-tertiary: #565963;
+  --icon-primary: #e4e6eb;
+  --icon-purple: #f3425f;
+  --icon-blue: #0866ff;
+  --icon-red: #e41e3f;
+} */
 
 * {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;

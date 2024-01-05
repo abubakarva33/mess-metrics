@@ -4,14 +4,32 @@ import "./PersonalDetails.css";
 import { Col, Row } from "react-bootstrap";
 
 const PersonalDetails = ({ userId, monthId }) => {
-  const { data, isFetching } = useGetSingleUserAccountQuery({ userId, monthId });
+  const { data, isFetching } = useGetSingleUserAccountQuery({
+    userId,
+    monthId,
+  });
   if (isFetching) {
     return <SpinnerMain />;
   }
-  const { meal, totalCost, sharedCostPerPerson, individualCost, deposit, balance } = data;
+  const {
+    meal,
+    totalCost,
+    sharedCostPerPerson,
+    individualCost,
+    deposit,
+    balance,
+  } = data;
 
   return (
-    <Row className="personalDashboard mt-2 gx-2 gy-2" xs={2} md={2} sm={2} lg={2} xl={3} xxl={3}>
+    <Row
+      className="personalDashboard mt-2 g-3"
+      xs={2}
+      md={2}
+      sm={2}
+      lg={2}
+      xl={3}
+      xxl={3}
+    >
       <Col>
         <div className="profileSectionItem">
           <img src="/images/totalMeal.png" className="personalIcon" alt="" />
@@ -53,13 +71,19 @@ const PersonalDetails = ({ userId, monthId }) => {
           <img src="/images/sharedCost.png" className="personalIcon" alt="" />
           <div className="profileDashboardSubItem">
             <p className="mb-0 tagType">My Shared Cost </p>
-            <p className="mb-0 amountTag">{sharedCostPerPerson.toFixed(2)} tk </p>
+            <p className="mb-0 amountTag">
+              {sharedCostPerPerson.toFixed(2)} tk{" "}
+            </p>
           </div>
         </div>
       </Col>
       <Col>
         <div className="profileSectionItem">
-          <img src="/images/individualCost.png" className="personalIcon" alt="" />
+          <img
+            src="/images/individualCost.png"
+            className="personalIcon"
+            alt=""
+          />
           <div className="profileDashboardSubItem">
             <p className="mb-0 tagType">My Individual Cost </p>
             <p className="mb-0 amountTag">{individualCost.toFixed(2)} tk </p>

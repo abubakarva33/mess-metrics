@@ -24,7 +24,8 @@ import { AiOutlineHome } from "react-icons/ai";
 const Home = () => {
   const { data: usersAcc, isFetching } = useGetUserAccountQuery();
   const { data: profileData } = useGetUserProfileQuery();
-  const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
+  const { data: messAccount, isFetching: messFetching } =
+    useGetMessAccountQuery();
   const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery();
 
   if (isFetching || messFetching || bazarFetching) {
@@ -51,14 +52,19 @@ const Home = () => {
       </Row>
       <div>
         <h5 className="divider">Personal Details</h5>
-        <PersonalDetails userId={profileData?.data?._id} monthId={messAccount?.month?._id} />
+        <PersonalDetails
+          userId={profileData?.data?._id}
+          monthId={messAccount?.month?._id}
+        />
       </div>
       <div>
         <div className="d-flexCenter my-4 w-100">
-          <h5 className="divider">Total Members : {messAccount?.mess?.members?.length || 0}</h5>
+          <h5 className="divider">
+            Total Members : {messAccount?.mess?.members?.length || 0}
+          </h5>
         </div>
 
-        <Row className="gy-2 gx-2 pb-5 mb-5">
+        <Row className="g-3 pb-5 mb-5">
           {usersAcc?.data?.map((user) => (
             <AllMembers
               key={user._id}
