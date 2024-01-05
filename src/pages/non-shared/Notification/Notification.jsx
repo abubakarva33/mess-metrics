@@ -19,7 +19,10 @@ const Notification = () => {
       <div className="phoneBookContainerMainBg">
         <div className="phoneBookContainerMain">
           <div className="componentHeader">
-            <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+            <IoIosArrowBack
+              className="componentHeaderIcon"
+              onClick={() => navigate(-1)}
+            />
             <h3>NOTIFICATION </h3>
           </div>
         </div>
@@ -35,7 +38,7 @@ const Notification = () => {
                     onClick={() => setPage(1)}
                     style={{
                       cursor: "pointer",
-                      color: "#3bb54a",
+                      color: "#5d83ac",
                     }}
                   >
                     New
@@ -62,7 +65,11 @@ const Notification = () => {
                 <p className="text-center mt-3 fs-5"> No Notification Found</p>
               )}
               {data?.data?.length >= 10 && (
-                <Button className="w-100" onClick={() => setPage(page + 1)} type="primary">
+                <Button
+                  className="w-100"
+                  onClick={() => setPage(page + 1)}
+                  type="primary"
+                >
                   Load More
                 </Button>
               )}

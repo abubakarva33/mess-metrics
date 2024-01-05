@@ -35,10 +35,10 @@ const Home = () => {
     <div className="mt-3 home-container">
       <Row className="gy-2">
         <Col sm={12} md={6}>
-          <div className="d-flexCenter divider mb-3">
+          {/* <div className="d-flexCenter divider mb-3">
             <AiOutlineHome className="me-2 fs-3 mb-0" />
             <h3 className="mb-0 "> {messAccount?.mess?.name}</h3>
-          </div>
+          </div> */}
 
           <MessDetails data={messAccount} />
         </Col>
@@ -51,7 +51,9 @@ const Home = () => {
         </Col>
       </Row>
       <div>
-        <h5 className="divider">Personal Details</h5>
+        <h5 className="divider">
+          <span className="px-2">Personal Details</span>{" "}
+        </h5>
         <PersonalDetails
           userId={profileData?.data?._id}
           monthId={messAccount?.month?._id}
@@ -60,7 +62,9 @@ const Home = () => {
       <div>
         <div className="d-flexCenter my-4 w-100">
           <h5 className="divider">
-            Total Members : {messAccount?.mess?.members?.length || 0}
+            <span className="px-2">
+              Total Members : {messAccount?.mess?.members?.length || 0}{" "}
+            </span>
           </h5>
         </div>
 

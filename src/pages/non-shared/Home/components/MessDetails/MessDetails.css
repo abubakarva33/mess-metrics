@@ -1,6 +1,19 @@
-.messDetails{
+.messDetails {
+  padding: 20px 10px;
+  border-radius: 10px;
+  /* color: aquamarine; */
+}
+
+.messDetails h4 {
+  color: var(--text-secondary);
+  padding-bottom: 6px;
+  text-shadow: 2px 2px 5px #00000075;
+  font-weight: 900;
+  font-size: 26px;
+}
+
+/* .messDetails{
     padding: 10px;
     border: 1px solid var(--text-tertiary);
     border-radius: 10px;
-    /* color: aquamarine; */
-}
+} */

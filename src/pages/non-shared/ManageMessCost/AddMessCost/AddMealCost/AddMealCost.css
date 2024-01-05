@@ -33,8 +33,10 @@
 }
 
 .sectionShadow {
-  background: linear-gradient(145deg, #161717, #1a1b1c);
-  box-shadow: 5px 5px 9px #141516, -5px -5px 9px #1c1d1e;
+  /* background: linear-gradient(145deg, #161717, #1a1b1c);
+  box-shadow: 5px 5px 9px #141516, -5px -5px 9px #1c1d1e; */
+  box-shadow: var(--card-shadow);
+  background: var(--bg-personalDashboard);
 }
 .ant-select-selector {
   min-height: 45px !important;
@@ -76,7 +78,7 @@
   color: var(--bg-body);
 }
 .react-datepicker__input-container input {
-  background-color: #3bb54a !important;
+  background-color: #5d83ac !important;
   min-height: 45px;
   font-size: 20px !important;
   text-align: center !important;

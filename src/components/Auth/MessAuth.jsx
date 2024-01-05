@@ -9,8 +9,7 @@ const MessAuth = ({ children }) => {
   const { isLogin } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const profile = useGetUserProfileQuery({});
-  const { data, status, refetch, error } = profile;
+  const { data, status, refetch, error } = useGetUserProfileQuery({});
 
   useEffect(() => {
     if (isLogin && status === "rejected" && error?.status === 401) {
