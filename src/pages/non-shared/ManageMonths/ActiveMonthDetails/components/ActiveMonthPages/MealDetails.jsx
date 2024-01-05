@@ -4,53 +4,75 @@ import { useGetAllMealQuery } from "../../../../../../redux/api/sampleApi/action
 import { Pagination, Space, Spin } from "antd";
 import { Link } from "react-router-dom";
 import SpinnerMain from "../../../../../../components/Spinner/SpinnerMain";
+import { useEffect } from "react";
+import { useGetUserProfileQuery } from "../../../../../../redux/api/sampleApi/userApi";
+import userRole from "../../../../../../utils/userRole";
+
+const initColumn = [
+  {
+    title: "No",
+    render: (_, record, index) => index + 1,
+  },
+  {
+    title: "Date",
+    dataIndex: "date",
+    key: "date",
+  },
+  {
+    title: " Member Name",
+    render: (_, record) => record?.user?.name,
+    key: "name",
+  },
+  {
+    title: "Meal",
+    dataIndex: "meal",
+    key: "meal",
+  },
+];
+
+const actionColumn = {
+  title: "Action",
+  width: 80,
+  key: "action",
+  render: (_, record) => (
+    <Space size="middle">
+      <Link>
+        <img
+          src="/images/pen.png"
+          alt="edit"
+          style={{ height: "30px", width: "30px" }}
+        />
+      </Link>
+    </Space>
+  ),
+};
 
 const MealDetails = () => {
+  const { data: profile, status } = useGetUserProfileQuery({});
   const [filter, setFilter] = useState({ page: 1 });
   const { data, isFetching } = useGetAllMealQuery(filter);
 
+  const [column, setColumn] = useState(initColumn);
+
+  useEffect(() => {
+    if (status === "fulfilled" && profile?.data?.role === userRole.manager) {
+      setColumn([...initColumn, actionColumn]);
+    } else {
+      setColumn(initColumn);
+    }
+  }, []);
+
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
-
-  const column = [
-    {
-      title: "No",
-      render: (_, record, index) => (data?.meta?.page - 1) * data?.meta?.limit + index + 1,
-    },
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: " Member Name",
-      render: (_, record) => record.user.name,
-      key: "name",
-    },
-
-    {
-      title: "Meal",
-      dataIndex: "meal",
-      key: "meal",
-    },
-    {
-      title: "Action",
-      width: 80,
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <Link>
-            <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
-          </Link>
-        </Space>
-      ),
-    },
-  ];
 
   return (
     <Spin spinning={isFetching}>
       <div className="activeMonthLg">
         {data?.success && (
-          <TableTemplate data={data} columns={column} onPageChange={onPageChange} />
+          <TableTemplate
+            data={data}
+            columns={column}
+            onPageChange={onPageChange}
+          />
         )}
       </div>
       <div>
@@ -65,7 +87,10 @@ const MealDetails = () => {
                     </div>
                     <div>
                       <p className="mb-0">
-                        Name: <span style={{ fontWeight: "700" }}>{data?.user?.name}</span>
+                        Name:{" "}
+                        <span style={{ fontWeight: "700" }}>
+                          {data?.user?.name}
+                        </span>
                       </p>
 
                       <p className="mb-0">Meal: {data?.meal}</p>
@@ -73,7 +98,11 @@ const MealDetails = () => {
                     </div>
                   </div>
                   <Link to={`/update-meal?date=${data?.date}`}>
-                    <img src="/images/pen.png" alt="" style={{ height: "30px", width: "30px" }} />
+                    <img
+                      src="/images/pen.png"
+                      alt=""
+                      style={{ height: "30px", width: "30px" }}
+                    />
                   </Link>
                 </div>
               ))}
