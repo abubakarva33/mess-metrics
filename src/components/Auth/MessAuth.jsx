@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useGetUserProfileQuery } from "../../redux/api/sampleApi/userApi";
-import Spinner from "../Spinner/Spinner";
 import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
+import { auth } from "../../redux/features/UserSlice/UserSlice";
 
 const MessAuth = ({ children }) => {
   const { isLogin } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const profile = useGetUserProfileQuery({});
   const { data, status, refetch, error } = profile;
@@ -14,6 +15,12 @@ const MessAuth = ({ children }) => {
   useEffect(() => {
     if (isLogin && status === "rejected" && error?.status === 401) {
       refetch();
+    }
+    if (
+      (isLogin && status === "rejected" && error?.status === 400) ||
+      !isLogin
+    ) {
+      dispatch(auth({ token: "", role: "" }));
     }
   }, [status, isLogin]);
 
