@@ -1,6 +1,7 @@
 .profileManageCenter {
   height: 48%;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-personalDashboard);
+  box-shadow: var(--card-shadow);
   border-radius: 10px;
   margin-bottom: 20px;
   padding: 20px 25px;
@@ -8,12 +9,14 @@
 
 .profileInfoCenter {
   height: 48%;
-  background-color: var(--bg-primary);
+  background-color: var(--bg-personalDashboard);
+  box-shadow: var(--card-shadow);
   border-radius: 10px;
   padding: 20px 25px;
 }
 .memberProfileCenter {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-personalDashboard);
+  box-shadow: var(--card-shadow);
   padding: 30px;
   border-radius: 10px;
 }

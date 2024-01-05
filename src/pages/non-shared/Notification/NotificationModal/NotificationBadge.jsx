@@ -10,7 +10,7 @@ const NotificationBadge = ({ isModalOpen, count }) => {
           size="large"
           icon={<BellOutlined />}
           style={{ cursor: "pointer", userSelect: "none" }}
-          className={isModalOpen ? "bg-primary" : ""}
+          className={isModalOpen ? "bg-primary" : "modalOpenIcon"}
         />
       </Badge>
     </Space>

@@ -21,6 +21,10 @@
   max-width: 350px;
   max-height: 500px;
 }
+.modalOpenIcon {
+  background-color: #2D363D59;
+  box-shadow: var(--card-shadow);
+}
 
 .dateImgNotification {
   background-color: #5d83ac;

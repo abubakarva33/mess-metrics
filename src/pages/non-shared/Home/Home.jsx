@@ -24,8 +24,7 @@ import { AiOutlineHome } from "react-icons/ai";
 const Home = () => {
   const { data: usersAcc, isFetching } = useGetUserAccountQuery();
   const { data: profileData } = useGetUserProfileQuery();
-  const { data: messAccount, isFetching: messFetching } =
-    useGetMessAccountQuery();
+  const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
   const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery();
 
   if (isFetching || messFetching || bazarFetching) {
@@ -35,12 +34,7 @@ const Home = () => {
     <div className="mt-3 home-container">
       <Row className="gy-2">
         <Col sm={12} md={6}>
-          {/* <div className="d-flexCenter divider mb-3">
-            <AiOutlineHome className="me-2 fs-3 mb-0" />
-            <h3 className="mb-0 "> {messAccount?.mess?.name}</h3>
-          </div> */}
-
-          <MessDetails data={messAccount} />
+          {messAccount && <MessDetails data={messAccount} />}
         </Col>
         <Col sm={12} md={6}>
           <div className="overview">
@@ -54,17 +48,12 @@ const Home = () => {
         <h5 className="divider">
           <span className="px-2">Personal Details</span>{" "}
         </h5>
-        <PersonalDetails
-          userId={profileData?.data?._id}
-          monthId={messAccount?.month?._id}
-        />
+        <PersonalDetails userId={profileData?.data?._id} monthId={messAccount?.month?._id} />
       </div>
       <div>
         <div className="d-flexCenter my-4 w-100">
           <h5 className="divider">
-            <span className="px-2">
-              Total Members : {messAccount?.mess?.members?.length || 0}{" "}
-            </span>
+            <span className="px-2">Total Members : {messAccount?.mess?.members?.length || 0} </span>
           </h5>
         </div>
 

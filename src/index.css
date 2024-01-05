@@ -33,6 +33,7 @@
   --icon-red: #e41e3f;
 
   --card-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  --gradient-primary: linear-gradient(90deg, #2d587e, #519ada);
 }
 
 /* :root {

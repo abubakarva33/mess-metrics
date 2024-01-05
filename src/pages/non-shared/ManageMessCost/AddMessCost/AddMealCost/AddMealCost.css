@@ -78,7 +78,7 @@
   color: var(--bg-body);
 }
 .react-datepicker__input-container input {
-  background-color: #5d83ac !important;
+  background: var(--gradient-primary) !important;
   min-height: 45px;
   font-size: 20px !important;
   text-align: center !important;
@@ -87,6 +87,7 @@
   border: none;
   outline: none;
   border-radius: 10px;
+  box-shadow: var(--card-shadow) !important;
 }
 .react-datepicker-wrapper {
   width: 100%;

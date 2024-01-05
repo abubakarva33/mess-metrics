@@ -1,7 +1,8 @@
 .messDetails {
   padding: 20px 10px;
   border-radius: 10px;
-  /* color: aquamarine; */
+  background-color: var(--bg-personalDashboard);
+  box-shadow: var(--card-shadow);
 }
 
 .messDetails h4 {
@@ -11,9 +12,3 @@
   font-weight: 900;
   font-size: 26px;
 }
-
-/* .messDetails{
-    padding: 10px;
-    border: 1px solid var(--text-tertiary);
-    border-radius: 10px;
-} */

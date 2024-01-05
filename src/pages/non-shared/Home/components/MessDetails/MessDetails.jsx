@@ -24,7 +24,7 @@ const MessDetails = ({ data }) => {
   return (
     <div>
       <div className="messDetails ">
-        <h4> {mess.name} </h4>
+        <h4> {mess?.name} </h4>
 
         <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
@@ -33,9 +33,7 @@ const MessDetails = ({ data }) => {
           </div>
           <p className="mb-0">
             <span className="d-inline-block pe-2"> : </span>
-            {` ${month?.name} ${month?.year} ${
-              month?.isActive ? "(Running)" : ""
-            }`}
+            {` ${month?.name} ${month?.year} ${month?.isActive ? "(Running)" : ""}`}
           </p>
         </div>
         <div className="d-gridTwo mb-1">
@@ -44,8 +42,7 @@ const MessDetails = ({ data }) => {
             <p className="mb-0">Manager </p>
           </div>
           <p className="mb-0">
-            <span className="d-inline-block pe-2"> : </span>{" "}
-            {mess.manager?.name}{" "}
+            <span className="d-inline-block pe-2"> : </span> {mess?.manager?.name}{" "}
           </p>
         </div>
         <div className="d-gridTwo mb-1">
@@ -100,8 +97,7 @@ const MessDetails = ({ data }) => {
           </div>
 
           <p className="mb-0">
-            <span className="d-inline-block pe-2"> : </span>{" "}
-            {mealRate.toFixed(2)}{" "}
+            <span className="d-inline-block pe-2"> : </span> {mealRate.toFixed(2)}{" "}
           </p>
         </div>
         <div className="d-gridTwo mb-1">
@@ -110,8 +106,7 @@ const MessDetails = ({ data }) => {
             <p className="mb-0">Total Individual Cost </p>
           </div>
           <p className="mb-0">
-            <span className="d-inline-block pe-2"> : </span>{" "}
-            {totalIndividualCost} tk{" "}
+            <span className="d-inline-block pe-2"> : </span> {totalIndividualCost} tk{" "}
           </p>
         </div>
         <div className="d-gridTwo mb-1">
@@ -129,8 +124,7 @@ const MessDetails = ({ data }) => {
             <p className="mb-0">Shared Cost Per Person </p>
           </div>
           <p className="mb-0">
-            <span className="d-inline-block pe-2"> : </span>{" "}
-            {sharedCostPerPerson.toFixed(2)}{" "}
+            <span className="d-inline-block pe-2"> : </span> {sharedCostPerPerson.toFixed(2)}{" "}
           </p>
         </div>
       </div>
