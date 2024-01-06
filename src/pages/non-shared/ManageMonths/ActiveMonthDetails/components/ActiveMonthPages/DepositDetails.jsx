@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import {
   useGetAllDepositQuery,
@@ -9,51 +9,66 @@ import { Space, Spin } from "antd";
 import { Link } from "react-router-dom";
 import UpdateModal from "./UpdateModal";
 import ActiveMonthPageTemplateSm from "./ActiveMonthPageTemplateSm";
+import { useSelector } from "react-redux";
+import { useGetActiveMonthQuery } from "../../../../../../redux/api/sampleApi/monthApi";
 
+const initColumn = [
+  {
+    title: "Date",
+    dataIndex: "date",
+    key: "date",
+  },
+  {
+    title: " Member Name",
+    key: "name",
+    render: (_, record) => record.user.name,
+  },
+
+  {
+    title: "Amount",
+    dataIndex: "amount",
+    key: "amount",
+  },
+];
+
+const actionColumn = {
+  title: "Action",
+  width: 80,
+  key: "action",
+  render: (_, record) => (
+    <Space size="middle">
+      <div onClick={() => (setItemData(record), setIsModalOpen(true))}>
+        <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
+      </div>
+    </Space>
+  ),
+};
 const DepositDetails = () => {
   const [filter, setFilter] = useState({});
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const { data: activeMonthData } = useGetActiveMonthQuery();
   const { data, isFetching } = useGetAllDepositQuery(filter);
   const [update, { status }] = useUpdateDepositMutation();
 
+  const { role } = useSelector((state) => state.user);
+  const [column, setColumn] = useState(initColumn);
+
+  console.log({ x: activeMonthData?._id, data: data });
+
+  const compareMonth = data?.data?.filter((item) => item?.month === activeMonthData?._id);
+
+  console.log(compareMonth);
+
+  useEffect(() => {
+    if (role === "manager" && compareMonth?.length > 0) {
+      setColumn([...initColumn, actionColumn]);
+    } else {
+      setColumn(initColumn);
+    }
+  }, [compareMonth, activeMonthData]);
+
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
-
-  const column = [
-    {
-      title: "No",
-      render: (_, record, index) => (data?.meta?.page - 1) * data?.meta?.limit + index + 1,
-    },
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: " Member Name",
-      key: "name",
-      render: (_, record) => record.user.name,
-    },
-
-    {
-      title: "Amount",
-      dataIndex: "amount",
-      key: "amount",
-    },
-    {
-      title: "Action",
-      width: 80,
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <div onClick={() => (setItemData(record), setIsModalOpen(true))}>
-            <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
-          </div>
-        </Space>
-      ),
-    },
-  ];
 
   const modalProps = {
     data: itemData,
