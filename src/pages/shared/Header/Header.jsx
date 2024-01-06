@@ -14,6 +14,9 @@ import {
 import { Avatar, Badge, Drawer, Dropdown, Space } from "antd";
 import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
+import { TiInfoLargeOutline } from "react-icons/ti";
+import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
+
 import {
   MdAddchart,
   MdOutlineCalendarMonth,
@@ -21,7 +24,12 @@ import {
   MdOutlinePeopleAlt,
   MdSystemUpdateAlt,
 } from "react-icons/md";
-import { BsDatabaseAdd, BsPeople, BsPersonUp } from "react-icons/bs";
+import {
+  BsDatabaseAdd,
+  BsInfoCircleFill,
+  BsPeople,
+  BsPersonUp,
+} from "react-icons/bs";
 import { BiBuildingHouse, BiMoneyWithdraw } from "react-icons/bi";
 import { GiPipeOrgan, GiReceiveMoney } from "react-icons/gi";
 import { PiRadioactive } from "react-icons/pi";
@@ -36,6 +44,7 @@ import NotificationModal from "../../non-shared/Notification/NotificationModal/N
 import { useGetAllNotificationQuery } from "../../../redux/api/sampleApi/actionApi";
 import NotificationBadge from "../../non-shared/Notification/NotificationModal/NotificationBadge";
 import Notification from "../../non-shared/Notification/Notification";
+import { IoMdHelp } from "react-icons/io";
 const Header = () => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -64,7 +73,7 @@ const Header = () => {
 
   const items = [
     {
-      label: <Link to="/my-profile">Profile</Link>,
+      label: <Link to="/my-profile">{data?.data?.name || "Profile"}</Link>,
       key: "1",
       icon: <UserOutlined />,
     },
@@ -87,13 +96,37 @@ const Header = () => {
         {role !== "admin" && role !== "superAdmin" ? (
           <div className="d-flexCenter">
             <Link to="/aboutUs" className="navItem">
-              About us
+              <Space size="middle">
+                <Avatar
+                  shape="round"
+                  size="large"
+                  icon={<TiInfoLargeOutline />}
+                  style={{ cursor: "pointer", userSelect: "none" }}
+                  className="bg-transparent"
+                />
+              </Space>
             </Link>
             <Link to="/helps" className="navItem">
-              Help
+              <Space size="middle">
+                <Avatar
+                  shape="round"
+                  size="large"
+                  icon={<IoMdHelp />}
+                  style={{ cursor: "pointer", userSelect: "none" }}
+                  className="bg-transparent"
+                />
+              </Space>
             </Link>
             <Link to="/faq" className="navItem">
-              FAQ
+              <Space size="middle">
+                <Avatar
+                  shape="round"
+                  size="large"
+                  icon={<HiOutlineChatBubbleLeftRight />}
+                  style={{ cursor: "pointer", userSelect: "none" }}
+                  className="bg-transparent"
+                />
+              </Space>
             </Link>
             <div className="navItem me-2" onClick={showModal}>
               <NotificationBadge
@@ -112,10 +145,10 @@ const Header = () => {
                       className=" me-1"
                       style={{ height: 40, width: 40, borderRadius: 50 }}
                     />
-                    <span className="text-capitalize" style={{ fontSize: 18 }}>
+                    {/* <span className="text-capitalize" style={{ fontSize: 18 }}>
                       {data?.data?.name}
-                    </span>
-                    <DownOutlined />
+                    </span> */}
+                    {/* <DownOutlined /> */}
                   </Space>
                 </div>
               </Dropdown>

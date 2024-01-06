@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import NotificationModalItem from "./NotificationModalItem";
 import { useUpdateAllNotificationMutation } from "../../../../redux/api/sampleApi/actionApi";
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
+import { FaRegEnvelope, FaRegEnvelopeOpen } from "react-icons/fa";
+
 const NotificationModal = ({
   isModalOpen,
   handleOk,
@@ -14,6 +16,7 @@ const NotificationModal = ({
   page,
   isFetching,
 }) => {
+  console.log({ data: data?.unread });
   const [isLoadClicked, setIsLoadClicked] = useState(false);
   const [updateNotification] = useUpdateAllNotificationMutation();
   return (
@@ -24,12 +27,12 @@ const NotificationModal = ({
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
-        className="notificationModal"
+        className="notificationModal py-3"
       >
         {data?.data?.length !== 0 && (
           <div className="d-flex align-items-center justify-content-between">
             <h6
-              className="ms-2"
+              className="ms-2 mb-0"
               onClick={() => setPage(1)}
               style={{
                 cursor: "pointer",
@@ -38,7 +41,22 @@ const NotificationModal = ({
             >
               Refresh
             </h6>
-            <h6
+
+            {data?.unread > 0 ? (
+              <h5
+                onClick={() => updateNotification()}
+                style={{ cursor: "pointer" }}
+                className="mb-0"
+              >
+                <FaRegEnvelope />
+              </h5>
+            ) : (
+              <h5 className="mb-0">
+                <FaRegEnvelopeOpen />
+              </h5>
+            )}
+
+            {/* <h6
               onClick={() => updateNotification()}
               style={{
                 cursor: "pointer",
@@ -46,9 +64,10 @@ const NotificationModal = ({
               }}
             >
               Mark all as read
-            </h6>
+            </h6> */}
           </div>
         )}
+        <hr />
         {isFetching && isLoadClicked ? (
           <Spin spinning={isFetching}>
             {data?.data?.map((item, ind) => (

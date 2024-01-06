@@ -2,6 +2,7 @@
   padding: 10px 10px 20px;
   max-height: 85vh;
   overflow-y: auto;
+  background-color: var(--bg-secondary);
 }
 .modalItem {
   display: flex;
@@ -9,10 +10,11 @@
   justify-content: space-between;
 }
 .modalItem:hover {
-  background: var(--bg-tertiary);
+  background: var(--bg-secondary);
 }
 .notificationModal > .ant-modal-content > .ant-modal-header .ant-modal-title {
   font-size: 22px;
+  background-color: var(--bg-secondary);
 }
 .notificationModal {
   position: absolute;
@@ -22,7 +24,7 @@
   max-height: 500px;
 }
 .modalOpenIcon {
-  background-color: #2D363D59;
+  background-color: #2d363d59;
   box-shadow: var(--card-shadow);
 }
 

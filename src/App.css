@@ -76,3 +76,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.bg_tertiary{
+  background-color: var(--bg-tertiary) !important;
+}
