@@ -44,7 +44,7 @@ const Home = () => {
           <div>{lastBazar && <BazarList data={lastBazar} />}</div>
         </Col>
       </Row>
-      <div>
+      <div className="mt-4">
         <h5 className="divider">
           <span className="px-2">Personal Details</span>{" "}
         </h5>

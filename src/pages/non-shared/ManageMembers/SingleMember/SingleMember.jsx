@@ -94,7 +94,7 @@ const SingleMember = () => {
   };
 
   return (
-    <div className="d-flexCenter" style={{minHeight: "84vh"}}>
+    <div className="d-flexCenter" style={{ minHeight: "84vh" }}>
       <Container fluid className="my-4 singleMemberSection">
         <Row className="h-100">
           <Col xs={12} sm={6} md={6} lg={6} xl={5} xxl={5}>
@@ -106,7 +106,7 @@ const SingleMember = () => {
                   <h6> ( {role} )</h6>
                 </div>
               </div>
-              <div className="">
+              <div style={{ marginBottom: 11 }}>
                 <div>
                   <div className="d-flex align-items-center justify-content-between">
                     <p className="memberProfileNameText"> {email}</p>

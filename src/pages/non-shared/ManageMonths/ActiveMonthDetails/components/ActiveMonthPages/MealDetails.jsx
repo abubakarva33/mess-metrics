@@ -37,11 +37,7 @@ const actionColumn = {
   render: (_, record) => (
     <Space size="middle">
       <Link>
-        <img
-          src="/images/pen.png"
-          alt="edit"
-          style={{ height: "30px", width: "30px" }}
-        />
+        <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
       </Link>
     </Space>
   ),
@@ -68,11 +64,7 @@ const MealDetails = () => {
     <Spin spinning={isFetching}>
       <div className="activeMonthLg">
         {data?.success && (
-          <TableTemplate
-            data={data}
-            columns={column}
-            onPageChange={onPageChange}
-          />
+          <TableTemplate data={data} columns={column} onPageChange={onPageChange} />
         )}
       </div>
       <div>
@@ -87,10 +79,7 @@ const MealDetails = () => {
                     </div>
                     <div>
                       <p className="mb-0">
-                        Name:{" "}
-                        <span style={{ fontWeight: "700" }}>
-                          {data?.user?.name}
-                        </span>
+                        Name: <span style={{ fontWeight: "700" }}>{data?.user?.name}</span>
                       </p>
 
                       <p className="mb-0">Meal: {data?.meal}</p>
@@ -98,11 +87,7 @@ const MealDetails = () => {
                     </div>
                   </div>
                   <Link to={`/update-meal?date=${data?.date}`}>
-                    <img
-                      src="/images/pen.png"
-                      alt=""
-                      style={{ height: "30px", width: "30px" }}
-                    />
+                    <img src="/images/pen.png" alt="" style={{ height: "30px", width: "30px" }} />
                   </Link>
                 </div>
               ))}

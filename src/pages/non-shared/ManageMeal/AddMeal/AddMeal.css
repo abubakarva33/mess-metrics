@@ -13,7 +13,10 @@
   border-radius: 5px;
   margin: 0 7px;
 }
-
+.ant-select-dropdown{
+  background-color: #1A232D;
+  box-shadow: var(--card-shadow);
+}
 .mealItemPhoto {
   width: 40px;
   margin-right: 10px;

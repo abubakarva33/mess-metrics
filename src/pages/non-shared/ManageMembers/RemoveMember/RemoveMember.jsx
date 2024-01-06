@@ -146,7 +146,7 @@ const RemoveMember = () => {
                   </Form.Item>
 
                   <div className="d-flex w-100">
-                    <Button htmlType="submit" className="w-100">
+                    <Button type="primary" htmlType="submit" className="w-100">
                       Remove Member
                     </Button>
                   </div>

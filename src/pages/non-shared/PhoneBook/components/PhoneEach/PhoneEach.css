@@ -5,7 +5,8 @@
   margin-bottom: 15px;
   padding: 5px 10px;
   border-radius: 10px;
-  background-color: var(--bg-secondary);
+  background-color: #1A232D;
+  box-shadow: var(--card-shadow);
 }
 .phoneBtn {
   background-color: #fee21f;

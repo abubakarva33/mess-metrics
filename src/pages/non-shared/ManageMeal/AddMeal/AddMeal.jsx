@@ -199,7 +199,12 @@ const AddMeal = () => {
               </div>
             ))}
           </div>
-          <Button type="primary" className="w-100" onClick={onFinish}>
+          <Button
+            type="primary"
+            className="w-100"
+            onClick={onFinish}
+            style={{ minHeight: 40, fontSize: 18 }}
+          >
             Submit
           </Button>
         </div>
@@ -320,7 +325,12 @@ const AddMeal = () => {
                     </div>
                   ))}
                 </div>
-                <Button type="primary" className="w-100" onClick={onFinish}>
+                <Button
+                  type="primary"
+                  className="w-100"
+                  onClick={onFinish}
+                  style={{ minHeight: 40, fontSize: 18 }}
+                >
                   Submit
                 </Button>
               </div>
