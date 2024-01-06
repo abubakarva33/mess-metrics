@@ -41,7 +41,7 @@ const Home = () => {
             <h5 className="px-2 pt-3"> Mess Overview</h5>
             <Chart />
           </div>
-          <div>{lastBazar && <BazarList data={lastBazar} />}</div>
+          <div>{<BazarList data={lastBazar} />}</div>
         </Col>
       </Row>
       <div className="mt-4">
@@ -52,12 +52,12 @@ const Home = () => {
       </div>
       <div>
         <div className="d-flexCenter my-4 w-100">
-          <h5 className="divider">
+          <h5 className="divider mb-0">
             <span className="px-2">Total Members : {messAccount?.mess?.members?.length || 0} </span>
           </h5>
         </div>
 
-        <Row className="g-3 pb-5 mb-5">
+        <Row className="g-3 mb-5">
           {usersAcc?.data?.map((user) => (
             <AllMembers
               key={user._id}

@@ -1,9 +1,7 @@
 .bazarSection{
-    /* border: 1px solid var(--text-secondary); */
     padding: 10px;
     border-radius: 8px;
     background-color: var(--bg-personalDashboard);
-    margin-bottom: 20px;
 }
 .bazarTop{
     margin-bottom: 5px;

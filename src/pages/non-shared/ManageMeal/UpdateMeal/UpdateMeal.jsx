@@ -120,48 +120,55 @@ const UpdateMeal = () => {
             />
           </div>
 
-          <div>
-            {meal?.map((m, ind) => (
-              <div className="phoneItem " key={ind}>
-                <div className="phoneItemLeft">
-                  <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
-                  <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
-                </div>
-                <div className="d-flex">
-                  {m.isClicked && (
-                    <button
-                      disabled={m?.meal <= 0}
-                      className="addMealRegulationIcon"
-                      onClick={() => handlerMeal(m._id, -0.5)}
-                    >
-                      <HiMinusSm className="fs-4" />
-                    </button>
-                  )}
-
-                  <div className="mealCount">
-                    <p className="mb-0">{m?.meal}</p>
+          {mealData?.length === 0 ? (
+            <div className="d-flexCenter flex-column my-3">
+              <img src="/images/inbox.png" alt="" />
+              <p className="text-center fs-5 mt-3">No meal data available.</p>
+            </div>
+          ) : (
+            <div>
+              {meal?.map((m, ind) => (
+                <div className="phoneItem " key={ind}>
+                  <div className="phoneItemLeft">
+                    <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
+                    <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
                   </div>
-                  {m.isClicked && (
-                    <button
-                      className="addMealRegulationIcon"
-                      onClick={() => handlerMeal(m._id, 0.5)}
-                    >
-                      <MdOutlineAdd className="fs-4" />
-                    </button>
-                  )}
-                  {!m?.isClicked && (
-                    <div>
-                      <MdEdit
-                        className="fs-4 ms-1"
-                        onClick={() => handleClick(m._id)}
-                        style={{ color: "#5d83ac" }}
-                      />
+                  <div className="d-flex">
+                    {m.isClicked && (
+                      <button
+                        disabled={m?.meal <= 0}
+                        className="addMealRegulationIcon"
+                        onClick={() => handlerMeal(m._id, -0.5)}
+                      >
+                        <HiMinusSm className="fs-4" />
+                      </button>
+                    )}
+
+                    <div className="mealCount">
+                      <p className="mb-0">{m?.meal}</p>
                     </div>
-                  )}
+                    {m.isClicked && (
+                      <button
+                        className="addMealRegulationIcon"
+                        onClick={() => handlerMeal(m._id, 0.5)}
+                      >
+                        <MdOutlineAdd className="fs-4" />
+                      </button>
+                    )}
+                    {!m?.isClicked && (
+                      <div>
+                        <MdEdit
+                          className="fs-4 ms-1"
+                          onClick={() => handleClick(m._id)}
+                          style={{ color: "#5d83ac" }}
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
           <Button
             type="primary"
             className="w-100"
@@ -180,13 +187,13 @@ const UpdateMeal = () => {
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
               <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-              <h3>ADD MEAL </h3>
+              <h3>UPDATE MEAL </h3>
             </div>
           </div>
         </div>
         <div className="phoneBookContainerItemBg">
-          <div className="phoneBookContainerItem ">
-            <div className="pt-5 pb-3 px-3">
+          <div className="phoneBookContainerItem smDeviceAlign">
+            <div className="pt-5 pb-3 px-3 m-auto w-100">
               <div className="mx-auto" style={{ maxWidth: "500px" }}>
                 <div className="mealDatePicker mb-4">
                   <ReactDatePicker
@@ -199,48 +206,56 @@ const UpdateMeal = () => {
                   />
                 </div>
 
-                <div>
-                  {meal?.map((m, ind) => (
-                    <div className="phoneItem " key={ind}>
-                      <div className="phoneItemLeft">
-                        <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
-                        <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
-                      </div>
-                      <div className="d-flex">
-                        {m.isClicked && (
-                          <button
-                            disabled={m?.meal <= 0}
-                            className="addMealRegulationIcon"
-                            onClick={() => handlerMeal(m._id, -0.5)}
-                          >
-                            <HiMinusSm className="fs-4" />
-                          </button>
-                        )}
-
-                        <div className="mealCount">
-                          <p className="mb-0">{m?.meal}</p>
+                {mealData?.length === 0 ? (
+                  <div className="d-flexCenter flex-column my-3">
+                    <img src="/images/inbox.png" alt="" />
+                    <p className="text-center fs-5 mt-3">No meal data available.</p>
+                  </div>
+                ) : (
+                  <div>
+                    {meal?.map((m, ind) => (
+                      <div className="phoneItem " key={ind}>
+                        <div className="phoneItemLeft">
+                          <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
+                          <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
                         </div>
-                        {m.isClicked && (
-                          <button
-                            className="addMealRegulationIcon"
-                            onClick={() => handlerMeal(m._id, 0.5)}
-                          >
-                            <MdOutlineAdd className="fs-4" />
-                          </button>
-                        )}
-                        {!m?.isClicked && (
-                          <div>
-                            <MdEdit
-                              className="fs-4 ms-1"
-                              onClick={() => handleClick(m._id)}
-                              style={{ color: "#5d83ac" }}
-                            />
+                        <div className="d-flex">
+                          {m.isClicked && (
+                            <button
+                              disabled={m?.meal <= 0}
+                              className="addMealRegulationIcon"
+                              onClick={() => handlerMeal(m._id, -0.5)}
+                            >
+                              <HiMinusSm className="fs-4" />
+                            </button>
+                          )}
+
+                          <div className="mealCount">
+                            <p className="mb-0">{m?.meal}</p>
                           </div>
-                        )}
+                          {m.isClicked && (
+                            <button
+                              className="addMealRegulationIcon"
+                              onClick={() => handlerMeal(m._id, 0.5)}
+                            >
+                              <MdOutlineAdd className="fs-4" />
+                            </button>
+                          )}
+                          {!m?.isClicked && (
+                            <div>
+                              <MdEdit
+                                className="fs-4 ms-1"
+                                onClick={() => handleClick(m._id)}
+                                style={{ color: "#5d83ac" }}
+                              />
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
+
                 <Button
                   type="primary"
                   className="w-100"

@@ -3,10 +3,9 @@ import "./BazarList.css";
 import { MdOutlineDateRange } from "react-icons/md";
 import { GiMoneyStack } from "react-icons/gi";
 import { Link } from "react-router-dom";
-import moment from "moment";
 
 const BazarList = ({ data }) => {
-  const { amount, members, date } = data;
+  console.log(data);
   return (
     <div className="bazarSection">
       <div className="d-flex align-items-center justify-content-between bazarTop">
@@ -17,21 +16,31 @@ const BazarList = ({ data }) => {
       </div>
       <div className="d-gridTwo">
         <div>
-          {members.map((member, ind) => (
+          {data?.members?.length === 0 && <p className="mb-0"> Not_Selected_Yet</p>}
+          {!data?.members && <p className="mb-0"> Not_Selected_Yet</p>}
+          {data?.members?.map((member, ind) => (
             <div className="d-flex align-items-center " key={ind}>
               <AiOutlineShopping />
               <p className="mb-0 ms-2"> {member?.name}</p>
             </div>
           ))}
         </div>
-        <div>
+        <div style={{ marginTop: 5 }}>
           <div className="d-flex align-items-center ">
-            <MdOutlineDateRange />
-            <p className="mb-0 ms-2">{date}</p>
+            <MdOutlineDateRange  />
+            {data?.date ? (
+              <p className="mb-0 ms-2">{data?.date}</p>
+            ) : (
+              <p className="mb-0 ms-2"> Not_Selected_Yet</p>
+            )}
           </div>
           <div className="d-flex align-items-center ">
-            <GiMoneyStack />
-            <p className="mb-0 ms-2">{amount}</p>
+            <GiMoneyStack  />
+            {data?.amount ? (
+              <p className="mb-0 ms-2">{data?.amount}</p>
+            ) : (
+              <p className="mb-0 ms-2"> Not_Selected_Yet</p>
+            )}
           </div>
         </div>
       </div>
