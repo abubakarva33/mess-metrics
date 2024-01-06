@@ -8,9 +8,6 @@ import {
   useGetUserAccountQuery,
   useGetUserProfileQuery,
 } from "../../../redux/api/sampleApi/userApi";
-import Members from "../ManageMembers/Members/Members";
-import { useDispatch } from "react-redux";
-import { authRole } from "../../../redux/features/UserSlice/UserSlice";
 import AllMembers from "./components/AllMembers/AllMembers";
 import SpinnerMain from "../../../components/Spinner/SpinnerMain";
 import {
@@ -19,11 +16,10 @@ import {
 } from "../../../redux/api/sampleApi/actionApi";
 import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
-import { AiOutlineHome } from "react-icons/ai";
 
 const Home = () => {
-  const { data: usersAcc, isFetching } = useGetUserAccountQuery();
-  const { data: profileData } = useGetUserProfileQuery();
+  const { data: usersAcc } = useGetUserAccountQuery();
+  const { data: profileData, isFetching } = useGetUserProfileQuery();
   const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
   const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery();
 
@@ -53,7 +49,7 @@ const Home = () => {
       <div>
         <div className="d-flexCenter my-4 w-100">
           <h5 className="divider mb-0">
-            <span className="px-2">Total Members : {messAccount?.mess?.members?.length || 0} </span>
+            <span className="px-2">Total Members : {usersAcc?.data?.length || 0} </span>
           </h5>
         </div>
 

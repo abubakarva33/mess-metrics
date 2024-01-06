@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./SingleMember.css";
 import { Col, Container, Row } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "antd";
 import {
   useGetSingleUserAccountQuery,
@@ -94,8 +94,8 @@ const SingleMember = () => {
   };
 
   return (
-    <div className="d-flexCenter" style={{ minHeight: "84vh" }}>
-      <Container fluid className="my-4 singleMemberSection">
+    <div>
+      <Container fluid className="my-4 singleMemberSection " style={{ minHeight: "84vh" }}>
         <Row className="h-100">
           <Col xs={12} sm={6} md={6} lg={6} xl={5} xxl={5}>
             <div className="memberProfileCenter">
@@ -149,7 +149,6 @@ const SingleMember = () => {
                         <p className="mb-1">remove now</p>
                       </div>
                       <Button style={{ width: "80px" }} danger type="primary" onClick={onFinish}>
-                        {" "}
                         Remove
                       </Button>
                     </div>
@@ -159,7 +158,6 @@ const SingleMember = () => {
                         <p className="mb-1"> create a notice now</p>
                       </div>
                       <Button style={{ width: "80px" }} type="primary">
-                        {" "}
                         Send
                       </Button>
                     </div>
@@ -186,14 +184,14 @@ const SingleMember = () => {
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
               <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-              <h3>MEMBER PROFILE </h3>
+              <h3>SINGLE MEMBER </h3>
             </div>
           </div>
         </div>
         <div className="phoneBookContainerItemBg">
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
-              <div className="memberProfileCenter">
+              <div className="memberProfileCenter mb-3">
                 <div className="memberProfileCenterTop">
                   <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                   <div className="d-flexCenter flex-column">
@@ -201,7 +199,7 @@ const SingleMember = () => {
                     <h6> ( {role} )</h6>
                   </div>
                 </div>
-                <div className="">
+                <div style={{ marginBottom: 11 }}>
                   <div>
                     <div className="d-flex align-items-center justify-content-between">
                       <p className="memberProfileNameText"> {email}</p>
@@ -228,8 +226,7 @@ const SingleMember = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="profileManageCenter mt-3">
+              <div className="profileManageCenter">
                 <div className="d-flex align-items-center justify-content-between profileHeaderNotice">
                   <h4 className="mb-0 ">Manage Member</h4>
                   <img src="/images/notice.png" alt="" />
@@ -240,14 +237,18 @@ const SingleMember = () => {
                       <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
                       <p className="mb-1">remove now</p>
                     </div>
-                    <Button onClick={onFinish}> Remove</Button>
+                    <Button style={{ width: "80px" }} danger type="primary" onClick={onFinish}>
+                      Remove
+                    </Button>
                   </div>
                   <div className="d-flex align-items-center justify-content-between">
                     <div>
                       <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
                       <p className="mb-1"> create a notice now</p>
                     </div>
-                    <Button> Send</Button>
+                    <Button style={{ width: "80px" }} type="primary">
+                      Send
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -257,6 +258,7 @@ const SingleMember = () => {
                 switchDataMinus={switchDataMinus}
                 singleUserFetching={singleUserFetching}
                 singleUserData={singleUserData}
+                total={mData?.meta?.total}
               />
             </div>
           </div>
