@@ -35,30 +35,32 @@ const actionColumn = {
   render: (_, record) => (
     <Space size="middle">
       <Link>
-        <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
+        <img
+          src="/images/pen.png"
+          alt="edit"
+          style={{ height: "30px", width: "30px" }}
+        />
       </Link>
     </Space>
   ),
 };
 
-const MealDetails = () => {
+const MealDetails = ({ date }) => {
   const [filter, setFilter] = useState({ page: 1 });
   const { data: activeMonthData } = useGetActiveMonthQuery();
-  const { data, isFetching } = useGetAllMealQuery(filter);
+  const { data, isFetching } = useGetAllMealQuery({ ...filter, date });
   const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);
 
-  console.log({ x: activeMonthData?._id, data: data?.data[0]?.activeMonth });
-
-  const compareMonth = data?.data?.filter((item) => item?.activeMonth === activeMonthData?._id);
+  console.log({ data });
 
   useEffect(() => {
-    if (role === "manager" && compareMonth?.length > 0) {
+    if (role === "manager") {
       setColumn([...initColumn, actionColumn]);
     } else {
       setColumn(initColumn);
     }
-  }, [compareMonth, activeMonthData]);
+  }, [activeMonthData]);
 
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 
@@ -66,7 +68,11 @@ const MealDetails = () => {
     <Spin spinning={isFetching}>
       <div className="activeMonthLg">
         {data?.success && (
-          <TableTemplate data={data} columns={column} onPageChange={onPageChange} />
+          <TableTemplate
+            data={data}
+            columns={column}
+            onPageChange={onPageChange}
+          />
         )}
       </div>
       <div>
@@ -81,7 +87,10 @@ const MealDetails = () => {
                     </div>
                     <div>
                       <p className="mb-0">
-                        Name: <span style={{ fontWeight: "700" }}>{data?.user?.name}</span>
+                        Name:{" "}
+                        <span style={{ fontWeight: "700" }}>
+                          {data?.user?.name}
+                        </span>
                       </p>
 
                       <p className="mb-0">Meal: {data?.meal}</p>
@@ -89,7 +98,11 @@ const MealDetails = () => {
                     </div>
                   </div>
                   <Link to={`/update-meal?date=${data?.date}`}>
-                    <img src="/images/pen.png" alt="" style={{ height: "30px", width: "30px" }} />
+                    <img
+                      src="/images/pen.png"
+                      alt=""
+                      style={{ height: "30px", width: "30px" }}
+                    />
                   </Link>
                 </div>
               ))}
