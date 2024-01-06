@@ -14,8 +14,8 @@ const ActiveDetailsTemplate = ({ data, modalProps, itemData, setItemData, setIsM
             <p className="mb-0 ">
               Shoppers:
               <span style={{ fontWeight: "700" }}>
-                {data?.members?.map((member) => (
-                  <span className="mb-0  d-flex flex column align-items-center">
+                {data?.members?.map((member, ind) => (
+                  <span className="mb-0  d-flex flex column align-items-center" key={ind}>
                     <FaUser className="me-1" /> {member?.name}
                   </span>
                 ))}

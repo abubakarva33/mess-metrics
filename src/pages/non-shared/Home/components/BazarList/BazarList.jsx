@@ -5,7 +5,6 @@ import { GiMoneyStack } from "react-icons/gi";
 import { Link } from "react-router-dom";
 
 const BazarList = ({ data }) => {
-  console.log(data);
   return (
     <div className="bazarSection">
       <div className="d-flex align-items-center justify-content-between bazarTop">

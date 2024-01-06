@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import {
   useGetAllDepositQuery,
-  useGetAllMealQuery,
   useUpdateDepositMutation,
 } from "../../../../../../redux/api/sampleApi/actionApi";
 import { Space, Spin } from "antd";
-import { Link } from "react-router-dom";
 import UpdateModal from "./UpdateModal";
 import ActiveMonthPageTemplateSm from "./ActiveMonthPageTemplateSm";
 import { useSelector } from "react-redux";
@@ -43,23 +41,21 @@ const actionColumn = {
     </Space>
   ),
 };
-const DepositDetails = () => {
-  const [filter, setFilter] = useState({});
+const DepositDetails = ({ date }) => {
+  const [filter, setFilter] = useState({ page: 1 });
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: activeMonthData } = useGetActiveMonthQuery();
-  const { data, isFetching } = useGetAllDepositQuery(filter);
+  const { data, isFetching } = useGetAllDepositQuery({ ...filter, date });
   const [update, { status }] = useUpdateDepositMutation();
 
   const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);
 
-  console.log({ x: activeMonthData?._id, data: data });
-
-  const compareMonth = data?.data?.filter((item) => item?.month === activeMonthData?._id);
-
-  console.log(compareMonth);
-
+  const compareMonth = useMemo(
+    () => data?.data?.filter((item) => item?.activeMonth === activeMonthData?._id),
+    [data, activeMonthData]
+  );
   useEffect(() => {
     if (role === "manager" && compareMonth?.length > 0) {
       setColumn([...initColumn, actionColumn]);

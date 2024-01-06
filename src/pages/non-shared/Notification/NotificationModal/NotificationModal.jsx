@@ -1,11 +1,8 @@
 import "./NotificationModal.css";
 import { Button, Modal, Spin } from "antd";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import NotificationModalItem from "./NotificationModalItem";
 import { useUpdateAllNotificationMutation } from "../../../../redux/api/sampleApi/actionApi";
-import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
-import { FaRegEnvelope, FaRegEnvelopeOpen } from "react-icons/fa";
 
 const NotificationModal = ({
   isModalOpen,
@@ -16,7 +13,6 @@ const NotificationModal = ({
   page,
   isFetching,
 }) => {
-  console.log({ data: data?.unread });
   const [isLoadClicked, setIsLoadClicked] = useState(false);
   const [updateNotification] = useUpdateAllNotificationMutation();
   return (
@@ -43,7 +39,7 @@ const NotificationModal = ({
             </h6>
             <p
               onClick={() => updateNotification()}
-              style={{ cursor: "pointer", fontSize: 16, fontWeight:500 }}
+              style={{ cursor: "pointer", fontSize: 16, fontWeight: 500 }}
               className="mb-0 text-primary"
             >
               Mark all as read

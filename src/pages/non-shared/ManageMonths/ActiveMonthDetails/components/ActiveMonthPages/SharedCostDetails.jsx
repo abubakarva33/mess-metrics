@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import {
   useGetAllSharedCostQuery,
@@ -44,23 +44,21 @@ const actionColumn = {
   ),
 };
 
-const SharedCostDetails = () => {
-  const [filter, setFilter] = useState({});
+const SharedCostDetails = ({ date }) => {
+  const [filter, setFilter] = useState({ page: 1 });
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: activeMonthData } = useGetActiveMonthQuery();
-  const { data, isFetching } = useGetAllSharedCostQuery(filter);
+  const { data, isFetching } = useGetAllSharedCostQuery({ ...filter, date });
   const [update, { status }] = useUpdateSharedCostMutation();
 
   const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);
 
-  console.log({ x: activeMonthData?._id, data: data });
-
-  const compareMonth = data?.data?.filter((item) => item?.month === activeMonthData?._id);
-
-  console.log(compareMonth);
-
+  const compareMonth = useMemo(
+    () => data?.data?.filter((item) => item?.activeMonth === activeMonthData?._id),
+    [data, activeMonthData]
+  );
   useEffect(() => {
     if (role === "manager" && compareMonth?.length > 0) {
       setColumn([...initColumn, actionColumn]);

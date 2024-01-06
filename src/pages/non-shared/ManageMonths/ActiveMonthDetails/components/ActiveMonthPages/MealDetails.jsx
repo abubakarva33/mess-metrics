@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import { useGetAllMealQuery } from "../../../../../../redux/api/sampleApi/actionApi";
 import { Pagination, Space, Spin } from "antd";
 import { Link } from "react-router-dom";
-import SpinnerMain from "../../../../../../components/Spinner/SpinnerMain";
 import { useEffect } from "react";
-import { useGetUserProfileQuery } from "../../../../../../redux/api/sampleApi/userApi";
-import userRole from "../../../../../../utils/userRole";
 import { useGetActiveMonthQuery } from "../../../../../../redux/api/sampleApi/monthApi";
 import { useSelector } from "react-redux";
 
@@ -35,11 +32,7 @@ const actionColumn = {
   render: (_, record) => (
     <Space size="middle">
       <Link>
-        <img
-          src="/images/pen.png"
-          alt="edit"
-          style={{ height: "30px", width: "30px" }}
-        />
+        <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
       </Link>
     </Space>
   ),
@@ -52,15 +45,18 @@ const MealDetails = ({ date }) => {
   const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);
 
-  console.log({ data });
+  const compareMonth = useMemo(
+    () => data?.data?.filter((item) => item?.activeMonth === activeMonthData?._id),
+    [data, activeMonthData]
+  );
 
   useEffect(() => {
-    if (role === "manager") {
+    if (role === "manager" && compareMonth?.length > 0) {
       setColumn([...initColumn, actionColumn]);
     } else {
       setColumn(initColumn);
     }
-  }, [activeMonthData]);
+  }, [compareMonth, activeMonthData]);
 
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 
@@ -68,29 +64,25 @@ const MealDetails = ({ date }) => {
     <Spin spinning={isFetching}>
       <div className="activeMonthLg">
         {data?.success && (
-          <TableTemplate
-            data={data}
-            columns={column}
-            onPageChange={onPageChange}
-          />
+          <TableTemplate data={data} columns={column} onPageChange={onPageChange} />
         )}
       </div>
       <div>
         <div className="phoneBookContainerItemBg">
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
-              {data?.data?.map((data) => (
-                <div className="d-flex align-items-center justify-content-between my-3 activeDetailsTemplate">
+              {data?.data?.map((data, ind) => (
+                <div
+                  className="d-flex align-items-center justify-content-between my-3 activeDetailsTemplate"
+                  key={ind}
+                >
                   <div className="d-flex align-items-center justify-content-between">
                     <div className="d-flexCenter dateLogo">
                       <h2 className=" mb-0"> {data?.date?.substring(0, 2)}</h2>
                     </div>
                     <div>
                       <p className="mb-0">
-                        Name:{" "}
-                        <span style={{ fontWeight: "700" }}>
-                          {data?.user?.name}
-                        </span>
+                        Name: <span style={{ fontWeight: "700" }}>{data?.user?.name}</span>
                       </p>
 
                       <p className="mb-0">Meal: {data?.meal}</p>
@@ -98,11 +90,7 @@ const MealDetails = ({ date }) => {
                     </div>
                   </div>
                   <Link to={`/update-meal?date=${data?.date}`}>
-                    <img
-                      src="/images/pen.png"
-                      alt=""
-                      style={{ height: "30px", width: "30px" }}
-                    />
+                    <img src="/images/pen.png" alt="" style={{ height: "30px", width: "30px" }} />
                   </Link>
                 </div>
               ))}

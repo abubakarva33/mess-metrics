@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import {
   useGetAllBazarQuery,
   useUpdateBazarMutation,
 } from "../../../../../../redux/api/sampleApi/actionApi";
 import { Space, Spin } from "antd";
-import { Link } from "react-router-dom";
 import UpdateModal from "./UpdateModal";
 import ActiveMonthPageTemplateSm from "./ActiveMonthPageTemplateSm";
 import { useSelector } from "react-redux";
@@ -57,18 +56,20 @@ const actionColumn = {
   ),
 };
 
-const BazarDetails = () => {
-  const [filter, setFilter] = useState({});
+const BazarDetails = ({ date }) => {
+  const [filter, setFilter] = useState({ page: 1 });
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: activeMonthData } = useGetActiveMonthQuery();
-  const { data, isFetching } = useGetAllBazarQuery(filter);
+  const { data, isFetching } = useGetAllBazarQuery({ ...filter, date });
   const [update, { status }] = useUpdateBazarMutation();
   const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);
 
-  const compareMonth = data?.data?.filter((item) => item?.month === activeMonthData?._id);
-
+  const compareMonth = useMemo(
+    () => data?.data?.filter((item) => item?.activeMonth === activeMonthData?._id),
+    [data, activeMonthData]
+  );
   useEffect(() => {
     if (role === "manager" && compareMonth?.length > 0) {
       setColumn([...initColumn, actionColumn]);
