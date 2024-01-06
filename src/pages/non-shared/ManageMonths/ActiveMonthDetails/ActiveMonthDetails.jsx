@@ -18,7 +18,7 @@ import IndividualCostDetails from "./components/ActiveMonthPages/IndividualCostD
 const ActiveMonthDetails = () => {
   const type = useSearchQuery("type") || "meal";
   const navigate = useNavigate();
-  const [filter, setFilter] = useState("");
+  const [filterDate, setFilterDate] = useState("");
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemName, setItemName] = useState("");
@@ -27,11 +27,11 @@ const ActiveMonthDetails = () => {
   const tableData = dataSource[type];
 
   const pages = {
-    meal: <MealDetails />,
-    deposit: <DepositDetails />,
-    bazar: <BazarDetails />,
-    sharedCost: <SharedCostDetails />,
-    individualCost: <IndividualCostDetails />,
+    meal: <MealDetails date={filterDate} />,
+    deposit: <DepositDetails date={filterDate} />,
+    bazar: <BazarDetails date={filterDate} />,
+    sharedCost: <SharedCostDetails date={filterDate} />,
+    individualCost: <IndividualCostDetails date={filterDate} />,
   };
 
   return (
@@ -44,8 +44,10 @@ const ActiveMonthDetails = () => {
               className=""
               placeholderText="Filter by date"
               dateFormat="dd-MM-yyyy"
-              value={filter}
-              onChange={(date) => setFilter(moment(date).format("DD-MM-YYYY"))}
+              value={filterDate}
+              onChange={(date) =>
+                setFilterDate(moment(date).format("DD-MM-YYYY"))
+              }
             />
           </div>
         </div>
@@ -95,7 +97,10 @@ const ActiveMonthDetails = () => {
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <IoIosArrowBack
+                className="componentHeaderIcon"
+                onClick={() => navigate(-1)}
+              />
               <h3>ACTIVE MONTH DETAILS</h3>
             </div>
             <div className="mx-3">
@@ -103,8 +108,10 @@ const ActiveMonthDetails = () => {
                 className="w-100"
                 placeholderText="Filter by date"
                 dateFormat="dd-MM-yyyy"
-                value={filter}
-                onChange={(date) => setFilter(moment(date).format("DD-MM-YYYY"))}
+                value={filterDate}
+                onChange={(date) =>
+                  setFilterDate(moment(date).format("DD-MM-YYYY"))
+                }
               />
             </div>
             <div className="activeMonthBtnGroups mb-4">
@@ -128,7 +135,9 @@ const ActiveMonthDetails = () => {
                 Shared Cost
               </Button>
               <Button
-                className={type === "individualCost" ? "activeNav ms-3" : "ms-3"}
+                className={
+                  type === "individualCost" ? "activeNav ms-3" : "ms-3"
+                }
                 onClick={() => navigate("?type=individualCost")}
               >
                 Individual Cost
