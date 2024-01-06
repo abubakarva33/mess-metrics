@@ -55,3 +55,28 @@ body {
 .memberNameEach {
   font-size: 20px;
 }
+.ant-btn-primary {
+  background: var(--gradient-primary) !important;
+}
+
+.ant-input,
+.ant-select-selector {
+  border: transparent !important;
+  background-color: transparent !important;
+  box-shadow: inset 0 0 10px -4px black !important;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.bg_tertiary{
+  background-color: var(--bg-tertiary) !important;
+}
