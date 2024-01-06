@@ -16,7 +16,8 @@
   --bg-body: #11151c;
   --bg-primary: #242526;
   --bg-secondary: #91b3ff26;
-  --bg-tertiary: #3a3b3c;
+  --bg-tertiary: #4169e1;
+
   --bg-quaternary: #232e3b;
   /* --bg-app-primary: #434343; */
   --bg-app-primary: #060811;
@@ -33,7 +34,7 @@
   --icon-red: #e41e3f;
 
   --card-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  --gradient-primary: linear-gradient(90deg, #2d587e, #519ada);
+  --gradient-primary: linear-gradient(90deg, #7367f0, #4169e1);
 }
 
 /* :root {
