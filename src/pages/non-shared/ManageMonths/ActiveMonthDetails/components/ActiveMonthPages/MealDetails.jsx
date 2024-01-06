@@ -7,12 +7,10 @@ import SpinnerMain from "../../../../../../components/Spinner/SpinnerMain";
 import { useEffect } from "react";
 import { useGetUserProfileQuery } from "../../../../../../redux/api/sampleApi/userApi";
 import userRole from "../../../../../../utils/userRole";
+import { useGetActiveMonthQuery } from "../../../../../../redux/api/sampleApi/monthApi";
+import { useSelector } from "react-redux";
 
 const initColumn = [
-  {
-    title: "No",
-    render: (_, record, index) => index + 1,
-  },
   {
     title: "Date",
     dataIndex: "date",
@@ -44,19 +42,23 @@ const actionColumn = {
 };
 
 const MealDetails = () => {
-  const { data: profile, status } = useGetUserProfileQuery({});
   const [filter, setFilter] = useState({ page: 1 });
+  const { data: activeMonthData } = useGetActiveMonthQuery();
   const { data, isFetching } = useGetAllMealQuery(filter);
-
+  const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);
 
+  console.log({ x: activeMonthData?._id, data: data?.data[0]?.activeMonth });
+
+  const compareMonth = data?.data?.filter((item) => item?.activeMonth === activeMonthData?._id);
+
   useEffect(() => {
-    if (status === "fulfilled" && profile?.data?.role === userRole.manager) {
+    if (role === "manager" && compareMonth?.length > 0) {
       setColumn([...initColumn, actionColumn]);
     } else {
       setColumn(initColumn);
     }
-  }, []);
+  }, [compareMonth, activeMonthData]);
 
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 

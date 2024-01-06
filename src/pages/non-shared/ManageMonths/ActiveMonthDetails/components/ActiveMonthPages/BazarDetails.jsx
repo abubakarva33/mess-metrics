@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import {
   useGetAllBazarQuery,
@@ -8,61 +8,81 @@ import { Space, Spin } from "antd";
 import { Link } from "react-router-dom";
 import UpdateModal from "./UpdateModal";
 import ActiveMonthPageTemplateSm from "./ActiveMonthPageTemplateSm";
+import { useSelector } from "react-redux";
+import { useGetActiveMonthQuery } from "../../../../../../redux/api/sampleApi/monthApi";
+
+const initColumn = [
+  {
+    title: "Date",
+    dataIndex: "date",
+    key: "date",
+  },
+  {
+    title: " Shoppers Name",
+    key: "name",
+    render: (_, record) =>
+      record?.members?.length > 0 ? (
+        record?.members?.map((member, idk) => (
+          <div size="middle" key={idk}>
+            <p className="mb-0">{member?.name}</p>
+          </div>
+        ))
+      ) : (
+        <p className="mb-0">Not_Selected_Yet</p>
+      ),
+  },
+  {
+    title: "Amount",
+    dataIndex: "amount",
+    key: "amount",
+  },
+  {
+    title: "Bazar Details",
+    dataIndex: "list",
+    render: (_, record) => (record?.list ? record?.list : "No Details"),
+    key: "list",
+  },
+];
+
+const actionColumn = {
+  title: "Action",
+  key: "action",
+  width: 80,
+  render: (_, record) => (
+    <Space size="middle">
+      <div onClick={() => (setItemData(record), setIsModalOpen(true))}>
+        <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
+      </div>
+    </Space>
+  ),
+};
 
 const BazarDetails = () => {
   const [filter, setFilter] = useState({});
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const { data: activeMonthData } = useGetActiveMonthQuery();
   const { data, isFetching } = useGetAllBazarQuery(filter);
   const [update, { status }] = useUpdateBazarMutation();
 
-  const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
+  const { role } = useSelector((state) => state.user);
+  const [column, setColumn] = useState(initColumn);
 
-  const column = [
-    {
-      title: "No",
-      render: (_, record, index) => (data?.meta?.page - 1) * data?.meta?.limit + index + 1,
-    },
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: " Shoppers Name",
-      key: "name",
-      render: (_, record) =>
-        record?.members?.map((member, idk) => (
-          <div size="middle" key={idk}>
-            <p className="mb-0">{member?.name}</p>
-          </div>
-        )),
-    },
-    {
-      title: "Amount",
-      dataIndex: "amount",
-      key: "amount",
-    },
-    {
-      title: "Bazar Details",
-      dataIndex: "list",
-      render: (_, record) => (record?.list ? record?.list : "No Details"),
-      key: "list",
-    },
-    {
-      title: "Action",
-      key: "action",
-      width: 80,
-      render: (_, record) => (
-        <Space size="middle">
-          <div onClick={() => (setItemData(record), setIsModalOpen(true))}>
-            <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
-          </div>
-        </Space>
-      ),
-    },
-  ];
+  console.log({ x: activeMonthData?._id, data: data });
+
+  const compareMonth = data?.data?.filter((item) => item?.month === activeMonthData?._id);
+
+  console.log(compareMonth);
+
+  useEffect(() => {
+    if (role === "manager" && compareMonth?.length > 0) {
+      setColumn([...initColumn, actionColumn]);
+    } else {
+      setColumn(initColumn);
+    }
+  }, [compareMonth, activeMonthData]);
+
+  const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 
   const modalProps = {
     data: itemData,
@@ -90,7 +110,9 @@ const BazarDetails = () => {
           <TableTemplate data={data} columns={column} onPageChange={onPageChange} />
         )}
       </div>
-      {data?.success && <ActiveMonthPageTemplateSm {...smDeviceProps} className="active-month-sm"/>}
+      {data?.success && (
+        <ActiveMonthPageTemplateSm {...smDeviceProps} className="active-month-sm" />
+      )}
 
       {itemData && <UpdateModal {...modalProps} />}
     </Spin>
