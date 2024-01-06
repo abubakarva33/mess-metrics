@@ -18,14 +18,14 @@
   max-width: 130px;
   font-size: 16px !important;
 }
-/* ::-webkit-scrollbar:horizontal {
-  height: 10px;
-  background-color: var(--bg-primary);
+.ant-table-wrapper .ant-table {
+  background-color: var(--bg-personalDashboard);
+  box-shadow: var(--card-shadow);
 }
-::-webkit-scrollbar-thumb:horizontal {
-  background: var(--bg-primary);
-  border-radius: 10px;
-} */
+.ant-table-wrapper .ant-table-tbody > tr.ant-table-placeholder {
+  background-color: var(--bg-personalDashboard);
+  box-shadow: var(--card-shadow);
+}
 
 .pagination-item li {
   height: auto !important;

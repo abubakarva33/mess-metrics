@@ -41,8 +41,15 @@ const NotificationModal = ({
             >
               Refresh
             </h6>
+            <p
+              onClick={() => updateNotification()}
+              style={{ cursor: "pointer", fontSize: 16, fontWeight:500 }}
+              className="mb-0 text-primary"
+            >
+              Mark all as read
+            </p>
 
-            {data?.unread > 0 ? (
+            {/* {data?.unread > 0 ? (
               <h5
                 onClick={() => updateNotification()}
                 style={{ cursor: "pointer" }}
@@ -54,38 +61,20 @@ const NotificationModal = ({
               <h5 className="mb-0">
                 <FaRegEnvelopeOpen />
               </h5>
-            )}
-
-            {/* <h6
-              onClick={() => updateNotification()}
-              style={{
-                cursor: "pointer",
-                color: "#5AA7FF",
-              }}
-            >
-              Mark all as read
-            </h6> */}
+            )} */}
           </div>
         )}
         <hr />
         {isFetching && isLoadClicked ? (
           <Spin spinning={isFetching}>
             {data?.data?.map((item, ind) => (
-              <NotificationModalItem
-                key={ind}
-                data={item}
-                setIsLoadClicked={setIsLoadClicked}
-              />
+              <NotificationModalItem key={ind} data={item} setIsLoadClicked={setIsLoadClicked} />
             ))}
           </Spin>
         ) : (
           <div>
             {data?.data?.map((item, ind) => (
-              <NotificationModalItem
-                key={ind}
-                data={item}
-                setIsLoadClicked={setIsLoadClicked}
-              />
+              <NotificationModalItem key={ind} data={item} setIsLoadClicked={setIsLoadClicked} />
             ))}
           </div>
         )}
@@ -98,6 +87,7 @@ const NotificationModal = ({
             className="w-100"
             onClick={() => (setPage(page + 1), setIsLoadClicked(true))}
             type="primary"
+            style={{ minHeight: 40, fontSize: 18 }}
           >
             Load More
           </Button>

@@ -29,13 +29,17 @@
 }
 
 .dateImgNotification {
-  background-color: #5d83ac;
-  color: var(--bg-body);
+  background: var(--gradient-primary);
+  font-weight: 200;
   margin-bottom: 0;
   min-width: 40px;
   min-height: 40px;
   border-radius: 50px;
   margin-right: 10px;
+}
+.dateImgNotification h4 {
+  color: #fff;
+  font-weight: 400;
 }
 .itemBold {
   font-weight: 500;

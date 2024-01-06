@@ -34,29 +34,6 @@ const DeleteMess = () => {
   };
 
   return (
-    // <div>
-    //   <h1>Delete Mess {profileData?.data?.data?.mess?.name}</h1>
-    //   <Button onClick={deleteMessHandler}>Delete Mess</Button>
-    // </div>
-
-    // <div className="phoneBookContainer">
-    //   <div className="phoneBookContainerMainBg">
-    //     <div className="phoneBookContainerMain">
-    //       <div className="componentHeader">
-    //         <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-    //         <h3>DELETE MESS </h3>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div className="phoneBookContainerItemBg">
-    //     <div className="phoneBookContainerItem ">
-    //       <div className="pt-5 pb-3 px-3">
-    //         <Button onClick={deleteMessHandler}>Delete Mess</Button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-
     <div>
       <div className="addMealCostSectionMain">
         <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>

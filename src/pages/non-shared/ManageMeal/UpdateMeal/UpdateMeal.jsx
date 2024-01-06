@@ -105,8 +105,8 @@ const UpdateMeal = () => {
   };
 
   return (
-    <div>
-      <div className="addMealSection">
+    <div className="">
+      <div className="addMealCostSectionMain">
         <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
           <h3 className="text-center mt-2 mb-4">Update Meal</h3>
           <div className="mealDatePicker mb-4">

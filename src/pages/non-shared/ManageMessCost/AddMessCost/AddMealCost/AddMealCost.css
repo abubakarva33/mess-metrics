@@ -89,6 +89,10 @@
   border-radius: 10px;
   box-shadow: var(--card-shadow) !important;
 }
+.react-datepicker__input-container input::placeholder {
+  color: #fff;
+}
+
 .react-datepicker-wrapper {
   width: 100%;
 }

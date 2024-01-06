@@ -9,7 +9,7 @@ const BazarList = ({ data }) => {
   return (
     <div className="bazarSection">
       <div className="d-flex align-items-center justify-content-between bazarTop">
-        <h4 className="mb-0">Recent Bazar</h4>
+        <h5 className="mb-0">Recent Bazar</h5>
         <Link to="/active-month-details?type=bazar">
           <p className="mb-0">Tap to Explore</p>
         </Link>
