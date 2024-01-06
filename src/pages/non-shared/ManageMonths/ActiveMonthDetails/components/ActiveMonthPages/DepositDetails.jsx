@@ -53,7 +53,7 @@ const DepositDetails = ({ date }) => {
   const [column, setColumn] = useState(initColumn);
 
   const compareMonth = useMemo(
-    () => data?.data?.filter((item) => item?.activeMonth === activeMonthData?._id),
+    () => data?.data?.filter((item) => item?.month === activeMonthData?._id),
     [data, activeMonthData]
   );
   useEffect(() => {

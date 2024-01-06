@@ -14,7 +14,7 @@
   margin: 0 7px;
 }
 .ant-select-dropdown{
-  background-color: #1A232D;
+  background-color: var(--bg-extraDashboard);
   box-shadow: var(--card-shadow);
 }
 .mealItemPhoto {

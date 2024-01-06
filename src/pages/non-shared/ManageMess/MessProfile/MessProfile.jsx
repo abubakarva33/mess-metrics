@@ -16,7 +16,6 @@ const MessProfile = () => {
   const navigate = useNavigate();
   const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
   const { role } = useSelector((state) => state.user);
-  console.log(role);
 
   if (messFetching) {
     return <SpinnerMain />;

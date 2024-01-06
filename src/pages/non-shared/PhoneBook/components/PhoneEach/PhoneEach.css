@@ -5,7 +5,7 @@
   margin-bottom: 15px;
   padding: 5px 10px;
   border-radius: 10px;
-  background-color: #1A232D;
+  background-color: var(--bg-extraDashboard);
   box-shadow: var(--card-shadow);
 }
 .phoneBtn {
@@ -28,21 +28,21 @@
 .phoneText {
   font-size: 16px;
 }
-.phoneNameText{
-    font-size: 18px;
+.phoneNameText {
+  font-size: 18px;
 }
 .phoneIconsGroup {
-    margin-top: 8px;
-    margin-right: 10px;
-  }
+  margin-top: 8px;
+  margin-right: 10px;
+}
 
 @media only screen and (max-width: 576px) {
   .phoneItem {
     background-color: #11121d;
   }
-  .phoneNameText{
+  .phoneNameText {
     font-size: 18px;
-}
+  }
   .phoneText {
     font-size: 17px;
   }
@@ -51,10 +51,10 @@
   .phoneText {
     font-size: 15px;
   }
-  .phoneNameText{
+  .phoneNameText {
     font-size: 16px;
-}
-.iconSize {
+  }
+  .iconSize {
     width: 30px;
   }
   .phoneItemPhoto {
