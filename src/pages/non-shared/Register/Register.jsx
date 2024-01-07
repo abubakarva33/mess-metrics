@@ -44,6 +44,8 @@ const Register = () => {
         icon: "error",
         title: "Oops...",
         text: `${error.data.message}`,
+        confirmButtonText: "Close",
+        timer: 1500,
       });
     }
   };
@@ -187,7 +189,7 @@ const Register = () => {
                 type="primary"
                 htmlType="submit"
                 className="login-form-button mb-3 w-100"
-                style={{ minHeight: 40 }}
+                style={{ minHeight: 40 , fontSize:18}}
               >
                 Register
               </Button>
@@ -201,7 +203,7 @@ const Register = () => {
                   type="primary"
                   disabled
                   className="login-form-button mb-3 me-3 w-100"
-                  style={{ minHeight: 40 }}
+                  style={{ minHeight: 40 , fontSize:18}}
                 >
                   Google
                 </Button>
@@ -209,7 +211,7 @@ const Register = () => {
                   type="primary"
                   disabled
                   className="login-form-button mb-3 w-100"
-                  style={{ minHeight: 40 }}
+                  style={{ minHeight: 40 , fontSize:18}}
                 >
                   Facebook
                 </Button>

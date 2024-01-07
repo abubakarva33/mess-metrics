@@ -53,6 +53,8 @@ const Login = () => {
         icon: "error",
         title: "Oops...",
         text: `${error.data.message}`,
+        confirmButtonText: "Close",
+        timer: 1500,
       });
       setError(error.data.message || "An unexpected error occurred");
       console.log(error.data.message || "An unexpected error occurred");
@@ -65,7 +67,14 @@ const Login = () => {
     return <Spinner />;
   }
 
-  const forgetHandler = () => {};
+  const forgetHandler = () => {
+    Swal.fire({
+      icon: "error",
+      title: "This page is under construction",
+      timer: 1000,
+      confirmButtonText: "Close",
+    });
+  };
 
   return (
     <div>
@@ -132,11 +141,9 @@ const Login = () => {
                 </Form.Item>
 
                 <div className="d-flex align-items-center justify-content-between">
-                  <Link to="/" className="login-form-forgot">
-                    <h6 className="forgotMsg" onClick={forgetHandler}>
-                      Forgot password?
-                    </h6>
-                  </Link>
+                  <h6 className="forgotMsg" onClick={forgetHandler}>
+                    Forgot password?
+                  </h6>
                 </div>
               </div>
               {error?.data?.success === false ? (
@@ -150,7 +157,7 @@ const Login = () => {
                   type="primary"
                   htmlType="submit"
                   className="login-form-button mb-3 w-100"
-                  style={{ minHeight: 40 }}
+                  style={{ minHeight: 40, fontSize: 18 }}
                 >
                   Log in
                 </Button>
@@ -164,7 +171,7 @@ const Login = () => {
                     type="primary"
                     disabled
                     className="login-form-button mb-3 me-3 w-100"
-                    style={{ minHeight: 40 }}
+                    style={{ minHeight: 40, fontSize: 18 }}
                   >
                     Google
                   </Button>
@@ -172,7 +179,7 @@ const Login = () => {
                     type="primary"
                     disabled
                     className="login-form-button mb-3 w-100"
-                    style={{ minHeight: 40 }}
+                    style={{ minHeight: 40, fontSize: 18 }}
                   >
                     Facebook
                   </Button>

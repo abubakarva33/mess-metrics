@@ -100,13 +100,11 @@ input:active {
   background-color: transparent !important;
 }
 
-/* Optional: Remove box shadow for autocomplete suggestions (Chrome) */
 input:-webkit-autofill {
-  color: var(--text-primary);
+  background-color: transparent !important;
   box-shadow: 0 0 0 1000px #11151c inset !important;
 }
 
-/* Remove background color for autocomplete suggestions */
 .ant-input:-webkit-autofill,
 .ant-input:focus,
 .ant-input:active,
@@ -114,20 +112,24 @@ input:-webkit-autofill {
   background-color: transparent !important;
 }
 
-/* Optional: Remove box shadow for autocomplete suggestions (Chrome) */
 .ant-input:-webkit-autofill {
   box-shadow: 0 0 0 1000px #11151c inset !important;
 }
 
-/* Change text color to white after autocomplete */
-.ant-input:-webkit-autofill,
-.ant-input:focus,
-.ant-input:active,
-.ant-input:hover {
-  -webkit-text-fill-color: white !important;
+html body .ant-input-affix-wrapper > input.ant-input:focus * {
+  background-color: transparent !important;
+  box-shadow: 0 0 0 1000px #11151c inset !important;
 }
 
-/* Override Ant Design's default focus border (if needed) */
-.ant-input-affix-wrapper > input.ant-input:focus *{
-  box-shadow: 0 0 0 2px rgba(0, 60, 180, 0.15) !important;
+.ant-input-affix-wrapper > input.ant-input:focus * {
+  box-shadow: 0 0 0 1000px #11151c inset !important;
+}
+.ant-picker-panel-container{
+  background-color: var(--bg-extraDashboard);
+}
+.ant-picker-dropdown .ant-picker-today-btn{
+  color: var(--text-primary);
+}
+.ant-picker-dropdown .ant-picker-today-btn:hover{
+  color: var(--text-secondary);
 }
