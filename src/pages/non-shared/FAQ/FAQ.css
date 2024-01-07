@@ -1,0 +1,23 @@
+.accordion-button {
+  background-color: var(--bg-extraDashboard) !important;
+  color: var(--text-primary);
+  box-shadow: var(--card-shadow) !important;
+  border: none !important;
+}
+.accordion-item {
+  background-color: var(--bg-personalDashboard) !important;
+  color: var(--text-primary);
+  border: none !important;
+}
+.accordion-button:not(.collapsed) {
+  color: var(--text-primary);
+}
+.accordion-button:not(.collapsed)::after {
+  filter: invert(1);
+}
+
+@media screen and (max-device-width: 776px) {
+  .faqM-devices {
+    display: none;
+  }
+}

@@ -1,9 +1,12 @@
 import { Accordion, Col, Row } from "react-bootstrap";
 import "./FAQ.css";
 import { useState } from "react";
+import { IoIosArrowBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const FAQ = () => {
   const [openItems, setOpenItems] = useState([]);
+  const navigate = useNavigate();
   const data = {
     success: true,
     message: "Notifications fetched successfully",
@@ -137,40 +140,104 @@ const FAQ = () => {
   };
 
   return (
-    <Row className="mx-2">
-      <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
-        {firstArray?.map((item, index) => (
-          <div className="mb-3">
-            <Accordion
-              key={index}
-              activeKey={openItems}
-              onSelect={(key) => handleCollapseChange(key)}
-            >
-              <Accordion.Item eventKey={index.toString()}>
-                <Accordion.Header>{`Accordion ${index + 1}`}</Accordion.Header>
-                <Accordion.Body>{item?.message}</Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+    <div>
+      <div className="faqM-devices">
+        <div className="divider my-4">Frequently Asked Questions</div>
+        <Row className="mx-2">
+          <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
+            {firstArray?.map((item, index) => (
+              <div className="mb-3">
+                <Accordion
+                  key={index}
+                  activeKey={openItems}
+                  onSelect={(key) => handleCollapseChange(key)}
+                >
+                  <Accordion.Item eventKey={index.toString()}>
+                    <Accordion.Header>{`Accordion ${index + 1}`}</Accordion.Header>
+                    {/* <Accordion.Body>{item?.message}</Accordion.Body> */}
+                    <Accordion.Body>{`Accordion template answer ${index + 1}`}</Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+              </div>
+            ))}
+          </Col>
+          <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
+            {secondArray?.map((item, index) => (
+              <div className="mb-3">
+                <Accordion
+                  key={index}
+                  activeKey={openItems}
+                  onSelect={(key) => handleCollapseChange(key)}
+                >
+                  <Accordion.Item eventKey={index.toString() + 1}>
+                    <Accordion.Header>{`Accordion ${index + 1}`}</Accordion.Header>
+                    {/* <Accordion.Body>{item?.message}</Accordion.Body> */}
+                    <Accordion.Body>{`Accordion template answer ${index + 1}`}</Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+              </div>
+            ))}
+          </Col>
+        </Row>
+      </div>
+
+      <div className="phoneBookContainer">
+        <div className="phoneBookContainerMainBg">
+          <div className="phoneBookContainerMain">
+            <div className="componentHeader">
+              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+              <h3>FAQ </h3>
+            </div>
           </div>
-        ))}
-      </Col>
-      <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
-        {secondArray?.map((item, index) => (
-          <div className="mb-3">
-            <Accordion
-              key={index}
-              activeKey={openItems}
-              onSelect={(key) => handleCollapseChange(key)}
-            >
-              <Accordion.Item eventKey={index.toString() + 1}>
-                <Accordion.Header>{`Accordion ${index + 1}`}</Accordion.Header>
-                <Accordion.Body>{item?.message}</Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+        </div>
+        <div className="phoneBookContainerItemBg">
+          <div className="phoneBookContainerItem smDeviceAlign">
+            <div className="pt-5 pb-3 px-3 m-auto w-100">
+              <Row className="">
+                <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
+                  {firstArray?.map((item, index) => (
+                    <div className="mb-3">
+                      <Accordion
+                        key={index}
+                        activeKey={openItems}
+                        onSelect={(key) => handleCollapseChange(key)}
+                      >
+                        <Accordion.Item eventKey={index.toString()}>
+                          <Accordion.Header>{`Accordion ${index + 1}`}</Accordion.Header>
+                          {/* <Accordion.Body>{item?.message}</Accordion.Body> */}
+                          <Accordion.Body>{`Accordion template answer ${
+                            index + 1
+                          }`}</Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    </div>
+                  ))}
+                </Col>
+                <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
+                  {secondArray?.map((item, index) => (
+                    <div className="mb-3">
+                      <Accordion
+                        key={index}
+                        activeKey={openItems}
+                        onSelect={(key) => handleCollapseChange(key)}
+                      >
+                        <Accordion.Item eventKey={index.toString() + 1}>
+                          <Accordion.Header>{`Accordion ${index + 1}`}</Accordion.Header>
+                          {/* <Accordion.Body>{item?.message}</Accordion.Body> */}
+                          <Accordion.Body>{`Accordion template answer ${
+                            index + 1
+                          }`}</Accordion.Body>
+                        </Accordion.Item>
+                      </Accordion>
+                    </div>
+                  ))}
+                </Col>
+              </Row>
+            </div>
           </div>
-        ))}
-      </Col>
-    </Row>
+        </div>
+      </div>
+    </div>
   );
 };
 

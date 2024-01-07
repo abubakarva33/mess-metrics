@@ -21,7 +21,7 @@ const Footer = () => {
       {location.pathname === "/" ? (
         <>
           <div className="footerSm">
-            <Link to="message">
+            <Link to="/aboutUs">
               <BiMessageDots className="footerIcon" />
             </Link>
 
@@ -31,7 +31,7 @@ const Footer = () => {
             <Link to="/" className="homeIconParent">
               <AiOutlineHome className="homeIcon" />
             </Link>
-            <Link to="/about-us">
+            <Link to="/aboutUs">
               <BiHelpCircle className="footerIcon" />
             </Link>
             <Link to="/my-profile">

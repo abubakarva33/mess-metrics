@@ -1,11 +1,11 @@
-import './ContactUs.css';
+import "./ContactUs.css";
 
 const ContactUs = () => {
-    return (
-        <div>
-            <h1>Contact Us</h1>
-        </div>
-    );
+  return (
+    <div>
+      <h1>This page is in under construction</h1>
+    </div>
+  );
 };
 
 export default ContactUs;

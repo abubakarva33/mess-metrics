@@ -16,6 +16,7 @@ import {
 } from "../../../redux/api/sampleApi/actionApi";
 import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { data: usersAcc } = useGetUserAccountQuery();
@@ -73,6 +74,11 @@ const Home = () => {
           icon={<CustomerServiceOutlined />}
         >
           <FloatButton />
+          <Link to="/add-meal">
+            {" "}
+            <FloatButton icon={<CommentOutlined />} description="Add Meal" className="text-right"/>
+          </Link>
+          <FloatButton icon={<CommentOutlined />} />
           <FloatButton icon={<CommentOutlined />} />
         </FloatButton.Group>
       </>
