@@ -2,7 +2,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import "./ActiveMonthDetails.css";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ActiveDetailsTemplate from "./components/ActiveDetailsTemplate/ActiveDetailsTemplate";
 
 import { useSearchQuery } from "../../../../utils/useSearchQuery";
@@ -26,6 +26,10 @@ const ActiveMonthDetails = () => {
   const dataSource = {};
   const tableData = dataSource[type];
 
+  useEffect(() => {
+    setFilterDate("");
+  }, [type]);
+
   const pages = {
     meal: <MealDetails date={filterDate} />,
     deposit: <DepositDetails date={filterDate} />,
@@ -45,9 +49,7 @@ const ActiveMonthDetails = () => {
               placeholderText="Filter by date"
               dateFormat="dd-MM-yyyy"
               value={filterDate}
-              onChange={(date) =>
-                setFilterDate(moment(date).format("DD-MM-YYYY"))
-              }
+              onChange={(date) => setFilterDate(moment(date).format("DD-MM-YYYY"))}
             />
           </div>
         </div>
@@ -97,10 +99,7 @@ const ActiveMonthDetails = () => {
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack
-                className="componentHeaderIcon"
-                onClick={() => navigate(-1)}
-              />
+              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
               <h3>ACTIVE MONTH DETAILS</h3>
             </div>
             <div className="mx-3">
@@ -109,9 +108,7 @@ const ActiveMonthDetails = () => {
                 placeholderText="Filter by date"
                 dateFormat="dd-MM-yyyy"
                 value={filterDate}
-                onChange={(date) =>
-                  setFilterDate(moment(date).format("DD-MM-YYYY"))
-                }
+                onChange={(date) => setFilterDate(moment(date).format("DD-MM-YYYY"))}
               />
             </div>
             <div className="activeMonthBtnGroups mb-4">
@@ -135,9 +132,7 @@ const ActiveMonthDetails = () => {
                 Shared Cost
               </Button>
               <Button
-                className={
-                  type === "individualCost" ? "activeNav ms-3" : "ms-3"
-                }
+                className={type === "individualCost" ? "activeNav ms-3" : "ms-3"}
                 onClick={() => navigate("?type=individualCost")}
               >
                 Individual Cost
