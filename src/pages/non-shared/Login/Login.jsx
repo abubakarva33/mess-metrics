@@ -9,14 +9,14 @@ import { useLoginUserMutation } from "../../../redux/api/sampleApi/userApi";
 import { auth } from "../../../redux/features/UserSlice/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../../components/Spinner/Spinner";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { isLogin } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginUser] = useLoginUserMutation();
-
-  const [isClicked, setIsClicked] = useState();
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -27,17 +27,45 @@ const Login = () => {
   }, [isLogin]);
 
   const onFinish = async (values) => {
-    const { token, success, data } = await loginUser(values).unwrap();
-
-    if (!success) {
-      return dispatch(auth({ token: "" }));
+    try {
+      const { token, success } = await loginUser(values).unwrap();
+      if (!success) {
+        return dispatch(auth({ token: "" }));
+      }
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Signed in successfully",
+      });
+      dispatch(auth({ token }));
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error.data.message}`,
+      });
+      setError(error.data.message || "An unexpected error occurred");
+      console.log(error.data.message || "An unexpected error occurred");
     }
-    dispatch(auth({ token }));
   };
+
+  console.log(error);
 
   if (isLoading) {
     return <Spinner />;
   }
+
+  const forgetHandler = () => {};
 
   return (
     <div>
@@ -62,6 +90,7 @@ const Login = () => {
             >
               <div className="mt-5 d-flex justify-content-center flex-column">
                 <h3 className="welcomeMsg">WELCOME TO MESS METRICS</h3>
+                {error}
                 <p>Sign in to continue access</p>
               </div>
               <Form.Item
@@ -98,25 +127,21 @@ const Login = () => {
                 />
               </Form.Item>
               <div className="d-flex align-items-center justify-content-between mb-2">
-                <Form.Item
-                  name="remember"
-                  valuePropName="checked"
-                  className="checkboxForm"
-                >
+                <Form.Item name="remember" valuePropName="checked" className="checkboxForm">
                   <Checkbox>Remember me</Checkbox>
                 </Form.Item>
 
                 <div className="d-flex align-items-center justify-content-between">
                   <Link to="/" className="login-form-forgot">
-                    <h6 className="forgotMsg">Forgot password?</h6>
+                    <h6 className="forgotMsg" onClick={forgetHandler}>
+                      Forgot password?
+                    </h6>
                   </Link>
                 </div>
               </div>
-              {isClicked ? (
+              {error?.data?.success === false ? (
                 <div>
-                  <p className="mb-2 text-danger">
-                    Email or password incorrect
-                  </p>
+                  <p className="mb-2 text-danger">Email or password incorrect</p>
                 </div>
               ) : null}
 
@@ -125,6 +150,7 @@ const Login = () => {
                   type="primary"
                   htmlType="submit"
                   className="login-form-button mb-3 w-100"
+                  style={{ minHeight: 40 }}
                 >
                   Log in
                 </Button>
@@ -136,20 +162,23 @@ const Login = () => {
                 <div className="d-flex w-100">
                   <Button
                     type="primary"
+                    disabled
                     className="login-form-button mb-3 me-3 w-100"
+                    style={{ minHeight: 40 }}
                   >
                     Google
                   </Button>
                   <Button
                     type="primary"
+                    disabled
                     className="login-form-button mb-3 w-100"
+                    style={{ minHeight: 40 }}
                   >
                     Facebook
                   </Button>
                 </div>
                 <p>
-                  Don&apos;t have an account?{" "}
-                  <Link to="/user/register">Register now!</Link>
+                  Don&apos;t have an account? <Link to="/user/register">Register now!</Link>
                 </p>
               </div>
             </Form>

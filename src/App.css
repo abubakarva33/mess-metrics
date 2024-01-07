@@ -66,6 +66,10 @@ body {
   box-shadow: inset 0 0 10px -4px black !important;
 }
 
+.ant-input-affix-wrapper {
+  background-color: transparent !important;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -78,4 +82,52 @@ input[type="number"] {
 
 .bg_tertiary {
   background-color: var(--bg-tertiary) !important;
+}
+
+/* Remove background color for autocomplete suggestions */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-color: transparent !important;
+}
+input:-webkit-autofill {
+  -webkit-text-fill-color: white !important;
+}
+
+input:focus,
+input:active {
+  background-color: transparent !important;
+}
+
+/* Optional: Remove box shadow for autocomplete suggestions (Chrome) */
+input:-webkit-autofill {
+  color: var(--text-primary);
+  box-shadow: 0 0 0 1000px #11151c inset !important;
+}
+
+/* Remove background color for autocomplete suggestions */
+.ant-input:-webkit-autofill,
+.ant-input:focus,
+.ant-input:active,
+.ant-input:hover {
+  background-color: transparent !important;
+}
+
+/* Optional: Remove box shadow for autocomplete suggestions (Chrome) */
+.ant-input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px #11151c inset !important;
+}
+
+/* Change text color to white after autocomplete */
+.ant-input:-webkit-autofill,
+.ant-input:focus,
+.ant-input:active,
+.ant-input:hover {
+  -webkit-text-fill-color: white !important;
+}
+
+/* Override Ant Design's default focus border (if needed) */
+.ant-input-affix-wrapper > input.ant-input:focus *{
+  box-shadow: 0 0 0 2px rgba(0, 60, 180, 0.15) !important;
 }

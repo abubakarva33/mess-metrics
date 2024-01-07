@@ -21,17 +21,30 @@ const Register = () => {
     try {
       const data = await createUser(fieldValues).unwrap();
       if (data?.success) {
-        await Swal.fire({
-          icon: "success",
-          title: "Your work has been saved",
+        const Toast = await Swal.mixin({
+          toast: true,
+          position: "top-end",
           showConfirmButton: false,
-          timer: 1000,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          title: "User created successfully",
         });
         navigate("/user/login");
         form.resetFields();
       }
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: `${error.data.message}`,
+      });
     }
   };
 
@@ -170,7 +183,12 @@ const Register = () => {
               </Form.Item>
             </div>
             <div className="btnGroups">
-              <Button type="primary" htmlType="submit" className="login-form-button mb-3 w-100">
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button mb-3 w-100"
+                style={{ minHeight: 40 }}
+              >
                 Register
               </Button>
               <div className="d-flex">
@@ -179,10 +197,20 @@ const Register = () => {
                 <hr />
               </div>
               <div className="d-flex w-100">
-                <Button type="primary" className="login-form-button mb-3 me-3 w-100">
+                <Button
+                  type="primary"
+                  disabled
+                  className="login-form-button mb-3 me-3 w-100"
+                  style={{ minHeight: 40 }}
+                >
                   Google
                 </Button>
-                <Button type="primary" className="login-form-button mb-3 w-100">
+                <Button
+                  type="primary"
+                  disabled
+                  className="login-form-button mb-3 w-100"
+                  style={{ minHeight: 40 }}
+                >
                   Facebook
                 </Button>
               </div>

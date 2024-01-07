@@ -13,7 +13,7 @@
 }
 .ant-picker .ant-picker-input > input {
   font-size: 18px !important;
-  color: var(--text-secondary) !important;
+  color: var(--text-primary) !important;
 }
 
 .datePickerAnt::placeholder {
