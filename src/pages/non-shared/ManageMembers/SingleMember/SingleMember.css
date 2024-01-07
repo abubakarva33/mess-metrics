@@ -101,4 +101,7 @@
   .memberProfileMonthNane {
     font-size: 20px !important;
   }
+  .d-gridTwo > div > p {
+    font-size: 14px;
+  }
 }

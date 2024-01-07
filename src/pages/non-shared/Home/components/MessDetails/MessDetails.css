@@ -12,3 +12,15 @@
   font-weight: 900;
   font-size: 26px;
 }
+.messDetailsIconSpace{
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 470px) {
+  .messDetails {
+    padding: 20px 5px 20px 10px;
+  }
+  .messDetailsIconSpace{
+    margin-right: 5px;
+  }
+}

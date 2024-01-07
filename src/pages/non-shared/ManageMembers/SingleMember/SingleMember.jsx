@@ -148,7 +148,13 @@ const SingleMember = () => {
                         <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
                         <p className="mb-1">remove now</p>
                       </div>
-                      <Button style={{ width: "80px" }} danger type="primary" onClick={onFinish}>
+                      <Button
+                        style={{ width: "80px" }}
+                        danger
+                        type="primary"
+                        onClick={onFinish}
+                        disabled={role === "manager"}
+                      >
                         Remove
                       </Button>
                     </div>

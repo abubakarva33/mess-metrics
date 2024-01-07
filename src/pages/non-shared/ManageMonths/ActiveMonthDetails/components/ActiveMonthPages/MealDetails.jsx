@@ -31,7 +31,7 @@ const actionColumn = {
   key: "action",
   render: (_, record) => (
     <Space size="middle">
-      <Link>
+      <Link to={`/update-meal?date=${record?.date}`}>
         <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
       </Link>
     </Space>
