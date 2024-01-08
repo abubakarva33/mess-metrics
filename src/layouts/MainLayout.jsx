@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import "./MainLayout.css";
 import Header from "../pages/shared/Header/Header";
 import SideHeader from "../pages/shared/SideHeader/SideHeader";

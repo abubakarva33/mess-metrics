@@ -2,7 +2,7 @@ import "./AllMess.css";
 import { Button, Form, Pagination, Space } from "antd";
 import AdminTableTemplate from "../components/AdminTableTemplate";
 import { Link } from "react-router-dom";
-import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineDelete,  AiOutlineEye } from "react-icons/ai";
 import {
   useDeleteMessByAdminMutation,
   useGetAllMessQuery,
@@ -16,11 +16,11 @@ const AllMess = () => {
   const [filter, setFilter] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [selectedIds, setSelectedIds] = useState([]);
-  const [deleteId, setDeleteId] = useState();
+    const [allDelete] = useDeleteMultipleMessageMutation();
+
   const [form] = Form.useForm();
   const { data, isLoading } = useGetAllMessQuery({ page: pageNumber, filter });
   const [deleteMess] = useDeleteMessByAdminMutation();
-  // const [allDelete] = useDeleteMultipleMessageMutation();
   if (isLoading) {
     return;
   }

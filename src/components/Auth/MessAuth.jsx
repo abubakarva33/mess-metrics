@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useGetUserProfileQuery } from "../../redux/api/sampleApi/userApi";
 import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 import { auth } from "../../redux/features/UserSlice/UserSlice";

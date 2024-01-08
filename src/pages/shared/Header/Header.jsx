@@ -1,18 +1,9 @@
 import "./Header.css";
 import {
-  AiFillCaretDown,
-  AiOutlineAppstoreAdd,
-  AiOutlineBars,
-  AiOutlineBell,
-  AiOutlineDelete,
-  AiOutlineHome,
-  AiOutlinePhone,
-  AiOutlineSetting,
-  AiOutlineUserAdd,
-  AiOutlineUserDelete,
+  AiOutlineSetting
 } from "react-icons/ai";
-import { Avatar, Badge, Drawer, Dropdown, Space } from "antd";
-import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar,  Dropdown, Space } from "antd";
+import {  LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import { TiInfoLargeOutline } from "react-icons/ti";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
