@@ -11,7 +11,6 @@ import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
-import SpinnerMain from "./components/Spinner/SpinnerMain.jsx";
 
 // import App from "./App.jsx";
 const App = lazy(() => import("./App"));

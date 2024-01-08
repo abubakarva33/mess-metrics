@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useGetUserProfileQuery } from "../../redux/api/sampleApi/userApi";
-import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 import { auth } from "../../redux/features/UserSlice/UserSlice";
 import SpinnerMain from "../Spinner/SpinnerMain";
 
@@ -35,7 +34,8 @@ const MessAuth = ({ children }) => {
   if (status === "fulfilled") {
     return <>{children}</>;
   }
-  return <SpinnerMain />;
+  return <></>;
+  // return <SpinnerMain />;
 };
 
 export default MessAuth;

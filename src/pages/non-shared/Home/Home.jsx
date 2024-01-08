@@ -9,7 +9,6 @@ import {
   useGetUserProfileQuery,
 } from "../../../redux/api/sampleApi/userApi";
 import AllMembers from "./components/AllMembers/AllMembers";
-import SpinnerMain from "../../../components/Spinner/SpinnerMain";
 import {
   useGetLastBazarQuery,
   useGetMessAccountQuery,
