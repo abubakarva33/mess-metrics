@@ -4,9 +4,9 @@ import { useGetUserProfileQuery } from "./redux/api/sampleApi/userApi";
 import { ConfigProvider, theme } from "antd";
 import { useDispatch } from "react-redux";
 import { authRole } from "./redux/features/UserSlice/UserSlice";
-import SkeletonLoader from "./components/SkeletonLoader/SkeletonLoader";
 import { routes } from "./routes/Routes";
 import Swal from "sweetalert2";
+import SpinnerMain from "./components/Spinner/SpinnerMain";
 
 function App() {
   const { isLoading, data } = useGetUserProfileQuery();
@@ -32,10 +32,10 @@ function App() {
   }, [data?.data?.role]);
 
   return (
-    <Suspense fallback={<SkeletonLoader />}>
+    <Suspense fallback={<SpinnerMain />}>
       <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
         {isLoading ? (
-          <SkeletonLoader />
+          <SpinnerMain />
         ) : (
           <RouterProvider router={routes}></RouterProvider>
         )}

@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import { useGetUserProfileQuery } from "../../redux/api/sampleApi/userApi";
 import SkeletonLoader from "../SkeletonLoader/SkeletonLoader";
 import { auth } from "../../redux/features/UserSlice/UserSlice";
+import SpinnerMain from "../Spinner/SpinnerMain";
 
 const MessAuth = ({ children }) => {
   const { isLogin } = useSelector((state) => state.user);
@@ -34,7 +35,7 @@ const MessAuth = ({ children }) => {
   if (status === "fulfilled") {
     return <>{children}</>;
   }
-  return <SkeletonLoader />;
+  return <SpinnerMain />;
 };
 
 export default MessAuth;
