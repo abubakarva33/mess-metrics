@@ -84,7 +84,6 @@ const IndividualCostDetails = ({ date }) => {
     itemData,
     data,
     update,
-    onPageChange,
     setItemData,
     setIsModalOpen,
     onPageChange,

@@ -93,7 +93,6 @@ const BazarDetails = ({ date }) => {
     itemData,
     data,
     update,
-    onPageChange,
     setItemData,
     setIsModalOpen,
     onPageChange,

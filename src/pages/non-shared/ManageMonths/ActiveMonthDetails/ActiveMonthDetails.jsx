@@ -88,12 +88,7 @@ const ActiveMonthDetails = () => {
         </div>
 
         <div className="px-2">{pages[type]}</div>
-        {/* <TableTemplate
-          data={tableData}
-          columns={column}
-          dataFetching={dataFetching}
-          onPageChange={onPageChange}
-        /> */}
+       
       </div>
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">
