@@ -19,7 +19,7 @@ const App = lazy(() => import("./App"));
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <Suspense fallback={<SpinnerMain />}>
+      <Suspense fallback={<></>}>
         <App />
       </Suspense>
     </Provider>

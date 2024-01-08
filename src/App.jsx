@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { authRole } from "./redux/features/UserSlice/UserSlice";
 import { routes } from "./routes/Routes";
 import Swal from "sweetalert2";
-import SpinnerMain from "./components/Spinner/SpinnerMain";
 
 function App() {
   const { isLoading, data } = useGetUserProfileQuery();
@@ -32,15 +31,14 @@ function App() {
   }, [data?.data?.role]);
 
   return (
-    <Suspense fallback={<SpinnerMain />}>
-      <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
-        {isLoading ? (
-          <SpinnerMain />
-        ) : (
-          <RouterProvider router={routes}></RouterProvider>
-        )}
-      </ConfigProvider>
-    </Suspense>
+    <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+      {isLoading ? (
+        // <SpinnerMain />
+        <></>
+      ) : (
+        <RouterProvider router={routes}></RouterProvider>
+      )}
+    </ConfigProvider>
   );
 }
 
