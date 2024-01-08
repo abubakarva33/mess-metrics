@@ -2,7 +2,7 @@ import { Button, Form, Pagination, Space } from "antd";
 import AdminTableTemplate from "../components/AdminTableTemplate";
 import "./AllUsers.css";
 import { Link } from "react-router-dom";
-import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineDelete,  AiOutlineEye } from "react-icons/ai";
 import {
   useDeleteUserMutation,
   useGetAllUsersQuery,
@@ -17,7 +17,6 @@ const AllUsers = () => {
   const [filter, setFilter] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [selectedIds, setSelectedIds] = useState([]);
-  const [deleteId, setDeleteId] = useState();
   const [form] = Form.useForm();
   const { data, isLoading } = useGetAllUsersQuery({ page: pageNumber, filter });
   const [deleteUser] = useDeleteUserMutation();

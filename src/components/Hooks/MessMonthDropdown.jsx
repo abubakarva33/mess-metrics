@@ -5,12 +5,12 @@ import SpinnerMain from "../Spinner/SpinnerMain";
 
 const useMonthOptions = () => {
   const { data, isFetching } = useGetMonthsQuery();
+  const [months, setMonths] = useState([{ label: "Select Member", value: "" }]);
 
   if (isFetching) {
     return <SpinnerMain />;
   }
 
-  const [months, setMonths] = useState([{ label: "Select Member", value: "" }]);
 
   useEffect(() => {
     const memberData = data?.map((member) => ({

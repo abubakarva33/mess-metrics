@@ -1,12 +1,11 @@
-import { Button, Form, Pagination, Space, Table } from "antd";
-import AdminTableTemplate from "../components/AdminTableTemplate";
+import {  Form, Pagination, Space, Table } from "antd";
+
 import "./AllAdmin.css";
 import { Link } from "react-router-dom";
-import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
 import {
   useDeleteUserMutation,
   useGetAllAdminQuery,
-  useGetAllUsersQuery,
   useMakeAdminMutation,
 } from "../../../redux/api/sampleApi/adminApi";
 import { useState } from "react";
@@ -17,13 +16,10 @@ import Search from "antd/es/input/Search";
 const AllAdmin = () => {
   const [filter, setFilter] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
-  const [selectedIds, setSelectedIds] = useState([]);
-  const [deleteId, setDeleteId] = useState();
   const [form] = Form.useForm();
   const { data, isLoading } = useGetAllAdminQuery({ page: pageNumber, filter });
-  const [deleteUser] = useDeleteUserMutation();
+
   const [makeAdmin] = useMakeAdminMutation();
-  // const [allDelete] = useDeleteMultipleMessageMutation();
   if (isLoading) {
     return;
   }

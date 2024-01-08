@@ -1,6 +1,6 @@
 import "./SkeletonLoader.css";
 import { Col, Container, Row } from "react-bootstrap";
-import { Skeleton, Space } from "antd";
+import { Skeleton,  } from "antd";
 const SkeletonLoader = () => {
   return (
     <>
