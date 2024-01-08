@@ -1,42 +1,112 @@
+import React from "react";
 import { createBrowserRouter } from "react-router-dom";
-import MainLayout from "../layouts/MainLayout";
-import ErrorPage from "./ErrorPage/ErrorPage";
-import Home from "../pages/non-shared/Home/Home";
-import ContactUs from "../pages/non-shared/ContactUs/ContactUs";
-import FAQ from "../pages/non-shared/FAQ/FAQ";
-import MyProfile from "../pages/non-shared/MyProfile/MyProfile";
-import Notification from "../pages/non-shared/Notification/Notification";
-import Help from "../pages/non-shared/Help/Help";
-import AddMeal from "../pages/non-shared/ManageMeal/AddMeal/AddMeal";
-import UpdateMeal from "../pages/non-shared/ManageMeal/UpdateMeal/UpdateMeal";
-import AddMealCoast from "../pages/non-shared/ManageMessCost/AddMessCost/AddMealCost/AddMealCost";
-import AddSharedOtherCost from "../pages/non-shared/ManageMessCost/AddMessCost/AddSharedOtherCost/AddSharedOtherCost";
-import AddIndividualOtherCost from "../pages/non-shared/ManageMessCost/AddMessCost/AddIndividualOtherCost/AddIndividualOtherCost";
-import UpdateMessCost from "../pages/non-shared/ManageMessCost/UpdateMessCost/UpdateMessCost";
-import AddMember from "../pages/non-shared/ManageMembers/AddMember/AddMember";
-import RemoveMember from "../pages/non-shared/ManageMembers/RemoveMember/RemoveMember";
-import AddMembersMoney from "../pages/non-shared/ManageMembers/AddMembersMoney/AddMembersMoney";
-import ActiveMonthDetails from "../pages/non-shared/ManageMonths/ActiveMonthDetails/ActiveMonthDetails";
-import SwitchActiveMonth from "../pages/non-shared/ManageMonths/SwitchActiveMonth/SwitchActiveMonth";
-import StartNewMonth from "../pages/non-shared/ManageMonths/StartNewMonth/StartNewMonth";
-import DeleteOldMonth from "../pages/non-shared/ManageMonths/DeleteOldMonth/DeleteOldMonth";
-import MessProfile from "../pages/non-shared/ManageMess/MessProfile/MessProfile";
-import DeleteMess from "../pages/non-shared/ManageMess/DeleteMess/DeleteMess";
-import ChangeManager from "../pages/non-shared/ManageMess/ChangeManager/ChangeManager";
-import Login from "../pages/non-shared/Login/Login";
-import Register from "../pages/non-shared/Register/Register";
-import CreateMess from "../pages/non-shared/CreateMess/CreateMess";
-import Members from "../pages/non-shared/ManageMembers/Members/Members";
-import ManagerAuth from "../components/Auth/ManagerAuth";
-import Birthdays from "../pages/non-shared/Birthdays/Birthdays";
-import PhoneBook from "../pages/non-shared/PhoneBook/PhoneBook";
-import RequestMeal from "../pages/non-shared/RequestMeal/RequestMeal";
-import SingleMember from "../pages/non-shared/ManageMembers/SingleMember/SingleMember";
-import Dashboard from "../pages/adminPanel/Dashboard/Dashboard";
-import AllUsers from "../pages/adminPanel/AllUsers/AllUsers";
-import AllAdmin from "../pages/adminPanel/AllAdmin/AllAdmin";
-import AllMess from "../pages/adminPanel/AllMess/AllMess";
-import AllMonth from "../pages/adminPanel/AllMonth/AllMonth";
+
+const MainLayout = React.lazy(() => import("../layouts/MainLayout"));
+const ErrorPage = React.lazy(() => import("./ErrorPage/ErrorPage"));
+const Home = React.lazy(() => import("../pages/non-shared/Home/Home"));
+const ContactUs = React.lazy(() =>
+  import("../pages/non-shared/ContactUs/ContactUs")
+);
+const FAQ = React.lazy(() => import("../pages/non-shared/FAQ/FAQ"));
+const MyProfile = React.lazy(() =>
+  import("../pages/non-shared/MyProfile/MyProfile")
+);
+const Notification = React.lazy(() =>
+  import("../pages/non-shared/Notification/Notification")
+);
+const Help = React.lazy(() => import("../pages/non-shared/Help/Help"));
+const AddMeal = React.lazy(() =>
+  import("../pages/non-shared/ManageMeal/AddMeal/AddMeal")
+);
+const UpdateMeal = React.lazy(() =>
+  import("../pages/non-shared/ManageMeal/UpdateMeal/UpdateMeal")
+);
+const AddMealCoast = React.lazy(() =>
+  import(
+    "../pages/non-shared/ManageMessCost/AddMessCost/AddMealCost/AddMealCost"
+  )
+);
+const AddSharedOtherCost = React.lazy(() =>
+  import(
+    "../pages/non-shared/ManageMessCost/AddMessCost/AddSharedOtherCost/AddSharedOtherCost"
+  )
+);
+const AddIndividualOtherCost = React.lazy(() =>
+  import(
+    "../pages/non-shared/ManageMessCost/AddMessCost/AddIndividualOtherCost/AddIndividualOtherCost"
+  )
+);
+const UpdateMessCost = React.lazy(() =>
+  import("../pages/non-shared/ManageMessCost/UpdateMessCost/UpdateMessCost")
+);
+const AddMember = React.lazy(() =>
+  import("../pages/non-shared/ManageMembers/AddMember/AddMember")
+);
+const RemoveMember = React.lazy(() =>
+  import("../pages/non-shared/ManageMembers/RemoveMember/RemoveMember")
+);
+const AddMembersMoney = React.lazy(() =>
+  import("../pages/non-shared/ManageMembers/AddMembersMoney/AddMembersMoney")
+);
+const ActiveMonthDetails = React.lazy(() =>
+  import(
+    "../pages/non-shared/ManageMonths/ActiveMonthDetails/ActiveMonthDetails"
+  )
+);
+const SwitchActiveMonth = React.lazy(() =>
+  import("../pages/non-shared/ManageMonths/SwitchActiveMonth/SwitchActiveMonth")
+);
+const StartNewMonth = React.lazy(() =>
+  import("../pages/non-shared/ManageMonths/StartNewMonth/StartNewMonth")
+);
+const DeleteOldMonth = React.lazy(() =>
+  import("../pages/non-shared/ManageMonths/DeleteOldMonth/DeleteOldMonth")
+);
+const MessProfile = React.lazy(() =>
+  import("../pages/non-shared/ManageMess/MessProfile/MessProfile")
+);
+const DeleteMess = React.lazy(() =>
+  import("../pages/non-shared/ManageMess/DeleteMess/DeleteMess")
+);
+const ChangeManager = React.lazy(() =>
+  import("../pages/non-shared/ManageMess/ChangeManager/ChangeManager")
+);
+const Login = React.lazy(() => import("../pages/non-shared/Login/Login"));
+const Register = React.lazy(() =>
+  import("../pages/non-shared/Register/Register")
+);
+const CreateMess = React.lazy(() =>
+  import("../pages/non-shared/CreateMess/CreateMess")
+);
+const Members = React.lazy(() =>
+  import("../pages/non-shared/ManageMembers/Members/Members")
+);
+const ManagerAuth = React.lazy(() => import("../components/Auth/ManagerAuth"));
+const Birthdays = React.lazy(() =>
+  import("../pages/non-shared/Birthdays/Birthdays")
+);
+const PhoneBook = React.lazy(() =>
+  import("../pages/non-shared/PhoneBook/PhoneBook")
+);
+const RequestMeal = React.lazy(() =>
+  import("../pages/non-shared/RequestMeal/RequestMeal")
+);
+const SingleMember = React.lazy(() =>
+  import("../pages/non-shared/ManageMembers/SingleMember/SingleMember")
+);
+const Dashboard = React.lazy(() =>
+  import("../pages/adminPanel/Dashboard/Dashboard")
+);
+const AllUsers = React.lazy(() =>
+  import("../pages/adminPanel/AllUsers/AllUsers")
+);
+const AllAdmin = React.lazy(() =>
+  import("../pages/adminPanel/AllAdmin/AllAdmin")
+);
+const AllMess = React.lazy(() => import("../pages/adminPanel/AllMess/AllMess"));
+const AllMonth = React.lazy(() =>
+  import("../pages/adminPanel/AllMonth/AllMonth")
+);
 
 export const routes = createBrowserRouter([
   {
