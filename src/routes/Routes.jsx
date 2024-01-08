@@ -1,5 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import SpinnerMain from "../components/Spinner/SpinnerMain";
+// import MainLayout from "../layouts/MainLayout";
 
 const MainLayout = React.lazy(() => import("../layouts/MainLayout"));
 const ErrorPage = React.lazy(() => import("./ErrorPage/ErrorPage"));
@@ -113,164 +115,328 @@ export const routes = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     children: [
-      { path: "/", element: <Home /> },
-      { path: "/aboutUs", element: <ContactUs /> },
-      { path: "/faq", element: <FAQ /> },
-      { path: "/my-profile", element: <MyProfile /> },
-      { path: "/notification", element: <Notification /> },
-      { path: "/helps", element: <Help /> },
-      { path: "/all-members", element: <Members /> },
-      { path: "/switch-active-month", element: <SwitchActiveMonth /> },
-      { path: "/mess-profile", element: <MessProfile /> },
-      { path: "/phone-book", element: <PhoneBook /> },
-      { path: "/birthdays", element: <Birthdays /> },
-      { path: "/request-meal", element: <RequestMeal /> },
-      { path: "/all-members/:Id", element: <SingleMember /> },
+      {
+        path: "/",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <Home />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/aboutUs",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <ContactUs />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/faq",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <FAQ />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/my-profile",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <MyProfile />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/notification",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <Notification />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/helps",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <Help />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/all-members",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <Members />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/switch-active-month",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <SwitchActiveMonth />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/mess-profile",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <MessProfile />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/phone-book",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <PhoneBook />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/birthdays",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <Birthdays />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/request-meal",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <RequestMeal />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/all-members/:Id",
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <SingleMember />
+          </Suspense>
+        ),
+      },
       {
         path: "/active-month-details",
-        element: <ActiveMonthDetails />,
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <ActiveMonthDetails />
+          </Suspense>
+        ),
         children: [
           {
             path: "/active-month-details/meal",
-            element: <ActiveMonthDetails />,
+            element: (
+              <Suspense fallback={<SpinnerMain />}>
+                <ActiveMonthDetails />
+              </Suspense>
+            ),
           },
         ],
       },
       {
         path: "/mess-metrics/protected-explore/dashboard",
-        element: <Dashboard />,
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <Dashboard />
+          </Suspense>
+        ),
       },
       {
         path: "/mess-metrics/protected-explore/dashboard/all-users",
-        element: <AllUsers />,
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <AllUsers />
+          </Suspense>
+        ),
       },
       {
         path: "/mess-metrics/protected-explore/dashboard/all-admins",
-        element: <AllAdmin />,
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <AllAdmin />
+          </Suspense>
+        ),
       },
       {
         path: "/mess-metrics/protected-explore/dashboard/all-mess",
-        element: <AllMess />,
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <AllMess />
+          </Suspense>
+        ),
       },
       {
         path: "/mess-metrics/protected-explore/dashboard/all-months",
-        element: <AllMonth />,
+        element: (
+          <Suspense fallback={<SpinnerMain />}>
+            <AllMonth />
+          </Suspense>
+        ),
       },
       {
         path: "/add-meal",
         element: (
-          <ManagerAuth>
-            <AddMeal />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <AddMeal />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
       {
         path: "/update-meal",
         element: (
-          <ManagerAuth>
-            <UpdateMeal />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <UpdateMeal />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
       {
         path: "/add-meal-cost",
         element: (
-          <ManagerAuth>
-            <AddMealCoast />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <AddMealCoast />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
       {
         path: "/add-shared-cost",
         element: (
-          <ManagerAuth>
-            <AddSharedOtherCost />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <AddSharedOtherCost />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
       {
         path: "/add-individual-cost",
         element: (
-          <ManagerAuth>
-            <AddIndividualOtherCost />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <AddIndividualOtherCost />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
-      // {
-      //   path: "/update-cost",
-      //   element: (
-      //     <ManagerAuth>
-      //       <UpdateMessCost />
-      //     </ManagerAuth>
-      //   ),
-      // },
       {
         path: "/add-member",
         element: (
-          <ManagerAuth>
-            <AddMember />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <AddMember />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
       {
         path: "/remove-member",
         element: (
-          <ManagerAuth>
-            <RemoveMember />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <RemoveMember />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
       {
         path: "/add-members-money",
         element: (
-          <ManagerAuth>
-            <AddMembersMoney />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <AddMembersMoney />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
       {
         path: "/start-new-month",
         element: (
-          <ManagerAuth>
-            <StartNewMonth />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <StartNewMonth />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
       {
         path: "/delete-old-month",
         element: (
-          <ManagerAuth>
-            <DeleteOldMonth />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <DeleteOldMonth />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
       {
         path: "/delete-mess",
         element: (
-          <ManagerAuth>
-            <DeleteMess />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <DeleteMess />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
       {
         path: "/change-manager",
         element: (
-          <ManagerAuth>
-            <ChangeManager />
-          </ManagerAuth>
+          <Suspense fallback={<SpinnerMain />}>
+            <ManagerAuth>
+              <ChangeManager />
+            </ManagerAuth>
+          </Suspense>
         ),
       },
     ],
   },
-  { path: "/user/login", element: <Login /> },
-  { path: "/user/register", element: <Register /> },
-  { path: "/create-mess", element: <CreateMess /> },
+  {
+    path: "/user/login",
+    element: (
+      <Suspense fallback={<SpinnerMain />}>
+        <Login />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/user/register",
+    element: (
+      <Suspense fallback={<SpinnerMain />}>
+        <Register />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/create-mess",
+    element: (
+      <Suspense fallback={<SpinnerMain />}>
+        <CreateMess />
+      </Suspense>
+    ),
+  },
   {
     path: "/error",
-    element: <ErrorPage />,
+    element: (
+      <Suspense fallback={<SpinnerMain />}>
+        <ErrorPage />
+      </Suspense>
+    ),
   },
   {
     path: "*",
-    element: <ErrorPage />,
+    element: (
+      <Suspense fallback={<SpinnerMain />}>
+        <ErrorPage />
+      </Suspense>
+    ),
   },
 ]);
