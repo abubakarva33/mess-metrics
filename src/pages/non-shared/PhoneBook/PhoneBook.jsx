@@ -3,7 +3,6 @@ import {
   useCreatePhoneMutation,
   useGetPhoneBookQuery,
 } from "../../../redux/api/sampleApi/phonebookApi";
-import "./PhoneBook.css";
 import PhoneEach from "./components/PhoneEach/PhoneEach";
 import Swal from "sweetalert2";
 import { IoIosArrowBack } from "react-icons/io";
