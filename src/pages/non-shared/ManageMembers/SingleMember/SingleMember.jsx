@@ -1,5 +1,4 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "./SingleMember.css";
 import { Col, Container, Row } from "react-bootstrap";
 import { useState } from "react";
 import { Button } from "antd";
