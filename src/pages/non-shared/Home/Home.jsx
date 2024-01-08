@@ -17,15 +17,17 @@ import {
 import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
 import { Link } from "react-router-dom";
+import SkeletonLoader from "../../../components/SkeletonLoader/SkeletonLoader";
 
 const Home = () => {
   const { data: usersAcc } = useGetUserAccountQuery();
   const { data: profileData, isFetching } = useGetUserProfileQuery();
-  const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
+  const { data: messAccount, isFetching: messFetching } =
+    useGetMessAccountQuery();
   const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery();
 
   if (isFetching || messFetching || bazarFetching) {
-    return <SpinnerMain />;
+    return <SkeletonLoader />;
   }
   return (
     <div className="mt-3 home-container">
@@ -45,12 +47,17 @@ const Home = () => {
         <h5 className="divider">
           <span className="px-2">Personal Details</span>{" "}
         </h5>
-        <PersonalDetails userId={profileData?.data?._id} monthId={messAccount?.month?._id} />
+        <PersonalDetails
+          userId={profileData?.data?._id}
+          monthId={messAccount?.month?._id}
+        />
       </div>
       <div>
         <div className="d-flexCenter my-4 w-100">
           <h5 className="divider mb-0">
-            <span className="px-2">Total Members : {usersAcc?.data?.length || 0} </span>
+            <span className="px-2">
+              Total Members : {usersAcc?.data?.length || 0}{" "}
+            </span>
           </h5>
         </div>
 
@@ -76,7 +83,11 @@ const Home = () => {
           <FloatButton />
           <Link to="/add-meal">
             {" "}
-            <FloatButton icon={<CommentOutlined />} description="Add Meal" className="text-right"/>
+            <FloatButton
+              icon={<CommentOutlined />}
+              description="Add Meal"
+              className="text-right"
+            />
           </Link>
           <FloatButton icon={<CommentOutlined />} />
           <FloatButton icon={<CommentOutlined />} />
