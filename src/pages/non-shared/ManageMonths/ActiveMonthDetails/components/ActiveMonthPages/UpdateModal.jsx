@@ -16,6 +16,7 @@ const typeFormate = {
 };
 
 const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
+  console.log(isModalOpen);
   const type = useSearchQuery("type") || "";
   const members = useMemberOptions();
   const [form] = Form.useForm();
@@ -29,14 +30,11 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
   useEffect(() => {
     const updated = { amount: data.amount };
     if (data.members) {
-      updated.members = Array.isArray(data.members)
-        ? data.members.map(({ _id }) => _id)
-        : [];
+      updated.members = Array.isArray(data.members) ? data.members.map(({ _id }) => _id) : [];
     }
     if (data.user) {
       updated.user = data.user._id;
     }
-
 
     form.setFieldsValue(updated);
   }, [data, form]);
@@ -88,13 +86,7 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
   }
 
   return (
-    <Modal
-      open={isModalOpen}
-      onOk={handleOk}
-      onCancel={handleCancel}
-      okText="Update"
-      footer={null}
-    >
+    <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} okText="Update" footer={null}>
       <h4 className="text-center mt-2 mb-4">Update {typeFormate[type]}</h4>
       <div className="mealDatePicker">
         <ReactDatePicker
@@ -106,13 +98,7 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
           icon={<MdCalendarMonth />}
         />
       </div>
-      <Form
-        name="complex-form"
-        form={form}
-        onFinish={onFinish}
-        layout="vertical"
-        className="my-4"
-      >
+      <Form name="complex-form" form={form} onFinish={onFinish} layout="vertical" className="my-4">
         <Form.Item>
           <div>
             <h6>Enter Updated Cost:</h6>
@@ -142,12 +128,7 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
             ]}
           >
             {/* <h6>Select Member:</h6> */}
-            <Select
-              mode="multiple"
-              maxTagCount={1}
-              maxTagTextLength={10}
-              options={members}
-            />
+            <Select mode="multiple" maxTagCount={1} maxTagTextLength={10} options={members} />
           </Form.Item>
         )}
         {data.user && (
@@ -161,11 +142,7 @@ const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
               },
             ]}
           >
-            <Select
-              placeholder="Select Member"
-              maxTagTextLength={10}
-              options={members}
-            />
+            <Select placeholder="Select Member" maxTagTextLength={10} options={members} />
           </Form.Item>
         )}
 

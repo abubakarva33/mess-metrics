@@ -3,7 +3,6 @@ import "./ActiveMonthDetails.css";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import { useEffect, useState } from "react";
-import ActiveDetailsTemplate from "./components/ActiveDetailsTemplate/ActiveDetailsTemplate";
 
 import { useSearchQuery } from "../../../../utils/useSearchQuery";
 import ReactDatePicker from "react-datepicker";

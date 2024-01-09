@@ -34,19 +34,6 @@ const initColumn = [
   },
 ];
 
-const actionColumn = {
-  title: "Action",
-  width: 80,
-  key: "action",
-  render: (_, record) => (
-    <Space size="middle">
-      <div onClick={() => (setItemData(record), setIsModalOpen(true))}>
-        <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
-      </div>
-    </Space>
-  ),
-};
-
 const IndividualCostDetails = ({ date }) => {
   const [filter, setFilter] = useState({ page: 1 });
   const [itemData, setItemData] = useState({});
@@ -57,6 +44,19 @@ const IndividualCostDetails = ({ date }) => {
 
   const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);
+
+  const actionColumn = {
+    title: "Action",
+    width: 80,
+    key: "action",
+    render: (_, record) => (
+      <Space size="middle">
+        <div onClick={() => (setItemData(record), setIsModalOpen(true))}>
+          <img src="/images/pen.png" alt="edit" style={{ height: "30px", width: "30px" }} />
+        </div>
+      </Space>
+    ),
+  };
 
   const compareMonth = useMemo(
     () => data?.data?.filter((item) => item?.month === activeMonthData?._id),

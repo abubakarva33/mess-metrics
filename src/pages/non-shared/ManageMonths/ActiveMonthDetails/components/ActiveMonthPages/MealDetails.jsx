@@ -45,8 +45,10 @@ const MealDetails = ({ date }) => {
   const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);
 
+  console.log(data);
+
   const compareMonth = useMemo(
-    () => data?.data?.filter((item) => item?.activeMonth === activeMonthData?._id),
+    () => data?.data?.filter((item) => item?.activeMonth?._id === activeMonthData?._id),
     [data, activeMonthData]
   );
 
