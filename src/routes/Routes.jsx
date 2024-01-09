@@ -126,14 +126,6 @@ export const routes = createBrowserRouter([
           </ManagerAuth>
         ),
       },
-      // {
-      //   path: "/update-cost",
-      //   element: (
-      //     <ManagerAuth>
-      //       <UpdateMessCost />
-      //     </ManagerAuth>
-      //   ),
-      // },
       {
         path: "/add-member",
         element: (
