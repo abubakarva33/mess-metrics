@@ -2,10 +2,8 @@ import "./UpdateMeal.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { MdCalendarMonth, MdEdit, MdOutlineAdd } from "react-icons/md";
 import { HiMinusSm } from "react-icons/hi";
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setDefaultMeal } from "../../../../redux/features/basic/basicSlice.js";
 import ReactDatePicker from "react-datepicker";
 import moment from "moment/moment";
 
@@ -24,8 +22,10 @@ const UpdateMeal = () => {
   const [meal, setMeal] = useState([]);
   const [startDate, setStartDate] = useState(date);
   const { data: mealData, isFetching: mealFetching } = useGetMessMealQuery(startDate);
-  const [UpdateMeal] = useUpdateMealMutation();
+  const [UpdateMeal, { status }] = useUpdateMealMutation();
   const navigate = useNavigate();
+
+  console.log(status);
 
   useEffect(() => {
     const prevMeal = mealData?.map((m) => ({
@@ -105,174 +105,180 @@ const UpdateMeal = () => {
   };
 
   return (
-    <div className="">
-      <div className="addMealCostSectionMain">
-        <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
-          <h3 className="text-center mt-2 mb-4">Update Meal</h3>
-          <div className="mealDatePicker mb-4">
-            <ReactDatePicker
-              className="w-100"
-              selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
-              dateFormat="dd-MM-yyyy"
-              showIcon
-              onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
-              icon={<MdCalendarMonth />}
-            />
-          </div>
-
-          {mealData?.length === 0 ? (
-            <div className="d-flexCenter flex-column my-3">
-              <img src="/images/inbox.png" alt="" />
-              <p className="text-center fs-5 mt-3">No meal data available.</p>
+    <Spin
+      spinning={status === "pending"}
+      className="d-flexCenter"
+      style={{ minHeight: "100vh" }}
+    >
+      <div className="">
+        <div className="addMealCostSectionMain">
+          <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
+            <h3 className="text-center mt-2 mb-4">Update Meal</h3>
+            <div className="mealDatePicker mb-4">
+              <ReactDatePicker
+                className="w-100"
+                selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+                dateFormat="dd-MM-yyyy"
+                showIcon
+                onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+                icon={<MdCalendarMonth />}
+              />
             </div>
-          ) : (
-            <div>
-              {meal?.map((m, ind) => (
-                <div className="phoneItem " key={ind}>
-                  <div className="phoneItemLeft">
-                    <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
-                    <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
-                  </div>
-                  <div className="d-flex">
-                    {m.isClicked && (
-                      <button
-                        disabled={m?.meal <= 0}
-                        className="addMealRegulationIcon"
-                        onClick={() => handlerMeal(m._id, -0.5)}
-                      >
-                        <HiMinusSm className="fs-4" />
-                      </button>
-                    )}
 
-                    <div className="mealCount">
-                      <p className="mb-0">{m?.meal}</p>
+            {mealData?.length === 0 ? (
+              <div className="d-flexCenter flex-column my-3">
+                <img src="/images/inbox.png" alt="" />
+                <p className="text-center fs-5 mt-3">No meal data available.</p>
+              </div>
+            ) : (
+              <div>
+                {meal?.map((m, ind) => (
+                  <div className="phoneItem " key={ind}>
+                    <div className="phoneItemLeft">
+                      <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
+                      <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
                     </div>
-                    {m.isClicked && (
-                      <button
-                        className="addMealRegulationIcon"
-                        onClick={() => handlerMeal(m._id, 0.5)}
-                      >
-                        <MdOutlineAdd className="fs-4" />
-                      </button>
-                    )}
-                    {!m?.isClicked && (
-                      <div>
-                        <MdEdit
-                          className="fs-4 ms-1"
-                          onClick={() => handleClick(m._id)}
-                          style={{ color: "#5d83ac" }}
-                        />
+                    <div className="d-flex">
+                      {m.isClicked && (
+                        <button
+                          disabled={m?.meal <= 0}
+                          className="addMealRegulationIcon"
+                          onClick={() => handlerMeal(m._id, -0.5)}
+                        >
+                          <HiMinusSm className="fs-4" />
+                        </button>
+                      )}
+
+                      <div className="mealCount">
+                        <p className="mb-0">{m?.meal}</p>
                       </div>
-                    )}
+                      {m.isClicked && (
+                        <button
+                          className="addMealRegulationIcon"
+                          onClick={() => handlerMeal(m._id, 0.5)}
+                        >
+                          <MdOutlineAdd className="fs-4" />
+                        </button>
+                      )}
+                      {!m?.isClicked && (
+                        <div>
+                          <MdEdit
+                            className="fs-4 ms-1"
+                            onClick={() => handleClick(m._id)}
+                            style={{ color: "#5d83ac" }}
+                          />
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
-          <Button
-            type="primary"
-            className="w-100"
-            onClick={onFinish}
-            style={{ minHeight: 40, fontSize: 18 }}
-            disabled={
-              Array.isArray(meal) ? [...meal?.filter((m) => m.isChanged)].length <= 0 : true
-            }
-          >
-            Submit
-          </Button>
-        </div>
-      </div>
-      <div className="phoneBookContainer">
-        <div className="phoneBookContainerMainBg">
-          <div className="phoneBookContainerMain">
-            <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-              <h3>UPDATE MEAL </h3>
-            </div>
+                ))}
+              </div>
+            )}
+            <Button
+              type="primary"
+              className="w-100"
+              onClick={onFinish}
+              style={{ minHeight: 40, fontSize: 18 }}
+              disabled={
+                Array.isArray(meal) ? [...meal?.filter((m) => m.isChanged)].length <= 0 : true
+              }
+            >
+              Submit
+            </Button>
           </div>
         </div>
-        <div className="phoneBookContainerItemBg">
-          <div className="phoneBookContainerItem smDeviceAlign">
-            <div className="pt-5 pb-3 px-3 m-auto w-100">
-              <div className="mx-auto" style={{ maxWidth: "500px" }}>
-                <div className="mealDatePicker mb-4">
-                  <ReactDatePicker
-                    className="w-100"
-                    selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
-                    dateFormat="dd-MM-yyyy"
-                    showIcon
-                    onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
-                    icon={<MdCalendarMonth />}
-                  />
-                </div>
-
-                {mealData?.length === 0 ? (
-                  <div className="d-flexCenter flex-column my-3">
-                    <img src="/images/inbox.png" alt="" />
-                    <p className="text-center fs-5 mt-3">No meal data available.</p>
+        <div className="phoneBookContainer">
+          <div className="phoneBookContainerMainBg">
+            <div className="phoneBookContainerMain">
+              <div className="componentHeader">
+                <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+                <h3>UPDATE MEAL </h3>
+              </div>
+            </div>
+          </div>
+          <div className="phoneBookContainerItemBg">
+            <div className="phoneBookContainerItem smDeviceAlign">
+              <div className="pt-5 pb-3 px-3 m-auto w-100">
+                <div className="mx-auto" style={{ maxWidth: "500px" }}>
+                  <div className="mealDatePicker mb-4">
+                    <ReactDatePicker
+                      className="w-100"
+                      selected={new Date(moment(startDate, "DD-MM-YYYY").format("MM-DD-YYYY"))}
+                      dateFormat="dd-MM-yyyy"
+                      showIcon
+                      onChange={(date) => setStartDate(moment(date).format("DD-MM-YYYY"))}
+                      icon={<MdCalendarMonth />}
+                    />
                   </div>
-                ) : (
-                  <div>
-                    {meal?.map((m, ind) => (
-                      <div className="phoneItem " key={ind}>
-                        <div className="phoneItemLeft">
-                          <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
-                          <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
-                        </div>
-                        <div className="d-flex">
-                          {m.isClicked && (
-                            <button
-                              disabled={m?.meal <= 0}
-                              className="addMealRegulationIcon"
-                              onClick={() => handlerMeal(m._id, -0.5)}
-                            >
-                              <HiMinusSm className="fs-4" />
-                            </button>
-                          )}
 
-                          <div className="mealCount">
-                            <p className="mb-0">{m?.meal}</p>
+                  {mealData?.length === 0 ? (
+                    <div className="d-flexCenter flex-column my-3">
+                      <img src="/images/inbox.png" alt="" />
+                      <p className="text-center fs-5 mt-3">No meal data available.</p>
+                    </div>
+                  ) : (
+                    <div>
+                      {meal?.map((m, ind) => (
+                        <div className="phoneItem " key={ind}>
+                          <div className="phoneItemLeft">
+                            <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
+                            <h6 className="phoneNameText pt-1">{m?.member?.name}</h6>
                           </div>
-                          {m.isClicked && (
-                            <button
-                              className="addMealRegulationIcon"
-                              onClick={() => handlerMeal(m._id, 0.5)}
-                            >
-                              <MdOutlineAdd className="fs-4" />
-                            </button>
-                          )}
-                          {!m?.isClicked && (
-                            <div>
-                              <MdEdit
-                                className="fs-4 ms-1"
-                                onClick={() => handleClick(m._id)}
-                                style={{ color: "#5d83ac" }}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                          <div className="d-flex">
+                            {m.isClicked && (
+                              <button
+                                disabled={m?.meal <= 0}
+                                className="addMealRegulationIcon"
+                                onClick={() => handlerMeal(m._id, -0.5)}
+                              >
+                                <HiMinusSm className="fs-4" />
+                              </button>
+                            )}
 
-                <Button
-                  type="primary"
-                  className="w-100"
-                  onClick={onFinish}
-                  style={{ minHeight: 40, fontSize: 18 }}
-                  disabled={
-                    Array.isArray(meal) ? [...meal?.filter((m) => m.isChanged)].length <= 0 : true
-                  }
-                >
-                  Submit
-                </Button>
+                            <div className="mealCount">
+                              <p className="mb-0">{m?.meal}</p>
+                            </div>
+                            {m.isClicked && (
+                              <button
+                                className="addMealRegulationIcon"
+                                onClick={() => handlerMeal(m._id, 0.5)}
+                              >
+                                <MdOutlineAdd className="fs-4" />
+                              </button>
+                            )}
+                            {!m?.isClicked && (
+                              <div>
+                                <MdEdit
+                                  className="fs-4 ms-1"
+                                  onClick={() => handleClick(m._id)}
+                                  style={{ color: "#5d83ac" }}
+                                />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <Button
+                    type="primary"
+                    className="w-100"
+                    onClick={onFinish}
+                    style={{ minHeight: 40, fontSize: 18 }}
+                    disabled={
+                      Array.isArray(meal) ? [...meal?.filter((m) => m.isChanged)].length <= 0 : true
+                    }
+                  >
+                    Submit
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Spin>
   );
 };
 

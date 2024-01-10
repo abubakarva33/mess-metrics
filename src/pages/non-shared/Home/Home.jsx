@@ -17,14 +17,17 @@ import {
 import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
 import { Link } from "react-router-dom";
+import { useGetSingleMessQuery } from "../../../redux/api/sampleApi/messApi";
 
 const Home = () => {
-  const { data: usersAcc } = useGetUserAccountQuery();
   const { data: profileData, isFetching } = useGetUserProfileQuery();
   const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
   const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery();
+  const { data: usersAcc } = useGetUserAccountQuery();
+  // do not remove useGetSingleMessQuery it improves performance //
+  const { data } = useGetSingleMessQuery(profileData?.data?.mess?._id);
 
-  if (isFetching || messFetching || bazarFetching) {
+  if (messFetching) {
     return <SpinnerMain />;
   }
   return (
@@ -38,7 +41,7 @@ const Home = () => {
             <h5 className="px-2 pt-3"> Mess Overview</h5>
             <Chart />
           </div>
-          <div>{<BazarList data={lastBazar} />}</div>
+          <div>{<BazarList data={lastBazar} bazarFetching={bazarFetching} />}</div>
         </Col>
       </Row>
       <div className="mt-4">
@@ -76,7 +79,7 @@ const Home = () => {
           <FloatButton />
           <Link to="/add-meal">
             {" "}
-            <FloatButton icon={<CommentOutlined />} description="Add Meal" className="text-right"/>
+            <FloatButton icon={<CommentOutlined />} description="Add Meal" className="text-right" />
           </Link>
           <FloatButton icon={<CommentOutlined />} />
           <FloatButton icon={<CommentOutlined />} />
