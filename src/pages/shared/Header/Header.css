@@ -34,7 +34,7 @@
 .ant-dropdown-menu-item {
   color: var(--text-primary) !important;
 }
-.SmallNavMain{
+.SmallNavMain {
   background-color: var(--bg-body) !important;
   position: sticky;
   top: 0;
@@ -46,16 +46,14 @@
   display: none;
   margin: 10px 12px 0 12px;
   border-radius: 10px;
-  background-color: var(--bg-secondary);
- 
+  background: var(--gradient-primary);
 }
-.headerMainMd{
+.headerMainMd {
   display: none;
 }
 
-
-@media screen and (min-device-width: 576px) and (max-device-width: 992px) { 
-  .headerMainMd{
+@media screen and (min-device-width: 576px) and (max-device-width: 992px) {
+  .headerMainMd {
     display: block;
   }
   .header {
@@ -70,8 +68,7 @@
   .header {
     display: none;
   }
-  .headerMainMd{
+  .headerMainMd {
     display: none;
   }
 }
-

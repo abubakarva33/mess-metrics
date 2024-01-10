@@ -1,17 +1,4 @@
-.componentHeader {
-  display: flex;
-  align-items: center;
-  padding: 30px 15px 10px 15px;
-}
-.componentHeader h3 {
-  font-size: 20px;
-  margin-bottom: 0;
-}
-.componentHeaderIcon {
-  font-size: 20px;
-  margin-bottom: 0;
-  margin-right: 10px;
-}
+
 .phoneBookContainer {
   display: none;
   background-color: var(--bg-app-primary);
@@ -48,17 +35,15 @@
 .phoneBookContainerItemBg {
   background-color: var(--bg-body);
 }
-.phonebookSection{
+.phonebookSection {
   margin: 0 0px;
 }
 
-
-@media screen and (min-device-width: 576px) and (max-device-width: 992px) { 
-  .phonebookSection{
+@media screen and (min-device-width: 576px) and (max-device-width: 992px) {
+  .phonebookSection {
     margin: 0 15px;
   }
 }
-
 
 @media only screen and (max-width: 576px) {
   .componentAddSection {
@@ -67,7 +52,7 @@
   .phoneBookContainer {
     display: block;
   }
-  .phonebookSection{
+  .phonebookSection {
     display: none;
   }
 }

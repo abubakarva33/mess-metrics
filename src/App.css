@@ -124,12 +124,33 @@ html body .ant-input-affix-wrapper > input.ant-input:focus * {
 .ant-input-affix-wrapper > input.ant-input:focus * {
   box-shadow: 0 0 0 1000px #11151c inset !important;
 }
-.ant-picker-panel-container{
+.ant-picker-panel-container {
   background-color: var(--bg-extraDashboard);
 }
-.ant-picker-dropdown .ant-picker-today-btn{
+.ant-picker-dropdown .ant-picker-today-btn {
   color: var(--text-primary);
 }
-.ant-picker-dropdown .ant-picker-today-btn:hover{
+.ant-picker-dropdown .ant-picker-today-btn:hover {
   color: var(--text-secondary);
+}
+
+.componentHeader {
+  background-color: var(--bg-body) !important;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding: 30px 15px 10px 15px;
+}
+.componentHeader h3 {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+.componentHeaderIcon {
+  font-size: 20px;
+  margin-bottom: 0;
+  margin-right: 10px;
 }

@@ -25,6 +25,8 @@ const Header = () => {
   const { data } = useGetUserProfileQuery();
   const { isFetching, data: notificationData } = useGetAllNotificationQuery(page);
 
+  console.log(data);
+
   const showModal = () => {
     setIsModalOpen(true);
     setPage(1);
@@ -148,7 +150,7 @@ const Header = () => {
                 </div>
                 <div className="d-flexCenter flex-column">
                   <p className="mb-0">Mess Metrics</p>
-                  <small>Royal Palace</small>
+                  <small>{data?.data?.mess?.name}</small>
                 </div>
                 <Link to="/">
                   <AiOutlineSetting className="fs-3" />
