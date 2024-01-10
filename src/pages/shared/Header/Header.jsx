@@ -1,40 +1,11 @@
 import "./Header.css";
-import {
-  AiFillCaretDown,
-  AiOutlineAppstoreAdd,
-  AiOutlineBars,
-  AiOutlineBell,
-  AiOutlineDelete,
-  AiOutlineHome,
-  AiOutlinePhone,
-  AiOutlineSetting,
-  AiOutlineUserAdd,
-  AiOutlineUserDelete,
-} from "react-icons/ai";
-import { Avatar, Badge, Drawer, Dropdown, Space } from "antd";
-import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { AiOutlineSetting } from "react-icons/ai";
+import { Avatar, Dropdown, Space } from "antd";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, useLocation } from "react-router-dom";
 import { TiInfoLargeOutline } from "react-icons/ti";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
-
-import {
-  MdAddchart,
-  MdOutlineCalendarMonth,
-  MdOutlineFastfood,
-  MdOutlinePeopleAlt,
-  MdSystemUpdateAlt,
-} from "react-icons/md";
-import {
-  BsDatabaseAdd,
-  BsInfoCircleFill,
-  BsPeople,
-  BsPersonUp,
-} from "react-icons/bs";
-import { BiBuildingHouse, BiMoneyWithdraw } from "react-icons/bi";
-import { GiPipeOrgan, GiReceiveMoney } from "react-icons/gi";
-import { PiRadioactive } from "react-icons/pi";
-import { TbRefreshDot } from "react-icons/tb";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../../redux/features/UserSlice/UserSlice";
 import HeaderDrawer from "./HeaderDrawer/HeaderDrawer";
@@ -43,7 +14,6 @@ import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
 import NotificationModal from "../../non-shared/Notification/NotificationModal/NotificationModal";
 import { useGetAllNotificationQuery } from "../../../redux/api/sampleApi/actionApi";
 import NotificationBadge from "../../non-shared/Notification/NotificationModal/NotificationBadge";
-import Notification from "../../non-shared/Notification/Notification";
 import { IoMdHelp } from "react-icons/io";
 const Header = () => {
   const dispatch = useDispatch();
@@ -52,9 +22,8 @@ const Header = () => {
   const [time, setTime] = useState(moment().format("hh:mm A"));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { role } = useSelector((state) => state.user);
-  const { isLoading, data } = useGetUserProfileQuery();
-  const { isFetching, data: notificationData } =
-    useGetAllNotificationQuery(page);
+  const { data } = useGetUserProfileQuery();
+  const { isFetching, data: notificationData } = useGetAllNotificationQuery(page);
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -129,10 +98,7 @@ const Header = () => {
               </Space>
             </Link>
             <div className="navItem me-2" onClick={showModal}>
-              <NotificationBadge
-                isModalOpen={isModalOpen}
-                count={notificationData?.unread}
-              />
+              <NotificationBadge isModalOpen={isModalOpen} count={notificationData?.unread} />
             </div>
 
             <div className="d-flexCenter position-relative smHeader">

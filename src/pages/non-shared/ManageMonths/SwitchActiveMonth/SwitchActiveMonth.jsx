@@ -25,7 +25,7 @@ const SwitchActiveMonth = () => {
   const [switchMonth] = useSwitchActiveMonthMutation();
   const navigate = useNavigate();
 
-  if (isFetching || isLoading) {
+  if ( isLoading) {
     return <SpinnerMain />;
   }
 

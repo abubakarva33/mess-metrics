@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 import { useGetSingleMessQuery } from "../../../redux/api/sampleApi/messApi";
 
 const Home = () => {
-  const { data: profileData, isFetching } = useGetUserProfileQuery();
+  const { data: profileData } = useGetUserProfileQuery();
   const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
   const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery();
   const { data: usersAcc } = useGetUserAccountQuery();

@@ -105,11 +105,7 @@ const UpdateMeal = () => {
   };
 
   return (
-    <Spin
-      spinning={status === "pending"}
-      className="d-flexCenter"
-      style={{ minHeight: "100vh" }}
-    >
+    <Spin spinning={status === "pending"} className="d-flexCenter" style={{ minHeight: "100vh" }}>
       <div className="">
         <div className="addMealCostSectionMain">
           <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
