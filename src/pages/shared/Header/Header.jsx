@@ -67,7 +67,7 @@ const Header = () => {
         {role !== "admin" && role !== "superAdmin" ? (
           <div className="d-flexCenter">
             <Link to="/aboutUs" className="navItem">
-              <Space size="middle">
+              {/* <Space size="middle">
                 <Avatar
                   shape="round"
                   size="large"
@@ -75,10 +75,11 @@ const Header = () => {
                   style={{ cursor: "pointer", userSelect: "none" }}
                   className="bg-transparent"
                 />
-              </Space>
+              </Space> */}
+              <img src="/public/images/info.png" alt="" style={{ height: 30 }} />
             </Link>
             <Link to="/helps" className="navItem">
-              <Space size="middle">
+              {/* <Space size="middle">
                 <Avatar
                   shape="round"
                   size="large"
@@ -86,10 +87,11 @@ const Header = () => {
                   style={{ cursor: "pointer", userSelect: "none" }}
                   className="bg-transparent"
                 />
-              </Space>
+              </Space> */}
+              <img src="/public/images/customer-services.png" alt="" style={{ height: 30 }} />
             </Link>
             <Link to="/faq" className="navItem">
-              <Space size="middle">
+              {/* <Space size="middle">
                 <Avatar
                   shape="round"
                   size="large"
@@ -97,7 +99,8 @@ const Header = () => {
                   style={{ cursor: "pointer", userSelect: "none" }}
                   className="bg-transparent"
                 />
-              </Space>
+              </Space> */}
+              <img src="/public/images/faq.png" alt="" style={{ height: 35 }} />
             </Link>
             <div className="navItem me-2" onClick={showModal}>
               <NotificationBadge isModalOpen={isModalOpen} count={notificationData?.unread} />
