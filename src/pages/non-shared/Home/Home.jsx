@@ -18,6 +18,7 @@ import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
 import { Link } from "react-router-dom";
 import { useGetSingleMessQuery } from "../../../redux/api/sampleApi/messApi";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const { data: profileData } = useGetUserProfileQuery();
@@ -31,7 +32,12 @@ const Home = () => {
     return <SpinnerMain />;
   }
   return (
-    <div className="mt-3 home-container">
+    <motion.div
+      className="mt-3 home-container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.25, duration: 0.5, ease: "easeInOut" }}
+    >
       <Row className="gy-2">
         <Col sm={12} md={6}>
           {messAccount && <MessDetails data={messAccount} />}
@@ -85,7 +91,7 @@ const Home = () => {
           <FloatButton icon={<CommentOutlined />} />
         </FloatButton.Group>
       </>
-    </div>
+    </motion.div>
   );
 };
 

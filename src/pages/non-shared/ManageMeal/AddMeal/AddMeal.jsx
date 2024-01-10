@@ -14,6 +14,7 @@ import moment from "moment/moment";
 import { useAddMealMutation } from "../../../../redux/api/sampleApi/actionApi";
 import Swal from "sweetalert2";
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
+import { motion } from "framer-motion";
 
 const AddMeal = () => {
   const [form] = Form.useForm();
@@ -90,7 +91,11 @@ const AddMeal = () => {
 
   return (
     <Spin spinning={status === "pending"} className="d-flexCenter" style={{ minHeight: "100vh" }}>
-      <div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.25, duration: 0.5, ease: "easeInOut" }}
+      >
         <div className="addMealCostSectionMain">
           <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
             <h3 className="text-center mt-2 mb-4">Add Members Meal</h3>
@@ -333,7 +338,7 @@ const AddMeal = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </Spin>
   );
 };

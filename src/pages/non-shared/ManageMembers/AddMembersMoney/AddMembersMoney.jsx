@@ -9,6 +9,7 @@ import { MdCalendarMonth } from "react-icons/md";
 import useMemberOptions from "../../../../components/Hooks/MembersDropdown";
 import Swal from "sweetalert2";
 import { useAddMembersMoneyMutation } from "../../../../redux/api/sampleApi/actionApi";
+import { motion } from "framer-motion";
 
 const AddMembersMoney = () => {
   const navigate = useNavigate();
@@ -52,7 +53,11 @@ const AddMembersMoney = () => {
   };
   return (
     <Spin spinning={status === "pending"} className="d-flexCenter" style={{ minHeight: "100vh" }}>
-      <div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.25, duration: 0.5, ease: "easeInOut" }}
+      >
         <div className="addMealCostSectionMain">
           <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
             <h4 className="text-center  mt-2 mb-4">Add member's Money</h4>
@@ -200,7 +205,7 @@ const AddMembersMoney = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </Spin>
   );
 };
