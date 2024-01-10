@@ -60,7 +60,7 @@ const Home = () => {
             </h5>
           </div>
 
-          <Row className="g-3 mb-5">
+          <Row className="g-3 footerMargin">
             {usersAcc?.data?.map((user) => (
               <AllMembers
                 key={user._id}

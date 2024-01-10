@@ -44,20 +44,6 @@ const NotificationModal = ({
             >
               Mark all as read
             </p>
-
-            {/* {data?.unread > 0 ? (
-              <h5
-                onClick={() => updateNotification()}
-                style={{ cursor: "pointer" }}
-                className="mb-0"
-              >
-                <FaRegEnvelope />
-              </h5>
-            ) : (
-              <h5 className="mb-0">
-                <FaRegEnvelopeOpen />
-              </h5>
-            )} */}
           </div>
         )}
         <hr />

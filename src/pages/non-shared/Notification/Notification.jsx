@@ -12,6 +12,7 @@ import { useState } from "react";
 const Notification = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
+  const [isLoadClicked, setIsLoadClicked] = useState(false);
   const { isFetching, data } = useGetAllNotificationQuery(page);
   const [updateNotification] = useUpdateAllNotificationMutation();
   return (
@@ -19,10 +20,7 @@ const Notification = () => {
       <div className="phoneBookContainerMainBg">
         <div className="phoneBookContainerMain">
           <div className="componentHeader">
-            <IoIosArrowBack
-              className="componentHeaderIcon"
-              onClick={() => navigate(-1)}
-            />
+            <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
             <h3>NOTIFICATION </h3>
           </div>
         </div>
@@ -55,11 +53,33 @@ const Notification = () => {
                 </div>
               )}
 
-              <Spin spinning={isFetching}>
+              {isFetching && isLoadClicked ? (
+                <Spin spinning={isFetching}>
+                  {data?.data?.map((item, ind) => (
+                    <NotificationModalItem
+                      key={ind}
+                      data={item}
+                      setIsLoadClicked={setIsLoadClicked}
+                    />
+                  ))}
+                </Spin>
+              ) : (
+                <div>
+                  {data?.data?.map((item, ind) => (
+                    <NotificationModalItem
+                      key={ind}
+                      data={item}
+                      setIsLoadClicked={setIsLoadClicked}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* <Spin spinning={isFetching}>
                 {data?.data?.map((item, ind) => (
                   <NotificationModalItem key={ind} data={item} />
                 ))}
-              </Spin>
+              </Spin> */}
 
               {data?.data?.length === 0 && (
                 <p className="text-center mt-3 fs-5"> No Notification Found</p>
@@ -67,8 +87,9 @@ const Notification = () => {
               {data?.data?.length >= 10 && (
                 <Button
                   className="w-100"
-                  onClick={() => setPage(page + 1)}
+                  onClick={() => (setPage(page + 1), setIsLoadClicked(true))}
                   type="primary"
+                  style={{ minHeight: 40, fontSize: 18 }}
                 >
                   Load More
                 </Button>

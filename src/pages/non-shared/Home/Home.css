@@ -29,6 +29,10 @@
   right: 45;
 }
 
+.footerMargin {
+  margin-bottom: 20px;
+}
+
 @media screen and (max-device-width: 992px) {
   .home-container {
     padding: 0 12px;
@@ -38,5 +42,8 @@
   .homeFloatIcon {
     right: 35px;
     bottom: 100px;
+  }
+  .footerMargin {
+    margin-bottom: 85px;
   }
 }
