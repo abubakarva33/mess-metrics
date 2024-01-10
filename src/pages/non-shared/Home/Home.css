@@ -32,7 +32,14 @@
 .footerMargin {
   margin-bottom: 20px;
 }
-
+/* .ant-float-btn-default .ant-float-btn-body{
+  background-color: none !important;
+}
+.ant-float-btn .ant-float-btn-body .ant-float-btn-content {
+  flex-direction: row-reverse;
+  min-height: auto;
+  min-width: 100px;
+} */
 @media screen and (max-device-width: 992px) {
   .home-container {
     padding: 0 12px;

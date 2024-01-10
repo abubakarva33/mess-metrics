@@ -14,11 +14,7 @@ import {
   useGetLastBazarQuery,
   useGetMessAccountQuery,
 } from "../../../redux/api/sampleApi/actionApi";
-import { CommentOutlined, CustomerServiceOutlined } from "@ant-design/icons";
-import { FloatButton } from "antd";
-import { Link } from "react-router-dom";
 import { useGetSingleMessQuery } from "../../../redux/api/sampleApi/messApi";
-import { motion } from "framer-motion";
 import PageTransition from "../../../utils/PageTransition";
 
 const Home = () => {
@@ -72,26 +68,6 @@ const Home = () => {
             ))}
           </Row>
         </div>
-        <>
-          <FloatButton.Group
-            trigger="click"
-            type="primary"
-            className="homeFloatIcon"
-            icon={<CustomerServiceOutlined />}
-          >
-            <FloatButton />
-            <Link to="/add-meal">
-              {" "}
-              <FloatButton
-                icon={<CommentOutlined />}
-                description="Add Meal"
-                className="text-right"
-              />
-            </Link>
-            <FloatButton icon={<CommentOutlined />} />
-            <FloatButton icon={<CommentOutlined />} />
-          </FloatButton.Group>
-        </>
       </div>
     </PageTransition>
   );
