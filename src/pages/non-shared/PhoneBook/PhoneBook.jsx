@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Spin } from "antd";
 import {
   useCreatePhoneMutation,
   useGetPhoneBookQuery,
@@ -17,8 +17,7 @@ const PhoneBook = () => {
   const navigate = useNavigate();
   const { role } = useSelector((state) => state.user);
   const { data, isFetching } = useGetPhoneBookQuery();
-  const [createNumber] = useCreatePhoneMutation();
-  const otherNumber = data?.filter((item) => item?._id !== data?._id);
+  const [createNumber, { status }] = useCreatePhoneMutation();
 
   if (isFetching) {
     return <SpinnerMain />;
@@ -45,7 +44,6 @@ const PhoneBook = () => {
       const phone = formValues[1];
       const data = await createNumber({ name: name, phone: phone }).unwrap();
       if (data?.success) {
-   
         await Swal.fire({
           icon: "success",
           title: "Your work has been saved",
@@ -57,78 +55,81 @@ const PhoneBook = () => {
   };
 
   return (
-    <div>
-      <div className="phonebookSection">
-        <h3 className="mt-4 d-flexCenter"> PHONEBOOK</h3>
-        {role === "manager" ? (
-          <div className="componentAddSection">
-            <div>
-              <p className="mb-0">Want to add number? </p>
-              <p className="mb-0">15 numbers available</p>
+    <Spin spinning={status === "pending"} className="d-flexCenter" style={{ minHeight: "100vh" }}>
+      <div>
+        <div className="phonebookSection">
+          <h3 className="mt-4 d-flexCenter"> PHONEBOOK</h3>
+          {role === "manager" ? (
+            <div className="componentAddSection">
+              <div>
+                <p className="mb-0">Want to add number? </p>
+                <p className="mb-0">15 numbers available</p>
+              </div>
+
+              <div className="componentAddIconSection">
+                <p className="mb-0 fs-2 d-flex align-items-center" onClick={addNumberHandler}>
+                  <MdAddCall className="mb-0 componentAddIcon" />
+                </p>
+              </div>
             </div>
+          ) : undefined}
 
-            <div className="componentAddIconSection">
-              <p className="mb-0 fs-2 d-flex align-items-center" onClick={addNumberHandler}>
-                <MdAddCall className="mb-0 componentAddIcon" />
-              </p>
-            </div>
-          </div>
-        ) : undefined}
+          <Container fluid className="gx-0 mt-3">
+            <Row sm={1} md={2} lg={2} xl={2} xxl={3} className="gx-2">
+              {Array.isArray(data) &&
+                data?.map((data, ind) => (
+                  <Col>
+                    <PhoneEach key={ind} data={data} />
+                  </Col>
+                ))}
+            </Row>
+          </Container>
+        </div>
 
-        <Container fluid className="gx-0 mt-3">
-          <Row sm={1} md={2} lg={2} xl={2} xxl={3} className="gx-2">
-            {Array.isArray(data) &&
-              data?.map((data, ind) => (
-                <Col>
-                  <PhoneEach key={ind} data={data} />
-                </Col>
-              ))}
-          </Row>
-        </Container>
-      </div>
+        {/* for small device  */}
 
-      {/* for small device  */}
-
-      <div className="phoneBookContainer">
-        <div className="phoneBookContainerMainBg">
-          <div className="phoneBookContainerMain">
-            <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-              <h3>PHONEBOOK </h3>
-            </div>
-            {role === "manager" ? (
-              <div className="componentAddSection">
-                <div>
-                  <p className="mb-0">Want to add number? </p>
-                  <p className="mb-0">15 numbers available</p>
-                  {/* <div className="d-flex">
+        <div className="phoneBookContainer">
+          <div className="phoneBookContainerMainBg">
+            <div className="phoneBookContainerMain">
+              <div className="componentHeader">
+                <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+                <h3>PHONEBOOK </h3>
+              </div>
+              {role === "manager" ? (
+                <div className="componentAddSection">
+                  <div>
+                    <p className="mb-0">Want to add number? </p>
+                    <p className="mb-0">15 numbers available</p>
+                    {/* <div className="d-flex">
                   <p className="mb-0"> {data?.length - otherNumber.length} Members </p>
                   <p className="mb-0">
                     
                     {data?.length - (data?.length - otherNumber.length)} others{" "}
                   </p>
                 </div> */}
-                </div>
+                  </div>
 
-                <div className="componentAddIconSection">
-                  <p className="mb-0 fs-2 d-flex align-items-center" onClick={addNumberHandler}>
-                    {/* <img src="/images/add-user.png" alt="" className="iconSize"/> */}
-                    <MdAddCall className="mb-0 componentAddIcon" />
-                  </p>
+                  <div className="componentAddIconSection">
+                    <p className="mb-0 fs-2 d-flex align-items-center" onClick={addNumberHandler}>
+                      {/* <img src="/images/add-user.png" alt="" className="iconSize"/> */}
+                      <MdAddCall className="mb-0 componentAddIcon" />
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ) : undefined}
+              ) : undefined}
+            </div>
           </div>
-        </div>
-        <div className="phoneBookContainerItemBg">
-          <div className="phoneBookContainerItem ">
-            <div className="pt-5 pb-3 px-3">
-              {Array.isArray(data) && data?.map((data, ind) => <PhoneEach key={ind} data={data} />)}
+          <div className="phoneBookContainerItemBg">
+            <div className="phoneBookContainerItem ">
+              <div className="pt-5 pb-3 px-3">
+                {Array.isArray(data) &&
+                  data?.map((data, ind) => <PhoneEach key={ind} data={data} />)}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Spin>
   );
 };
 
