@@ -15,7 +15,7 @@ import {
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useSearchQuery } from "../../../../utils/useSearchQuery.js";
-import { motion } from "framer-motion";
+import PageTransition from "../../../../utils/PageTransition.jsx";
 
 const UpdateMeal = () => {
   const date = useSearchQuery("date") || moment().format("DD-MM-YYYY");
@@ -104,12 +104,8 @@ const UpdateMeal = () => {
   };
 
   return (
-    <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 0.25, duration: 0.5, ease: "easeInOut" }}
-    >
-      <Spin spinning={status === "pending"} className="d-flexCenter" style={{ minHeight: "100vh" }}>
+    <Spin spinning={status === "pending"} className="d-flexCenter" style={{ minHeight: "100vh" }}>
+      <PageTransition>
         <div>
           <div className="addMealCostSectionMain">
             <div className="addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
@@ -280,8 +276,8 @@ const UpdateMeal = () => {
             </div>
           </div>
         </div>
-      </Spin>
-    </motion.div>
+      </PageTransition>
+    </Spin>
   );
 };
 
