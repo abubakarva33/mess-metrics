@@ -24,7 +24,7 @@ const PhoneBook = () => {
     return <SpinnerMain />;
   }
 
-  console.log(data);
+
 
   const addNumberHandler = async () => {
     const { value: formValues } = await Swal.fire({

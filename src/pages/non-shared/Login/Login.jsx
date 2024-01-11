@@ -57,11 +57,9 @@ const Login = () => {
         timer: 1500,
       });
       setError(error.data.message || "An unexpected error occurred");
-      console.log(error.data.message || "An unexpected error occurred");
     }
   };
 
-  console.log(error);
 
   if (isLoading) {
     return <Spinner />;

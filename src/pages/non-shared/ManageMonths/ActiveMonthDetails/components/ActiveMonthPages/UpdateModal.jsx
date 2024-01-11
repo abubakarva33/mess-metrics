@@ -16,7 +16,6 @@ const typeFormate = {
 };
 
 const UpdateModal = ({ data, isModalOpen, setIsModalOpen, update, status }) => {
-  console.log(isModalOpen);
   const type = useSearchQuery("type") || "";
   const members = useMemberOptions();
   const [form] = Form.useForm();
