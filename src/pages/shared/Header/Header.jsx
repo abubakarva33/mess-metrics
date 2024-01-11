@@ -102,7 +102,7 @@ const Header = () => {
               </Space> */}
               <img src="/public/images/faq.png" alt="" style={{ height: 35 }} />
             </Link>
-            <div className="navItem me-2" onClick={showModal}>
+            <div className="navItem me-3" onClick={showModal}>
               <NotificationBadge isModalOpen={isModalOpen} count={notificationData?.unread} />
             </div>
 

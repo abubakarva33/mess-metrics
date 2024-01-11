@@ -57,3 +57,7 @@
   font-weight: 300;
   margin-bottom: 0;
 }
+
+.bg-transparentt{
+  filter: contrast(0.5);
+}
