@@ -8,11 +8,11 @@ import AllMemberList from "../AllMemberList/AllMemberList";
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 
 const Members = () => {
-  const { data, isFetching } = useGetMembersQuery();
+  const { data, isFetching } = useGetMembersQuery({});
   const navigate = useNavigate();
 
   if (isFetching) {
-    return <SpinnerMain/>
+    return <SpinnerMain />;
   }
 
   return (

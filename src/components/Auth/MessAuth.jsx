@@ -15,10 +15,7 @@ const MessAuth = ({ children }) => {
     if (isLogin && status === "rejected" && error?.status === 401) {
       refetch();
     }
-    if (
-      (isLogin && status === "rejected" && error?.status === 400) ||
-      !isLogin
-    ) {
+    if ((isLogin && status === "rejected" && error?.status === 400) || !isLogin) {
       dispatch(auth({ token: "", role: "" }));
     }
   }, [status, isLogin]);

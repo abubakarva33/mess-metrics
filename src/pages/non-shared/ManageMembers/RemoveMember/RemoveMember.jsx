@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const RemoveMember = () => {
   const [form] = Form.useForm();
   const [removeMember, { status }] = useDeleteMemberMutation();
-  const { data: profileData, isFetching } = useGetUserProfileQuery();
+  const { data: profileData, isFetching } = useGetUserProfileQuery({});
   const users = useMemberOptions();
   const [members, setMembers] = useState(users);
   const navigate = useNavigate();

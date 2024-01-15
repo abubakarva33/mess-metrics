@@ -35,7 +35,7 @@ const SharedCostDetails = ({ date }) => {
   const [filter, setFilter] = useState({ page: 1 });
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data: activeMonthData } = useGetActiveMonthQuery();
+  const { data: activeMonthData } = useGetActiveMonthQuery({});
   const { data, isFetching } = useGetAllSharedCostQuery({ ...filter, date });
   const [update, { status }] = useUpdateSharedCostMutation();
 

@@ -38,7 +38,7 @@ const IndividualCostDetails = ({ date }) => {
   const [filter, setFilter] = useState({ page: 1 });
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data: activeMonthData } = useGetActiveMonthQuery();
+  const { data: activeMonthData } = useGetActiveMonthQuery({});
   const { data, isFetching } = useGetAllIndividualCostQuery({ ...filter, date });
   const [update, { status }] = useUpdateIndividualCostMutation();
 

@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 const MessProfile = () => {
   const navigate = useNavigate();
-  const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery();
+  const { data: messAccount, isFetching: messFetching } = useGetMessAccountQuery({});
   const { role } = useSelector((state) => state.user);
 
   if (messFetching) {

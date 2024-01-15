@@ -19,7 +19,7 @@ const DeleteOldMonth = () => {
   const month = useActiveMonthOptions();
   const navigate = useNavigate();
   const [months, setMonths] = useState();
-  const { data, isFetching } = useGetActiveMonthQuery();
+  const { data, isFetching } = useGetActiveMonthQuery({});
   const [deleteMonth, { status }] = useDeleteMonthMutation();
 
   useEffect(() => {

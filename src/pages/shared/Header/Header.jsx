@@ -2,7 +2,7 @@ import "./Header.css";
 import { AiOutlineSetting } from "react-icons/ai";
 import { Avatar, Dropdown, Space } from "antd";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TiInfoLargeOutline } from "react-icons/ti";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { useState } from "react";
@@ -15,14 +15,16 @@ import NotificationModal from "../../non-shared/Notification/NotificationModal/N
 import { useGetAllNotificationQuery } from "../../../redux/api/sampleApi/actionApi";
 import NotificationBadge from "../../non-shared/Notification/NotificationModal/NotificationBadge";
 import { IoMdHelp } from "react-icons/io";
+import { logOutHandler } from "../../../utils/logout";
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
   const [page, setPage] = useState(1);
   const [time, setTime] = useState(moment().format("hh:mm A"));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { role } = useSelector((state) => state.user);
-  const { data } = useGetUserProfileQuery();
+  const { data } = useGetUserProfileQuery({});
   const { isFetching, data: notificationData } = useGetAllNotificationQuery(page);
 
   console.log(data);
@@ -53,7 +55,8 @@ const Header = () => {
       key: "2",
       icon: <LogoutOutlined />,
       onClick: () => {
-        dispatch(auth({ token: "" }));
+        // dispatch(auth({ token: "" }));
+        logOutHandler(dispatch);
       },
       danger: true,
     },
@@ -127,12 +130,7 @@ const Header = () => {
             <h3 className="mb-0">WELCOME ADMIN</h3>
             <div className=" d-flex align-items-center">
               <p className="mb-0">{time} | Admin Account |</p>
-              <p
-                className="mb-0 ms-2 bg-danger px-2 py-1 rounded"
-                onClick={() => {
-                  dispatch(auth({ token: "" }));
-                }}
-              >
+              <p className="mb-0 ms-2 bg-danger px-2 py-1 rounded" onClick={logOutHandler}>
                 Logout
               </p>
             </div>

@@ -191,7 +191,7 @@ const managerRoutes = [
 ];
 
 const Routes = () => {
-  const { data, status } = useGetUserProfileQuery();
+  const { data, status } = useGetUserProfileQuery({});
 
   const [mainLayoutChild, setMainLayoutChild] = useState(mainLayoutChildInit);
 

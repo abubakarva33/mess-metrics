@@ -40,11 +40,10 @@ const actionColumn = {
 
 const MealDetails = ({ date }) => {
   const [filter, setFilter] = useState({ page: 1 });
-  const { data: activeMonthData } = useGetActiveMonthQuery();
+  const { data: activeMonthData } = useGetActiveMonthQuery({});
   const { data, isFetching } = useGetAllMealQuery({ ...filter, date });
   const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);
-
 
   const compareMonth = useMemo(
     () => data?.data?.filter((item) => item?.activeMonth?._id === activeMonthData?._id),

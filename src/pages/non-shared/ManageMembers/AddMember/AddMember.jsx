@@ -10,7 +10,7 @@ import { IoIosArrowBack } from "react-icons/io";
 const AddMember = () => {
   const [form] = Form.useForm();
   const [AddMemberToMess, { status }] = useAddMemberMutation();
-  const { data: profileData, isLoading } = useGetUserProfileQuery();
+  const { data: profileData, isLoading } = useGetUserProfileQuery({});
   const navigate = useNavigate();
 
   const onFinish = async (values) => {

@@ -22,7 +22,7 @@ const MyProfile = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [updateProfile, { status }] = useUpdateProfileMutation();
-  const { data } = useGetUserProfileQuery();
+  const { data } = useGetUserProfileQuery({});
   const { data: mData } = useGetMonthsQuery({
     page,
     limit: 1,

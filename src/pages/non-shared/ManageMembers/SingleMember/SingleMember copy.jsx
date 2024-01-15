@@ -15,7 +15,7 @@ const SingleMember = () => {
   const navigate = useNavigate();
   const [activeMonth, setActiveMonth] = useState("");
   const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
-  const { data: monthData, isFetching: monthsFetching } = useGetMonthsQuery();
+  const { data: monthData, isFetching: monthsFetching } = useGetMonthsQuery({});
   const activeDocument = monthData?.find((item) => item.isActive === true);
   const { data: singleUserData, isFetching: singleUserFetching } = useGetSingleUserAccountQuery({
     userId: Id,

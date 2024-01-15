@@ -22,7 +22,7 @@ const AddMeal = () => {
   const navigate = useNavigate();
 
   // rtk-query
-  const { data: profileData, isFetching } = useGetUserProfileQuery();
+  const { data: profileData, isFetching } = useGetUserProfileQuery({});
   const { data, isLoading } = useGetSingleMessQuery(profileData?.data?.mess?._id);
   const [addMeal, { status }] = useAddMealMutation();
 

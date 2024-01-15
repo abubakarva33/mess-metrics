@@ -17,14 +17,12 @@ import PageTransition from "../../../utils/PageTransition";
 const PhoneBook = () => {
   const navigate = useNavigate();
   const { role } = useSelector((state) => state.user);
-  const { data, isFetching } = useGetPhoneBookQuery();
+  const { data, isFetching } = useGetPhoneBookQuery({});
   const [createNumber, { status }] = useCreatePhoneMutation();
 
   if (isFetching) {
     return <SpinnerMain />;
   }
-
-
 
   const addNumberHandler = async () => {
     const { value: formValues } = await Swal.fire({

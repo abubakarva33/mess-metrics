@@ -2,7 +2,7 @@ import { useGetMembersQuery } from "../../redux/api/sampleApi/messApi";
 import { useEffect, useState } from "react";
 
 const useMemberOptions = () => {
-  const { data } = useGetMembersQuery();
+  const { data } = useGetMembersQuery({});
 
   const [members, setMembers] = useState([{ label: "Select Member", value: "" }]);
 

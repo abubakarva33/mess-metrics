@@ -8,7 +8,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import SpinnerMain from "../../../components/Spinner/SpinnerMain";
 
 const Birthdays = () => {
-  const { data, isFetching, isLoading } = useGetMembersQuery();
+  const { data, isFetching, isLoading } = useGetMembersQuery({});
   const navigate = useNavigate();
 
   if (isFetching || isLoading) {
@@ -35,10 +35,7 @@ const Birthdays = () => {
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
             <div className="componentHeader">
-              <IoIosArrowBack
-                className="componentHeaderIcon"
-                onClick={() => navigate(-1)}
-              />
+              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
               <h3>BIRTHDAYS </h3>
             </div>
           </div>
@@ -47,9 +44,7 @@ const Birthdays = () => {
           <div className="phoneBookContainerItem ">
             <div className="pt-5 pb-3 px-3">
               {Array.isArray(data) &&
-                data?.map((data, ind) => (
-                  <BirthdayEach key={ind} data={data} />
-                ))}
+                data?.map((data, ind) => <BirthdayEach key={ind} data={data} />)}
             </div>
           </div>
         </div>

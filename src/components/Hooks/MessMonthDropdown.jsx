@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import SpinnerMain from "../Spinner/SpinnerMain";
 
 const useMonthOptions = () => {
-  const { data, isFetching } = useGetMonthsQuery();
+  const { data, isFetching } = useGetMonthsQuery({});
 
   if (isFetching) {
     return <SpinnerMain />;
@@ -27,8 +27,6 @@ const useMonthOptions = () => {
     }
     setMonths(membersFormate);
   }, [data]);
-
- 
 
   return months;
 };

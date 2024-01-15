@@ -12,7 +12,7 @@ import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 const ChangeManager = () => {
   const [form] = Form.useForm();
   const [changeManager, { status }] = useChangeManagerMutation();
-  const { data: profileData, isFetching } = useGetUserProfileQuery();
+  const { data: profileData, isFetching } = useGetUserProfileQuery({});
   const navigate = useNavigate();
   const users = useMemberOptions();
   const [members, setMembers] = useState(users);

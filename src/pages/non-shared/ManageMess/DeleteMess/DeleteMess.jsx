@@ -8,7 +8,7 @@ import { IoIosArrowBack } from "react-icons/io";
 
 const DeleteMess = () => {
   const navigate = useNavigate();
-  const { data, isFetching } = useGetUserProfileQuery();
+  const { data, isFetching } = useGetUserProfileQuery({});
   const [deleteMess, { status }] = useDeleteMessMutation();
 
   const deleteMessHandler = async () => {

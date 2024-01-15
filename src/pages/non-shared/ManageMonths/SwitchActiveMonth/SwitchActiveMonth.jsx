@@ -11,11 +11,11 @@ import { useNavigate } from "react-router-dom";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
 
 const SwitchActiveMonth = () => {
-  const { data: profile, isFetching } = useGetUserProfileQuery();
+  const { data: profile, isFetching } = useGetUserProfileQuery({});
 
   const [form] = Form.useForm();
   const month = useActiveMonthOptions();
-  const { data, isLoading } = useGetActiveMonthQuery();
+  const { data, isLoading } = useGetActiveMonthQuery({});
   const [switchMonth, { status }] = useSwitchActiveMonthMutation();
   const navigate = useNavigate();
 

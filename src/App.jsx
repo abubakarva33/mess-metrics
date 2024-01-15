@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 import ErrorPage from "./routes/ErrorPage/ErrorPage";
 
 function App() {
-  const { isLoading, data } = useGetUserProfileQuery();
+  const { isLoading, data } = useGetUserProfileQuery({});
   const dispatch = useDispatch();
 
   useEffect(() => {
