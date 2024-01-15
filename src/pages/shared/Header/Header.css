@@ -50,6 +50,8 @@
 }
 .headerMainMd {
   display: none;
+  position: relative;
+  z-index: 999999;
 }
 
 @media screen and (min-device-width: 576px) and (max-device-width: 992px) {
