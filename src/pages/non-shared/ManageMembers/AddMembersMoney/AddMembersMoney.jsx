@@ -60,7 +60,7 @@ const AddMembersMoney = () => {
       >
         <div className="addMealCostSectionMain">
           <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
-            <h4 className="text-center  mt-2 mb-4">Add member's Money</h4>
+            <h4 className="text-center  mt-2 mb-4">Add member&apos;s Money</h4>
             <div className="mealDatePicker">
               <ReactDatePicker
                 className="w-100"

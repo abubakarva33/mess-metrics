@@ -2,7 +2,7 @@ import { Button, Form, Pagination, Space } from "antd";
 import AdminTableTemplate from "../components/AdminTableTemplate";
 import "./AllUsers.css";
 import { Link } from "react-router-dom";
-import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import {
   useDeleteUserMutation,
   useGetAllUsersQuery,
@@ -93,7 +93,7 @@ const AllUsers = () => {
       ),
     },
   ];
-  const { total, limit } = data?.meta;
+  const { total, limit } = data?.meta || {};
   const onChange = (current) => {
     setPageNumber(current);
   };

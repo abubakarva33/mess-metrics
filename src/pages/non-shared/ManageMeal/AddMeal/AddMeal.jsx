@@ -294,8 +294,8 @@ const AddMeal = () => {
                       </div>
                     </Form>
                     <div>
-                      {data?.members?.map((member) => (
-                        <div className="phoneItem ">
+                      {data?.members?.map((member, ind) => (
+                        <div className="phoneItem " key={ind}>
                           <div className="phoneItemLeft">
                             <img src="/images/userIcon.png" alt="" className="mealItemPhoto" />
                             <h6 className="phoneNameText pt-1">{member.name}</h6>

@@ -1,10 +1,8 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./SingleMember.css";
 import { Col, Container, Row } from "react-bootstrap";
-import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { Button } from "antd";
-import { IoIosArrowBack } from "react-icons/io";
 import { useGetSingleUserAccountQuery } from "../../../../redux/api/sampleApi/userApi";
 import { useGetMonthsQuery } from "../../../../redux/api/sampleApi/monthApi";
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
@@ -12,7 +10,6 @@ import SingleMemberMonthDetails from "./SingleMemberMonthDetails";
 
 const SingleMember = () => {
   const { Id } = useParams();
-  const navigate = useNavigate();
   const [activeMonth, setActiveMonth] = useState("");
   const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
   const { data: monthData, isFetching: monthsFetching } = useGetMonthsQuery({});
@@ -30,8 +27,7 @@ const SingleMember = () => {
     return <SpinnerMain />;
   }
   const monthList = monthData?.map((month) => month._id);
-  const { name, email, phone, role, dateOfBirth, month } = singleUserData?.data;
-  const currentObject = monthList[currentObjectIndex];
+  const { name, email, phone, role, dateOfBirth, month } = singleUserData?.data || {};
   const switchDataPlus = () => {
     setCurrentObjectIndex((prevIndex) => (prevIndex + 1) % monthList.length);
     setActiveMonth(monthList[(currentObjectIndex + 1) % monthList.length]);

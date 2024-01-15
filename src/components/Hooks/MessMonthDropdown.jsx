@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useGetMonthsQuery } from "../../redux/api/sampleApi/monthApi";
 
 import { useEffect, useState } from "react";

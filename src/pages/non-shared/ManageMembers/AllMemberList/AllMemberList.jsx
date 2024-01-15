@@ -1,8 +1,6 @@
 import "./AllMemberList.css";
 import { Col } from "react-bootstrap";
-import { MdOutlineEmail } from "react-icons/md";
-import { FcFullTrash } from "react-icons/fc";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 
 const AllMemberList = ({ data }) => {
   const { name, email, phone, role, dateOfBirth, _id } = data;

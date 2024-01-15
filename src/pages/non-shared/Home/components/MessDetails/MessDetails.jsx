@@ -1,4 +1,3 @@
-import { AiOutlineHome } from "react-icons/ai";
 import { BsPersonGear } from "react-icons/bs";
 import "./MessDetails.css";
 import { GiMoneyStack, GiPayMoney, GiTakeMyMoney } from "react-icons/gi";

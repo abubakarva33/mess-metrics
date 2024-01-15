@@ -1,12 +1,10 @@
-import { Button, Form, Pagination, Space, Table } from "antd";
-import AdminTableTemplate from "../components/AdminTableTemplate";
+import { Form, Pagination, Space, Table } from "antd";
 import "./AllAdmin.css";
 import { Link } from "react-router-dom";
-import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEye } from "react-icons/ai";
 import {
   useDeleteUserMutation,
   useGetAllAdminQuery,
-  useGetAllUsersQuery,
   useMakeAdminMutation,
 } from "../../../redux/api/sampleApi/adminApi";
 import { useState } from "react";
@@ -88,7 +86,7 @@ const AllAdmin = () => {
       ),
     },
   ];
-  const { total, limit } = data?.meta;
+  const { total, limit } = data?.meta || {};
   const onChange = (current) => {
     setPageNumber(current);
   };

@@ -2,16 +2,11 @@ import { Pagination, Table } from "antd";
 import "./TableTemplate.css";
 import SpinnerMain from "../../../../../../components/Spinner/SpinnerMain";
 
-const TableTemplate = ({
-  data,
-  columns,
-  dataFetching = false,
-  onPageChange,
-}) => {
+const TableTemplate = ({ data, columns, dataFetching = false, onPageChange }) => {
   if (dataFetching) {
     return <SpinnerMain />;
   }
-  const { total = 0, limit, page } = data?.meta;
+  const { total = 0, limit, page } = data?.meta || {};
   return (
     <div className="mb-3">
       <Table pagination={false} columns={columns} dataSource={data?.data} />

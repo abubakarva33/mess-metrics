@@ -18,7 +18,7 @@ const SingleMember = () => {
   const { Id } = useParams();
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
-  const { data: mData, isFetching: monthsFetching } = useGetMonthsQuery({
+  const { data: mData } = useGetMonthsQuery({
     page,
     limit: 1,
     userId: Id,

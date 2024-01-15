@@ -1,6 +1,5 @@
 import { Row } from "react-bootstrap";
 import { useGetMembersQuery } from "../../../../redux/api/sampleApi/messApi";
-import AllMembers from "../../Home/components/AllMembers/AllMembers";
 import "./Members.css";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";

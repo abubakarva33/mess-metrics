@@ -80,7 +80,7 @@ const PhoneBook = () => {
               <Row sm={1} md={2} lg={2} xl={2} xxl={3} className="gx-2">
                 {Array.isArray(data) &&
                   data?.map((data, ind) => (
-                    <Col>
+                    <Col key={ind}>
                       <PhoneEach key={ind} data={data} />
                     </Col>
                   ))}

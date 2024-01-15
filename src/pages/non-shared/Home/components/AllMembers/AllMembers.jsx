@@ -1,13 +1,10 @@
-import { Col, Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import "./AllMembers.css";
 import { Link } from "react-router-dom";
 import { balanceCalculator } from "../../../../../constant/calculation";
-import { useGetUserProfileQuery } from "../../../../../redux/api/sampleApi/userApi";
 
-const AllMembers = ({ data, mealRate, sharedCost, monthId }) => {
-  const { data: profile } = useGetUserProfileQuery({});
-
-  const { deposit, individualCost, meal, user, _id } = data;
+const AllMembers = ({ data, mealRate, sharedCost }) => {
+  const { deposit, individualCost, meal, user } = data;
   const calculate = balanceCalculator({
     meal,
     mealRate,

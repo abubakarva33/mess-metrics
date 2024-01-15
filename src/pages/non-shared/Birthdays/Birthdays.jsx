@@ -1,6 +1,4 @@
-import React from "react";
 import { useGetMembersQuery } from "../../../redux/api/sampleApi/messApi";
-import Spinner from "../../../components/Spinner/Spinner";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import BirthdayEach from "./BirthdayEach/BirthdayEach";
@@ -23,7 +21,7 @@ const Birthdays = () => {
           <Row sm={1} md={2} lg={2} xl={2} xxl={3} className="gx-3">
             {Array.isArray(data) &&
               data?.map((data, ind) => (
-                <Col>
+                <Col key={ind}>
                   <BirthdayEach key={ind} data={data} />
                 </Col>
               ))}

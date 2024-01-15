@@ -7,7 +7,7 @@ const ActiveDetailsTemplate = ({ data, modalProps, itemData, setItemData, setIsM
     <div className="d-flex align-items-center justify-content-between my-3 activeDetailsTemplate">
       <div className="d-flex align-items-center justify-content-between">
         <div className="d-flexCenter dateLogo">
-          <h2 className=" mb-0"> {(data?.date).substring(0, 2)}</h2>
+          <h2 className=" mb-0"> {data?.date?.substring(0, 2)}</h2>
         </div>
         <div>
           {data?.members && (

@@ -1,5 +1,4 @@
 import { Spin } from "antd";
-import SpinnerMain from "../../../../../components/Spinner/SpinnerMain";
 import { useGetSingleUserAccountQuery } from "../../../../../redux/api/sampleApi/userApi";
 import "./PersonalDetails.css";
 import { Col, Row } from "react-bootstrap";

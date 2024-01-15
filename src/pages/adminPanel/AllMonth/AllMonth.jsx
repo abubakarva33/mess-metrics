@@ -2,7 +2,7 @@ import "./AllMonth.css";
 import { Button, Form, Pagination, Space } from "antd";
 import AdminTableTemplate from "../components/AdminTableTemplate";
 import { Link } from "react-router-dom";
-import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import {
   useDeleteMonthByAdminMutation,
   useGetAllMonthQuery,
@@ -16,7 +16,7 @@ const AllMonth = () => {
   const [filter, setFilter] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [selectedIds, setSelectedIds] = useState([]);
-  const [deleteId, setDeleteId] = useState();
+  // const [deleteId, setDeleteId] = useState();
   const [form] = Form.useForm();
   const { data, isLoading } = useGetAllMonthQuery({ page: pageNumber, filter });
   const [deleteMonth] = useDeleteMonthByAdminMutation();
@@ -82,7 +82,7 @@ const AllMonth = () => {
       ),
     },
   ];
-  const { total, limit } = data?.meta;
+  const { total, limit } = data?.meta || {};
   const onChange = (current) => {
     setPageNumber(current);
   };

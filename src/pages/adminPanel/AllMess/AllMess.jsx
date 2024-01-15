@@ -2,7 +2,7 @@ import "./AllMess.css";
 import { Button, Form, Pagination, Space } from "antd";
 import AdminTableTemplate from "../components/AdminTableTemplate";
 import { Link } from "react-router-dom";
-import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlineEye } from "react-icons/ai";
 import {
   useDeleteMessByAdminMutation,
   useGetAllMessQuery,
@@ -77,7 +77,7 @@ const AllMess = () => {
       ),
     },
   ];
-  const { total, limit } = data?.meta;
+  const { total, limit } = data?.meta || {};
   const onChange = (current) => {
     setPageNumber(current);
   };

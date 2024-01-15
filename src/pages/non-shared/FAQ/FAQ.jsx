@@ -146,15 +146,10 @@ const FAQ = () => {
         <Row className="mx-2">
           <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
             {firstArray?.map((item, index) => (
-              <div className="mb-3">
-                <Accordion
-                  key={index}
-                  activeKey={openItems}
-                  onSelect={(key) => handleCollapseChange(key)}
-                >
+              <div className="mb-3" key={index}>
+                <Accordion activeKey={openItems} onSelect={(key) => handleCollapseChange(key)}>
                   <Accordion.Item eventKey={index.toString()}>
                     <Accordion.Header>{`Accordion ${index + 1}`}</Accordion.Header>
-                    {/* <Accordion.Body>{item?.message}</Accordion.Body> */}
                     <Accordion.Body>{`Accordion template answer ${index + 1}`}</Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
@@ -163,15 +158,10 @@ const FAQ = () => {
           </Col>
           <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
             {secondArray?.map((item, index) => (
-              <div className="mb-3">
-                <Accordion
-                  key={index}
-                  activeKey={openItems}
-                  onSelect={(key) => handleCollapseChange(key)}
-                >
+              <div className="mb-3" key={index}>
+                <Accordion activeKey={openItems} onSelect={(key) => handleCollapseChange(key)}>
                   <Accordion.Item eventKey={index.toString() + 1}>
                     <Accordion.Header>{`Accordion ${index + 1}`}</Accordion.Header>
-                    {/* <Accordion.Body>{item?.message}</Accordion.Body> */}
                     <Accordion.Body>{`Accordion template answer ${index + 1}`}</Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
@@ -196,15 +186,13 @@ const FAQ = () => {
               <Row className="">
                 <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
                   {firstArray?.map((item, index) => (
-                    <div className="mb-3">
+                    <div className="mb-3" key={index}>
                       <Accordion
-                        key={index}
                         activeKey={openItems}
                         onSelect={(key) => handleCollapseChange(key)}
                       >
                         <Accordion.Item eventKey={index.toString()}>
                           <Accordion.Header>{`Accordion ${index + 1}`}</Accordion.Header>
-                          {/* <Accordion.Body>{item?.message}</Accordion.Body> */}
                           <Accordion.Body>{`Accordion template answer ${
                             index + 1
                           }`}</Accordion.Body>
@@ -215,15 +203,13 @@ const FAQ = () => {
                 </Col>
                 <Col xs={12} sm={12} md={6} lg={6} xl={6} xxl={6}>
                   {secondArray?.map((item, index) => (
-                    <div className="mb-3">
+                    <div className="mb-3" key={index}>
                       <Accordion
-                        key={index}
                         activeKey={openItems}
                         onSelect={(key) => handleCollapseChange(key)}
                       >
                         <Accordion.Item eventKey={index.toString() + 1}>
                           <Accordion.Header>{`Accordion ${index + 1}`}</Accordion.Header>
-                          {/* <Accordion.Body>{item?.message}</Accordion.Body> */}
                           <Accordion.Body>{`Accordion template answer ${
                             index + 1
                           }`}</Accordion.Body>

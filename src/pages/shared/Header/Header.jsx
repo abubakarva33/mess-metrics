@@ -21,6 +21,7 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(1);
   const [time, setTime] = useState(moment().format("hh:mm A"));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { role } = useSelector((state) => state.user);

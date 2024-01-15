@@ -1,4 +1,4 @@
-import { AiFillBell, AiOutlineHome } from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
 import "./Footer.css";
 import { BsPersonCircle } from "react-icons/bs";
 import { BiHelpCircle, BiMessageDots } from "react-icons/bi";

@@ -23,7 +23,7 @@ const CreateMess = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (Boolean(data?.data?.mess)) {
+    if (data?.data?.mess) {
       navigate("/");
     }
     setIsLoading(false);
@@ -44,7 +44,6 @@ const CreateMess = () => {
       console.log(error);
     }
   };
-
 
   const joinMessHandler = async () => {
     const { value: text } = await Swal.fire({

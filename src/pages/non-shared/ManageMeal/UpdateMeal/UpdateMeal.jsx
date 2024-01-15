@@ -176,7 +176,7 @@ const UpdateMeal = () => {
                 onClick={onFinish}
                 style={{ minHeight: 40, fontSize: 18 }}
                 disabled={
-                  Array.isArray(meal) ? [...meal?.filter((m) => m.isChanged)].length <= 0 : true
+                  Array.isArray(meal) ? [...meal.filter((m) => m?.isChanged)]?.length <= 0 : true
                 }
               >
                 Submit
@@ -264,7 +264,7 @@ const UpdateMeal = () => {
                       style={{ minHeight: 40, fontSize: 18 }}
                       disabled={
                         Array.isArray(meal)
-                          ? [...meal?.filter((m) => m.isChanged)].length <= 0
+                          ? [...meal.filter((m) => m.isChanged)].length <= 0
                           : true
                       }
                     >

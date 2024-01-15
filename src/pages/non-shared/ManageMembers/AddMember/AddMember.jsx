@@ -1,8 +1,7 @@
 import "./AddMember.css";
 import { useAddMemberMutation } from "../../../../redux/api/sampleApi/messApi";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
-import { Button, ConfigProvider, Form, Input, Spin } from "antd";
-import { HomeOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Spin } from "antd";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
