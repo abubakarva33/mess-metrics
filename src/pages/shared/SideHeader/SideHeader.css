@@ -1,8 +1,13 @@
 .sideHeader {
   min-height: 100vh;
   border-right: 1px solid var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* width: 100%; */
   /* overflow-y: scroll;
   overflow-x: hidden; */
+  /* position: relative; */
 }
 .headerExpand {
   display: flex;
@@ -79,4 +84,21 @@
   .sidebarSm {
     display: block;
   }
+}
+
+.logOutForm {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-extraDashboard);
+  box-shadow: var(--card-shadow);
+  margin-top: auto;
+  padding: 10px;
+  position: sticky;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.logOutImg img {
+  height: 45px;
+  width: 45px;
 }

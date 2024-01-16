@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "./SideHeader.css";
 import { BiBuildingHouse, BiMoneyWithdraw } from "react-icons/bi";
+import { IoMdLogOut } from "react-icons/io";
 
 import {
   AiOutlineAppstoreAdd,
@@ -24,10 +25,13 @@ import { PiRadioactive } from "react-icons/pi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
+import { logOutHandler } from "../../../utils/logout";
 
 const SideHeader = () => {
   const [activeNav, setActiveNav] = useState("");
   const { role } = useSelector((state) => state.user);
+  const { data } = useGetUserProfileQuery({});
 
   const navHandler = (name) => {
     if (activeNav === name) {
@@ -41,12 +45,13 @@ const SideHeader = () => {
     <>
       {role !== "admin" && role !== "superAdmin" ? (
         <div className="sideHeader">
-          <div className="headerExpand">
+          <div className="headerExpand w-100 mx-2 px-2">
             <Link to="/">
               <img src="/images/logo.webp" alt="" className="headerLogo" />
             </Link>
           </div>
-          <div className="sideNavItems mt-4">
+
+          <div className="sideNavItems mt-4 w-100 px-2">
             <Link to="/" className="sideNavItem mb-2 py-2 addMoney">
               <AiOutlineHome className="fs-5 me-2" /> Home
             </Link>
@@ -222,6 +227,19 @@ const SideHeader = () => {
             <Link to="/birthdays" className="sideNavItem mb-2 py-2 addMoney">
               <AiOutlinePhone className="fs-5 me-2" /> Birthdays
             </Link>
+          </div>
+
+          <div className="logOutForm mt-auto w-100 mx-3">
+            <div className="logOutImg pe-2">
+              <img src="/public/images/userIcon.png" alt="" />
+            </div>
+            <div className="logOutName">
+              <div className=" fs-6 fw-bold me-2 mb-0">{data?.data?.name}</div>
+              <div>{role}</div>
+            </div>
+            <div className="ms-auto ">
+              <IoMdLogOut className="fs-4 text-warning" onClick={logOutHandler} />
+            </div>
           </div>
         </div>
       ) : (
