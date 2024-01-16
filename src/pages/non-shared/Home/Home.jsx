@@ -48,7 +48,7 @@ const Home = () => {
         </Row>
         <div className="mt-4">
           <h5 className="divider">
-            <span className="px-2">Personal Details</span>{" "}
+            <span className="px-2">Personal Details</span>
           </h5>
           <Suspense fallback={<></>}>
             <PersonalDetails userId={profileData?.data?._id} monthId={messAccount?.month?._id} />

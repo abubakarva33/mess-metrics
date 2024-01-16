@@ -44,7 +44,7 @@ const MessDetails = ({ data }) => {
           </div>
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {mess?.manager?.name}{" "}
+              <span className="d-inline-block pe-2"> : </span> {mess?.manager?.name}
             </p>
           </div>
         </div>
@@ -55,7 +55,7 @@ const MessDetails = ({ data }) => {
           </div>
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {balance} tk{" "}
+              <span className="d-inline-block pe-2"> : </span> {balance} tk
             </p>
           </div>
         </div>
@@ -66,7 +66,7 @@ const MessDetails = ({ data }) => {
           </div>
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {totalCost} tk{" "}
+              <span className="d-inline-block pe-2"> : </span> {totalCost} tk
             </p>
           </div>
         </div>
@@ -77,7 +77,7 @@ const MessDetails = ({ data }) => {
           </div>
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {totalDeposit} tk{" "}
+              <span className="d-inline-block pe-2"> : </span> {totalDeposit} tk
             </p>
           </div>
         </div>
@@ -88,7 +88,7 @@ const MessDetails = ({ data }) => {
           </div>
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {totalMealCost} tk{" "}
+              <span className="d-inline-block pe-2"> : </span> {totalMealCost} tk
             </p>
           </div>
         </div>
@@ -111,7 +111,7 @@ const MessDetails = ({ data }) => {
 
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {mealRate.toFixed(2)}{" "}
+              <span className="d-inline-block pe-2"> : </span> {mealRate.toFixed(2)}
             </p>
           </div>
         </div>
@@ -122,7 +122,7 @@ const MessDetails = ({ data }) => {
           </div>
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {totalIndividualCost} tk{" "}
+              <span className="d-inline-block pe-2"> : </span> {totalIndividualCost} tk
             </p>
           </div>
         </div>
@@ -133,7 +133,7 @@ const MessDetails = ({ data }) => {
           </div>
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {sharedCost} tk{" "}
+              <span className="d-inline-block pe-2"> : </span> {sharedCost} tk
             </p>
           </div>
         </div>
@@ -144,7 +144,7 @@ const MessDetails = ({ data }) => {
           </div>
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {sharedCostPerPerson.toFixed(2)}{" "}
+              <span className="d-inline-block pe-2"> : </span> {sharedCostPerPerson.toFixed(2)}
             </p>
           </div>
         </div>

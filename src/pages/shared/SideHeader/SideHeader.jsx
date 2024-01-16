@@ -56,7 +56,7 @@ const SideHeader = () => {
                   className="sideNavItem mb-2 py-2 sideNavMainItem  "
                   onClick={() => navHandler("manageMeal")}
                 >
-                  <MdOutlineFastfood className="fs-5 me-2" /> Manage Meal{" "}
+                  <MdOutlineFastfood className="fs-5 me-2" /> Manage Meal
                   {activeNav === "manageMeal" ? (
                     <IoIosArrowUp className="ms-auto" />
                   ) : (
@@ -81,7 +81,7 @@ const SideHeader = () => {
                   className="sideNavItem mb-2 py-2 sideNavMainItem"
                   onClick={() => navHandler("manageCosts")}
                 >
-                  <BiMoneyWithdraw className="fs-5 me-2" /> Manage Costs{" "}
+                  <BiMoneyWithdraw className="fs-5 me-2" /> Manage Costs
                   {activeNav === "manageCosts" ? (
                     <IoIosArrowUp className="ms-auto" />
                   ) : (

@@ -97,8 +97,7 @@ const PhoneEach = ({ data }) => {
       key: "1",
       label: (
         <>
-          {" "}
-          <img src="/images/pencil.png" alt="" className="iconSize" />{" "}
+          <img src="/images/pencil.png" alt="" className="iconSize" />
         </>
       ),
       onClick: updateNumberHandler,
@@ -107,8 +106,7 @@ const PhoneEach = ({ data }) => {
       key: "2",
       label: (
         <>
-          {" "}
-          <img src="/images/bin.png" alt="" className="iconSize" />{" "}
+          <img src="/images/bin.png" alt="" className="iconSize" />
         </>
       ),
       onClick: deletePhoneHandler,
