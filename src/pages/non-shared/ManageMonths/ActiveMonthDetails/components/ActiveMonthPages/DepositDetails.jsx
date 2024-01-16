@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import  { useEffect, useMemo, useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import {
   useGetAllDepositQuery,

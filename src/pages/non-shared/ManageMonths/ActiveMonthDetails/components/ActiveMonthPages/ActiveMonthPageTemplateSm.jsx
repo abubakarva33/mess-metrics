@@ -1,10 +1,9 @@
-import React from "react";
 import ActiveDetailsTemplate from "../ActiveDetailsTemplate/ActiveDetailsTemplate";
 import { Pagination } from "antd";
 
 const ActiveMonthPageTemplateSm = ({
   data,
-  update,
+ 
   modalProps,
   itemData,
   setItemData,

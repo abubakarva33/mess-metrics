@@ -1,11 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import {
   useGetAllSharedCostQuery,
   useUpdateSharedCostMutation,
 } from "../../../../../../redux/api/sampleApi/actionApi";
 import { Space, Spin } from "antd";
-import { Link } from "react-router-dom";
 import UpdateModal from "./UpdateModal";
 import ActiveMonthPageTemplateSm from "./ActiveMonthPageTemplateSm";
 import { useSelector } from "react-redux";

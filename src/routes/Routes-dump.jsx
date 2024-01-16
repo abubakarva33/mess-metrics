@@ -12,7 +12,6 @@ import UpdateMeal from "../pages/non-shared/ManageMeal/UpdateMeal/UpdateMeal";
 import AddMealCoast from "../pages/non-shared/ManageMessCost/AddMessCost/AddMealCost/AddMealCost";
 import AddSharedOtherCost from "../pages/non-shared/ManageMessCost/AddMessCost/AddSharedOtherCost/AddSharedOtherCost";
 import AddIndividualOtherCost from "../pages/non-shared/ManageMessCost/AddMessCost/AddIndividualOtherCost/AddIndividualOtherCost";
-import UpdateMessCost from "../pages/non-shared/ManageMessCost/UpdateMessCost/UpdateMessCost";
 import AddMember from "../pages/non-shared/ManageMembers/AddMember/AddMember";
 import RemoveMember from "../pages/non-shared/ManageMembers/RemoveMember/RemoveMember";
 import AddMembersMoney from "../pages/non-shared/ManageMembers/AddMembersMoney/AddMembersMoney";

@@ -5,7 +5,6 @@ import {
   AiOutlineDelete,
   AiOutlineHome,
   AiOutlinePhone,
-  AiOutlineSetting,
   AiOutlineUserAdd,
   AiOutlineUserDelete,
 } from "react-icons/ai";

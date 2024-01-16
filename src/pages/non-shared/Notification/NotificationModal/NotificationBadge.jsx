@@ -1,4 +1,3 @@
-import React from "react";
 import { Avatar, Badge, Space } from "antd";
 import { BellOutlined } from "@ant-design/icons";
 const NotificationBadge = ({ isModalOpen, count }) => {

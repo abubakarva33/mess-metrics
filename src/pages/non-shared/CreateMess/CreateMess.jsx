@@ -41,7 +41,12 @@ const CreateMess = () => {
         });
       }
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: error?.data?.message || "Create Mess Failed",
+        showConfirmButton: false,
+        timer: 1000,
+      });
     }
   };
 

@@ -14,7 +14,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginUser] = useLoginUserMutation();
-  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -54,7 +53,6 @@ const Login = () => {
         confirmButtonText: "Close",
         timer: 1500,
       });
-      setError(error.data.message || "An unexpected error occurred");
     }
   };
 
@@ -92,7 +90,6 @@ const Login = () => {
         >
           <div className="mt-5 d-flex justify-content-center flex-column">
             <h3 className="welcomeMsg">WELCOME TO MESS METRICS</h3>
-            {error}
             <p>Sign in to continue access</p>
           </div>
           <Form.Item
@@ -139,12 +136,6 @@ const Login = () => {
               </h6>
             </div>
           </div>
-          {error?.data?.success === false ? (
-            <div>
-              <p className="mb-2 text-danger">Email or password incorrect</p>
-            </div>
-          ) : null}
-
           <div className="btnGroups">
             <Button
               type="primary"

@@ -41,7 +41,12 @@ const StartNewMonth = () => {
         }
       });
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: error?.data?.message || "Start New Month Failed",
+        showConfirmButton: false,
+        timer: 1000,
+      });
     }
   };
 

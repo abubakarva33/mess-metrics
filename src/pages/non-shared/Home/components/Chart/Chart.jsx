@@ -146,8 +146,15 @@ const Chart = () => {
           legendOffset: -40,
           legendPosition: "middle",
         }}
-        tooltip={(props) => (
-          <div style={{ background: "transparent", padding: "10px", border: "1px solid #ccc", color: "black" }}>
+        tooltip={() => (
+          <div
+            style={{
+              background: "transparent",
+              padding: "10px",
+              border: "1px solid #ccc",
+              color: "black",
+            }}
+          >
             <p>Name: </p>
             <p>Month:</p>
             <p>Value:</p>

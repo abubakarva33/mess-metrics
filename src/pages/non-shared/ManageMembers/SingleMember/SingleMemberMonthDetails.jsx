@@ -1,5 +1,4 @@
 import { Spin } from "antd";
-import React from "react";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 const disabledStyle = {
   cursor: "not-allowed",

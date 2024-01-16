@@ -26,7 +26,7 @@ const Home = () => {
   const { data: lastBazar, isFetching: bazarFetching } = useGetLastBazarQuery({});
   const { data: usersAcc } = useGetUserAccountQuery({});
   // do not remove useGetSingleMessQuery it improves performance //
-  const { data } = useGetSingleMessQuery(profileData?.data?.mess?._id);
+  useGetSingleMessQuery(profileData?.data?.mess?._id);
 
   if (messFetching) {
     return <SpinnerMain />;

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import { useGetAllMealQuery } from "../../../../../../redux/api/sampleApi/actionApi";
 import { Pagination, Space, Spin } from "antd";

@@ -4,7 +4,6 @@ import { BiBuildingHouse, BiMoneyWithdraw } from "react-icons/bi";
 
 import {
   AiOutlineAppstoreAdd,
-  AiOutlineBars,
   AiOutlineDelete,
   AiOutlineHome,
   AiOutlinePhone,
@@ -28,7 +27,6 @@ import { useSelector } from "react-redux";
 
 const SideHeader = () => {
   const [activeNav, setActiveNav] = useState("");
-  const [dummyRole, setDummyRole] = useState("admin");
   const { role } = useSelector((state) => state.user);
 
   const navHandler = (name) => {

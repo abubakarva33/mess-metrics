@@ -1,15 +1,14 @@
 import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGetUserProfileQuery } from "./redux/api/sampleApi/userApi";
-import { ConfigProvider, Space, theme } from "antd";
+import { ConfigProvider, theme } from "antd";
 import { useDispatch } from "react-redux";
 import { authRole } from "./redux/features/UserSlice/UserSlice";
 import SkeletonLoader from "./components/SkeletonLoader/SkeletonLoader";
 import { routes } from "./routes/Routes";
 import Swal from "sweetalert2";
-import ErrorPage from "./routes/ErrorPage/ErrorPage";
 
 function App() {
   const { isLoading, data } = useGetUserProfileQuery({});

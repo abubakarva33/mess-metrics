@@ -2,11 +2,7 @@ import { Form, Pagination, Space, Table } from "antd";
 import "./AllAdmin.css";
 import { Link } from "react-router-dom";
 import { AiOutlineEye } from "react-icons/ai";
-import {
-  useDeleteUserMutation,
-  useGetAllAdminQuery,
-  useMakeAdminMutation,
-} from "../../../redux/api/sampleApi/adminApi";
+import { useGetAllAdminQuery, useMakeAdminMutation } from "../../../redux/api/sampleApi/adminApi";
 import { useState } from "react";
 import moment from "moment/moment";
 import Swal from "sweetalert2";
@@ -15,11 +11,11 @@ import Search from "antd/es/input/Search";
 const AllAdmin = () => {
   const [filter, setFilter] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
-  const [selectedIds, setSelectedIds] = useState([]);
-  const [deleteId, setDeleteId] = useState();
+  // const [selectedIds, setSelectedIds] = useState([]);
+  // const [deleteId, setDeleteId] = useState();
   const [form] = Form.useForm();
   const { data, isLoading } = useGetAllAdminQuery({ page: pageNumber, filter });
-  const [deleteUser] = useDeleteUserMutation();
+  // const [deleteUser] = useDeleteUserMutation();
   const [makeAdmin] = useMakeAdminMutation();
   // const [allDelete] = useDeleteMultipleMessageMutation();
   if (isLoading) {

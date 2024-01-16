@@ -18,12 +18,9 @@ const ActiveMonthDetails = () => {
   const type = useSearchQuery("type") || "meal";
   const navigate = useNavigate();
   const [filterDate, setFilterDate] = useState("");
-  const [itemData, setItemData] = useState({});
+  const [itemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [itemName, setItemName] = useState("");
-
-  const dataSource = {};
-  const tableData = dataSource[type];
+  const [itemName] = useState("");
 
   useEffect(() => {
     setFilterDate("");
@@ -87,7 +84,6 @@ const ActiveMonthDetails = () => {
         </div>
 
         <div className="px-2">{pages[type]}</div>
-       
       </div>
       <div className="phoneBookContainer">
         <div className="phoneBookContainerMainBg">

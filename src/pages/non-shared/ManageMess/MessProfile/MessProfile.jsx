@@ -2,12 +2,8 @@ import { IoIosArrowBack } from "react-icons/io";
 import "./MessProfile.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
-import { FaBirthdayCake, FaCamera, FaPhoneAlt } from "react-icons/fa";
-import { MdArrowBackIosNew, MdArrowForwardIos, MdEdit, MdOutlineMailOutline } from "react-icons/md";
-import { Button } from "antd";
-import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
-import { useState } from "react";
-import { useGetSingleMessQuery } from "../../../../redux/api/sampleApi/messApi";
+import { MdArrowBackIosNew, MdArrowForwardIos, MdEdit } from "react-icons/md";
+
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 import { useGetMessAccountQuery } from "../../../../redux/api/sampleApi/actionApi";
 import { useSelector } from "react-redux";

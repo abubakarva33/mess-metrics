@@ -16,7 +16,7 @@ const AllMess = () => {
   const [filter, setFilter] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [selectedIds, setSelectedIds] = useState([]);
-  const [deleteId, setDeleteId] = useState();
+  // const [deleteId, setDeleteId] = useState();
   const [form] = Form.useForm();
   const { data, isLoading } = useGetAllMessQuery({ page: pageNumber, filter });
   const [deleteMess] = useDeleteMessByAdminMutation();
@@ -84,31 +84,31 @@ const AllMess = () => {
   const onFinish = (values) => {
     setFilter(values.target.value);
   };
-  const handleDelete = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        if (selectedIds.length > 1) {
-          const res = await allDelete({ ids: selectedIds }).unwrap();
-          if (res?.success) {
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
-          }
-        } else {
-          const res = await deleteMess(selectedIds).unwrap();
-          if (res?.success) {
-            Swal.fire("Deleted!", "Your file has been deleted.", "success");
-          }
-        }
-      }
-    });
-  };
+  // const handleDelete = () => {
+  //   Swal.fire({
+  //     title: "Are you sure?",
+  //     text: "You won't be able to revert this!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Yes, delete it!",
+  //   }).then(async (result) => {
+  //     if (result.isConfirmed) {
+  //       if (selectedIds.length > 1) {
+  //         const res = await allDelete({ ids: selectedIds }).unwrap();
+  //         if (res?.success) {
+  //           Swal.fire("Deleted!", "Your file has been deleted.", "success");
+  //         }
+  //       } else {
+  //         const res = await deleteMess(selectedIds).unwrap();
+  //         if (res?.success) {
+  //           Swal.fire("Deleted!", "Your file has been deleted.", "success");
+  //         }
+  //       }
+  //     }
+  //   });
+  // };
   const handleSingleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -144,9 +144,7 @@ const AllMess = () => {
       {selectedIds?.length > 0 ? (
         <div className="my-3 mx-5">
           <h6 className="text-center mb-2">{selectedIds.length} items selected</h6>
-          <Button className="me-2" onClick={handleDelete}>
-            Delete
-          </Button>
+          <Button className="me-2">Delete</Button>
           <Button className="me-2" onClick={clearSelection}>
             Clear Selection
           </Button>

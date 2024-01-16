@@ -2,12 +2,11 @@ import "./Header.css";
 import { AiOutlineSetting } from "react-icons/ai";
 import { Avatar, Dropdown, Space } from "antd";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation,  } from "react-router-dom";
 import { TiInfoLargeOutline } from "react-icons/ti";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../../../redux/features/UserSlice/UserSlice";
 import HeaderDrawer from "./HeaderDrawer/HeaderDrawer";
 import moment from "moment";
 import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
@@ -18,17 +17,14 @@ import { IoMdHelp } from "react-icons/io";
 import { logOutHandler } from "../../../utils/logout";
 const Header = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const location = useLocation();
   const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(1);
   const [time, setTime] = useState(moment().format("hh:mm A"));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { role } = useSelector((state) => state.user);
   const { data } = useGetUserProfileQuery({});
   const { isFetching, data: notificationData } = useGetAllNotificationQuery(page);
-
-  console.log(data);
 
   const showModal = () => {
     setIsModalOpen(true);

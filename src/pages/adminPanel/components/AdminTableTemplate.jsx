@@ -9,9 +9,9 @@ const AdminTableTemplate = ({ data, column, setSelectedIds, selectedIds }) => {
     selectedRowKeys: selectedIds,
     onChange: onSelectChange,
   };
-  const clearSelection = () => {
-    setSelectedIds([]);
-  };
+  // const clearSelection = () => {
+  //   setSelectedIds([]);
+  // };
 
   return (
     <div>

@@ -9,7 +9,7 @@ import NotificationBadge from "../Notification/NotificationModal/NotificationBad
 
 const Footer = () => {
   const location = useLocation();
-  const [page, setPage] = useState(1);
+  const [page] = useState(1);
   const { data } = useGetAllNotificationQuery(page);
   return (
     <div>

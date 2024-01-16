@@ -136,7 +136,7 @@ const AddMeal = () => {
                             required: true,
                             message: "Please input your Number!",
                           },
-                          ({ getFieldValue }) => ({
+                          () => ({
                             validator(_, value) {
                               if (value >= 0) {
                                 return Promise.resolve();
@@ -262,7 +262,7 @@ const AddMeal = () => {
                                   required: true,
                                   message: "Please input your Number!",
                                 },
-                                ({ getFieldValue }) => ({
+                                () => ({
                                   validator(_, value) {
                                     if (value >= 0) {
                                       return Promise.resolve();

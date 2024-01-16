@@ -1,14 +1,11 @@
-import { Button, Dropdown } from "antd";
+import { Dropdown } from "antd";
 import "./PhoneEach.css";
 import {
   useDeletePhoneMutation,
   useUpdatePhoneMutation,
 } from "../../../../../redux/api/sampleApi/phonebookApi";
 import Swal from "sweetalert2";
-import { IoCallOutline } from "react-icons/io5";
 import { FaRegCopy } from "react-icons/fa6";
-import { AiOutlineDelete } from "react-icons/ai";
-import { FaRegEdit } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
