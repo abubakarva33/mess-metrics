@@ -2,7 +2,7 @@ import "./Header.css";
 import { AiOutlineSetting } from "react-icons/ai";
 import { Avatar, Dropdown, Space } from "antd";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { Link, useLocation,  } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { TiInfoLargeOutline } from "react-icons/ti";
 import { HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 import { useState } from "react";
@@ -52,7 +52,6 @@ const Header = () => {
       key: "2",
       icon: <LogoutOutlined />,
       onClick: () => {
-        // dispatch(auth({ token: "" }));
         logOutHandler(dispatch);
       },
       danger: true,

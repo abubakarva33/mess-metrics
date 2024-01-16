@@ -24,7 +24,7 @@ import { TbRefreshDot } from "react-icons/tb";
 import { PiRadioactive } from "react-icons/pi";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetUserProfileQuery } from "../../../redux/api/sampleApi/userApi";
 import { logOutHandler } from "../../../utils/logout";
 
@@ -32,6 +32,7 @@ const SideHeader = () => {
   const [activeNav, setActiveNav] = useState("");
   const { role } = useSelector((state) => state.user);
   const { data } = useGetUserProfileQuery({});
+  const dispatch = useDispatch();
 
   const navHandler = (name) => {
     if (activeNav === name) {
@@ -238,7 +239,7 @@ const SideHeader = () => {
               <div>{role}</div>
             </div>
             <div className="ms-auto ">
-              <IoMdLogOut className="fs-4 text-warning" onClick={logOutHandler} />
+              <IoMdLogOut className="fs-4 text-warning" onClick={() => logOutHandler(dispatch)} />
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@ import { GiPipeOrgan, GiReceiveMoney } from "react-icons/gi";
 import { PiRadioactive } from "react-icons/pi";
 import { TbRefreshDot } from "react-icons/tb";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp, IoMdLogOut } from "react-icons/io";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
 import { logOutHandler } from "../../../../utils/logout";
@@ -31,6 +31,7 @@ import { logOutHandler } from "../../../../utils/logout";
 const HeaderDrawer = () => {
   const [activeNav, setActiveNav] = useState("");
   const location = useLocation();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const { role } = useSelector((state) => state.user);
   const { data } = useGetUserProfileQuery({});
@@ -258,7 +259,7 @@ const HeaderDrawer = () => {
               <div>{data?.data?.role}</div>
             </div>
             <div className="ms-auto ">
-              <IoMdLogOut className="fs-4 text-warning" onClick={logOutHandler} />
+              <IoMdLogOut className="fs-4 text-warning" onClick={() => logOutHandler(dispatch)} />
             </div>
           </div>
         </div>
