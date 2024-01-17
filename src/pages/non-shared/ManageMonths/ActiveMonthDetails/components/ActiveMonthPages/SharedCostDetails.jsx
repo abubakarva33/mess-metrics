@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect,  useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import {
   useGetAllSharedCostQuery,
@@ -54,17 +54,15 @@ const SharedCostDetails = ({ date }) => {
     ),
   };
 
-  const compareMonth = useMemo(
-    () => data?.data?.filter((item) => item?.month === activeMonthData?._id),
-    [data, activeMonthData]
-  );
+  const isSameMonth = data?.data[0]?.month === activeMonthData?._id;
+
   useEffect(() => {
-    if (role === "manager" && compareMonth?.length > 0) {
+    if (role === "manager" && isSameMonth) {
       setColumn([...initColumn, actionColumn]);
     } else {
       setColumn(initColumn);
     }
-  }, [compareMonth, activeMonthData]);
+  }, [isSameMonth, activeMonthData]);
 
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 

@@ -30,7 +30,6 @@ const MainLayout = () => {
           </div>
           {data?.data?.role === "manager" && isSameMonth ? (
             <>
-              {" "}
               <FloatButton.Group
                 trigger="click"
                 type="primary"

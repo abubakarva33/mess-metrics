@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import TableTemplate from "../TableTemplate/TableTemplate";
 import { useGetAllMealQuery } from "../../../../../../redux/api/sampleApi/actionApi";
 import { Pagination, Space, Spin } from "antd";
@@ -45,18 +45,15 @@ const MealDetails = ({ date }) => {
   const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);
 
-  const compareMonth = useMemo(
-    () => data?.data?.filter((item) => item?.activeMonth?._id === activeMonthData?._id),
-    [data, activeMonthData]
-  );
+  const isSameMonth = data?.data[0]?.activeMonth?._id === activeMonthData?._id;
 
   useEffect(() => {
-    if (role === "manager" && compareMonth?.length > 0) {
+    if (role === "manager" && isSameMonth) {
       setColumn([...initColumn, actionColumn]);
     } else {
       setColumn(initColumn);
     }
-  }, [compareMonth, activeMonthData]);
+  }, [isSameMonth, activeMonthData]);
 
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 
@@ -89,7 +86,7 @@ const MealDetails = ({ date }) => {
                       <p className="mb-0">Date: {data?.date}</p>
                     </div>
                   </div>
-                  {role === "manager" && compareMonth?.length > 0 ? (
+                  {role === "manager" && isSameMonth ? (
                     <Link to={`/update-meal?date=${data?.date}`}>
                       <img src="/images/pen.png" alt="" style={{ height: "30px", width: "30px" }} />
                     </Link>
