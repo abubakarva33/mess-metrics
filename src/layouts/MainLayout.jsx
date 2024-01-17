@@ -7,8 +7,13 @@ import Auth from "../components/Auth/Auth";
 import MessAuth from "../components/Auth/MessAuth";
 import { CommentOutlined, PlusOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
+import { useGetUserProfileQuery } from "../redux/api/sampleApi/userApi";
+import { useGetActiveMonthQuery } from "../redux/api/sampleApi/monthApi";
 
 const MainLayout = () => {
+  const { data } = useGetUserProfileQuery({});
+  const { data: activeMonthData } = useGetActiveMonthQuery({});
+  const isSameMonth = data?.data?.activeMonth === activeMonthData?._id;
   return (
     <Auth>
       <MessAuth>
@@ -23,32 +28,35 @@ const MainLayout = () => {
               <Footer />
             </footer>
           </div>
-          <>
-            <FloatButton.Group
-              trigger="click"
-              type="primary"
-              className="homeFloatIcon"
-              icon={<PlusOutlined />}
-            >
-              <Link to="/add-meal-cost">
-                <FloatButton
-                  icon={<CommentOutlined />}
-                  tooltip={<div>Add Meal Cost</div>}
-                  className="mb-3"
-                />
-              </Link>
-              <Link to="/add-members-money">
-                <FloatButton
-                  icon={<CommentOutlined />}
-                  tooltip={<div>Add Members Money</div>}
-                  className="mb-3"
-                />
-              </Link>
-              <Link to="/add-meal">
-                <FloatButton icon={<CommentOutlined />} tooltip={<div>Add Meal</div>} />
-              </Link>
-            </FloatButton.Group>
-          </>
+          {data?.data?.role === "manager" && isSameMonth ? (
+            <>
+              {" "}
+              <FloatButton.Group
+                trigger="click"
+                type="primary"
+                className="homeFloatIcon"
+                icon={<PlusOutlined />}
+              >
+                <Link to="/add-meal-cost">
+                  <FloatButton
+                    icon={<CommentOutlined />}
+                    tooltip={<div>Add Meal Cost</div>}
+                    className="mb-3"
+                  />
+                </Link>
+                <Link to="/add-members-money">
+                  <FloatButton
+                    icon={<CommentOutlined />}
+                    tooltip={<div>Add Members Money</div>}
+                    className="mb-3"
+                  />
+                </Link>
+                <Link to="/add-meal">
+                  <FloatButton icon={<CommentOutlined />} tooltip={<div>Add Meal</div>} />
+                </Link>
+              </FloatButton.Group>
+            </>
+          ) : null}
         </div>
       </MessAuth>
     </Auth>
