@@ -89,9 +89,11 @@ const MealDetails = ({ date }) => {
                       <p className="mb-0">Date: {data?.date}</p>
                     </div>
                   </div>
-                  <Link to={`/update-meal?date=${data?.date}`}>
-                    <img src="/images/pen.png" alt="" style={{ height: "30px", width: "30px" }} />
-                  </Link>
+                  {role === "manager" && compareMonth?.length > 0 ? (
+                    <Link to={`/update-meal?date=${data?.date}`}>
+                      <img src="/images/pen.png" alt="" style={{ height: "30px", width: "30px" }} />
+                    </Link>
+                  ) : null}
                 </div>
               ))}
               {data?.meta?.total > data?.meta?.limit && (

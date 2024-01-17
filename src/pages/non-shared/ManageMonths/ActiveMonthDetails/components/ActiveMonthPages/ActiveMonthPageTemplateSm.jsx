@@ -3,7 +3,7 @@ import { Pagination } from "antd";
 
 const ActiveMonthPageTemplateSm = ({
   data,
- 
+
   modalProps,
   itemData,
   setItemData,

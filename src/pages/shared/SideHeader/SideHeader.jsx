@@ -232,7 +232,7 @@ const SideHeader = () => {
 
           <div className="logOutForm mt-auto w-100 mx-3">
             <div className="logOutImg pe-2">
-              <img src="/public/images/userIcon.png" alt="" />
+              <img src="/images/userIcon.png" alt="" />
             </div>
             <div className="logOutName">
               <div className=" fs-6 fw-bold me-2 mb-0">{data?.data?.name}</div>

@@ -40,7 +40,9 @@ const Home = () => {
           </Col>
           <Col sm={12} md={6}>
             <div className="overview">
-              <h5 className="px-2 pt-3"> Mess Overview</h5>
+              <h5 className="px-2 pt-3">
+                Mess Overview <small style={{ fontSize: 12 }} className="text-warning"> (Under Construction)</small>
+              </h5>
               <Chart />
             </div>
             <div>{<BazarList data={lastBazar} bazarFetching={bazarFetching} />}</div>

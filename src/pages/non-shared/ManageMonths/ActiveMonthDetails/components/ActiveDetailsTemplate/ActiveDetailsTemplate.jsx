@@ -1,8 +1,14 @@
+import { useSelector } from "react-redux";
+import { useGetActiveMonthQuery } from "../../../../../../redux/api/sampleApi/monthApi";
 import UpdateModal from "../UpdateModal";
 import "./ActiveDetailsTemplate.css";
 import { FaUser } from "react-icons/fa";
 
 const ActiveDetailsTemplate = ({ data, modalProps, itemData, setItemData, setIsModalOpen }) => {
+  const { role } = useSelector((state) => state.user);
+  const { data: activeMonthData } = useGetActiveMonthQuery({});
+  const isSameMonth = data.month === activeMonthData._id;
+
   return (
     <div className="d-flex align-items-center justify-content-between my-3 activeDetailsTemplate">
       <div className="d-flex align-items-center justify-content-between">
@@ -36,12 +42,14 @@ const ActiveDetailsTemplate = ({ data, modalProps, itemData, setItemData, setIsM
           {data?.list && <p className="mb-0">Details: {data?.list}</p>}
         </div>
       </div>
-      <img
-        src="/images/pen.png"
-        alt=""
-        style={{ height: "30px", width: "30px" }}
-        onClick={() => (setItemData(data), setIsModalOpen(true))}
-      />
+      {role === "manager" && isSameMonth ? (
+        <img
+          src="/images/pen.png"
+          alt=""
+          style={{ height: "30px", width: "30px" }}
+          onClick={() => (setItemData(data), setIsModalOpen(true))}
+        />
+      ) : null}
 
       {itemData && <UpdateModal {...modalProps} />}
     </div>
