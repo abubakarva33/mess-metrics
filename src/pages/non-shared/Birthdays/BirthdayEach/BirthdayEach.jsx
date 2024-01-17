@@ -1,14 +1,13 @@
 import moment from "moment/moment";
 import "./BirthdayEach.css";
 import { LuPartyPopper } from "react-icons/lu";
+import { capitalizeEveryWord } from "../../../../utils/textConvertToCapital";
 
 const BirthdayEach = ({ data }) => {
   const { name, dateOfBirth } = data;
 
   const adjustDate = () => {
-    let dateFromInput = dateOfBirth
-      ? moment(dateOfBirth, "DD-MM-YYYY").year(2023)
-      : moment();
+    let dateFromInput = dateOfBirth ? moment(dateOfBirth, "DD-MM-YYYY").year(2023) : moment();
     const isToday = dateFromInput.isSame(moment(), "day");
     if (isToday) {
       return (
@@ -32,13 +31,12 @@ const BirthdayEach = ({ data }) => {
     );
   };
 
-
   return (
     <div className="phoneItem ">
       <div className="phoneItemLeft">
         <img src="/images/userIcon.png" alt="" className="phoneItemPhoto" />
         <div>
-          <h6 className="phoneNameText pt-1">{name}</h6>
+          <h6 className="phoneNameText pt-1">{name && capitalizeEveryWord(name)}</h6>
           <p className="mb-0 me-2 phoneText "> {dateOfBirth}</p>
         </div>
       </div>

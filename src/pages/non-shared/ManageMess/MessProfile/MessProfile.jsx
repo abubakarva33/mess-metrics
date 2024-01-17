@@ -7,6 +7,7 @@ import { MdArrowBackIosNew, MdArrowForwardIos, MdEdit } from "react-icons/md";
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 import { useGetMessAccountQuery } from "../../../../redux/api/sampleApi/actionApi";
 import { useSelector } from "react-redux";
+import { capitalizeEveryWord } from "../../../../utils/textConvertToCapital";
 
 const MessProfile = () => {
   const navigate = useNavigate();
@@ -27,9 +28,19 @@ const MessProfile = () => {
                 <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                 <div className="d-flexCenter flex-column">
                   <h3 className="mb-0 mt-3 memberProfileName">
-                    {messAccount?.mess?.manager?.name}
+                    {messAccount?.mess?.manager?.name &&
+                      capitalizeEveryWord(messAccount?.mess?.manager?.name) &&
+                      capitalizeEveryWord(
+                        messAccount?.mess?.manager?.name &&
+                          capitalizeEveryWord(messAccount?.mess?.manager?.name)
+                      )}
                   </h3>
-                  <h6> ( {messAccount?.mess?.manager?.role} )</h6>
+                  <h6>
+                    (
+                    {messAccount?.mess?.manager?.role &&
+                      capitalizeEveryWord(messAccount?.mess?.manager?.role)}
+                    )
+                  </h6>
                 </div>
               </div>
               <div style={{ marginBottom: 11 }}>
@@ -168,9 +179,15 @@ const MessProfile = () => {
                   <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                   <div className="d-flexCenter flex-column">
                     <h3 className="mb-0 mt-3 memberProfileName">
-                      {messAccount?.mess?.manager?.name}
+                      {messAccount?.mess?.manager?.name &&
+                        capitalizeEveryWord(messAccount?.mess?.manager?.name)}
                     </h3>
-                    <h6> ( {messAccount?.mess?.manager?.role} )</h6>
+                    <h6>
+                      (
+                      {messAccount?.mess?.manager?.role &&
+                        capitalizeEveryWord(messAccount?.mess?.manager?.role)}
+                      )
+                    </h6>
                   </div>
                 </div>
                 <div className="">

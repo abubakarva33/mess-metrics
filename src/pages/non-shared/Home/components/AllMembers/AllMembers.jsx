@@ -2,6 +2,7 @@ import { Col } from "react-bootstrap";
 import "./AllMembers.css";
 import { Link } from "react-router-dom";
 import { balanceCalculator } from "../../../../../constant/calculation";
+import { capitalizeEveryWord } from "../../../../../utils/textConvertToCapital";
 
 const AllMembers = ({ data, mealRate, sharedCost }) => {
   const { deposit, individualCost, meal, user } = data;
@@ -17,7 +18,7 @@ const AllMembers = ({ data, mealRate, sharedCost }) => {
     <Col sm={12} md={6} lg={6} xl={4} xxl={4}>
       <Link to={`/all-members/${user._id}`}>
         <div className={`member`}>
-          <h6>{user?.name}</h6>
+          <h6>{user?.name && capitalizeEveryWord(user?.name)}</h6>
           <div className="d-gridTwo">
             <p className="mb-0">Total Meal: {meal}</p>
             <p className="mb-0">

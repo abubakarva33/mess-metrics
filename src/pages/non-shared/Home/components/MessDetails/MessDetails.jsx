@@ -5,6 +5,7 @@ import { RiLuggageDepositLine } from "react-icons/ri";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { PiStrategy } from "react-icons/pi";
 import { MdOutlineCalendarMonth } from "react-icons/md";
+import { capitalizeEveryWord } from "../../../../../utils/textConvertToCapital";
 
 const MessDetails = ({ data }) => {
   const {
@@ -23,7 +24,7 @@ const MessDetails = ({ data }) => {
   return (
     <div>
       <div className="messDetails ">
-        <h4> {mess?.name} </h4>
+        <h4> {mess?.name && capitalizeEveryWord(mess?.name)} </h4>
 
         <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">
@@ -44,7 +45,8 @@ const MessDetails = ({ data }) => {
           </div>
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {mess?.manager?.name}
+              <span className="d-inline-block pe-2"> : </span>
+              {mess?.manager?.name && capitalizeEveryWord(mess?.manager?.name)}
             </p>
           </div>
         </div>

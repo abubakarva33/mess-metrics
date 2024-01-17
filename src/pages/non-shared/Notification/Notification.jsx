@@ -37,6 +37,7 @@ const Notification = () => {
                     style={{
                       cursor: "pointer",
                       color: "#5d83ac",
+                      userSelect: "none",
                     }}
                   >
                     New
@@ -46,6 +47,7 @@ const Notification = () => {
                     style={{
                       cursor: "pointer",
                       color: "#5AA7FF",
+                      userSelect: "none",
                     }}
                   >
                     Mark all as read

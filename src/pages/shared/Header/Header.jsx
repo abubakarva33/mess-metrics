@@ -15,6 +15,7 @@ import { useGetAllNotificationQuery } from "../../../redux/api/sampleApi/actionA
 import NotificationBadge from "../../non-shared/Notification/NotificationModal/NotificationBadge";
 import { IoMdHelp } from "react-icons/io";
 import { logOutHandler } from "../../../utils/logout";
+import { capitalizeEveryWord } from "../../../utils/textConvertToCapital";
 const Header = () => {
   const dispatch = useDispatch();
 
@@ -144,7 +145,9 @@ const Header = () => {
                 </div>
                 <div className="d-flexCenter flex-column">
                   <p className="mb-0">Mess Metrics</p>
-                  <small>{data?.data?.mess?.name}</small>
+                  <small>
+                    {data?.data?.mess?.name && capitalizeEveryWord(data?.data?.mess?.name)}
+                  </small>
                 </div>
                 <Link to="/">
                   <AiOutlineSetting className="fs-3" />
