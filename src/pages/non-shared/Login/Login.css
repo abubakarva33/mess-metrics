@@ -58,6 +58,13 @@ font-size: 22px;
     color: var(--text-primary) !important;
 } */
 
+.mnscs{
+  text-wrap: wrap;
+  position: absolute;
+  top: 0;
+  left: 180px;
+}
+
 @media only screen and (max-width: 700px) {
   .welcomeMsg{
     font-size: 18px;
