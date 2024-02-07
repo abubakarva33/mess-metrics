@@ -53,4 +53,7 @@
   .footerMargin {
     margin-bottom: 85px;
   }
+  .overview {
+    display: none;
+  }
 }
