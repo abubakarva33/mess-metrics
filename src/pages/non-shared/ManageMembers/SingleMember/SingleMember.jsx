@@ -14,10 +14,12 @@ import { useDeleteMemberMutation } from "../../../../redux/api/sampleApi/messApi
 import Swal from "sweetalert2";
 import { IoIosArrowBack } from "react-icons/io";
 import { capitalizeEveryWord } from "../../../../utils/textConvertToCapital";
+import { useSelector } from "react-redux";
 
 const SingleMember = () => {
   const { Id } = useParams();
   const [page, setPage] = useState(1);
+  const { role } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const { data: mData } = useGetMonthsQuery({
     page,
@@ -39,7 +41,7 @@ const SingleMember = () => {
   if (!userProfile) {
     return <p>Error: User not found</p>;
   }
-  const { name, email, phone, role, dateOfBirth, _id, mess } = userProfile;
+  const { name, email, phone, dateOfBirth, _id, mess } = userProfile;
 
   const switchDataPlus = () => {
     setPage((prev) => {
@@ -106,7 +108,7 @@ const SingleMember = () => {
                   <h3 className="mb-0 mt-3 memberProfileName">
                     {name && capitalizeEveryWord(name)}
                   </h3>
-                  <h6> ( {role && capitalizeEveryWord(role)} )</h6>
+                  <h6> ( {userProfile?.role && capitalizeEveryWord(userProfile?.role)} )</h6>
                 </div>
               </div>
               <div style={{ marginBottom: 11 }}>
@@ -156,7 +158,7 @@ const SingleMember = () => {
                         danger
                         type="primary"
                         onClick={onFinish}
-                        disabled={role === "manager"}
+                        disabled={role !== "manager"}
                       >
                         Remove
                       </Button>
@@ -166,7 +168,11 @@ const SingleMember = () => {
                         <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
                         <p className="mb-1"> create a notice now</p>
                       </div>
-                      <Button style={{ width: "80px" }} type="primary">
+                      <Button
+                        style={{ width: "80px" }}
+                        type="primary"
+                        disabled={role !== "manager"}
+                      >
                         Send
                       </Button>
                     </div>
@@ -207,7 +213,7 @@ const SingleMember = () => {
                     <h3 className="mb-0 mt-3 memberProfileName">
                       {name && capitalizeEveryWord(name)}
                     </h3>
-                    <h6> ( {role && capitalizeEveryWord(role)} )</h6>
+                    <h6> ( {userProfile?.role && capitalizeEveryWord(userProfile?.role)} )</h6>
                   </div>
                 </div>
                 <div style={{ marginBottom: 11 }}>
@@ -237,32 +243,35 @@ const SingleMember = () => {
                   </div>
                 </div>
               </div>
-              <div className="profileManageCenter">
-                <div className="d-flex align-items-center justify-content-between profileHeaderNotice">
-                  <h4 className="mb-0 ">Manage Member</h4>
-                  <img src="/images/notice.png" alt="" />
-                </div>
-                <div>
-                  <div className="d-flex align-items-center justify-content-between mb-2">
-                    <div>
-                      <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
-                      <p className="mb-1">remove now</p>
-                    </div>
-                    <Button style={{ width: "80px" }} danger type="primary" onClick={onFinish}>
-                      Remove
-                    </Button>
+              {role === "manager" && (
+                <div className="profileManageCenter">
+                  <div className="d-flex align-items-center justify-content-between profileHeaderNotice">
+                    <h4 className="mb-0 ">Manage Member</h4>
+                    <img src="/images/notice.png" alt="" />
                   </div>
-                  <div className="d-flex align-items-center justify-content-between">
-                    <div>
-                      <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
-                      <p className="mb-1"> create a notice now</p>
+                  <div>
+                    <div className="d-flex align-items-center justify-content-between mb-2">
+                      <div>
+                        <h5 className="mb-1 memberProfileManageItemText"> No longer member?</h5>
+                        <p className="mb-1">remove now</p>
+                      </div>
+                      <Button style={{ width: "80px" }} danger type="primary" onClick={onFinish}>
+                        Remove
+                      </Button>
                     </div>
-                    <Button style={{ width: "80px" }} type="primary">
-                      Send
-                    </Button>
+                    <div className="d-flex align-items-center justify-content-between">
+                      <div>
+                        <h5 className="mb-1 memberProfileManageItemText"> Need to send Notice?</h5>
+                        <p className="mb-1"> create a notice now</p>
+                      </div>
+                      <Button style={{ width: "80px" }} type="primary">
+                        Send
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
+
               <SingleMemberMonthDetails
                 month={monthData}
                 switchDataPlus={switchDataPlus}
