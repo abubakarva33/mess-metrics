@@ -122,7 +122,12 @@ const AddIndividualOtherCost = () => {
               </Form.Item>
 
               <div className="d-flex justify-content-center  ">
-                <Button type="primary" htmlType="submit" className="w-50 h-auto">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="w-50 h-auto"
+                  disabled={status === "pending"}
+                >
                   <span className="fs-5"> Add</span>
                 </Button>
               </div>
@@ -209,7 +214,12 @@ const AddIndividualOtherCost = () => {
                       </Form.Item>
 
                       <div className="d-flex justify-content-center  ">
-                        <Button type="primary" htmlType="submit" className="w-100 h-auto">
+                        <Button
+                          type="primary"
+                          htmlType="submit"
+                          className="w-100 h-auto"
+                          disabled={status === "pending"}
+                        >
                           <span className="fs-5"> Add Cost</span>
                         </Button>
                       </div>

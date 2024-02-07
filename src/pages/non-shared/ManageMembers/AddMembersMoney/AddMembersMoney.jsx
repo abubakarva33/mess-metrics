@@ -19,6 +19,8 @@ const AddMembersMoney = () => {
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
   const [addMembersMoney, { status }] = useAddMembersMoneyMutation();
 
+  console.log({ status });
+
   const onFinish = async (values) => {
     values.user = shoppersList;
     const amount = Number(values.amount);
@@ -118,7 +120,12 @@ const AddMembersMoney = () => {
                 </div>
               </Form.Item>
               <div className="d-flex justify-content-center  mt-5">
-                <Button type="primary" htmlType="submit" className="w-50 h-auto">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="w-50 h-auto"
+                  disabled={status === "pending"}
+                >
                   <span className="fs-5"> Add money</span>
                 </Button>
               </div>

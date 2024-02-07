@@ -17,7 +17,7 @@ const CreateMess = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [createMess] = useCreateMessMutation();
+  const [createMess, { status }] = useCreateMessMutation();
   const { data } = useGetUserProfileQuery(undefined, { refetchOnMountOrArgChange: true });
 
   const [isLoading, setIsLoading] = useState(true);
@@ -133,6 +133,7 @@ const CreateMess = () => {
                       type="primary"
                       htmlType="submit"
                       className="login-form-button mb-3 w-100"
+                      disabled={status === "pending"}
                     >
                       Create Mess
                     </Button>
