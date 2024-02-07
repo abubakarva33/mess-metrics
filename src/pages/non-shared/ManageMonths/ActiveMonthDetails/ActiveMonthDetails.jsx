@@ -1,7 +1,7 @@
 import { IoIosArrowBack } from "react-icons/io";
 import "./ActiveMonthDetails.css";
 import { useNavigate } from "react-router-dom";
-import { Button } from "antd";
+import { Button, Radio, Switch } from "antd";
 import { useEffect, useState } from "react";
 
 import { useSearchQuery } from "../../../../utils/useSearchQuery";
@@ -13,11 +13,14 @@ import DepositDetails from "./components/ActiveMonthPages/DepositDetails";
 import BazarDetails from "./components/ActiveMonthPages/BazarDetails";
 import SharedCostDetails from "./components/ActiveMonthPages/SharedCostDetails";
 import IndividualCostDetails from "./components/ActiveMonthPages/IndividualCostDetails";
+import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
 
 const ActiveMonthDetails = () => {
+  const { data } = useGetUserProfileQuery({});
   const type = useSearchQuery("type") || "meal";
   const navigate = useNavigate();
   const [filterDate, setFilterDate] = useState("");
+  const [filterUser, setFilterUser] = useState(data?.data?._id);
   const [itemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemName] = useState("");
@@ -26,12 +29,20 @@ const ActiveMonthDetails = () => {
     setFilterDate("");
   }, [type]);
 
+  const switchHandler = () => {
+    if (filterUser === data?.data?._id) {
+      setFilterUser("");
+    } else {
+      setFilterUser(data?.data?._id);
+    }
+  };
+
   const pages = {
-    meal: <MealDetails date={filterDate} />,
-    deposit: <DepositDetails date={filterDate} />,
-    bazar: <BazarDetails date={filterDate} />,
+    meal: <MealDetails date={filterDate} user={filterUser} />,
+    deposit: <DepositDetails date={filterDate} user={filterUser} />,
+    bazar: <BazarDetails date={filterDate} members={filterUser} />,
     sharedCost: <SharedCostDetails date={filterDate} />,
-    individualCost: <IndividualCostDetails date={filterDate} />,
+    individualCost: <IndividualCostDetails date={filterDate} user={filterUser} />,
   };
 
   return (
@@ -39,7 +50,15 @@ const ActiveMonthDetails = () => {
       <div className="activeMonthSectionMain">
         <div className="d-flex align-items-center justify-content-between my-4">
           <h4 className="text-center mb-0">Active Month Details</h4>
-          <div className="activeDatePicker">
+          <div className="activeDatePicker d-flexCenter">
+            <Switch
+              checkedChildren="Owned"
+              unCheckedChildren={<span className="pt-1 d-inline-block">Mess</span>}
+              defaultChecked
+              onClick={switchHandler}
+              className="w-100 me-3"
+              handleSize={45}
+            />
             <ReactDatePicker
               className=""
               placeholderText="Filter by date"
@@ -49,6 +68,7 @@ const ActiveMonthDetails = () => {
             />
           </div>
         </div>
+
         <div className="activeMonthBtnGroups mb-4">
           <Button
             className={type === "meal" ? "activeNav" : undefined}
@@ -92,9 +112,17 @@ const ActiveMonthDetails = () => {
               <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
               <h3>ACTIVE MONTH DETAILS</h3>
             </div>
-            <div className="mx-3">
+            <div className="activeDatePicker d-flexCenter">
+              <Switch
+                checkedChildren="Owned"
+                unCheckedChildren={<span className="pt-1 d-inline-block">Mess</span>}
+                defaultChecked
+                onClick={switchHandler}
+                className="w-100 ms-5 me-3"
+                handleSize={45}
+              />
               <ReactDatePicker
-                className="w-100"
+                className=""
                 placeholderText="Filter by date"
                 dateFormat="dd-MM-yyyy"
                 value={filterDate}

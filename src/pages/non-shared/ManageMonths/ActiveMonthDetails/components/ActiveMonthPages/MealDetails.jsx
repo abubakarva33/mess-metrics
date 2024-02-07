@@ -38,10 +38,10 @@ const actionColumn = {
   ),
 };
 
-const MealDetails = ({ date }) => {
+const MealDetails = ({ date, user }) => {
   const [filter, setFilter] = useState({ page: 1 });
   const { data: activeMonthData } = useGetActiveMonthQuery({});
-  const { data, isFetching } = useGetAllMealQuery({ ...filter, date });
+  const { data, isFetching } = useGetAllMealQuery({ ...filter, date, user });
   const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);
 
@@ -54,6 +54,10 @@ const MealDetails = ({ date }) => {
       setColumn(initColumn);
     }
   }, [isSameMonth, activeMonthData]);
+
+  useEffect(() => {
+    setFilter((prev) => ({ ...prev, page: 1 }));
+  }, [date, user]);
 
   const onPageChange = (page) => setFilter((prev) => ({ ...prev, page }));
 

@@ -29,12 +29,12 @@ const initColumn = [
   },
 ];
 
-const DepositDetails = ({ date }) => {
+const DepositDetails = ({ date ,user}) => {
   const [filter, setFilter] = useState({ page: 1 });
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: activeMonthData } = useGetActiveMonthQuery({});
-  const { data, isFetching } = useGetAllDepositQuery({ ...filter, date });
+  const { data, isFetching } = useGetAllDepositQuery({ ...filter, date,user });
   const [update, { status }] = useUpdateDepositMutation();
 
   const { role } = useSelector((state) => state.user);

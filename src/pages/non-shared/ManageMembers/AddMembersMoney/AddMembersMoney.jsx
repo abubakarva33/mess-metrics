@@ -19,8 +19,6 @@ const AddMembersMoney = () => {
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
   const [addMembersMoney, { status }] = useAddMembersMoneyMutation();
 
-  console.log({ status });
-
   const onFinish = async (values) => {
     values.user = shoppersList;
     const amount = Number(values.amount);

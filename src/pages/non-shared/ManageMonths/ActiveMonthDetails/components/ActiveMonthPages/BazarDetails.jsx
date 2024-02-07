@@ -43,12 +43,12 @@ const initColumn = [
   },
 ];
 
-const BazarDetails = ({ date }) => {
+const BazarDetails = ({ date, members }) => {
   const [filter, setFilter] = useState({ page: 1 });
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: activeMonthData } = useGetActiveMonthQuery({});
-  const { data, isFetching } = useGetAllBazarQuery({ ...filter, date });
+  const { data, isFetching } = useGetAllBazarQuery({ ...filter, date, members });
   const [update, { status }] = useUpdateBazarMutation();
   const { role } = useSelector((state) => state.user);
   const [column, setColumn] = useState(initColumn);

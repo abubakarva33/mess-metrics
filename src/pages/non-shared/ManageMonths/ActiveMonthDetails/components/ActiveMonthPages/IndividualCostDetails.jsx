@@ -34,12 +34,12 @@ const initColumn = [
   },
 ];
 
-const IndividualCostDetails = ({ date }) => {
+const IndividualCostDetails = ({ date, user }) => {
   const [filter, setFilter] = useState({ page: 1 });
   const [itemData, setItemData] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: activeMonthData } = useGetActiveMonthQuery({});
-  const { data, isFetching } = useGetAllIndividualCostQuery({ ...filter, date });
+  const { data, isFetching } = useGetAllIndividualCostQuery({ ...filter, date, user });
   const [update, { status }] = useUpdateIndividualCostMutation();
 
   const { role } = useSelector((state) => state.user);
