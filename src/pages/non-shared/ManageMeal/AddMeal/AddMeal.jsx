@@ -31,6 +31,7 @@ const AddMeal = () => {
   const { dMeal } = useSelector((state) => state.basic);
   const [startDate, setStartDate] = useState(moment().format("DD-MM-YYYY"));
   const [clicked, setIsClicked] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     const filterData = data?.members?.map((member) => {
@@ -61,7 +62,12 @@ const AddMeal = () => {
   };
 
   const onFinish = async () => {
+    setIsSubmitted(true);
+    if (status !== "pending") {
+      setIsSubmitted(false);
+    }
     const fieldValues = { meals: meal, date: startDate };
+
     try {
       const res = await addMeal(fieldValues).unwrap();
       if (res?.success) {
@@ -203,6 +209,7 @@ const AddMeal = () => {
                 className="w-100"
                 onClick={onFinish}
                 style={{ minHeight: 40, fontSize: 18 }}
+                disabled={isSubmitted === true}
               >
                 Submit
               </Button>

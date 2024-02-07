@@ -1,6 +1,6 @@
 import "./Login.css";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, ConfigProvider, Form, Input } from "antd";
+import { Button, Checkbox, ConfigProvider, Form, Input, Spin } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLoginUserMutation } from "../../../redux/api/sampleApi/userApi";
@@ -13,8 +13,9 @@ const Login = () => {
   const { isLogin } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [loginUser] = useLoginUserMutation();
+  const [loginUser, { status }] = useLoginUserMutation();
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     if (isLogin) {
@@ -24,6 +25,10 @@ const Login = () => {
   }, [isLogin]);
 
   const onFinish = async (values) => {
+    setIsSubmitted(true);
+    if (status !== "pending") {
+      setIsSubmitted(false);
+    }
     try {
       const { token, success } = await loginUser(values).unwrap();
       if (!success) {
@@ -143,8 +148,9 @@ const Login = () => {
                 htmlType="submit"
                 className="login-form-button mb-3 w-100"
                 style={{ minHeight: 40, fontSize: 18 }}
+                disabled={isSubmitted === true}
               >
-                Log in
+                <Spin spinning={status === "pending"}> Log in</Spin>
               </Button>
               <div className="d-flex">
                 <hr />
@@ -177,7 +183,6 @@ const Login = () => {
         </ConfigProvider>
       </div>
       <div>
-      
         {/* <svg
           id="wave"
           style="transform:rotate(0deg); transition: 0.3s"
