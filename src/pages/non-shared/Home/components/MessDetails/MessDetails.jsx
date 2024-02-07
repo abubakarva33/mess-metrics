@@ -24,7 +24,7 @@ const MessDetails = ({ data }) => {
   return (
     <div>
       <div className="messDetails ">
-        <h4> {mess?.name && capitalizeEveryWord(mess?.name)} </h4>
+        <h4 className="messName"> {mess?.name && capitalizeEveryWord(mess?.name)} </h4>
 
         <div className="d-gridTwo mb-1">
           <div className="d-flex align-items-center">

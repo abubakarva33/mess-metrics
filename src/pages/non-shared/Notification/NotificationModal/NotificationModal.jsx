@@ -24,6 +24,7 @@ const NotificationModal = ({
         onCancel={handleCancel}
         footer={null}
         className="notificationModal py-3"
+        style={{ userSelect: "none" }}
       >
         {data?.data?.length !== 0 && (
           <div className="d-flex align-items-center justify-content-between">
