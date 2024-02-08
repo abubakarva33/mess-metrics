@@ -17,7 +17,6 @@ import SingleMemberMonthDetails from "../ManageMembers/SingleMember/SingleMember
 import Swal from "sweetalert2";
 import SpinnerMain from "../../../components/Spinner/SpinnerMain";
 import moment from "moment";
-import { capitalizeEveryWord } from "../../../utils/textConvertToCapital";
 
 const MyProfile = () => {
   const navigate = useNavigate();
@@ -105,15 +104,13 @@ const MyProfile = () => {
                 </div>
                 <div className="d-flexCenter flex-column">
                   <div className="d-flexCenter mt-3">
-                    <h3 className="mb-0  memberProfileName profileName">
-                      {name && capitalizeEveryWord(name)}
-                    </h3>
+                    <h3 className="mb-0  memberProfileName profileName text-capitalize">{name}</h3>
                     <MdEdit
                       className="fs-5 ms-2"
                       onClick={() => editHandler({ type: "text", item: "name" })}
                     />
                   </div>
-                  <h6> ( {role && capitalizeEveryWord(role)} )</h6>
+                  <h6 className="text-capitalize"> ( {role} )</h6>
                 </div>
               </div>
               <div style={{ marginBottom: 15 }}>
@@ -221,15 +218,15 @@ const MyProfile = () => {
                   </div>
                   <div className="d-flexCenter flex-column">
                     <div className="d-flexCenter mt-3">
-                      <h3 className="mb-0  memberProfileName profileName">
-                        {name && capitalizeEveryWord(name)}
+                      <h3 className="mb-0  memberProfileName profileName text-capitalize">
+                        {name}
                       </h3>
                       <MdEdit
                         className="fs-5 ms-2"
                         onClick={() => editHandler({ type: "text", item: "name" })}
                       />
                     </div>
-                    <h6> ( {role && capitalizeEveryWord(role)} )</h6>
+                    <h6 className="text-capitalize"> ( {role} )</h6>
                   </div>
                 </div>
                 <div className="">

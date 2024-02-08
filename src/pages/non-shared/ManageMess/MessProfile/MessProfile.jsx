@@ -6,7 +6,7 @@ import { MdArrowBackIosNew, MdArrowForwardIos, MdEdit } from "react-icons/md";
 import SpinnerMain from "../../../../components/Spinner/SpinnerMain";
 import { useGetMessAccountQuery } from "../../../../redux/api/sampleApi/actionApi";
 import { useSelector } from "react-redux";
-import { capitalizeEveryWord } from "../../../../utils/textConvertToCapital";
+
 import PhoneLayout from "../../../../layouts/PhoneLayout/PhoneLayout";
 
 const MessProfile = () => {
@@ -150,22 +150,15 @@ const MessProfile = () => {
       </Container>
 
       {/* for small device only  */}
-
       <PhoneLayout headLine={"ACTIVE MONTH DETAILS"} className="w-100">
         <div className="memberProfileCenter mb-3">
           <div className="memberProfileCenterTop">
             <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
             <div className="d-flexCenter flex-column">
-              <h3 className="mb-0 mt-3 memberProfileName">
-                {messAccount?.mess?.manager?.name &&
-                  capitalizeEveryWord(messAccount?.mess?.manager?.name)}
+              <h3 className="mb-0 mt-3 memberProfileName text-capitalize">
+                {messAccount?.mess?.manager?.name}
               </h3>
-              <h6>
-                (
-                {messAccount?.mess?.manager?.role &&
-                  capitalizeEveryWord(messAccount?.mess?.manager?.role)}
-                )
-              </h6>
+              <h6 className="text-capitalize">({messAccount?.mess?.manager?.role})</h6>
             </div>
           </div>
           <div className="">

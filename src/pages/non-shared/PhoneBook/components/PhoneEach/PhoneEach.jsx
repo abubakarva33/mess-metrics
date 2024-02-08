@@ -9,7 +9,6 @@ import { FaRegCopy } from "react-icons/fa6";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { capitalizeEveryWord } from "../../../../../utils/textConvertToCapital";
 
 const PhoneEach = ({ data }) => {
   const { _id, name, phone } = data;
@@ -119,7 +118,7 @@ const PhoneEach = ({ data }) => {
       <div className="phoneItemLeft">
         <img src="/images/userIcon.png" alt="" className="phoneItemPhoto" />
         <div>
-          <h6 className="phoneNameText pt-1">{name && capitalizeEveryWord(name)}</h6>
+          <h6 className="phoneNameText pt-1 text-capitalize">{name}</h6>
           <div className="d-flex align-items-center mb-2">
             <p className="mb-0 me-2 phoneText "> {phone}</p>
             <div onClick={() => copyToClipboard(phone)}>{isCopied ? "Copied!" : <FaRegCopy />}</div>

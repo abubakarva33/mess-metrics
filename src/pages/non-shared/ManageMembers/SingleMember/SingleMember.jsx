@@ -13,7 +13,6 @@ import SingleMemberMonthDetails from "./SingleMemberMonthDetails";
 import { useDeleteMemberMutation } from "../../../../redux/api/sampleApi/messApi";
 import Swal from "sweetalert2";
 import { IoIosArrowBack } from "react-icons/io";
-import { capitalizeEveryWord } from "../../../../utils/textConvertToCapital";
 import { useSelector } from "react-redux";
 
 const SingleMember = () => {
@@ -105,10 +104,8 @@ const SingleMember = () => {
               <div className="memberProfileCenterTop">
                 <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                 <div className="d-flexCenter flex-column">
-                  <h3 className="mb-0 mt-3 memberProfileName">
-                    {name && capitalizeEveryWord(name)}
-                  </h3>
-                  <h6> ( {userProfile?.role && capitalizeEveryWord(userProfile?.role)} )</h6>
+                  <h3 className="mb-0 mt-3 memberProfileName text-capitalize">{name}</h3>
+                  <h6 className="text-capitalize"> ( {userProfile?.role} )</h6>
                 </div>
               </div>
               <div style={{ marginBottom: 11 }}>
@@ -210,10 +207,8 @@ const SingleMember = () => {
                 <div className="memberProfileCenterTop">
                   <img src="/images/singleUser.webp" alt="" className="memberProfileImage" />
                   <div className="d-flexCenter flex-column">
-                    <h3 className="mb-0 mt-3 memberProfileName">
-                      {name && capitalizeEveryWord(name)}
-                    </h3>
-                    <h6> ( {userProfile?.role && capitalizeEveryWord(userProfile?.role)} )</h6>
+                    <h3 className="mb-0 mt-3 memberProfileName text-capitalize">{name}</h3>
+                    <h6 className="text-capitalize"> ( {userProfile?.role} )</h6>
                   </div>
                 </div>
                 <div style={{ marginBottom: 11 }}>

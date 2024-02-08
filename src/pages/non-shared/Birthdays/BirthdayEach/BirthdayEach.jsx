@@ -1,7 +1,6 @@
 import moment from "moment/moment";
 import "./BirthdayEach.css";
 import { LuPartyPopper } from "react-icons/lu";
-import { capitalizeEveryWord } from "../../../../utils/textConvertToCapital";
 
 const BirthdayEach = ({ data }) => {
   const { name, dateOfBirth } = data;
@@ -36,7 +35,7 @@ const BirthdayEach = ({ data }) => {
       <div className="phoneItemLeft">
         <img src="/images/userIcon.png" alt="" className="phoneItemPhoto" />
         <div>
-          <h6 className="phoneNameText pt-1">{name && capitalizeEveryWord(name)}</h6>
+          <h6 className="phoneNameText pt-1 text-capitalize">{name}</h6>
           <p className="mb-0 me-2 phoneText "> {dateOfBirth}</p>
         </div>
       </div>
