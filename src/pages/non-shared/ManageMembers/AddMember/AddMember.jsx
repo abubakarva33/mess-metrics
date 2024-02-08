@@ -4,7 +4,7 @@ import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi"
 import { Button, Form, Input, Spin } from "antd";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { IoIosArrowBack } from "react-icons/io";
+import PhoneLayout from "../../../../layouts/PhoneLayout/PhoneLayout";
 
 const AddMember = () => {
   const [form] = Form.useForm();
@@ -41,7 +41,32 @@ const AddMember = () => {
       });
     }
   };
+  const formComponent = (
+    <Form name="complex-form" form={form} onFinish={onFinish} layout="vertical" className="my-4">
+      <Form.Item>
+        <div className="addMealItemMargin mt-3">
+          <h6> Email or Number </h6>
+          <Form.Item
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "Please input valid email/number!",
+              },
+            ]}
+          >
+            <Input placeholder="Enter valid email or number" />
+          </Form.Item>
+        </div>
+      </Form.Item>
 
+      <div className="d-flex justify-content-center  ">
+        <Button type="primary" htmlType="submit" className="w-50 h-auto">
+          <span className="fs-5"> Add Member</span>
+        </Button>
+      </div>
+    </Form>
+  );
   return (
     <Spin
       spinning={status === "pending" || isLoading}
@@ -52,89 +77,11 @@ const AddMember = () => {
         <div className="addMealCostSectionMain">
           <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
             <h4 className="text-center  mt-2 mb-4">Add New Member</h4>
-            <Form
-              name="complex-form"
-              form={form}
-              onFinish={onFinish}
-              layout="vertical"
-              className="my-4"
-            >
-              <Form.Item>
-                <div className="addMealItemMargin mt-3">
-                  <h6> Email or Number </h6>
-                  <Form.Item
-                    name="email"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input valid email/number!",
-                      },
-                    ]}
-                  >
-                    <Input placeholder="Enter valid email or number" />
-                  </Form.Item>
-                </div>
-              </Form.Item>
-
-              <div className="d-flex justify-content-center  ">
-                <Button type="primary" htmlType="submit" className="w-50 h-auto">
-                  <span className="fs-5"> Add Member</span>
-                </Button>
-              </div>
-            </Form>
+            {formComponent}
           </div>
         </div>
 
-        <div className="phoneBookContainer">
-          <div className="phoneBookContainerMainBg">
-            <div className="phoneBookContainerMain">
-              <div className="componentHeader">
-                <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-                <h3>ADD NEW MEMBER </h3>
-              </div>
-            </div>
-          </div>
-          <div className="phoneBookContainerItemBg">
-            <div className="phoneBookContainerItem smDeviceAlign">
-              <div className="pt-5 pb-3 px-3 m-auto w-100">
-                <div>
-                  <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
-                    <Form
-                      name="complex-form"
-                      form={form}
-                      onFinish={onFinish}
-                      layout="vertical"
-                      className="my-4"
-                    >
-                      <Form.Item>
-                        <div className="addMealItemMargin mt-3">
-                          <h6> Email or Number </h6>
-                          <Form.Item
-                            name="email"
-                            rules={[
-                              {
-                                required: true,
-                                message: "Please input valid email/number!",
-                              },
-                            ]}
-                          >
-                            <Input placeholder="Enter valid email or number" />
-                          </Form.Item>
-                        </div>
-                      </Form.Item>
-
-                      <div className="d-flex justify-content-center  ">
-                        <Button type="primary" htmlType="submit" className="w-100 h-auto">
-                          <span className="fs-5"> Add Member</span>
-                        </Button>
-                      </div>
-                    </Form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PhoneLayout headLine={"ADD NEW MEMBER"}>{formComponent}</PhoneLayout>
       </div>
     </Spin>
   );
