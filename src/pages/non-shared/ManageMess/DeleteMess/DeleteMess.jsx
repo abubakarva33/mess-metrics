@@ -3,14 +3,11 @@ import { useDeleteMessMutation } from "../../../../redux/api/sampleApi/messApi";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
 import "./DeleteMess.css";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-import { IoIosArrowBack } from "react-icons/io";
+import PhoneLayout from "../../../../layouts/PhoneLayout/PhoneLayout";
 
 const DeleteMess = () => {
-  const navigate = useNavigate();
   const { data, isFetching } = useGetUserProfileQuery({});
   const [deleteMess, { status }] = useDeleteMessMutation();
-
   const deleteMessHandler = async () => {
     Swal.fire({
       title: "Are you sure?",
@@ -47,31 +44,15 @@ const DeleteMess = () => {
             </div>
           </div>
         </div>
-        <div className="phoneBookContainer">
-          <div className="phoneBookContainerMainBg">
-            <div className="phoneBookContainerMain">
-              <div className="componentHeader">
-                <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-                <h3>DELETE MESS </h3>
-              </div>
+        <PhoneLayout headLine={"DELETE MESS"}>
+          <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
+            <div className="d-flex justify-content-center  ">
+              <Button type="primary" className="w-100 h-auto" onClick={deleteMessHandler}>
+                <span className="fs-5"> Delete Mess</span>
+              </Button>
             </div>
           </div>
-          <div className="phoneBookContainerItemBg">
-            <div className="phoneBookContainerItem smDeviceAlign">
-              <div className="pt-5 pb-3 px-3 m-auto w-100">
-                <div>
-                  <div className=" addMealCostSection  mx-auto" style={{ maxWidth: "500px" }}>
-                    <div className="d-flex justify-content-center  ">
-                      <Button type="primary" className="w-100 h-auto" onClick={deleteMessHandler}>
-                        <span className="fs-5"> Delete Mess</span>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </PhoneLayout>
       </div>
     </Spin>
   );

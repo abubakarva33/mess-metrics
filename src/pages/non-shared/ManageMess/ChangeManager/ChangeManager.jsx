@@ -5,8 +5,8 @@ import { Button, ConfigProvider, Form, Select, Spin } from "antd";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
 import { useEffect, useState } from "react";
 import useMemberOptions from "../../../../components/Hooks/MembersDropdown";
-import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import PhoneLayout from "../../../../layouts/PhoneLayout/PhoneLayout";
 
 const ChangeManager = () => {
   const [form] = Form.useForm();
@@ -76,110 +76,59 @@ const ChangeManager = () => {
     });
   };
 
+  const formComponent = (
+    <ConfigProvider
+      theme={{
+        components: {
+          Form: {
+            labelColor: "#ffffff",
+            colorText: "green",
+          },
+        },
+      }}
+    >
+      <Form
+        name="basic"
+        className="login-form"
+        onFinish={onFinish}
+        layout="vertical"
+        form={form}
+        autoComplete="on"
+      >
+        <Form.Item
+          name="newManagerId"
+          rules={[
+            {
+              required: true,
+              message: "Please Select Member!",
+            },
+          ]}
+        >
+          <Select defaultValue="" options={members} />
+        </Form.Item>
+
+        <div className="d-flex justify-content-center  ">
+          <Button type="primary" htmlType="submit" className="w-50 h-auto mt-3">
+            <span className="fs-5"> Change</span>
+          </Button>
+        </div>
+      </Form>
+    </ConfigProvider>
+  );
+
   return (
     <Spin
       spinning={status === "pending" || isFetching}
       className="d-flexCenter"
       style={{ minHeight: "100vh" }}
     >
-      <div>
-        <div className="addMealCostSectionMain">
-          <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
-            <h4 className="text-center  mt-2 mb-4">Change Manager</h4>
-            <ConfigProvider
-              theme={{
-                components: {
-                  Form: {
-                    labelColor: "#ffffff",
-                    colorText: "green",
-                  },
-                },
-              }}
-            >
-              <Form
-                name="basic"
-                className="login-form"
-                onFinish={onFinish}
-                layout="vertical"
-                form={form}
-                autoComplete="on"
-              >
-                <Form.Item
-                  name="newManagerId"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please Select Member!",
-                    },
-                  ]}
-                >
-                  <Select defaultValue="" options={members} />
-                </Form.Item>
-
-                <div className="d-flex justify-content-center  ">
-                  <Button type="primary" htmlType="submit" className="w-50 h-auto mt-3">
-                    <span className="fs-5"> Change</span>
-                  </Button>
-                </div>
-              </Form>
-            </ConfigProvider>
-          </div>
-        </div>
-
-        <div className="phoneBookContainer">
-          <div className="phoneBookContainerMainBg">
-            <div className="phoneBookContainerMain">
-              <div className="componentHeader">
-                <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-                <h3>CHANGE MANAGER </h3>
-              </div>
-            </div>
-          </div>
-          <div className="phoneBookContainerItemBg">
-            <div className="phoneBookContainerItem  smDeviceAlign">
-              <div className="pt-5 pb-3 px-3 m-auto w-100">
-                <ConfigProvider
-                  theme={{
-                    components: {
-                      Form: {
-                        labelColor: "#ffffff",
-                        colorText: "green",
-                      },
-                    },
-                  }}
-                >
-                  <Form
-                    name="basic"
-                    className="login-form"
-                    onFinish={onFinish}
-                    layout="vertical"
-                    form={form}
-                    autoComplete="on"
-                  >
-                    <Form.Item
-                      name="newManagerId"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please Select Member!",
-                        },
-                      ]}
-                    >
-                      <Select defaultValue="" options={members} />
-                    </Form.Item>
-
-                    <div className="d-flex w-100">
-                      <Button type="primary" htmlType="submit" className="w-100">
-                        Change Manager
-                      </Button>
-                    </div>
-                  </Form>
-                </ConfigProvider>
-              </div>
-            </div>
-          </div>
+      <div className="addMealCostSectionMain">
+        <div className=" addMealCostSection sectionShadow mx-auto" style={{ maxWidth: "500px" }}>
+          <h4 className="text-center  mt-2 mb-4">Change Manager</h4>
+          {formComponent}
         </div>
       </div>
+      <PhoneLayout headLine={"CHANGE MANAGER"}>{formComponent}</PhoneLayout>
     </Spin>
   );
 };
