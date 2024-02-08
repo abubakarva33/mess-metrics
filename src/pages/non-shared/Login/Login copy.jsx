@@ -184,6 +184,7 @@ const Login = () => {
           width="200"
           height="100vh"
           xmlns="http://www.w3.org/2000/svg"
+          // eslint-disable-next-line react/no-unknown-property
           xmlns:xlink="http://www.w3.org/1999/xlink"
           version="1.1"
         >

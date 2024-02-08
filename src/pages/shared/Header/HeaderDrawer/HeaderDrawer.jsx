@@ -1,5 +1,4 @@
 import {
-  AiFillCaretDown,
   AiOutlineAppstoreAdd,
   AiOutlineBars,
   AiOutlineDelete,
