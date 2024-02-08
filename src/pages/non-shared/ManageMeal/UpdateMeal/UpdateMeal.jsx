@@ -1,5 +1,4 @@
 import "./UpdateMeal.css";
-import { IoIosArrowBack } from "react-icons/io";
 import { MdCalendarMonth, MdEdit, MdOutlineAdd } from "react-icons/md";
 import { HiMinusSm } from "react-icons/hi";
 import { Button, Spin } from "antd";
