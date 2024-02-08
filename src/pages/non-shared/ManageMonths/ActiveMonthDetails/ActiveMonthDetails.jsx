@@ -1,7 +1,7 @@
 import { IoIosArrowBack } from "react-icons/io";
 import "./ActiveMonthDetails.css";
 import { useNavigate } from "react-router-dom";
-import { Button, Radio, Switch } from "antd";
+import { Button, Switch } from "antd";
 import { useEffect, useState } from "react";
 
 import { useSearchQuery } from "../../../../utils/useSearchQuery";
@@ -56,11 +56,11 @@ const ActiveMonthDetails = () => {
               unCheckedChildren={<span className="pt-1 d-inline-block">Mess</span>}
               defaultChecked
               onClick={switchHandler}
-              className="w-100 me-3"
-              handleSize={45}
+              className=" me-3"
+              style={{ width: 80 }}
             />
             <ReactDatePicker
-              className=""
+              className="w-100"
               placeholderText="Filter by date"
               dateFormat="dd-MM-yyyy"
               value={filterDate}
@@ -106,12 +106,12 @@ const ActiveMonthDetails = () => {
         <div className="px-2">{pages[type]}</div>
       </div>
       <div className="phoneBookContainer">
+        <div className="componentHeader">
+          <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+          <h3>ACTIVE MONTH DETAILS</h3>
+        </div>
         <div className="phoneBookContainerMainBg">
           <div className="phoneBookContainerMain">
-            <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-              <h3>ACTIVE MONTH DETAILS</h3>
-            </div>
             <div className="activeDatePicker d-flexCenter">
               <Switch
                 checkedChildren="Owned"
@@ -119,6 +119,7 @@ const ActiveMonthDetails = () => {
                 defaultChecked
                 onClick={switchHandler}
                 className="w-100 ms-5 me-3"
+                style={{ width: 80 }}
                 handleSize={45}
               />
               <ReactDatePicker
