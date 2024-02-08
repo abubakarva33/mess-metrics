@@ -1,0 +1,28 @@
+.phoneBookContainer {
+    display: none;
+    background-color: var(--bg-app-primary);
+    min-height: 100vh;
+  }
+  .phoneBookContainerMain {
+    background-color: var(--bg-body);
+    padding-bottom: 50px;
+    border-bottom-right-radius: 70px;
+    margin-right: -5px;
+  }
+  .phoneBookContainerItem {
+    background-color: var(--bg-app-primary);
+    border-top-left-radius: 70px;
+    margin-left: -5px;
+  }
+  .phoneBookContainerMainBg {
+    background-color: var(--bg-app-primary);
+  }
+  .phoneBookContainerItemBg {
+    background-color: var(--bg-body);
+  }
+
+  @media only screen and (max-width: 576px) {
+    .phoneBookContainer {
+      display: block;
+    }
+  }

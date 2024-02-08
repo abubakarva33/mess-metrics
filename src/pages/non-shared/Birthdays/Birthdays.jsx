@@ -1,13 +1,11 @@
 import { useGetMembersQuery } from "../../../redux/api/sampleApi/messApi";
-import { IoIosArrowBack } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
 import BirthdayEach from "./BirthdayEach/BirthdayEach";
 import { Col, Container, Row } from "react-bootstrap";
 import SpinnerMain from "../../../components/Spinner/SpinnerMain";
+import PhoneLayout from "../../../layouts/PhoneLayout/PhoneLayout";
 
 const Birthdays = () => {
   const { data, isFetching, isLoading } = useGetMembersQuery({});
-  const navigate = useNavigate();
 
   if (isFetching || isLoading) {
     return <SpinnerMain />;
@@ -29,24 +27,9 @@ const Birthdays = () => {
         </Container>
       </div>
 
-      <div className="phoneBookContainer">
-        <div className="phoneBookContainerMainBg">
-          <div className="phoneBookContainerMain">
-            <div className="componentHeader">
-              <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-              <h3>BIRTHDAYS </h3>
-            </div>
-          </div>
-        </div>
-        <div className="phoneBookContainerItemBg">
-          <div className="phoneBookContainerItem ">
-            <div className="pt-5 pb-3 px-3">
-              {Array.isArray(data) &&
-                data?.map((data, ind) => <BirthdayEach key={ind} data={data} />)}
-            </div>
-          </div>
-        </div>
-      </div>
+      <PhoneLayout headLine={"BIRTHDAYS"}>
+        {Array.isArray(data) && data?.map((data, ind) => <BirthdayEach key={ind} data={data} />)}
+      </PhoneLayout>
     </div>
   );
 };

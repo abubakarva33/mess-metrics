@@ -1,8 +1,4 @@
-.phoneBookContainer {
-  display: none;
-  background-color: var(--bg-app-primary);
-  min-height: 100vh;
-}
+
 .componentAddSection {
   display: flex;
   align-items: center;
@@ -15,23 +11,6 @@
 }
 .componentAddIcon {
   color: var(--bg-primary);
-}
-.phoneBookContainerMain {
-  background-color: var(--bg-body);
-  padding-bottom: 50px;
-  border-bottom-right-radius: 70px;
-  margin-right: -5px;
-}
-.phoneBookContainerItem {
-  background-color: var(--bg-app-primary);
-  border-top-left-radius: 70px;
-  margin-left: -5px;
-}
-.phoneBookContainerMainBg {
-  background-color: var(--bg-app-primary);
-}
-.phoneBookContainerItemBg {
-  background-color: var(--bg-body);
 }
 .phonebookSection {
   margin: 0 0px;
@@ -46,9 +25,6 @@
 @media only screen and (max-width: 576px) {
   .componentAddSection {
     padding: 30px 25px 0px 20px;
-  }
-  .phoneBookContainer {
-    display: block;
   }
   .phonebookSection {
     display: none;

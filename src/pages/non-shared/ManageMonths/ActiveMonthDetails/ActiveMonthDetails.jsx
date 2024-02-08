@@ -14,6 +14,7 @@ import BazarDetails from "./components/ActiveMonthPages/BazarDetails";
 import SharedCostDetails from "./components/ActiveMonthPages/SharedCostDetails";
 import IndividualCostDetails from "./components/ActiveMonthPages/IndividualCostDetails";
 import { useGetUserProfileQuery } from "../../../../redux/api/sampleApi/userApi";
+import PhoneLayout from "../../../../layouts/PhoneLayout/PhoneLayout";
 
 const ActiveMonthDetails = () => {
   const { data } = useGetUserProfileQuery({});
@@ -105,7 +106,63 @@ const ActiveMonthDetails = () => {
 
         <div className="px-2">{pages[type]}</div>
       </div>
-      <div className="phoneBookContainer">
+      <PhoneLayout headLine={"Active Month Details"}>
+        <div>
+          <div className="activeDatePicker d-flexCenter">
+            <Switch
+              checkedChildren="Owned"
+              unCheckedChildren={<span className="pt-1 d-inline-block">Mess</span>}
+              defaultChecked
+              onClick={switchHandler}
+              className="w-100 ms-5 me-3"
+              style={{ width: 80 }}
+              handleSize={45}
+            />
+            <ReactDatePicker
+              className=""
+              placeholderText="Filter by date"
+              dateFormat="dd-MM-yyyy"
+              value={filterDate}
+              onChange={(date) => setFilterDate(moment(date).format("DD-MM-YYYY"))}
+            />
+          </div>
+          <div className="activeMonthBtnGroups">
+            <Button
+              className={type === "meal" ? "activeNav" : undefined}
+              onClick={() => navigate("?type=meal")}
+            >
+              Meal
+            </Button>
+            <Button
+              className={type === "deposit" ? "activeNav ms-3" : "ms-3"}
+              onClick={() => navigate("?type=deposit")}
+            >
+              Deposit
+            </Button>
+
+            <Button
+              className={type === "sharedCost" ? "activeNav ms-3" : "ms-3"}
+              onClick={() => navigate("?type=sharedCost")}
+            >
+              Shared Cost
+            </Button>
+            <Button
+              className={type === "individualCost" ? "activeNav ms-3" : "ms-3"}
+              onClick={() => navigate("?type=individualCost")}
+            >
+              Individual Cost
+            </Button>
+            <Button
+              className={type === "bazar" ? "activeNav ms-3" : "ms-3"}
+              onClick={() => navigate("?type=bazar")}
+            >
+              BazarList
+            </Button>
+          </div>
+          <div>{pages[type]}</div>
+        </div>
+      </PhoneLayout>
+      {/* <div className="phoneBookContainer">
         <div className="componentHeader">
           <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
           <h3>ACTIVE MONTH DETAILS</h3>
@@ -166,7 +223,7 @@ const ActiveMonthDetails = () => {
           </div>
         </div>
         <div>{pages[type]}</div>
-      </div>
+      </div> */}
       <UpdateModal
         data={itemData}
         isModalOpen={isModalOpen}

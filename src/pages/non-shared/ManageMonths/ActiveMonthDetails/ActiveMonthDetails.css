@@ -47,9 +47,9 @@
 .active-month-sm {
   display: none;
 }
-.phoneBookContainerItemBg {
+/* .phoneBookContainerItemBg {
   display: none;
-}
+} */
 
 @media only screen and (max-width: 576px) {
   .activeMonthSectionMain {
@@ -61,7 +61,7 @@
   .activeMonthLg {
     display: none !important;
   }
-  .phoneBookContainerItemBg {
+  /* .phoneBookContainerItemBg {
     display: block;
-  }
+  } */
 }
