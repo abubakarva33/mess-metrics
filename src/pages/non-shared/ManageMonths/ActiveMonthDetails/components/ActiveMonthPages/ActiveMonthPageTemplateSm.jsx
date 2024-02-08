@@ -28,7 +28,6 @@ const ActiveMonthPageTemplateSm = ({
           {total > limit && (
             <div className="text-center my-2">
               <Pagination
-                // defaultCurrent={1}
                 current={page || 1}
                 pageSize={limit || 10}
                 total={total}

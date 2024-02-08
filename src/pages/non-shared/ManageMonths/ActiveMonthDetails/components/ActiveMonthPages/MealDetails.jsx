@@ -68,49 +68,43 @@ const MealDetails = ({ date, user }) => {
           <TableTemplate data={data} columns={column} onPageChange={onPageChange} />
         )}
       </div>
-      <div>
-        <div className="phoneBookContainerItemBg">
-          <div className="phoneBookContainerItem ">
-            <div className="pt-5 pb-3 px-3">
-              {data?.data?.map((data, ind) => (
-                <div
-                  className="d-flex align-items-center justify-content-between my-3 activeDetailsTemplate"
-                  key={ind}
-                >
-                  <div className="d-flex align-items-center justify-content-between">
-                    <div className="d-flexCenter dateLogo">
-                      <h2 className=" mb-0"> {data?.date?.substring(0, 2)}</h2>
-                    </div>
-                    <div>
-                      <p className="mb-0">
-                        Name: <span style={{ fontWeight: "700" }}>{data?.user?.name}</span>
-                      </p>
+      <div className="activeMonthSm ps-1">
+        {data?.data?.map((data, ind) => (
+          <div
+            className="d-flex align-items-center justify-content-between my-3 activeDetailsTemplate"
+            key={ind}
+          >
+            <div className="d-flex align-items-center justify-content-between">
+              <div className="d-flexCenter dateLogo">
+                <h2 className=" mb-0"> {data?.date?.substring(0, 2)}</h2>
+              </div>
+              <div>
+                <p className="mb-0">
+                  Name: <span style={{ fontWeight: "700" }}>{data?.user?.name}</span>
+                </p>
 
-                      <p className="mb-0">Meal: {data?.meal}</p>
-                      <p className="mb-0">Date: {data?.date}</p>
-                    </div>
-                  </div>
-                  {role === "manager" && isSameMonth ? (
-                    <Link to={`/update-meal?date=${data?.date}`}>
-                      <img src="/images/pen.png" alt="" style={{ height: "30px", width: "30px" }} />
-                    </Link>
-                  ) : null}
-                </div>
-              ))}
-              {data?.meta?.total > data?.meta?.limit && (
-                <div className="text-center my-2">
-                  <Pagination
-                    current={data?.meta?.page || 1}
-                    pageSize={data?.meta?.limit || 10}
-                    total={data?.meta?.total}
-                    onChange={onPageChange}
-                    rootClassName="pagination-item"
-                  />
-                </div>
-              )}
+                <p className="mb-0">Meal: {data?.meal}</p>
+                <p className="mb-0">Date: {data?.date}</p>
+              </div>
             </div>
+            {role === "manager" && isSameMonth ? (
+              <Link to={`/update-meal?date=${data?.date}`}>
+                <img src="/images/pen.png" alt="" style={{ height: "30px", width: "30px" }} />
+              </Link>
+            ) : null}
           </div>
-        </div>
+        ))}
+        {data?.meta?.total > data?.meta?.limit && (
+          <div className="text-center my-2">
+            <Pagination
+              current={data?.meta?.page || 1}
+              pageSize={data?.meta?.limit || 10}
+              total={data?.meta?.total}
+              onChange={onPageChange}
+              rootClassName="pagination-item"
+            />
+          </div>
+        )}
       </div>
     </Spin>
   );

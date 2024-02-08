@@ -1,20 +1,17 @@
 .activeMonthBtnGroups {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   flex-wrap: nowrap;
   overflow-x: auto;
   margin: 30px;
 }
-/* Hide scrollbar for Chrome, Safari and Opera */
 .activeMonthBtnGroups::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .activeMonthBtnGroups {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .activeNav {
@@ -47,9 +44,12 @@
 .active-month-sm {
   display: none;
 }
-/* .phoneBookContainerItemBg {
+.phoneBookContainerItemBg {
   display: none;
-} */
+}
+.activeMonthSm {
+  display: none;
+}
 
 @media only screen and (max-width: 576px) {
   .activeMonthSectionMain {
@@ -61,7 +61,10 @@
   .activeMonthLg {
     display: none !important;
   }
-  /* .phoneBookContainerItemBg {
+  .phoneBookContainerItemBg {
     display: block;
-  } */
+  }
+  .activeMonthSm {
+    display: block;
+  }
 }

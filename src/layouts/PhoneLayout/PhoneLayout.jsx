@@ -5,12 +5,12 @@ const PhoneLayout = ({ children, headLine, additionalComponent }) => {
   const navigate = useNavigate();
   return (
     <div className="phoneBookContainer">
+      <div className="componentHeader">
+        <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
+        <h3>{headLine} </h3>
+      </div>
       <div className="phoneBookContainerMainBg">
         <div className="phoneBookContainerMain">
-          <div className="componentHeader">
-            <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
-            <h3>{headLine} </h3>
-          </div>
           <div>{additionalComponent}</div>
         </div>
       </div>

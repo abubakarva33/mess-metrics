@@ -1,9 +1,7 @@
-import { IoIosArrowBack } from "react-icons/io";
 import "./ActiveMonthDetails.css";
 import { useNavigate } from "react-router-dom";
 import { Button, Switch } from "antd";
 import { useEffect, useState } from "react";
-
 import { useSearchQuery } from "../../../../utils/useSearchQuery";
 import ReactDatePicker from "react-datepicker";
 import moment from "moment";
@@ -46,123 +44,95 @@ const ActiveMonthDetails = () => {
     individualCost: <IndividualCostDetails date={filterDate} user={filterUser} />,
   };
 
+  //Components for additional-interactions
+  const headerActions = (
+    <div className="activeDatePicker d-flexCenter">
+      <Switch
+        checkedChildren="Owned"
+        unCheckedChildren={<span className="pt-1 d-inline-block">Mess</span>}
+        defaultChecked
+        onClick={switchHandler}
+        className=" me-3"
+        style={{ width: 80 }}
+      />
+      <ReactDatePicker
+        className="w-100"
+        placeholderText="Filter by date"
+        dateFormat="dd-MM-yyyy"
+        value={filterDate}
+        onChange={(date) => setFilterDate(moment(date).format("DD-MM-YYYY"))}
+      />
+    </div>
+  );
+  const buttonGroups = (
+    <div className="activeMonthBtnGroups mb-4">
+      <Button
+        className={type === "meal" ? "activeNav" : undefined}
+        onClick={() => navigate("?type=meal")}
+      >
+        Meal
+      </Button>
+      <Button
+        className={type === "deposit" ? "activeNav ms-3" : "ms-3"}
+        onClick={() => navigate("?type=deposit")}
+      >
+        Deposit
+      </Button>
+
+      <Button
+        className={type === "sharedCost" ? "activeNav ms-3" : "ms-3"}
+        onClick={() => navigate("?type=sharedCost")}
+      >
+        Shared Cost
+      </Button>
+      <Button
+        className={type === "individualCost" ? "activeNav ms-3" : "ms-3"}
+        onClick={() => navigate("?type=individualCost")}
+      >
+        Individual Cost
+      </Button>
+      <Button
+        className={type === "bazar" ? "activeNav ms-3" : "ms-3"}
+        onClick={() => navigate("?type=bazar")}
+      >
+        BazarList
+      </Button>
+    </div>
+  );
+  const additionalComponent = (
+    <>
+      {headerActions}
+      {buttonGroups}
+    </>
+  );
+
   return (
     <div>
       <div className="activeMonthSectionMain">
         <div className="d-flex align-items-center justify-content-between my-4">
           <h4 className="text-center mb-0">Active Month Details</h4>
-          <div className="activeDatePicker d-flexCenter">
-            <Switch
-              checkedChildren="Owned"
-              unCheckedChildren={<span className="pt-1 d-inline-block">Mess</span>}
-              defaultChecked
-              onClick={switchHandler}
-              className=" me-3"
-              style={{ width: 80 }}
-            />
-            <ReactDatePicker
-              className="w-100"
-              placeholderText="Filter by date"
-              dateFormat="dd-MM-yyyy"
-              value={filterDate}
-              onChange={(date) => setFilterDate(moment(date).format("DD-MM-YYYY"))}
-            />
-          </div>
+          {headerActions}
         </div>
-
-        <div className="activeMonthBtnGroups mb-4">
-          <Button
-            className={type === "meal" ? "activeNav" : undefined}
-            onClick={() => navigate("?type=meal")}
-          >
-            Meal
-          </Button>
-          <Button
-            className={type === "deposit" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => navigate("?type=deposit")}
-          >
-            Deposit
-          </Button>
-
-          <Button
-            className={type === "sharedCost" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => navigate("?type=sharedCost")}
-          >
-            Shared Cost
-          </Button>
-          <Button
-            className={type === "individualCost" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => navigate("?type=individualCost")}
-          >
-            Individual Cost
-          </Button>
-          <Button
-            className={type === "bazar" ? "activeNav ms-3" : "ms-3"}
-            onClick={() => navigate("?type=bazar")}
-          >
-            BazarList
-          </Button>
-        </div>
-
+        {buttonGroups}
         <div className="px-2">{pages[type]}</div>
       </div>
-      <PhoneLayout headLine={"Active Month Details"}>
-        <div>
-          <div className="activeDatePicker d-flexCenter">
-            <Switch
-              checkedChildren="Owned"
-              unCheckedChildren={<span className="pt-1 d-inline-block">Mess</span>}
-              defaultChecked
-              onClick={switchHandler}
-              className="w-100 ms-5 me-3"
-              style={{ width: 80 }}
-              handleSize={45}
-            />
-            <ReactDatePicker
-              className=""
-              placeholderText="Filter by date"
-              dateFormat="dd-MM-yyyy"
-              value={filterDate}
-              onChange={(date) => setFilterDate(moment(date).format("DD-MM-YYYY"))}
-            />
-          </div>
-          <div className="activeMonthBtnGroups">
-            <Button
-              className={type === "meal" ? "activeNav" : undefined}
-              onClick={() => navigate("?type=meal")}
-            >
-              Meal
-            </Button>
-            <Button
-              className={type === "deposit" ? "activeNav ms-3" : "ms-3"}
-              onClick={() => navigate("?type=deposit")}
-            >
-              Deposit
-            </Button>
-
-            <Button
-              className={type === "sharedCost" ? "activeNav ms-3" : "ms-3"}
-              onClick={() => navigate("?type=sharedCost")}
-            >
-              Shared Cost
-            </Button>
-            <Button
-              className={type === "individualCost" ? "activeNav ms-3" : "ms-3"}
-              onClick={() => navigate("?type=individualCost")}
-            >
-              Individual Cost
-            </Button>
-            <Button
-              className={type === "bazar" ? "activeNav ms-3" : "ms-3"}
-              onClick={() => navigate("?type=bazar")}
-            >
-              BazarList
-            </Button>
-          </div>
-          <div>{pages[type]}</div>
-        </div>
+      <PhoneLayout headLine={"Active Month Details"} additionalComponent={additionalComponent}>
+        {pages[type]}
       </PhoneLayout>
-      {/* <div className="phoneBookContainer">
+      <UpdateModal
+        data={itemData}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        itemName={itemName}
+      />
+    </div>
+  );
+};
+
+export default ActiveMonthDetails;
+
+{
+  /* <div className="phoneBookContainer">
         <div className="componentHeader">
           <IoIosArrowBack className="componentHeaderIcon" onClick={() => navigate(-1)} />
           <h3>ACTIVE MONTH DETAILS</h3>
@@ -223,15 +193,5 @@ const ActiveMonthDetails = () => {
           </div>
         </div>
         <div>{pages[type]}</div>
-      </div> */}
-      <UpdateModal
-        data={itemData}
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        itemName={itemName}
-      />
-    </div>
-  );
-};
-
-export default ActiveMonthDetails;
+      </div> */
+}
