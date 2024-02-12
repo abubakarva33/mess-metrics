@@ -65,7 +65,7 @@
 }
 
 .login-right {
-  background: url(/public/images/bg2.jpg);
+  background: url(/public/images/bg2.webp);
   background-repeat: no-repeat;
   background-size: cover;
   filter: grayscale(1);
