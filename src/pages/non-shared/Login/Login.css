@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
 }
-.userForm{
+.userForm {
   background-image: image-set("/images/loginBg.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -19,13 +19,13 @@
   flex-direction: column;
   color: #a0a09b;
 }
-.login-right{
-    min-height: 100vh;
+.login-right {
+  min-height: 100vh;
 }
-.welcomeMsg{
-font-size: 22px;
+.welcomeMsg {
+  font-size: 22px;
 }
-.forgotMsg{
+.forgotMsg {
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 0;
@@ -33,10 +33,9 @@ font-size: 22px;
 
 .checkboxForm {
   margin-bottom: 0;
-  
 }
-.userForm{
-    min-height: 100vh;
+.userForm {
+  min-height: 100vh;
 }
 /* .ant-input-affix-wrapper{
     background-color: transparent !important;
@@ -58,15 +57,30 @@ font-size: 22px;
     color: var(--text-primary) !important;
 } */
 
-.mnscs{
+.mnscs {
   text-wrap: wrap;
   position: absolute;
   top: 0;
   left: 180px;
 }
 
+.login-right {
+  background: url(/public/images/bg2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: grayscale(1);
+}
+.login-left {
+  background: url(/public/images/bg4.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-right: 3px solid black;
+}
+
 @media only screen and (max-width: 700px) {
-  .welcomeMsg{
+  .welcomeMsg {
     font-size: 18px;
-    }
+  }
 }
