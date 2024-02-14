@@ -176,7 +176,7 @@ const Login = () => {
                 </Button>
               </div>
               <p>
-                Don&apos;t have an account?{" "}
+                Don&apos;t have an account?
                 <Link to="/user/register">
                   <span className="fs-5 text-light">Register now!</span>
                 </Link>
@@ -187,16 +187,24 @@ const Login = () => {
       </div>
       <div className="login-right w-100">
         <div className="d-flex justify-content-end mt-3 align-items-center">
-          <p className="me-3 mb-0">ABOUT US</p>
-          <p className="me-3 mb-0">TUTORIALS</p>
-          <p className="me-3 mb-0">FEATURES</p>
-          <Button
-            type="primary"
-            className="login-form-button me-4"
-            style={{ minHeight: 35, fontSize: 16 }}
-          >
-            SIGN UP
-          </Button>
+          <Link className="me-3 mb-0" to="/aboutUs">
+            ABOUT US
+          </Link>
+          <Link className="me-3 mb-0" to="/">
+            TUTORIALS
+          </Link>
+          <Link className="me-3 mb-0" to="/">
+            FEATURES
+          </Link>
+          <Link to="/user/register">
+            <Button
+              type="primary"
+              className="login-form-button me-4"
+              style={{ minHeight: 35, fontSize: 16 }}
+            >
+              SIGN UP
+            </Button>
+          </Link>
         </div>
         <div className="d-flexCenter flex-column h-75 mx-5">
           <h1> WELCOME TO MESS METRICS</h1>
