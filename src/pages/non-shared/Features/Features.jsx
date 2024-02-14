@@ -7,7 +7,7 @@ const Features = () => {
       <div className="phonebookSection">
         <h1>This page is in under construction</h1>
       </div>
-      <PhoneLayout headLine="CONTACT US">
+      <PhoneLayout headLine="FEATURES">
         <h1>This page is in under construction</h1>
       </PhoneLayout>
     </div>
