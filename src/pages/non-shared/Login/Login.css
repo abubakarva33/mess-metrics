@@ -26,6 +26,8 @@
   padding-left: 20px;
   padding-right: 20px;
   border-right: 3px solid black;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 .login-right {
   min-height: 100vh;
