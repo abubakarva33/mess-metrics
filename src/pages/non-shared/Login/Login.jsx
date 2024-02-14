@@ -178,7 +178,7 @@ const Login = () => {
               <p>
                 Don&apos;t have an account?
                 <Link to="/user/register">
-                  <span className="fs-5 text-light">Register now!</span>
+                  <span className="fs-5 text-light ms-1">Register now!</span>
                 </Link>
               </p>
             </div>
@@ -187,7 +187,7 @@ const Login = () => {
       </div>
       <div className="login-right w-100">
         <div className="d-flex justify-content-end mt-3 align-items-center">
-          <Link className="me-3 mb-0" to="/aboutUs">
+          <Link className="me-3 mb-0" to="/about-us">
             ABOUT US
           </Link>
           <Link className="me-3 mb-0" to="/tutorials">
