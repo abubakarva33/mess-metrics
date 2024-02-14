@@ -18,9 +18,25 @@
   display: flex;
   flex-direction: column;
   color: #a0a09b;
+  min-height: 100vh;
+  max-width: 400px;
+  background: url(/images/bg4.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-right: 3px solid black;
 }
 .login-right {
   min-height: 100vh;
+  background: url(/images/bg2.webp);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: grayscale(1);
+}
+
+.login-right > .d-flex > * {
+  filter: none !important;
 }
 .welcomeMsg {
   font-size: 22px;
@@ -37,25 +53,6 @@
 .userForm {
   min-height: 100vh;
 }
-/* .ant-input-affix-wrapper{
-    background-color: transparent !important;
-}
-.ant-input{
-    background-color: transparent !important;
-    color: var(--text-secondary) !important;
-}
-.ant-input::placeholder{
-    color: var(--text-secondary) !important;
-}
-.ant-input-affix-wrapper{
-    color: var(--text-primary) !important;
-}
-.ant-input-password-icon{
-    color: var(--text-primary) !important;
-}
-.ant-checkbox-wrapper{
-    color: var(--text-primary) !important;
-} */
 
 .mnscs {
   text-wrap: wrap;
@@ -64,21 +61,14 @@
   left: 180px;
 }
 
-.login-right {
-  background: url(/public/images/bg2.webp);
-  background-repeat: no-repeat;
-  background-size: cover;
-  filter: grayscale(1);
+@media only screen and (max-width: 576px) {
+  .login-right {
+    display: none;
+  }
+  .login-left {
+    max-width: 576px;
+  }
 }
-.login-left {
-  background: url(/public/images/bg4.svg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-right: 3px solid black;
-}
-
 @media only screen and (max-width: 700px) {
   .welcomeMsg {
     font-size: 18px;

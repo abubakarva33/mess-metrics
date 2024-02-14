@@ -76,10 +76,8 @@ const Login = () => {
 
   return (
     <div className="d-flex">
-      <div className="d-flexCenter login-left w-100" style={{ maxWidth: 400 }}>
-        <div className="mt-5 d-flex justify-content-center flex-column">
-          <p>Sign in to continue access</p>
-        </div>
+      <div className="d-flexCenter login-left w-100">
+        <img src="/public/images/logo.webp" alt="" width={150} className="align-self-start mt-3" />
         <ConfigProvider
           theme={{
             components: {
@@ -97,6 +95,9 @@ const Login = () => {
             layout="vertical"
             autoComplete="on"
           >
+            <div className="d-flexCenter">
+              <p className=" mb-2 fs-5">Sign in to continue access</p>
+            </div>
             <Form.Item
               name="email"
               label="Email"
@@ -149,7 +150,7 @@ const Login = () => {
                 style={{ minHeight: 40, fontSize: 18 }}
                 disabled={isSubmitted === true}
               >
-                <Spin spinning={status === "pending"}> Log in</Spin>
+                Log in
               </Button>
               <div className="d-flex">
                 <hr />
@@ -175,13 +176,38 @@ const Login = () => {
                 </Button>
               </div>
               <p>
-                Don&apos;t have an account? <Link to="/user/register">Register now!</Link>
+                Don&apos;t have an account?{" "}
+                <Link to="/user/register">
+                  <span className="fs-5 text-light">Register now!</span>
+                </Link>
               </p>
             </div>
           </Form>
         </ConfigProvider>
       </div>
-      <div className="login-right w-100"></div>
+      <div className="login-right w-100">
+        <div className="d-flex justify-content-end mt-3 align-items-center">
+          <p className="me-3 mb-0">ABOUT US</p>
+          <p className="me-3 mb-0">TUTORIALS</p>
+          <p className="me-3 mb-0">FEATURES</p>
+          <Button
+            type="primary"
+            className="login-form-button me-4"
+            style={{ minHeight: 35, fontSize: 16 }}
+          >
+            SIGN UP
+          </Button>
+        </div>
+        <div className="d-flexCenter flex-column h-75 mx-5">
+          <h1> WELCOME TO MESS METRICS</h1>
+          <p>
+            Discover an effortless Meal Management Tool for messes or bachelor hostels. It automates
+            meal tracking, adjusts costs, and simplifies expense management. Roles for Manager,
+            Vice-Manager, and Members streamline administration. Easy access to monthly details and
+            summaries with user-friendly charts makes meal planning and cost sharing a breeze.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
