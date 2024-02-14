@@ -1,9 +1,15 @@
+import PhoneLayout from "../../../layouts/PhoneLayout/PhoneLayout";
 import "./Help.css";
 
 const Help = () => {
   return (
     <div>
-      <h1>This page is in under construction</h1>
+      <div className="phonebookSection">
+        <h1>This page is in under construction</h1>
+      </div>
+      <PhoneLayout headLine="CONTACT US">
+        <h1>This page is in under construction</h1>
+      </PhoneLayout>
     </div>
   );
 };
