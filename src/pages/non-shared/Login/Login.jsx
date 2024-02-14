@@ -1,6 +1,6 @@
 import "./Login.css";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, ConfigProvider, Form, Input, Spin } from "antd";
+import { Button, Checkbox, ConfigProvider, Form, Input } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useLoginUserMutation } from "../../../redux/api/sampleApi/userApi";
