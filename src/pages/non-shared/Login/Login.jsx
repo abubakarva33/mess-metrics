@@ -190,10 +190,10 @@ const Login = () => {
           <Link className="me-3 mb-0" to="/aboutUs">
             ABOUT US
           </Link>
-          <Link className="me-3 mb-0" to="/">
+          <Link className="me-3 mb-0" to="/tutorials">
             TUTORIALS
           </Link>
-          <Link className="me-3 mb-0" to="/">
+          <Link className="me-3 mb-0" to="/features">
             FEATURES
           </Link>
           <Link to="/user/register">

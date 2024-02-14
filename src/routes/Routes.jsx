@@ -36,6 +36,8 @@ import AllUsers from "../pages/adminPanel/AllUsers/AllUsers";
 import AllAdmin from "../pages/adminPanel/AllAdmin/AllAdmin";
 import AllMess from "../pages/adminPanel/AllMess/AllMess";
 import AllMonth from "../pages/adminPanel/AllMonth/AllMonth";
+import Features from "../pages/non-shared/Features/Features";
+import Tutorials from "../pages/non-shared/Tutorials/Tutorials";
 
 export const routes = createBrowserRouter([
   {
@@ -43,10 +45,8 @@ export const routes = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/aboutUs", element: <ContactUs /> },
-      { path: "/features", element: <ContactUs /> },
-      { path: "/tutorials", element: <ContactUs /> },
       { path: "/faq", element: <FAQ /> },
+      { path: "/aboutUs", element: <ContactUs /> },
       { path: "/my-profile", element: <MyProfile /> },
       { path: "/notification", element: <Notification /> },
       { path: "/helps", element: <Help /> },
@@ -188,6 +188,8 @@ export const routes = createBrowserRouter([
   { path: "/user/login", element: <Login /> },
   { path: "/user/register", element: <Register /> },
   { path: "/create-mess", element: <CreateMess /> },
+  { path: "/features", element: <Features /> },
+  { path: "/tutorials", element: <Tutorials /> },
   {
     path: "/error",
     element: <ErrorPage />,

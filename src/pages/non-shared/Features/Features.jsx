@@ -1,4 +1,4 @@
-import "./ContactUs.css";
+import "./Features.css";
 
 const Features = () => {
   return (
