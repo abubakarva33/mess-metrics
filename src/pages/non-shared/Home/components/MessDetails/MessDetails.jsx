@@ -56,7 +56,7 @@ const MessDetails = ({ data }) => {
           </div>
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {balance} tk
+              <span className="d-inline-block pe-2"> : </span> {balance?.toFixed(2)} tk
             </p>
           </div>
         </div>
@@ -123,7 +123,7 @@ const MessDetails = ({ data }) => {
           </div>
           <div>
             <p className="mb-0">
-              <span className="d-inline-block pe-2"> : </span> {totalIndividualCost} tk
+              <span className="d-inline-block pe-2"> : </span> {totalIndividualCost?.toFixed(2)} tk
             </p>
           </div>
         </div>
