@@ -28,6 +28,23 @@
   background-color: transparent !important;
 }
 
+/* Float Button Styles */
+.homeFloatIcon .ant-float-btn-primary {
+  background-color: var(--bg-tertiary) !important;
+}
+
+.homeFloatIcon .ant-float-btn-default {
+  background-color: var(--bg-secondary) !important;
+}
+
+.homeFloatIcon .ant-float-btn-default .ant-float-btn-icon {
+  color: var(--text-primary) !important;
+}
+
+.homeFloatIcon .ant-float-btn-primary .ant-float-btn-icon {
+  color: #ffffff !important;
+}
+
 @media only screen and (max-width: 992px) {
   .layout-body {
     width: 100vw !important;
